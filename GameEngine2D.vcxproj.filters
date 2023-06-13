@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{cf63e269-8da3-4d46-b309-f590825e4f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{e087fc61-eace-4185-b49a-4ddfd5b29900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects">
+      <UniqueIdentifier>{1cd9f11d-c5dc-45c0-b181-ea09d7e4840e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Player">
+      <UniqueIdentifier>{96524518-a3ba-45ed-99c3-87e372986daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\AddisionalTypes">
+      <UniqueIdentifier>{9839823f-f5c2-4e99-8371-b92aa54cdb96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Blocks">
+      <UniqueIdentifier>{f66dd042-c8ef-4078-b896-887c5f72dd69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Items">
+      <UniqueIdentifier>{42f7dc58-a31e-4dad-87a9-8c40878ae568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Projectals">
+      <UniqueIdentifier>{fbb9be9b-a70c-4a74-ba55-02455eb05b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Particles">
+      <UniqueIdentifier>{7a5c9933-a908-4128-bbdf-45bcd1f5a629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPCs">
+      <UniqueIdentifier>{8272d864-a4b6-4554-b89a-bac08c39d7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Controllers">
+      <UniqueIdentifier>{4842b05d-e740-42c0-8ed1-9b805db318a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Scenes">
+      <UniqueIdentifier>{e84ff9e4-949e-4024-a373-7a9e891c7b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Items\Weapons">
+      <UniqueIdentifier>{b45c510e-ae98-46bb-8b7a-74ed0600d7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\Scenes\Game">
+      <UniqueIdentifier>{bc7b0725-363b-425a-8f3c-b691c7813b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Factories">
+      <UniqueIdentifier>{3b5aa74a-1960-465a-a7db-6da15e54d03c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Engine.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\GameObject.cpp">
+      <Filter>src\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Player\Player.cpp">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Controllers\AnimationControler.cpp">
+      <Filter>src\core\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Controllers\SpriteController.cpp">
+      <Filter>src\core\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\GameScene.cpp">
+      <Filter>src\core\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\Scene.cpp">
+      <Filter>src\core\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\UserInterface.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Projectals\Projectal.cpp">
+      <Filter>src\GameObjects\Projectals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\Item.cpp">
+      <Filter>src\GameObjects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\Weapon\Weapon.cpp">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\Weapon\ShootingWeapon.cpp">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\Game\FourTree.cpp">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\Game\PerlinNoice.cpp">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Blocks\Block.cpp">
+      <Filter>src\GameObjects\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\ItemFactory.cpp">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\BlockFactory.cpp">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\Engine.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\GameObject.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Player\Player.h">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Controllers\AnimationControler.h">
+      <Filter>src\core\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Controllers\SpriteController.h">
+      <Filter>src\core\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\GameScene.h">
+      <Filter>src\core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\Scene.h">
+      <Filter>src\core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\UserInterface.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Projectals\Projectal.h">
+      <Filter>src\GameObjects\Projectals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\Item.h">
+      <Filter>src\GameObjects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\Weapon\Weapon.h">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\Weapon\ShootingWeapon.h">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\Game\FourTree.h">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\Game\PerlinNoice.h">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Blocks\Block.h">
+      <Filter>src\GameObjects\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\ItemFactory.h">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\BlockFactory.h">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Factory.h">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
