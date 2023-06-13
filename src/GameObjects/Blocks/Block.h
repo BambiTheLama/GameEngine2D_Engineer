@@ -28,5 +28,7 @@ public:
 
     virtual Block* clone() { return new Block(*this); }
 
+    virtual bool isColliding() { return true; }
+
 };
 

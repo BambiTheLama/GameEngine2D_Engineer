@@ -7,9 +7,14 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
-	heandler = new ObjectHandler({0,0,(float)GetScreenWidth(),(float)GetScreenHeight()});
-	heandler->addObject(new Player());
+	heandler = new ObjectHandler({0,0,5000.0f,5000.0f});
+	heandler->addObject(cameraTarget=new Player());
 	game = this;
+	Rectangle pos = cameraTarget->getPos();
+	camera.target = { pos.x + 20.0f, pos.y + 20.0f };
+	camera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+	camera.rotation = 0.0f;
+	camera.zoom = 1.0f;
 }
 
 GameScene::~GameScene()
@@ -20,7 +25,19 @@ GameScene::~GameScene()
 
 void GameScene::update()
 {
-	cursorPos = GetMousePosition();
+	Rectangle pos = cameraTarget->getPos();
+	camera.target = { pos.x + pos.width/2, pos.y + pos.height/2 };
+	if (IsKeyDown(KEY_UP))
+		zoom += 0.01;
+	if (IsKeyDown(KEY_DOWN))
+		zoom -= 0.01;
+	camera.zoom = zoom;
+	float cameraW = (float)GetScreenWidth()/(zoom);
+	float cameraH = (float)GetScreenHeight()/(zoom);
+	cameraPos = { camera.target.x - cameraW / 2,camera.target.y - cameraH / 2,cameraW,cameraH };
+	printf("CAMERAPOS ={%lf %lf %lf %lf}\n",cameraPos.x, cameraPos.y, cameraPos.width, cameraPos.height);
+
+	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
 	std::list<GameObject*> objects = heandler->getObject();
 	for (GameObject* obj : objects)
 		obj->update();
@@ -48,31 +65,16 @@ void GameScene::removeObject(GameObject* obj)
 
 void GameScene::draw()
 {
-	std::list<GameObject*> objects = heandler->getObject();
-	int n = objects.size(), j = 0;
-	GameObject** toDraw = new GameObject * [n];
-	
-	for (GameObject* obj : objects)
-	{
-		//obj->draw();
-		toDraw[j] = obj;
-		for (int i = j; i > 0; i--)
-		{
-			Rectangle pos1 = toDraw[i]->getPos();
-			Rectangle pos2 = toDraw[i - 1]->getPos();
-			if (pos1.y + pos1.height < pos2.y + pos2.height)
-			{
-				toDraw[i] = toDraw[i - 1];
-				toDraw[i - 1] = obj;
-			}
-		}
 
-		j++;
-	}
-	for (int i = 0; i < n; i++)
-		toDraw[i]->draw();
-	delete toDraw;
+	std::list<GameObject*> objects = heandler->getObjectsToDraw(cameraPos);
+
+
+	BeginMode2D(camera);
+	for (GameObject* obj : objects)
+		obj->draw();
 	heandler->draw();
+	EndMode2D();
+	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 }
 
 void GameScene::removeBlocks(Rectangle pos)

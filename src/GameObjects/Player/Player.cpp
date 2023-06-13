@@ -28,6 +28,7 @@ void Player::update()
 
 void Player::move()
 {
+	Rectangle posTmp = getPos();
 	if (IsKeyDown(KEY_A))
 	{
 		pos.x -= speed;
@@ -43,6 +44,10 @@ void Player::move()
 	if (IsKeyDown(KEY_S))
 	{
 		pos.y += speed;
+	}
+	if (checkCollision(this))
+	{
+		//pos = posTmp;
 	}
 	weapon->setMovePos({ pos.x,pos.y });
 	weapon->update();

@@ -13,7 +13,10 @@ class GameScene :
     static GameScene* game;
     ObjectHandler *heandler;
     Vector2 cursorPos;
-    
+    Camera2D camera;
+    GameObject* cameraTarget;
+    float zoom=1;
+    Rectangle cameraPos;
 public:
     /// <summary>
     /// Konstruktor od sceny gry
@@ -51,7 +54,7 @@ public:
     /// </summary>
     /// <param name="pos">Pozycja z której interesuj¹ nas obiekty</param>
     /// <returns>Lista obiektów w danym obszarze</returns>
-    std::list<GameObject*> getObjects(Rectangle pos) { return heandler->getObject(pos); }
+    std::list<GameObject*> getObjects(Rectangle pos) { return heandler->getObjects(pos); }
     /// <summary>
     /// Aktualizujê pozycjê obiektu
     /// </summary>
@@ -95,5 +98,7 @@ public:
     /// </summary>
     /// <returns>scena gry</returns>
     static GameScene* getGameScene() { return game; }
+
+    
 };
 

@@ -5,6 +5,7 @@ float cursorTarget(Vector2 objPos);
 float degreeToRadius(float degree);
 float radiusToDegree(float degree);
 Vector2 deltaFromDegree(float degree,float speed=1);
+
 /// <summary>
 /// Enum okreœlaj¹cy do jakiego typu nale¿y dany obiekt
 /// </summary>
@@ -47,5 +48,8 @@ public:
 	virtual Rectangle getPos() { return { movePos.x + pos.x,movePos.y + pos.y,pos.width,pos.height }; }
 
 	virtual GameObject* clone() = 0;
+
+	virtual bool isColliding() { return false; }
 };
 
+bool checkCollision(GameObject* obj);

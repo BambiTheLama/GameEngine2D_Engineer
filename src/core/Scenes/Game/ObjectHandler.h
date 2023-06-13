@@ -36,7 +36,9 @@ public:
     /// </summary>
     /// <param name="pos">Pozycja obiektów</param>
     /// <returns>Lista z obiektami</returns>
-    std::list<GameObject*> getObject(Rectangle pos);
+    std::list<GameObject*> getObjects(Rectangle pos);
+
+    std::list<GameObject*> getObjectsToDraw(Rectangle pos);
     /// <summary>
     /// Usuwa i dodaje nowe obiekty do kolekcji
     /// </summary>

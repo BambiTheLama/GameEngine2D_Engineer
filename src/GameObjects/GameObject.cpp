@@ -40,3 +40,17 @@ Vector2 deltaFromDegree(float degree,float speed)
 	delta.y *= cos(degreeToRadius(degree));
 	return delta;
 }
+
+bool checkCollision(GameObject* obj)
+{
+	std::list<GameObject*> objs = Game->getObjects(obj->getPos());
+	objs.remove(obj);
+	for (GameObject* o : objs)
+		if (o->isColliding())
+		{
+			if(CheckCollisionRecs(o->getPos(),obj->getPos()))
+				return true;
+		}
+			
+	return false;
+}

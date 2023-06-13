@@ -21,7 +21,7 @@ void FourTree::addObj(GameObject* obj)
 	objects.push_back(obj);
 	if (tree == NULL)
 	{
-		if (pos.width >64 && pos.height > 64 && objects.size() > 10)
+		if ((pos.width >256 || pos.height > 256) && objects.size() > 10)
 			openTree();
 	}
 	else
@@ -114,9 +114,20 @@ void FourTree::getObjectsAt(Rectangle pos, std::list<GameObject*>& objs)
 		return;
 	}
 	for(allObjects)
-		if (CheckCollisionRecs(pos, o->getPos()) && !hasObj(o))
-			objs.push_back(o);
-	
+		if (CheckCollisionRecs(pos, o->getPos()) )
+		{
+			bool has = false;
+			for (GameObject* obj : objs)
+				if (obj == o)
+				{
+					has = true;
+					break;
+				}
+					
+			if(!has)
+				objs.push_back(o);
+		}
+			
 }
 
 std::list<GameObject*> FourTree::getObjectsAt(Rectangle pos)
@@ -124,6 +135,7 @@ std::list<GameObject*> FourTree::getObjectsAt(Rectangle pos)
 	std::list<GameObject*> objs;
 	if (CheckCollisionRecs(pos, this->pos))
 		getObjectsAt(pos, objs);
+
 	return objs;
 
 }

@@ -19,12 +19,12 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 		blocks[i] = new Block * [(int)w];
 		for (int j = 0; j < w; j++)
 		{
-
+			printf("%c", (char)(factory->getSize() *noice[i][j]+'a'));
 			blocks[i][j] = factory->getObject(factory->getSize()* noice[i][j]);
 			if (blocks[i][j] != NULL)
 				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
 		}
-			
+		printf("\n");
 	}
 	delete perlin;
 
@@ -67,9 +67,90 @@ std::list<GameObject*> ObjectHandler::getObject()
 	return objs;
 }
 
-std::list<GameObject*> ObjectHandler::getObject(Rectangle pos) 
+std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos) 
 { 
-	return tree->getObjectsAt(pos); 
+	std::list<GameObject*> objs = tree->getObjectsAt(pos);
+	int startX = pos.x / tileSize-1;
+	int startY = pos.y / tileSize-1;
+	if (startX < 0)
+		startX = 0;
+	if (startY < 0)
+		startY = 0;
+	int w = pos.width / tileSize + startX + 3;
+	int h = pos.height / tileSize + startY + 3;
+	if (w >= this->w)
+		w = this->w - 1;
+	if (h >= this->h)
+		h = this->h - 1; 
+	for (int y = startY; y < h; y++)
+		for (int x = startX; x < w; x++)	
+			if(blocks[y][x]!=NULL)
+				objs.push_back(blocks[y][x]);
+	return objs;
+}
+
+std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
+{
+	std::list<GameObject*> objs = tree->getObjectsAt(pos);
+	int n = objs.size();
+	GameObject** objs2 = new GameObject * [n];
+	int i = 0;
+	while (objs.size() > 0)
+	{
+		GameObject* min=NULL;
+		for (GameObject* o : objs)
+		{
+			if (min == NULL)
+			{
+				min = o;
+				continue;
+			}
+			Rectangle pos1 = min->getPos();
+			Rectangle pos2 = o->getPos();
+			if (pos1.y > pos2.y)
+			{
+				min = o;
+			}
+		}
+		objs.remove(min);
+		objs2[i] = min;
+		i++;
+	}
+
+	int startX = pos.x / tileSize - 1;
+	int startY = pos.y / tileSize - 1;
+	if (startX < 0)
+		startX = 0;
+	if (startY < 0)
+		startY = 0;
+	int w = pos.width / tileSize + startX + 3;
+	int h = pos.height / tileSize + startY + 3;
+	if (w >= this->w)
+		w = this->w - 1;
+	if (h >= this->h)
+		h = this->h - 1;
+	i = 0;
+	for (int y = startY; y < h; y++)
+	{
+		for (int j = i; j < n; j++)
+		{
+			Rectangle objPos = objs2[j]->getPos();
+			if (objPos.y > y * tileSize)
+			{
+				break;
+			}
+			objs.push_back(objs2[i]);
+			i++;
+		}
+		for (int x = startX; x < w; x++)
+			if (blocks[y][x] != NULL)
+				objs.push_back(blocks[y][x]);
+		
+	}
+	for (; i < n; i++)
+		objs.push_back(objs2[i]);
+	delete objs2;
+	return objs;
 }
 
 void ObjectHandler::deleteObject(GameObject* obj) 
