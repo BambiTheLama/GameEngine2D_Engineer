@@ -21,8 +21,11 @@ void FourTree::addObj(GameObject* obj)
 	objects.push_back(obj);
 	if (tree == NULL)
 	{
-		if ((pos.width >256 || pos.height > 256) && objects.size() > 10)
+		if ((pos.width > 256 || pos.height > 256) && objects.size() > 10)
+		{
 			openTree();
+		}
+			
 	}
 	else
 	{
@@ -57,6 +60,8 @@ void FourTree::openTree()
 	tree[1] = new FourTree({ pos.x + w,pos.y,w,h });
 	tree[2] = new FourTree({ pos.x + w,pos.y + h,w,h });
 	tree[3] = new FourTree({ pos.x,pos.y + h,w,h });
+	for (GameObject* obj : objects)
+		allTree->addObj(obj);
 }
 void FourTree::closeTree()
 {

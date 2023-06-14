@@ -7,7 +7,7 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
-	heandler = new ObjectHandler({0,0,5000.0f,5000.0f});
+	heandler = new ObjectHandler({0,0,64000.0f,64000.0f});
 	heandler->addObject(cameraTarget=new Player());
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
@@ -35,10 +35,10 @@ void GameScene::update()
 	float cameraW = (float)GetScreenWidth()/(zoom);
 	float cameraH = (float)GetScreenHeight()/(zoom);
 	cameraPos = { camera.target.x - cameraW / 2,camera.target.y - cameraH / 2,cameraW,cameraH };
-	printf("CAMERAPOS ={%lf %lf %lf %lf}\n",cameraPos.x, cameraPos.y, cameraPos.width, cameraPos.height);
+	//printf("CAMERAPOS ={%lf %lf %lf %lf}\n",cameraPos.x, cameraPos.y, cameraPos.width, cameraPos.height);
 
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
-	std::list<GameObject*> objects = heandler->getObject();
+	std::list<GameObject*> objects = heandler->getObjects(cameraPos);
 	for (GameObject* obj : objects)
 		obj->update();
 	heandler->update();
@@ -126,8 +126,16 @@ Block* GameScene::getBlock(Rectangle pos)
 std::list<Block*> GameScene::getBlocks(Rectangle pos)
 {
 	int xIndex = pos.x / tileSize;
+	if (xIndex < 0)
+		xIndex = 0;
 	int yIndex = pos.y / tileSize;
+	if (yIndex < 0)
+		yIndex = 0;
 	int wMove = pos.width / tileSize;
+	if (wMove <= 0)
+		wMove = 1;
 	int hMove = pos.height / tileSize;
+	if (hMove <= 0)
+		hMove = 1;
 	return heandler->getBlocks(xIndex, yIndex, wMove, hMove);
 }

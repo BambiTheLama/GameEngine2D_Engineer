@@ -10,6 +10,11 @@ GameObject::GameObject(Rectangle pos)
 	this->pos = pos;
 }
 
+GameObject::~GameObject()
+{
+
+}
+
 float cursorTarget(Vector2 objPos)
 {
 	Vector2 mouse = Game->getCursorPos();

@@ -18,12 +18,11 @@ Player::Player():GameObject({ 400,400,64,64 })
 }
 Player::~Player()
 {
-
+	printf("UMAR£EM\n");
 }
 void Player::update()
 {
 	move();
-		
 }
 
 void Player::move()
@@ -47,7 +46,7 @@ void Player::move()
 	}
 	if (checkCollision(this))
 	{
-		//pos = posTmp;
+		pos = posTmp;
 	}
 	weapon->setMovePos({ pos.x,pos.y });
 	weapon->update();

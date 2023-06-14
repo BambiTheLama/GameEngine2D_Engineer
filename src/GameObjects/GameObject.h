@@ -28,7 +28,7 @@ public:
 	/// <summary>
 	/// Wiztualny destruktor by by³ wywo³any odpowiedni z klas dziedzicz¹cych
 	/// </summary>
-	virtual ~GameObject() {};
+	virtual ~GameObject();
 	/// <summary>
 	/// Metoda aktualizuj¹ca obiekt
 	/// </summary>

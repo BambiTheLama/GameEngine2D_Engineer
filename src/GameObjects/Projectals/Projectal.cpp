@@ -36,11 +36,17 @@ void Projectal::update()
 		toUpdate--;
 		if (toUpdate <= 0)
 		{
-			Game->updatePos(this);
 			toUpdate = 5;
-
+			Game->updatePos(this);
 		}
 			
+	}
+	std::list<Block*> objs=Game->getBlocks(pos);
+
+	for (auto* obj : objs)
+	{
+		Game->deleteBlocks(obj->getPos());
+
 	}
 }
 

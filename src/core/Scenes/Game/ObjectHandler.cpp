@@ -19,12 +19,12 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 		blocks[i] = new Block * [(int)w];
 		for (int j = 0; j < w; j++)
 		{
-			printf("%c", (char)(factory->getSize() *noice[i][j]+'a'));
+			//printf("%c", (char)(factory->getSize() *noice[i][j]+'a'));
 			blocks[i][j] = factory->getObject(factory->getSize()* noice[i][j]);
 			if (blocks[i][j] != NULL)
 				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
 		}
-		printf("\n");
+		//printf("\n");
 	}
 	delete perlin;
 
@@ -53,7 +53,7 @@ void ObjectHandler::clearLists()
 	objects.clear();
 }
 
-std::list<GameObject*> ObjectHandler::getObject()
+std::list<GameObject*> ObjectHandler::getObjects()
 { 
 	std::list<GameObject*> objs;
 	for (GameObject* o : objects)
@@ -76,8 +76,8 @@ std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos)
 		startX = 0;
 	if (startY < 0)
 		startY = 0;
-	int w = pos.width / tileSize + startX + 3;
-	int h = pos.height / tileSize + startY + 3;
+	int w = pos.width / tileSize + startX + 2;
+	int h = pos.height / tileSize + startY + 2;
 	if (w >= this->w)
 		w = this->w - 1;
 	if (h >= this->h)
@@ -135,7 +135,7 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 		for (int j = i; j < n; j++)
 		{
 			Rectangle objPos = objs2[j]->getPos();
-			if (objPos.y > y * tileSize)
+			if (objPos.y+objPos.height > (y+1) * tileSize)
 			{
 				break;
 			}
@@ -221,16 +221,13 @@ void ObjectHandler::deleteBlock(int x, int y)
 	if (blocks[y][x] != NULL)
 	{
 		Block* block = blocks[y][x];
+		objectsToDelete.push_back(block);
 		Rectangle pos = block->getPos();
 		int w = pos.width / tileSize;
 		int h = pos.height / tileSize;
 		for (int i = 0; i < w; i++)
 			for (int j = 0; j < h; j++)
 				blocks[y + j][x + i] = NULL;
-
-		delete block;
-		block = NULL;
-
 	}
 }
 
@@ -253,6 +250,14 @@ void ObjectHandler::deleteBlocks(int x, int y, int w, int h)
 
 std::list<Block*> ObjectHandler::getBlocks(int x, int y, int w, int h)
 {
+	if (x + w >= this->w)
+	{
+		w = this->w - x;
+	}
+	if (y + h >= this->h)
+	{
+		h = this->h - y;
+	}
 	std::list<Block*> blockToReturn;
 	for (int i = 0; i < w; i++)
 		for (int j = 0; j < h; j++)

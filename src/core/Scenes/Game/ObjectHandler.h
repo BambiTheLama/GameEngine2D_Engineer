@@ -30,7 +30,7 @@ public:
     /// Zwraca wszystkie obiekty
     /// </summary>
     /// <returns>Lista z obiektami</returns>
-    std::list<GameObject*> getObject();
+    std::list<GameObject*> getObjects();
     /// <summary>
     /// Zwraca wszystkie obiekty w podanej pozycji
     /// </summary>
