@@ -36,9 +36,9 @@ void GameScene::update()
 	float cameraH = (float)GetScreenHeight()/(zoom);
 	cameraPos = { camera.target.x - cameraW / 2,camera.target.y - cameraH / 2,cameraW,cameraH };
 	//printf("CAMERAPOS ={%lf %lf %lf %lf}\n",cameraPos.x, cameraPos.y, cameraPos.width, cameraPos.height);
-
+	Rectangle updatePos = { camera.target.x - cameraW ,camera.target.y - cameraH ,cameraW*2,cameraH*2 };
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
-	std::list<GameObject*> objects = heandler->getObjects(cameraPos);
+	std::list<GameObject*> objects = heandler->getObjects(updatePos);
 	for (GameObject* obj : objects)
 		obj->update();
 	heandler->update();
