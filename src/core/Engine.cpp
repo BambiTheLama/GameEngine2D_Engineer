@@ -22,6 +22,7 @@ Engine::~Engine()
 
 	if (scene != NULL)
 		delete scene;
+	scene = NULL;
 	SpriteController::closeSprites();
 	Items->clearFactory();
 	Blocks->clearFactory();
@@ -30,8 +31,7 @@ Engine::~Engine()
 void Engine::start()
 {
 	
-
-	
+	scene->start();
 	while (!WindowShouldClose())
 	{
 		update();

@@ -4,6 +4,7 @@
 GameObject::GameObject(GameObject& obj)
 {
 	this->pos = obj.pos;
+	this->ID = obj.ID;
 }
 GameObject::GameObject(Rectangle pos)
 {

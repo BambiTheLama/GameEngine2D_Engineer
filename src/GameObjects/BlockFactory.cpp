@@ -1,18 +1,20 @@
 #include "BlockFactory.h"
 #include "../core/Scenes/GameScene.h"
-
+#include "Blocks/CollidingBlock.h"
 BlockFactory* BlockFactory::factory=NULL;
 
 BlockFactory::BlockFactory()
 {
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, BLACK));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, RED));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, GREEN));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, BLUE));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, YELLOW));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, PINK));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, GRAY));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, LIGHTGRAY));
+	std::string path = "Resource/Blocks/";
+	objects.push_back(new CollidingBlock({ 0,0,tileSize,tileSize }, ToolType::NON, 0, path + "Water.png"));
+
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, path+"Dirt.png"));
+
+
+	for (int i = 0; i < objects.size(); i++)
+	{
+		objects[i]->ID = i;
+	}
 }
 
 BlockFactory::~BlockFactory()
@@ -33,6 +35,7 @@ void BlockFactory::clearFactory()
 {
 	if (factory != NULL)
 		delete factory;
+	factory = NULL;
 }
 
 Block* BlockFactory::getObject(int i)

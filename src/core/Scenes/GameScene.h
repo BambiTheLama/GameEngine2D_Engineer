@@ -27,6 +27,10 @@ public:
     /// </summary>
     ~GameScene();
     /// <summary>
+    /// Metoda startuj¹ca gry wszystkie obiekty zostan¹ dodane na scenê
+    /// </summary>
+    void start();
+    /// <summary>
     /// Aktualizacja wszystkich obiektów
     /// </summary>
     void update();
@@ -53,8 +57,9 @@ public:
     /// Zwraca obiekty w podanym miejsu
     /// </summary>
     /// <param name="pos">Pozycja z której interesuj¹ nas obiekty</param>
+    /// <param name="type">Typy obiektów które maj¹ zostac zwrócone</param>
     /// <returns>Lista obiektów w danym obszarze</returns>
-    std::list<GameObject*> getObjects(Rectangle pos) { return heandler->getObjects(pos); }
+    std::list<GameObject*> getObjects(Rectangle pos, ObjectToGet type = ObjectToGet::getAll) { return heandler->getObjects(pos, type); }
     /// <summary>
     /// Aktualizujê pozycjê obiektu
     /// </summary>
@@ -71,7 +76,7 @@ public:
     /// <param name="pos">pozycja z której usuwamy obiekty</param>
     void removeBlocks(Rectangle pos);
     /// <summary>
-    /// Usuwa z pamieci elementy podane 
+    /// Usuwa z pamieci bloki w podanej pozycji
     /// </summary>
     /// <param name="pos">Pozycja bloków do usuniecia z pamieci</param>
     void deleteBlocks(Rectangle pos);

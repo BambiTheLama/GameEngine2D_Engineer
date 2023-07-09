@@ -3,31 +3,36 @@
 /// <summary>
 /// Klasa od animacji obiektów
 /// </summary>
-class AnimationControler
+class AnimationController
 {
 	std::vector<SpriteController*> sprites;
-
+	bool toDelete=false;
 public:
 	/// <summary>
 	/// konstruktor do której podajemy vektor z wszystkimi animacjami
 	/// </summary>
 	/// <param name="sprites">Obiekty do animowania</param>
-	AnimationControler(std::vector<SpriteController*> sprites);
+	AnimationController(std::vector<SpriteController*> sprites);
 	/// <summary>
 	/// Konstruktor do której podajemy tylko jeden obiekt do anikacji
 	/// </summary>
 	/// <param name="sprite">obiekt do animacji</param>
-	AnimationControler(SpriteController* sprite);
+	AnimationController(SpriteController* sprite);
 	/// <summary>
 	/// Konstruktor do której podajemy tablice obiektów do animacji
 	/// </summary>
 	/// <param name="sprites">Obiekty do animowania</param>
 	/// <param name="n">iloœæ obiektów</param>
-	AnimationControler(SpriteController** sprites, int n);
+	AnimationController(SpriteController** sprites, int n);
+	/// <summary>
+	/// Kostruktor który kopiuje dane z podobnego obiektu
+	/// </summary>
+	/// <param name="animations">obiekt z którego kopiujemy dane</param>
+	AnimationController(AnimationController& animations);
 	/// <summary>
 	/// Destruktor wszystkich obiektów z spraitami
 	/// </summary>
-	~AnimationControler();
+	~AnimationController();
 	/// <summary>
 	/// Metoda od rysowania obiektu 
 	/// </summary>
@@ -37,5 +42,7 @@ public:
 	/// <param name="flippLeftRight">Czy rysujemy obiekt obracaj¹c do z lewa na prawo</param>
 	/// <param name="flipUpDown">Czy rysujemy obiekt obracaj¹c z góry na dó³</param>
 	void draw(Rectangle pos, int frame=0, int animationIndex=0, bool flipLeftRight = false, bool flipUpDown = false);
+
+	int getMaxFrames(int animationIndex = 0);
 };
 

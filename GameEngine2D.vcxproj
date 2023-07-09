@@ -129,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\Controllers\AnimationControler.cpp" />
+    <ClCompile Include="src\core\Controllers\AnimationController.cpp" />
     <ClCompile Include="src\core\Controllers\SpriteController.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
@@ -138,9 +138,11 @@
     <ClCompile Include="src\core\Scenes\Game\PerlinNoice.cpp" />
     <ClCompile Include="src\core\Scenes\Scene.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp" />
+    <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\UserInterface.cpp" />
     <ClCompile Include="src\GameObjects\BlockFactory.cpp" />
     <ClCompile Include="src\GameObjects\Blocks\Block.cpp" />
+    <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp" />
     <ClCompile Include="src\GameObjects\GameObject.cpp" />
     <ClCompile Include="src\GameObjects\Items\Item.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\ShootingWeapon.cpp" />
@@ -151,7 +153,7 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\core\Controllers\AnimationControler.h" />
+    <ClInclude Include="src\core\Controllers\AnimationController.h" />
     <ClInclude Include="src\core\Controllers\SpriteController.h" />
     <ClInclude Include="src\core\Engine.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
@@ -159,10 +161,13 @@
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />
     <ClInclude Include="src\core\Scenes\Game\PerlinNoice.h" />
     <ClInclude Include="src\core\Scenes\Scene.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\UserInterface.h" />
     <ClInclude Include="src\GameObjects\BlockFactory.h" />
     <ClInclude Include="src\GameObjects\Blocks\Block.h" />
+    <ClInclude Include="src\GameObjects\Blocks\CollidingBlock.h" />
     <ClInclude Include="src\GameObjects\Factory.h" />
     <ClInclude Include="src\GameObjects\GameObject.h" />
     <ClInclude Include="src\GameObjects\Items\Item.h" />

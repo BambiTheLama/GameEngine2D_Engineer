@@ -60,7 +60,7 @@
     <ClCompile Include="src\GameObjects\Player\Player.cpp">
       <Filter>src\GameObjects\Player</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Controllers\AnimationControler.cpp">
+    <ClCompile Include="src\core\Controllers\AnimationController.cpp">
       <Filter>src\core\Controllers</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Controllers\SpriteController.cpp">
@@ -108,6 +108,12 @@
     <ClCompile Include="src\GameObjects\BlockFactory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp">
+      <Filter>src\GameObjects\Blocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -119,7 +125,7 @@
     <ClInclude Include="src\GameObjects\Player\Player.h">
       <Filter>src\GameObjects\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Controllers\AnimationControler.h">
+    <ClInclude Include="src\core\Controllers\AnimationController.h">
       <Filter>src\core\Controllers</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Controllers\SpriteController.h">
@@ -169,6 +175,15 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Factory.h">
       <Filter>src\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Blocks\CollidingBlock.h">
+      <Filter>src\GameObjects\Blocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

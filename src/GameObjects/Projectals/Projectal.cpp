@@ -4,13 +4,13 @@
 
 Projectal::Projectal(Projectal& obj):GameObject(obj)
 {
-
+	this->range = obj.range;
+	this->speed = obj.speed;
 }
 
 Projectal::Projectal(Rectangle pos, float rotation,float range):GameObject(pos)
 {
 	this->rotation = rotation;
-	float multiplay = tan(rotation);
 	this->range = range;
 	this->speed = 5;
 

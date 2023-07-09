@@ -1,22 +1,28 @@
 #pragma once
 #include "../GameObject.h"
+#include "../../core/Controllers/SpriteController.h"
+#include "../AddisionalTypes/AllTypes.h"
+#include <string>
 enum class ToolType {
-    All = 0, Axe = 2, Shovel = 3, Pickaxe = 6
+    All = 0, Axe = 2, Shovel = 3, Pickaxe = 5, NON=2137
 };
 class Block :
     public GameObject
 {
 protected:
-    int hp,power;
+    int hp, power;
     ToolType requestType;
-    Color c;
     Block(Block& obj);
-
+    SpriteController* sprite;
+    Rectangle texturePos;
+    bool right = true, left = true, down = true, up = true;
     
 public:
-    Block(Rectangle pos, ToolType requestType, int power, Color c);
+    Block(Rectangle pos, ToolType requestType, int power, std::string path);
 
     ~Block();
+
+    virtual void start();
 
     virtual void update();
 
@@ -28,7 +34,6 @@ public:
 
     virtual Block* clone() { return new Block(*this); }
 
-    virtual bool isColliding() { return true; }
-
+    void generateTexturePos();
 };
 

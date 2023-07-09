@@ -1,14 +1,23 @@
 #pragma once
 #include "../GameObject.h"
 #include "../Items/Weapon/Weapon.h"
+#include "../AddisionalTypes/AllTypes.h"
+
+enum class playerAnimationState {
+    IDE = 0, MoveUp, MoveDown, MoveLeft, MoveRight = -3, Doge = 4, Die = 5
+};
 /// <summary>
 /// Obiekt gracza nad któr¹ ma kontrolê u¿ytkownik
 /// </summary>
 class Player :
-    public GameObject
+    public GameObject, public Collider
 {
     float speed;
     Weapon* weapon;
+    AnimationController* animations;
+    playerAnimationState state = playerAnimationState::IDE;
+    float frame = 0;
+    bool canMove = true;
 protected:
     Player(Player& obj);
 public:
@@ -40,5 +49,9 @@ public:
     ObjectType getType() { return ObjectType::Player; }
 
     virtual Player* clone() { return new Player(*this); }
+
+    virtual void setCanMoveObject(bool canMove) { this->canMove = canMove; }
+
+    bool isColliding() { return true; }
 };
 

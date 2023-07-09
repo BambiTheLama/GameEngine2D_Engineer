@@ -6,6 +6,14 @@ class Scene
 {
 public:
 	/// <summary>
+	/// Destruktor wirtualny potrzbny do usuwania scen
+	/// </summary>
+	virtual ~Scene() {}
+	/// <summary>
+	/// Metoda Startuj¹ce metody start dla obiektów
+	/// </summary>
+	virtual void start() = 0;
+	/// <summary>
 	/// Metoda aktualizujaca
 	/// </summary>
 	virtual void update() = 0;

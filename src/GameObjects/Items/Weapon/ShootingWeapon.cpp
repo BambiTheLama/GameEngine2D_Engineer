@@ -5,16 +5,20 @@
 ShootingWeapon::ShootingWeapon(ShootingWeapon& obj):Weapon(obj)
 {
 	orgin = obj.orgin;
+	projectal = obj.projectal->clone();
 }
 
 ShootingWeapon::ShootingWeapon(Rectangle pos) :Weapon(pos)
 {
 	orgin = { pos.width / 2, pos.height};
+	Rectangle bulletPos = { pos.x - 8,pos.y - 8 , 16,16 };
+	projectal = new Projectal(bulletPos, rotation, 1000);
 }
 
 ShootingWeapon::~ShootingWeapon()
 {
-
+	if(projectal!=NULL)
+		delete projectal;
 }
 void ShootingWeapon::update()
 {
@@ -35,12 +39,15 @@ bool ShootingWeapon::use()
 {
 	if(CDR>0)
 		return false;
+
 	Rectangle pos = getPos();
-	Rectangle bulletPos = { pos.x-8,pos.y-8 , 16,16 };
 
-	Game->addObject(new Projectal(bulletPos, rotation, 1000));
+	Projectal *pro = projectal->clone();
+	pro->setRotation(rotation);
+	pro->setMovePos({ pos.x - 8,pos.y - 8 });
+	Game->addObject(pro);
 
+	CDR = CDRMAX;
 
-	//CDR = CDRMAX;
 	return true;
 }

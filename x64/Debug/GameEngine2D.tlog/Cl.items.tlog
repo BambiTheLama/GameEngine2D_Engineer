@@ -1,4 +1,4 @@
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Controllers\AnimationControler.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\AnimationControler.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Controllers\AnimationController.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\AnimationController.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Controllers\SpriteController.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\SpriteController.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Engine.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Engine.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\GameScene.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\GameScene.obj
@@ -7,9 +7,11 @@ C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\Ob
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\PerlinNoice.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\PerlinNoice.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Scene.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Scene.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Collider.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\DodgeInterface.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\DodgeInterface.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\UserInterface.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\UserInterface.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\BlockFactory.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\BlockFactory.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Blocks\Block.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Block.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Blocks\CollidingBlock.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\CollidingBlock.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\GameObject.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\GameObject.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Item.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Item.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\ShootingWeapon.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ShootingWeapon.obj

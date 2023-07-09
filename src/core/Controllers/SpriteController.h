@@ -8,10 +8,8 @@
 class SpriteController
 {
 	static std::vector<SpriteController*> sprites;
-
 	Texture2D texture;
-	std::string path;
-	
+	std::string path;	
 public:
 	/// <summary>
 	/// Konstruktor do klasy poprzez œcie¿kê
@@ -32,5 +30,6 @@ public:
 	/// Czyœci wszystkie wczytane textury
 	/// </summary>
 	static void closeSprites();
+
 };
 

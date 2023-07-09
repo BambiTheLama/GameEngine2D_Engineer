@@ -1,10 +1,12 @@
 #pragma once
 #include "Weapon.h"
+#include "../../Projectals/Projectal.h"
 class ShootingWeapon :
     public Weapon
 {
     float rotation;
     Vector2 orgin;
+    Projectal* projectal=NULL;
 protected:
     ShootingWeapon(ShootingWeapon& obj);
 public:

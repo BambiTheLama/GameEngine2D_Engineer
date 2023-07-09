@@ -3,7 +3,8 @@
 #include <vector>
 #include "Factory.h"
 #define Blocks BlockFactory::getFactory()
-class BlockFactory:Factory
+class BlockFactory
+	:public Factory
 {
 	static BlockFactory* factory;
 	std::vector<Block*> objects;

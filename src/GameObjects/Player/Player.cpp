@@ -5,20 +5,30 @@
 #include "../Projectals/Projectal.h"
 #include "../ItemFactory.h"
 
-Player::Player(Player& obj):GameObject(obj)
+Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 {
-
+	animations = new AnimationController(*obj.animations);
 }
 
-Player::Player():GameObject({ 400,400,64,64 })
+Player::Player():GameObject({ 400,400,64,64 }),Collider({pos.width/3,pos.height/4,pos.width/3,pos.width/2})
 {
 	speed = 2;
 	Item* i= Items->getObject(0);
 	weapon = dynamic_cast<Weapon*>(i);
+	int n = 6;
+	std::string names[6] = { "IDE","MoveUp","MoveDown","MoveLeft","Doge","Die" };
+	std::vector<SpriteController*> sprites;
+	for (int i = 0; i < n; i++)
+	{
+		std::string path = "Resource/Player/" + names[i] + ".png";
+		sprites.push_back(new SpriteController(path.c_str()));
+		
+	}
+	animations = new AnimationController(sprites);
 }
 Player::~Player()
 {
-	printf("UMAR£EM\n");
+	delete animations;
 }
 void Player::update()
 {
@@ -27,28 +37,54 @@ void Player::update()
 
 void Player::move()
 {
-	Rectangle posTmp = getPos();
-	if (IsKeyDown(KEY_A))
+	
+	Vector2 posTmp = { 0,0 };
+	if (canMove)
 	{
-		pos.x -= speed;
+		if (IsKeyDown(KEY_A))
+		{
+			posTmp.x -= speed;
+		}
+		if (IsKeyDown(KEY_D))
+		{
+			posTmp.x += speed;
+		}
+		if (IsKeyDown(KEY_W))
+		{
+			posTmp.y -= speed;
+		}
+		if (IsKeyDown(KEY_S))
+		{
+			posTmp.y += speed;
+		}
+
+		if (posTmp.x != 0)
+		{
+			if (posTmp.x > 0)
+				state = playerAnimationState::MoveRight;
+			else
+				state = playerAnimationState::MoveLeft;
+		}
+		if (posTmp.y != 0)
+		{
+			if (posTmp.y > 0)
+				state = playerAnimationState::MoveDown;
+			else
+				state = playerAnimationState::MoveUp;
+		}
+		if (IsKeyDown(KEY_SPACE))
+		{
+			state = playerAnimationState::Doge;
+		}
 	}
-	if (IsKeyDown(KEY_D))
+	
+	Rectangle pos = getPos();
+	setMovePos({ posTmp.x + pos.x, pos.y + posTmp.y });
+	if (isCollidingWithSomething(this))
 	{
-		pos.x += speed;
+		setMovePos({ pos.x, pos.y });
 	}
-	if (IsKeyDown(KEY_W))
-	{
-		pos.y -= speed;
-	}
-	if (IsKeyDown(KEY_S))
-	{
-		pos.y += speed;
-	}
-	if (checkCollision(this))
-	{
-		pos = posTmp;
-	}
-	weapon->setMovePos({ pos.x,pos.y });
+	weapon->setMovePos({ pos.x+pos.width/2,pos.y+pos.height/2 });
 	weapon->update();
 	Game->updatePos(this);
 }
@@ -56,12 +92,8 @@ void Player::move()
 void Player::draw()
 {
 	Rectangle pos = getPos();
-	DrawRectangleRec(pos, RED);
-	changePos
-	DrawRectangleRec(pos, GREEN);
-	changePos
-	DrawRectangleRec(pos, BLUE);
-	changePos
-	DrawRectangleRec(pos, YELLOW);
-	weapon->draw();
+
+	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
+	if (IsKeyDown(KEY_TAB))
+		Collider::draw(this);
 }

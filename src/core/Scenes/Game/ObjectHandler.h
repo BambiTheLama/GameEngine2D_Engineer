@@ -6,6 +6,14 @@
 #include "../../../GameObjects/Blocks/Block.h"
 #include "FourTree.h"
 #define tileSize 32
+enum class ObjectToGet
+{
+    getAll,getBlocks,getNoBlocks
+};
+
+/// <summary>
+/// Klasa odpowiedzialna za trzymanie wszystkich obiektów w miejnym miejscu
+/// </summary>
 class ObjectHandler
 {
     std::list<GameObject*> objects=std::list<GameObject*>();
@@ -26,6 +34,8 @@ public:
     /// Czyœci wszytkie listy i usuwa obiekty z objects i obejctsToAdd
     /// </summary>
     void clearLists();
+
+    void start();
     /// <summary>
     /// Zwraca wszystkie obiekty
     /// </summary>
@@ -36,8 +46,12 @@ public:
     /// </summary>
     /// <param name="pos">Pozycja obiektów</param>
     /// <returns>Lista z obiektami</returns>
-    std::list<GameObject*> getObjects(Rectangle pos);
-
+    std::list<GameObject*> getObjects(Rectangle pos, ObjectToGet type = ObjectToGet::getAll);
+    /// <summary>
+    /// Obiekty ju¿ gotowe do rysowanie posortowane w kolejnoœci od najwy¿szego miejssca na mapie do najni¿szego
+    /// </summary>
+    /// <param name="pos">Pozycja obiektów do rysowania</param>
+    /// <returns>lista obiektów gotowych do rysowania</returns>
     std::list<GameObject*> getObjectsToDraw(Rectangle pos);
     /// <summary>
     /// Usuwa i dodaje nowe obiekty do kolekcji
@@ -111,5 +125,8 @@ public:
     /// <param name="y">pozcyja y</param>
     /// <returns>block do zwrócenia</returns>
     Block* getBlock(int x, int y);
+
+    int getBlockW() { return w; }
+    int getBlockH() { return h; }
 };
 

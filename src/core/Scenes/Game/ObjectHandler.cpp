@@ -20,7 +20,7 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 		for (int j = 0; j < w; j++)
 		{
 			//printf("%c", (char)(factory->getSize() *noice[i][j]+'a'));
-			blocks[i][j] = factory->getObject(factory->getSize()* noice[i][j]);
+			blocks[i][j] = factory->getObject(noice[i][j] >= 0 ? 1 : 0);
 			if (blocks[i][j] != NULL)
 				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
 		}
@@ -30,6 +30,8 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 
 
 }
+
+
 
 ObjectHandler::~ObjectHandler()
 {
@@ -52,7 +54,15 @@ void ObjectHandler::clearLists()
 		delete obj;
 	objects.clear();
 }
-
+void ObjectHandler::start()
+{
+	for (GameObject* obj : objects)
+		obj->start();
+	for (int i = 0; i < h; i++)
+		for (int j = 0; j < w; j++)
+			if(blocks[i][j]!=NULL)
+				blocks[i][j]->start();
+}
 std::list<GameObject*> ObjectHandler::getObjects()
 { 
 	std::list<GameObject*> objs;
@@ -67,25 +77,33 @@ std::list<GameObject*> ObjectHandler::getObjects()
 	return objs;
 }
 
-std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos) 
-{ 
-	std::list<GameObject*> objs = tree->getObjectsAt(pos);
-	int startX = pos.x / tileSize-1;
-	int startY = pos.y / tileSize-1;
-	if (startX < 0)
-		startX = 0;
-	if (startY < 0)
-		startY = 0;
-	int w = pos.width / tileSize + startX + 2;
-	int h = pos.height / tileSize + startY + 2;
-	if (w >= this->w)
-		w = this->w - 1;
-	if (h >= this->h)
-		h = this->h - 1; 
-	for (int y = startY; y < h; y++)
-		for (int x = startX; x < w; x++)	
-			if(blocks[y][x]!=NULL)
-				objs.push_back(blocks[y][x]);
+std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos, ObjectToGet type)
+{
+	std::list<GameObject*> objs;
+	if (type != ObjectToGet::getBlocks)
+	{
+		objs = tree->getObjectsAt(pos);
+	}
+	if (type != ObjectToGet::getNoBlocks)
+	{
+		int startX = pos.x / tileSize - 1;
+		int startY = pos.y / tileSize - 1;
+		if (startX < 0)
+			startX = 0;
+		if (startY < 0)
+			startY = 0;
+		int w = pos.width / tileSize + startX + 3;
+		int h = pos.height / tileSize + startY + 3;
+		if (w >= this->w)
+			w = this->w - 1;
+		if (h >= this->h)
+			h = this->h - 1;
+		for (int y = startY; y < h; y++)
+			for (int x = startX; x < w; x++)
+				if (blocks[y][x] != NULL)
+					objs.push_back(blocks[y][x]);
+	}
+	
 	return objs;
 }
 
@@ -206,6 +224,8 @@ void ObjectHandler::update()
 	
 }
 
+
+
 bool ObjectHandler::addBlock(Block* block,int x,int y)
 {
 	if (blocks[y][x] == NULL)
@@ -220,14 +240,14 @@ void ObjectHandler::deleteBlock(int x, int y)
 {
 	if (blocks[y][x] != NULL)
 	{
-		Block* block = blocks[y][x];
-		objectsToDelete.push_back(block);
-		Rectangle pos = block->getPos();
+		objectsToDelete.push_back(blocks[y][x]);
+		Rectangle pos = blocks[y][x]->getPos();
 		int w = pos.width / tileSize;
 		int h = pos.height / tileSize;
 		for (int i = 0; i < w; i++)
 			for (int j = 0; j < h; j++)
 				blocks[y + j][x + i] = NULL;
+		
 	}
 }
 

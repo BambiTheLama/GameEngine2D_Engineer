@@ -7,7 +7,7 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
-	heandler = new ObjectHandler({0,0,64000.0f,64000.0f});
+	heandler = new ObjectHandler({0,0,3000.0f,3000.0f});
 	heandler->addObject(cameraTarget=new Player());
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
@@ -19,10 +19,16 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	delete heandler;
-;	game = NULL;
-}
+	game = NULL;
+	ObjectHandler* h = heandler;
+	heandler = NULL;
+	delete h;
 
+}
+void GameScene::start()
+{
+	heandler->start();
+}
 void GameScene::update()
 {
 	Rectangle pos = cameraTarget->getPos();
@@ -66,13 +72,14 @@ void GameScene::removeObject(GameObject* obj)
 void GameScene::draw()
 {
 
-	std::list<GameObject*> objects = heandler->getObjectsToDraw(cameraPos);
+	std::list<GameObject*> objects = heandler->getObjects(cameraPos);
 
 
 	BeginMode2D(camera);
 	for (GameObject* obj : objects)
 		obj->draw();
-	heandler->draw();
+	if(IsKeyDown(KEY_TAB))
+		heandler->draw();
 	EndMode2D();
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 }
@@ -92,8 +99,8 @@ void GameScene::deleteBlocks(Rectangle pos)
 {
 	int xIndex = pos.x / tileSize;
 	int yIndex = pos.y / tileSize;
-	int wMove = pos.width / tileSize;
-	int hMove = pos.height / tileSize;
+	int wMove = pos.width / tileSize + (int)(pos.width) % tileSize > 0 ? 1 : 0;
+	int hMove = pos.height / tileSize + (int)(pos.height) % tileSize > 0 ? 1 : 0;
 	heandler->deleteBlocks(xIndex, yIndex, wMove, hMove);
 }
 
@@ -120,6 +127,10 @@ Block* GameScene::getBlock(Rectangle pos)
 {
 	int xIndex = pos.x / tileSize;
 	int yIndex = pos.y / tileSize;
+	if (xIndex >= heandler->getBlockW() || xIndex < 0)
+		return NULL;
+	if (yIndex >= heandler->getBlockH() || yIndex < 0)
+		return NULL;
 	return heandler->getBlock(xIndex, yIndex);
 }
 

@@ -1,15 +1,22 @@
 #pragma once
 #include "raylib.h"
+#include "../GameObject.h"
 class Collider
 {
 	Rectangle collision;
 public:
 	Collider(Rectangle col);
 
-	Rectangle getCollision() { return collision; }
+	Collider(Collider& collder);
 
-	bool checkCollison(Rectangle col) { return CheckCollisionRecs(col, collision); }
+	Rectangle getCollisionPos(GameObject* obj);
 
-	bool checkCollison(Collider& col) { return CheckCollisionRecs(collision, col.collision); }
+	bool isCollidingWithSomething(GameObject* obj);
+
+	void draw(GameObject* obj)
+	{
+		Rectangle pos = obj->getPos();
+		DrawRectangle(pos.x + collision.x, pos.y + collision.y, collision.width, collision.height, RED);
+	}
 };
 

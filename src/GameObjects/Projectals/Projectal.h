@@ -32,6 +32,11 @@ public:
     /// Metoda rysuj¹ca
     /// </summary>
     void draw();
+    /// <summary>
+    /// Ustaw rotacjê pocisku
+    /// </summary>
+    /// <param name="rotation">K¹t obrotu</param>
+    void setRotation(float rotation) { this->rotation = rotation; delta = deltaFromDegree(rotation, speed);}
 
     ObjectType getType() { return ObjectType::Projectal; }
 
