@@ -2,6 +2,7 @@
 #include "../GameObject.h"
 #include "../Items/Weapon/Weapon.h"
 #include "../AddisionalTypes/AllTypes.h"
+#include "Eq.h"
 
 enum class playerAnimationState {
     IDE = 0, MoveUp, MoveDown, MoveLeft, MoveRight = -3, Doge = 4, Die = 5
@@ -10,7 +11,7 @@ enum class playerAnimationState {
 /// Obiekt gracza nad któr¹ ma kontrolê u¿ytkownik
 /// </summary>
 class Player :
-    public GameObject, public Collider
+    public GameObject, public Collider , public UserUI
 {
     float speed;
     Weapon* weapon;
@@ -18,6 +19,7 @@ class Player :
     playerAnimationState state = playerAnimationState::IDE;
     float frame = 0;
     bool canMove = true;
+    Eq* eq;
 protected:
     Player(Player& obj);
 public:
@@ -30,6 +32,8 @@ public:
     /// Destruktor od klasy gracza
     /// </summary>
     ~Player();
+
+    void start();
     /// <summary>
     /// Metoda aktualizuj¹ca gracza
     /// </summary>
@@ -47,6 +51,8 @@ public:
     /// </summary>
     /// <returns></returns>
     ObjectType getType() { return ObjectType::Player; }
+
+    virtual void drawInterface();
 
     virtual Player* clone() { return new Player(*this); }
 

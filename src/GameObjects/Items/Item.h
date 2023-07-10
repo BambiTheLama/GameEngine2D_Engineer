@@ -6,13 +6,15 @@ class Item :
 protected:
     Item(Item& obj);
 public:
-    Item(Rectangle pos);
+    Item(Rectangle pos, std::string name);
 
     virtual ~Item();
 
     virtual void update();
 
     virtual void draw();
+
+    virtual void drawAt(Rectangle pos);
 
     virtual bool use();
 

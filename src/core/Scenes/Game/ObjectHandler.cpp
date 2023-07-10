@@ -1,6 +1,7 @@
 #include "ObjectHandler.h"
 #include "../../../GameObjects/BlockFactory.h"
 #include "PerlinNoice.h"
+
 ObjectHandler::ObjectHandler(Rectangle pos)
 {
 	this->pos = pos;
@@ -20,7 +21,15 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 		for (int j = 0; j < w; j++)
 		{
 			//printf("%c", (char)(factory->getSize() *noice[i][j]+'a'));
-			blocks[i][j] = factory->getObject(noice[i][j] >= 0 ? 1 : 0);
+
+			int blockID = noice[i][j] >= 0 ? 1 : 0;
+			if (blockID > 0)
+			{
+				blockID = noice[i][j] * factory->getSize()+1;
+
+			}
+
+			blocks[i][j] = factory->getObject(blockID);
 			if (blocks[i][j] != NULL)
 				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
 		}
@@ -111,6 +120,35 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 {
 	std::list<GameObject*> objs = tree->getObjectsAt(pos);
 
+	GameObject** tmpObj = new GameObject * [objs.size()];
+	int n = 0;
+
+	while (objs.size() > 0)
+	{
+		int min = INT_MAX;
+		GameObject* minObj = NULL;
+		for (auto o : objs)
+		{
+			Rectangle pos = o->getPos();
+			if (min>pos.y+pos.height)
+			{
+				min = pos.y + pos.height;
+				minObj = o;
+			}
+		}
+		tmpObj[n] = minObj;
+		n++;
+		objs.remove(minObj);
+
+	}
+	for (int i = 0; i < n; i++)
+	{
+		objs.push_back(tmpObj[i]);
+	}
+	delete tmpObj;
+
+
+
 	int startX = pos.x / tileSize - 1;
 	int startY = pos.y / tileSize - 1;
 	if (startX < 0)
@@ -143,7 +181,9 @@ void ObjectHandler::deleteObject(GameObject* obj)
 void ObjectHandler::addObject(GameObject* obj) 
 { 
 	if (objects.size() < 1000 - objectsToAdd.size())
+	{
 		objectsToAdd.push_back(obj);
+	}
 	else
 		delete obj;
 }
@@ -180,6 +220,7 @@ void ObjectHandler::update()
 		{
 			objects.push_back(obj);
 			tree->addObj(obj);
+			obj->start();
 		}
 
 		objectsToAdd.clear();

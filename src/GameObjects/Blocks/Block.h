@@ -18,7 +18,7 @@ protected:
     bool right = true, left = true, down = true, up = true;
     
 public:
-    Block(Rectangle pos, ToolType requestType, int power, std::string path);
+    Block(Rectangle pos, ToolType requestType, int power, std::string path,std::string name);
 
     ~Block();
 

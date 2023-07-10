@@ -8,7 +8,7 @@ ShootingWeapon::ShootingWeapon(ShootingWeapon& obj):Weapon(obj)
 	projectal = obj.projectal->clone();
 }
 
-ShootingWeapon::ShootingWeapon(Rectangle pos) :Weapon(pos)
+ShootingWeapon::ShootingWeapon(Rectangle pos, std::string name) :Weapon(pos,name)
 {
 	orgin = { pos.width / 2, pos.height};
 	Rectangle bulletPos = { pos.x - 8,pos.y - 8 , 16,16 };

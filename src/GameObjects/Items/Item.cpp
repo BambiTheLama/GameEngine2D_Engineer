@@ -3,7 +3,7 @@ Item::Item(Item& obj) :GameObject(obj)
 {
 
 }
-Item::Item(Rectangle pos):GameObject(pos)
+Item::Item(Rectangle pos, std::string name):GameObject(pos,name)
 {
 
 }
@@ -21,6 +21,12 @@ void Item::draw()
 {
 
 }
+
+void Item::drawAt(Rectangle pos)
+{
+
+}
+
 bool Item::use()
 {
 	return false;

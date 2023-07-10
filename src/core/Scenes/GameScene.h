@@ -12,6 +12,7 @@ class GameScene :
 {
     static GameScene* game;
     ObjectHandler *heandler;
+    std::list<UserUI*> userUI;
     Vector2 cursorPos;
     Camera2D camera;
     GameObject* cameraTarget;
@@ -103,6 +104,16 @@ public:
     /// </summary>
     /// <returns>scena gry</returns>
     static GameScene* getGameScene() { return game; }
+    /// <summary>
+    /// Dodaje do listy nowy Interfejs u¿ytkownika
+    /// </summary>
+    /// <param name="ui">Interfejs do dodania</param>
+    void addUserUI(UserUI* ui) { userUI.push_back(ui); }
+    /// <summary>
+    /// Usuwa do listy nowy Interfejs u¿ytkownika
+    /// </summary>
+    /// <param name="ui">Interfejs do usuniêcia</param>
+    void removeUserUI(UserUI* ui) { userUI.remove(ui); }
 
     
 };

@@ -5,10 +5,12 @@ GameObject::GameObject(GameObject& obj)
 {
 	this->pos = obj.pos;
 	this->ID = obj.ID;
+	this->name = obj.name;
 }
-GameObject::GameObject(Rectangle pos)
+GameObject::GameObject(Rectangle pos,std::string name)
 {
 	this->pos = pos;
+	this->name = name;
 }
 
 GameObject::~GameObject()

@@ -7,7 +7,7 @@ ItemFactory* ItemFactory::factory = NULL;
 ItemFactory::ItemFactory()
 {
 	objects = std::vector<Item*>();
-	objects.push_back(new ShootingWeapon({0,0,64,64}));
+	objects.push_back(new ShootingWeapon({0,0,64,64},""));
 	
 
 }

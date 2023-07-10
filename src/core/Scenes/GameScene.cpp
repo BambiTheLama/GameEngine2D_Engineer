@@ -23,6 +23,7 @@ GameScene::~GameScene()
 	ObjectHandler* h = heandler;
 	heandler = NULL;
 	delete h;
+	userUI.clear();
 
 }
 void GameScene::start()
@@ -82,6 +83,8 @@ void GameScene::draw()
 		heandler->draw();
 	EndMode2D();
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
+	for (UserUI* i : userUI)
+		i->drawInterface();
 }
 
 void GameScene::removeBlocks(Rectangle pos)

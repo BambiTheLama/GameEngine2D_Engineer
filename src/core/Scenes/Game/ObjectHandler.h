@@ -2,7 +2,7 @@
 #include <vector>
 #include <list>
 #include "../../../GameObjects/GameObject.h"
-#include "../../../GameObjects/AddisionalTypes/UserInterface.h"
+#include "../../../GameObjects/AddisionalTypes/UserUI.h"
 #include "../../../GameObjects/Blocks/Block.h"
 #include "FourTree.h"
 #define tileSize 32
@@ -125,8 +125,15 @@ public:
     /// <param name="y">pozcyja y</param>
     /// <returns>block do zwrócenia</returns>
     Block* getBlock(int x, int y);
-
+    /// <summary>
+    /// Szerokoœæ na której s¹ bloki
+    /// </summary>
+    /// <returns></returns>
     int getBlockW() { return w; }
+    /// <summary>
+    /// Wysokoœæ na której s¹ bloki
+    /// </summary>
+    /// <returns></returns>
     int getBlockH() { return h; }
 };
 

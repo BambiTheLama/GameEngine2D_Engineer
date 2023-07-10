@@ -15,7 +15,7 @@ protected:
 
     Weapon(Weapon& obj);
 public:
-    Weapon(Rectangle pos);
+    Weapon(Rectangle pos, std::string name);
 
     virtual void update();
 

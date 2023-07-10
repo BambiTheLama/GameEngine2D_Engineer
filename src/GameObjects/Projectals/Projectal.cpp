@@ -8,7 +8,7 @@ Projectal::Projectal(Projectal& obj):GameObject(obj)
 	this->speed = obj.speed;
 }
 
-Projectal::Projectal(Rectangle pos, float rotation,float range):GameObject(pos)
+Projectal::Projectal(Rectangle pos, float rotation,float range):GameObject(pos,"")
 {
 	this->rotation = rotation;
 	this->range = range;
@@ -45,7 +45,8 @@ void Projectal::update()
 
 	for (auto* obj : objs)
 	{
-		Game->deleteBlocks(obj->getPos());
+		if(obj->isColliding())
+			Game->deleteBlocks(obj->getPos());
 
 	}
 }

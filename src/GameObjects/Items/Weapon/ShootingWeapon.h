@@ -10,7 +10,7 @@ class ShootingWeapon :
 protected:
     ShootingWeapon(ShootingWeapon& obj);
 public:
-    ShootingWeapon(Rectangle pos);
+    ShootingWeapon(Rectangle pos, std::string name);
 
     ~ShootingWeapon();
 

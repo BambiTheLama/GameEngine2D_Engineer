@@ -2,6 +2,7 @@
 #include "Blocks/Block.h"
 #include <vector>
 #include "Factory.h"
+
 #define Blocks BlockFactory::getFactory()
 class BlockFactory
 	:public Factory

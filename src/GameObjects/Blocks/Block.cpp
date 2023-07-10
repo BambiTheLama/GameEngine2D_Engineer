@@ -10,7 +10,7 @@ Block::Block(Block& obj):GameObject(obj)
 	texturePos = obj.texturePos;
 }
 
-Block::Block(Rectangle pos, ToolType requestType, int power,  std::string path) :GameObject(pos)
+Block::Block(Rectangle pos, ToolType requestType, int power,  std::string path,std::string name) :GameObject(pos,name)
 {
 	this->requestType = requestType;
 	int hp = 10;
@@ -214,4 +214,5 @@ void Block::generateTexturePos()
 			}
 		}
 	}
+
 }

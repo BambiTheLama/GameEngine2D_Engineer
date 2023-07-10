@@ -10,7 +10,7 @@ Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 	animations = new AnimationController(*obj.animations);
 }
 
-Player::Player():GameObject({ 400,400,64,64 }),Collider({pos.width/3,pos.height/4,pos.width/3,pos.width/2})
+Player::Player():GameObject({ 400,400,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
 {
 	speed = 2;
 	Item* i= Items->getObject(0);
@@ -28,8 +28,16 @@ Player::Player():GameObject({ 400,400,64,64 }),Collider({pos.width/3,pos.height/
 }
 Player::~Player()
 {
+	if(Game!=NULL)
+		Game->removeUserUI(this);
 	delete animations;
 }
+
+void Player::start()
+{
+	Game->addUserUI(this);
+}
+
 void Player::update()
 {
 	move();
@@ -96,4 +104,9 @@ void Player::draw()
 	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
 	if (IsKeyDown(KEY_TAB))
 		Collider::draw(this);
+}
+
+void Player::drawInterface()
+{
+	eq->draw(IsKeyDown(KEY_ONE));
 }

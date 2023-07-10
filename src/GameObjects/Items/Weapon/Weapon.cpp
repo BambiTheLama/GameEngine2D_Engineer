@@ -5,7 +5,7 @@ Weapon::Weapon(Weapon& obj):Item(obj)
 
 }
 
-Weapon::Weapon(Rectangle pos):Item(pos)
+Weapon::Weapon(Rectangle pos, std::string name):Item(pos,name)
 {
 
 }

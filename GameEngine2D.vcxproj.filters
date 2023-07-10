@@ -72,7 +72,7 @@
     <ClCompile Include="src\core\Scenes\Scene.cpp">
       <Filter>src\core\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\AddisionalTypes\UserInterface.cpp">
+    <ClCompile Include="src\GameObjects\AddisionalTypes\UserUI.cpp">
       <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Projectals\Projectal.cpp">
@@ -114,6 +114,9 @@
     <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp">
       <Filter>src\GameObjects\Blocks</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\Player\Eq.cpp">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -137,7 +140,7 @@
     <ClInclude Include="src\core\Scenes\Scene.h">
       <Filter>src\core\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\AddisionalTypes\UserInterface.h">
+    <ClInclude Include="src\GameObjects\AddisionalTypes\UserUI.h">
       <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\Projectals\Projectal.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Blocks\CollidingBlock.h">
       <Filter>src\GameObjects\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Player\Eq.h">
+      <Filter>src\GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

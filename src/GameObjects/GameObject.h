@@ -26,10 +26,10 @@ class GameObject
 	unsigned int ID = 0;
 protected:
 	Rectangle pos;
+	std::string name;
 	GameObject(GameObject& obj);
 public:
-
-	GameObject(Rectangle pos);
+	GameObject(Rectangle pos,std::string name);
 	/// <summary>
 	/// Wiztualny destruktor by by³ wywo³any odpowiedni z klas dziedzicz¹cych
 	/// </summary>
