@@ -72,7 +72,7 @@ void GameScene::removeObject(GameObject* obj)
 void GameScene::draw()
 {
 
-	std::list<GameObject*> objects = heandler->getObjects(cameraPos);
+	std::list<GameObject*> objects = heandler->getObjectsToDraw(cameraPos);
 
 
 	BeginMode2D(camera);
