@@ -3,6 +3,7 @@
 #include "../Items/Weapon/Weapon.h"
 #include "../AddisionalTypes/AllTypes.h"
 #include "Eq.h"
+#include "MiniMap.h"
 
 enum class playerAnimationState {
     IDE = 0, MoveUp, MoveDown, MoveLeft, MoveRight = -3, Doge = 4, Die = 5
@@ -20,6 +21,7 @@ class Player :
     float frame = 0;
     bool canMove = true;
     Eq* eq;
+    MiniMap* miniMap;
 protected:
     Player(Player& obj);
 public:

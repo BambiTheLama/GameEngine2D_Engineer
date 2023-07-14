@@ -28,6 +28,8 @@ public:
 
     virtual void draw();
 
+    virtual void drawInMiniMap(int x, int y);
+
     virtual void damageBlock(int power, ToolType tool);
 
     ObjectType getType() { return ObjectType::Block; }

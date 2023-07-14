@@ -135,5 +135,10 @@ public:
     /// </summary>
     /// <returns></returns>
     int getBlockH() { return h; }
+    /// <summary>
+    /// Zwraca wszystkei bloki
+    /// </summary>
+    /// <returns></returns>
+    Block*** getAllBlock() { return blocks; }
 };
 

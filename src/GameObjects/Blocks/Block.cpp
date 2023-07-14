@@ -58,6 +58,11 @@ void Block::draw()
 		DrawRectangleLinesEx(pos, 2, BLACK);
 }
 
+void Block::drawInMiniMap(int x, int y)
+{
+	DrawTexturePro(sprite->getTexture(), texturePos, { (float)x,(float)y,1,1 }, { 0,0 }, 0, WHITE);
+}
+
 void Block::damageBlock(int power, ToolType tool)
 {
 	if (this->power > power || (tool != requestType && requestType != ToolType::All))return;

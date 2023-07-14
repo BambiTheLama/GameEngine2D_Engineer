@@ -8,6 +8,7 @@
 Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 {
 	animations = new AnimationController(*obj.animations);
+	miniMap = new MiniMap(this);
 }
 
 Player::Player():GameObject({ 400,400,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
@@ -25,17 +26,20 @@ Player::Player():GameObject({ 400,400,64,64 },"Player"), Collider({pos.width / 3
 		
 	}
 	animations = new AnimationController(sprites);
+	miniMap = new MiniMap(this);
 }
 Player::~Player()
 {
 	if(Game!=NULL)
 		Game->removeUserUI(this);
 	delete animations;
+	delete miniMap;
 }
 
 void Player::start()
 {
 	Game->addUserUI(this);
+	miniMap->generateMiniMap();
 }
 
 void Player::update()
@@ -109,4 +113,5 @@ void Player::draw()
 void Player::drawInterface()
 {
 	eq->draw(IsKeyDown(KEY_ONE));
+	miniMap->draw();
 }

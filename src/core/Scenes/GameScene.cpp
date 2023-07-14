@@ -7,8 +7,8 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
-	heandler = new ObjectHandler({0,0,3000.0f,3000.0f});
-	heandler->addObject(cameraTarget=new Player());
+	handler = new ObjectHandler({0,0,32000.0f,32000.0f});
+	handler->addObject(cameraTarget=new Player());
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
 	camera.target = { pos.x + 20.0f, pos.y + 20.0f };
@@ -20,15 +20,15 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	game = NULL;
-	ObjectHandler* h = heandler;
-	heandler = NULL;
+	ObjectHandler* h = handler;
+	handler = NULL;
 	delete h;
 	userUI.clear();
 
 }
 void GameScene::start()
 {
-	heandler->start();
+	handler->start();
 }
 void GameScene::update()
 {
@@ -45,10 +45,10 @@ void GameScene::update()
 	//printf("CAMERAPOS ={%lf %lf %lf %lf}\n",cameraPos.x, cameraPos.y, cameraPos.width, cameraPos.height);
 	Rectangle updatePos = { camera.target.x - cameraW ,camera.target.y - cameraH ,cameraW*2,cameraH*2 };
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
-	std::list<GameObject*> objects = heandler->getObjects(updatePos);
+	std::list<GameObject*> objects = handler->getObjects(updatePos);
 	for (GameObject* obj : objects)
 		obj->update();
-	heandler->update();
+	handler->update();
 
 	//printf("Iloœæ elementów: %d\n", objects.size());
 
@@ -57,30 +57,30 @@ void GameScene::update()
 
 void GameScene::addObject(GameObject* obj)
 {
-	heandler->addObject(obj);
+	handler->addObject(obj);
 }
 
 void GameScene::deleteObject(GameObject* obj)
 {
-	heandler->deleteObject(obj);
+	handler->deleteObject(obj);
 }
 
 void GameScene::removeObject(GameObject* obj)
 {
-	heandler->removeObject(obj);
+	handler->removeObject(obj);
 }
 
 void GameScene::draw()
 {
 
-	std::list<GameObject*> objects = heandler->getObjectsToDraw(cameraPos);
+	std::list<GameObject*> objects = handler->getObjectsToDraw(cameraPos);
 
 
 	BeginMode2D(camera);
 	for (GameObject* obj : objects)
 		obj->draw();
 	if(IsKeyDown(KEY_TAB))
-		heandler->draw();
+		handler->draw();
 	EndMode2D();
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 	for (UserUI* i : userUI)
@@ -95,7 +95,7 @@ void GameScene::removeBlocks(Rectangle pos)
 	int hMove = pos.height / tileSize;
 	for (int i = 0; i < wMove; i++)
 		for (int j = 0; j < hMove; j++)
-			heandler->removeBlock(xIndex + i, yIndex + j);
+			handler->removeBlock(xIndex + i, yIndex + j);
 }
 
 void GameScene::deleteBlocks(Rectangle pos)
@@ -104,7 +104,7 @@ void GameScene::deleteBlocks(Rectangle pos)
 	int yIndex = pos.y / tileSize;
 	int wMove = pos.width / tileSize + (int)(pos.width) % tileSize > 0 ? 1 : 0;
 	int hMove = pos.height / tileSize + (int)(pos.height) % tileSize > 0 ? 1 : 0;
-	heandler->deleteBlocks(xIndex, yIndex, wMove, hMove);
+	handler->deleteBlocks(xIndex, yIndex, wMove, hMove);
 }
 
 bool GameScene::addBlock(Block* block)
@@ -115,13 +115,13 @@ bool GameScene::addBlock(Block* block)
 	int wMove = pos.width / tileSize;
 	int hMove = pos.height / tileSize;
 	
-	std::list<Block*> blocks = heandler->getBlocks(xIndex, yIndex, wMove, hMove);
+	std::list<Block*> blocks = handler->getBlocks(xIndex, yIndex, wMove, hMove);
 	if (blocks.size() > 0)
 		return false;
 	for (int x = 0; x < wMove; x++)
 		for (int y = 0; y < hMove; y++)
 		{
-			heandler->addBlock(block, x + xIndex, y + yIndex);
+			handler->addBlock(block, x + xIndex, y + yIndex);
 		}
 	return true;
 }
@@ -130,11 +130,11 @@ Block* GameScene::getBlock(Rectangle pos)
 {
 	int xIndex = pos.x / tileSize;
 	int yIndex = pos.y / tileSize;
-	if (xIndex >= heandler->getBlockW() || xIndex < 0)
+	if (xIndex >= handler->getBlockW() || xIndex < 0)
 		return NULL;
-	if (yIndex >= heandler->getBlockH() || yIndex < 0)
+	if (yIndex >= handler->getBlockH() || yIndex < 0)
 		return NULL;
-	return heandler->getBlock(xIndex, yIndex);
+	return handler->getBlock(xIndex, yIndex);
 }
 
 std::list<Block*> GameScene::getBlocks(Rectangle pos)
@@ -151,5 +151,5 @@ std::list<Block*> GameScene::getBlocks(Rectangle pos)
 	int hMove = pos.height / tileSize;
 	if (hMove <= 0)
 		hMove = 1;
-	return heandler->getBlocks(xIndex, yIndex, wMove, hMove);
+	return handler->getBlocks(xIndex, yIndex, wMove, hMove);
 }

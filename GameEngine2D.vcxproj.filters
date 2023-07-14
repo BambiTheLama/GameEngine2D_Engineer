@@ -46,6 +46,9 @@
     <Filter Include="src\GameObjects\Factories">
       <UniqueIdentifier>{3b5aa74a-1960-465a-a7db-6da15e54d03c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameObjects\Plants">
+      <UniqueIdentifier>{0a805371-c0ea-4618-89cc-b7452ae1b7e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -115,6 +118,12 @@
       <Filter>src\GameObjects\Blocks</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Player\Eq.cpp">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Plants\Plant.cpp">
+      <Filter>src\GameObjects\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Player\MiniMap.cpp">
       <Filter>src\GameObjects\Player</Filter>
     </ClCompile>
   </ItemGroup>
@@ -189,6 +198,12 @@
       <Filter>src\GameObjects\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\Player\Eq.h">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Plants\Plant.h">
+      <Filter>src\GameObjects\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Player\MiniMap.h">
       <Filter>src\GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,7 +11,7 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 	blocks = new Block** [(int)(h)];
 
 	PerlinNoice* perlin = new PerlinNoice(w, h);
-	perlin->generateNoise2D(6, 1.69, 69);
+	perlin->generateNoise2D(10, 1.69, 69);
 	float** noice = perlin->getNoice();
 	BlockFactory* factory = Blocks;
 
