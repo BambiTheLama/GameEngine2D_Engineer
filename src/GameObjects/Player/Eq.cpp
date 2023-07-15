@@ -1,11 +1,29 @@
 #include "Eq.h"
 #include <vector>
-
+#include "../ItemFactory.h"
 Eq::Eq()
 {
+	items = new Item * *[EqHeight];
 	for (int i = 0; i < EqHeight; i++)
+	{
+		items[i] = new  Item * [EqWight];
 		for (int j = 0; j < EqWight; j++)
-			items[i][j] = NULL;
+			items[i][j] = Items->getObject(i * EqWight + j);
+	}
+
+}
+
+Eq::~Eq()
+{
+	for (int i = 0; i < EqHeight; i++)
+	{
+		for (int j = 0; j < EqWight; j++)
+			if (items[i][j] != NULL)
+				delete items[i][j];
+		delete items[i];
+	}
+	delete items;
+
 }
 
 void Eq::sortItems(sortBy type)
@@ -71,6 +89,29 @@ bool Eq::useItem()
 {
 	return false;
 }
+void Eq::updateItemPos(Vector2 movePos)
+{ 
+	if (items[usingItemY][usingItemX] != NULL) 
+		items[usingItemY][usingItemX]->setMovePos(movePos);;
+}
+
+void Eq::update()
+{
+	usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
+	usingItemX = usingItem % EqWight;
+	usingItemY = usingItem / EqWight;
+	if (items[usingItemY][usingItemX] != NULL)
+	{
+		items[usingItemY][usingItemX]->update();
+	}
+}
+void Eq::draw()
+{
+	if (items[usingItemY][usingItemX] != NULL)
+	{
+		items[usingItemY][usingItemX]->draw();
+	}
+}
 
 void Eq::draw(bool fullEq)
 {
@@ -79,7 +120,9 @@ void Eq::draw(bool fullEq)
 		{
 			Rectangle posToDraw = { EqStartX + (EqSpacing + EqSize) * j - EqSpacing,
 				EqStartY + (EqSpacing + EqSize) * i - EqSpacing, EqSize, EqSize };
-			DrawRectangleRec(posToDraw, RED);
+			DrawRectangleRec(posToDraw, usingItem == i * EqWight + j ? BLUE : RED);
+			if (items[i][j] != NULL)
+				items[i][j]->drawAt(posToDraw);
 
 		}
 }

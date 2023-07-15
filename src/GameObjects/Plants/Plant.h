@@ -7,8 +7,16 @@ class Plant :
 {
     Plant(Plant& obj);
 public:
-    Plant();
+    Plant(Rectangle pos,std::string name);
 
-    //virtual void update
+    virtual ~Plant();
+
+    virtual void update();
+
+    virtual void draw();
+
+    ObjectType getType() { return ObjectType::Plant; }
+
+    virtual Plant* clone() { return new Plant(*this); }
 };
 

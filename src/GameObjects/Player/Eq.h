@@ -12,10 +12,12 @@ enum class sortBy {
 
 class Eq
 {
-	int usingItem = 0;
-	Item* items[EqHeight][EqWight];
+	int usingItem = 0, usingItemX = 0, usingItemY = 0;
+	Item*** items = NULL;
 public:
 	Eq();
+
+	~Eq();
 
 	void sortItems(sortBy typ);
 
@@ -24,6 +26,14 @@ public:
 	bool addItem(Item* item);
 
 	Item* getItem(int slotX, int slotY) { return items[slotY][slotX]; }
+
+	Item* getUsingItem() { return items[usingItemY][usingItemX]; }
+
+	void updateItemPos(Vector2 movePos);
+
+	void update();
+
+	void draw();
 
 	void draw(bool fullEq);
 };

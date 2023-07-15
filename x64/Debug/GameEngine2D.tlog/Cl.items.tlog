@@ -8,12 +8,15 @@ C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\Pe
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Scene.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Scene.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Collider.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\DodgeInterface.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\DodgeInterface.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\ItemsDrop.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ItemsDrop.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\UserUI.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\UserUI.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\BlockFactory.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\BlockFactory.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Blocks\Block.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Block.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Blocks\CollidingBlock.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\CollidingBlock.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\GameObject.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\GameObject.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\BlockItem.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\BlockItem.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Item.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Item.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Tool\ToolItem.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ToolItem.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\ShootingWeapon.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ShootingWeapon.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Weapon.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Weapon.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Plants\Plant.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Plant.obj

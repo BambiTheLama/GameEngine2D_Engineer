@@ -30,6 +30,21 @@ public:
 	/// Czyœci wszystkie wczytane textury
 	/// </summary>
 	static void closeSprites();
-
+	/// <summary>
+	/// Zwraca ca³¹ wielkoœæ textury
+	/// </summary>
+	/// <returns>Ca³e wymiary textury</returns>
+	Rectangle getTextureSize() { return { 0,0,(float)texture.width,(float)texture.height }; }
+	/// <summary>
+	/// Zwraca klatkê klatka jest brana na podstawie wyskoœci 
+	/// </summary>
+	/// <param name="frame">Któr¹ klatkê wzi¹œc</param>
+	/// <returns>Miejsce gdzie jest dana klatka</returns>
+	Rectangle getTextureFrame(int frame) { return { 0,(float)texture.height*(frame% howMuchFrames()),(float)texture.height,(float)texture.height }; }
+	/// <summary>
+	/// Zwraca ile jest klatek (szerokoœæ/wysokoœæ)
+	/// </summary>
+	/// <returns>iloœæ klatek</returns>
+	int howMuchFrames() { return texture.width / texture.height; }
 };
 

@@ -32,9 +32,20 @@ void ShootingWeapon::update()
 }
 void ShootingWeapon::draw()
 {
-	Rectangle pos = getPos();
-	DrawRectanglePro(pos, orgin, rotation, BLUE);
+	DrawRectanglePro(pos, orgin, rotation, YELLOW);
 }
+
+void ShootingWeapon::drawAt(Rectangle pos)
+{
+	pos.x += 2;
+	pos.y += 2;
+	pos.width -= 4;
+	pos.height -= 4;
+	DrawRectanglePro(pos, {0,0},0, YELLOW);
+}
+
+
+
 bool ShootingWeapon::use()
 {
 	if(CDR>0)

@@ -18,6 +18,12 @@ public:
 
     virtual bool use();
 
+    virtual void addToStack(int i){}
+
+    virtual int getStackSize() { return 1; }
+
+    virtual int getStackMaxSize() { return 1; }
+
     virtual bool isStacable() { return false; }
 
     ObjectType getType() { return ObjectType::Item; }

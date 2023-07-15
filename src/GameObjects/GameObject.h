@@ -13,7 +13,7 @@ Vector2 deltaFromDegree(float degree,float speed=1);
 /// </summary>
 enum class ObjectType
 {
-	NPC, Item, Block, Particle, Player, NON, Projectal,
+	NPC, Item, Block, Particle, Player, NON, Projectal, Plant
 };
 class Factory;
 class BlockFactory;
@@ -89,6 +89,7 @@ public:
 
 	friend class Factory;
 	friend class BlockFactory;
+	friend class ItemFactory;
 };
 
 bool checkCollision(GameObject* obj);

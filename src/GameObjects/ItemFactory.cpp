@@ -1,15 +1,25 @@
 #include "ItemFactory.h"
 #include "Items/Item.h"
 #include "Items/Weapon/ShootingWeapon.h"
-
+#include "Items/BlockItem.h"
 ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
 {
+	std::string path = "Resource/Items/";
+	int blockStackSize = 100;
 	objects = std::vector<Item*>();
-	objects.push_back(new ShootingWeapon({0,0,64,64},""));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Wood", path + "Wood.png", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", path + "Plank.png", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", path + "Dirt.png", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", path + "Sand.png", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", path + "Stone.png", blockStackSize));
+	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
-
+	for (int i = 0; i < objects.size(); i++)
+	{
+		objects[i]->ID = i;
+	}
 }
 
 ItemFactory::~ItemFactory()

@@ -15,7 +15,6 @@ class Player :
     public GameObject, public Collider , public UserUI
 {
     float speed;
-    Weapon* weapon;
     AnimationController* animations;
     playerAnimationState state = playerAnimationState::IDE;
     float frame = 0;

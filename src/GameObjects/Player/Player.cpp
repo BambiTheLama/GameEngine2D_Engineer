@@ -9,13 +9,12 @@ Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 {
 	animations = new AnimationController(*obj.animations);
 	miniMap = new MiniMap(this);
+	eq = new Eq();
 }
 
 Player::Player():GameObject({ 400,400,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
 {
 	speed = 2;
-	Item* i= Items->getObject(0);
-	weapon = dynamic_cast<Weapon*>(i);
 	int n = 6;
 	std::string names[6] = { "IDE","MoveUp","MoveDown","MoveLeft","Doge","Die" };
 	std::vector<SpriteController*> sprites;
@@ -23,10 +22,10 @@ Player::Player():GameObject({ 400,400,64,64 },"Player"), Collider({pos.width / 3
 	{
 		std::string path = "Resource/Player/" + names[i] + ".png";
 		sprites.push_back(new SpriteController(path.c_str()));
-		
 	}
 	animations = new AnimationController(sprites);
 	miniMap = new MiniMap(this);
+	eq = new Eq();
 }
 Player::~Player()
 {
@@ -44,7 +43,10 @@ void Player::start()
 
 void Player::update()
 {
+	eq->update();
 	move();
+	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+	Game->updatePos(this);
 }
 
 void Player::move()
@@ -89,16 +91,14 @@ void Player::move()
 			state = playerAnimationState::Doge;
 		}
 	}
-	
+
 	Rectangle pos = getPos();
 	setMovePos({ posTmp.x + pos.x, pos.y + posTmp.y });
 	if (isCollidingWithSomething(this))
 	{
 		setMovePos({ pos.x, pos.y });
 	}
-	weapon->setMovePos({ pos.x+pos.width/2,pos.y+pos.height/2 });
-	weapon->update();
-	Game->updatePos(this);
+
 }
 #define changePos {int s=6;pos.x += s;pos.y += s;pos.width -= s+s;pos.height -= s+s; }
 void Player::draw()
@@ -108,6 +108,7 @@ void Player::draw()
 	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
 	if (IsKeyDown(KEY_TAB))
 		Collider::draw(this);
+	eq->draw();
 }
 
 void Player::drawInterface()

@@ -18,6 +18,8 @@ public:
 
     virtual void draw();
 
+    virtual void drawAt(Rectangle pos);
+
     virtual bool use();
 
     virtual WeaponType getWeaponType() { return WeaponType::Range; }

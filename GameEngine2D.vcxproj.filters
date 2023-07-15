@@ -49,6 +49,9 @@
     <Filter Include="src\GameObjects\Plants">
       <UniqueIdentifier>{0a805371-c0ea-4618-89cc-b7452ae1b7e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameObjects\Items\Tool">
+      <UniqueIdentifier>{2b990fa1-2400-4726-92ed-5a783329e06b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -125,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\Player\MiniMap.cpp">
       <Filter>src\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\ItemsDrop.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\Tool\ToolItem.cpp">
+      <Filter>src\GameObjects\Items\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\BlockItem.cpp">
+      <Filter>src\GameObjects\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Player\MiniMap.h">
       <Filter>src\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\ItemsDrop.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\Tool\ToolItem.h">
+      <Filter>src\GameObjects\Items\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\BlockItem.h">
+      <Filter>src\GameObjects\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
