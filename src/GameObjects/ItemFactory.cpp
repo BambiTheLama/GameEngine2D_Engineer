@@ -2,19 +2,19 @@
 #include "Items/Item.h"
 #include "Items/Weapon/ShootingWeapon.h"
 #include "Items/BlockItem.h"
+#include "Items/Tool/ToolItem.h"
 ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
 {
-	std::string path = "Resource/Items/";
 	int blockStackSize = 100;
 	objects = std::vector<Item*>();
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Wood", path + "Wood.png", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", path + "Plank.png", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", path + "Dirt.png", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", path + "Sand.png", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", path + "Stone.png", blockStackSize));
-
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Wood", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", blockStackSize));
+	objects.push_back(new BlockItem({ 0,0,32,32 }, "Stone", blockStackSize));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Axe"));
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)

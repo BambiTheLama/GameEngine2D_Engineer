@@ -5,12 +5,11 @@ BlockFactory* BlockFactory::factory=NULL;
 
 BlockFactory::BlockFactory()
 {
-	std::string path = "Resource/Blocks/";
-	objects.push_back(new CollidingBlock({ 0,0,tileSize,tileSize }, ToolType::NON, 0, path + "Water.png","Wather"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, path + "Sand.png","Sand"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, path + "Grass.png","Grass"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, path + "Dirt.png","Dirt"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0, path + "Stone.png","Stone"));
+	objects.push_back(new CollidingBlock({ 0,0,tileSize,tileSize }, ToolType::NON, 0 ,"Water"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0 ,"Sand"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0 ,"Grass"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0 ,"Dirt"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::All, 0 ,"Stone"));
 
 
 	for (int i = 0; i < objects.size(); i++)

@@ -10,11 +10,12 @@ Block::Block(Block& obj):GameObject(obj)
 	texturePos = obj.texturePos;
 }
 
-Block::Block(Rectangle pos, ToolType requestType, int power,  std::string path,std::string name) :GameObject(pos,name)
+Block::Block(Rectangle pos, ToolType requestType, int power, std::string name) :GameObject(pos,name)
 {
 	this->requestType = requestType;
 	int hp = 10;
 	this->power = power;
+	std::string path= "Resource/Blocks/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 	texturePos.width = sprite->getTexture().width/4;
 	texturePos.height = sprite->getTexture().height/4;

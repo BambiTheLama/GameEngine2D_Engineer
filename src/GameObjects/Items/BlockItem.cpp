@@ -8,10 +8,11 @@ BlockItem::BlockItem(BlockItem& item):Item(item)
 	sprite = new SpriteController(*item.sprite);
 }
 
-BlockItem::BlockItem(Rectangle pos, std::string name, std::string path, int stackSize) :Item(pos, name)
+BlockItem::BlockItem(Rectangle pos, std::string name, int stackSize) :Item(pos, name)
 {
 	this->stackMaxSize = stackSize;
 	this->stackSize = 1;
+	std::string path = "Resource/Items/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 }
 

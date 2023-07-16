@@ -12,7 +12,7 @@ Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 	eq = new Eq();
 }
 
-Player::Player():GameObject({ 400,400,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
+Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
 {
 	speed = 2;
 	int n = 6;

@@ -8,7 +8,7 @@ class BlockItem :
     SpriteController* sprite;
     BlockItem(BlockItem& item);
 public:
-    BlockItem(Rectangle pos, std::string name, std::string path, int stackSize);
+    BlockItem(Rectangle pos, std::string name, int stackSize);
 
     virtual ~BlockItem();
 

@@ -5,7 +5,7 @@ class CollidingBlock :
 {
     CollidingBlock(CollidingBlock& obj);
 public:
-    CollidingBlock(Rectangle pos, ToolType requestType, int power, std::string path, std::string name);
+    CollidingBlock(Rectangle pos, ToolType requestType, int power, std::string name);
 
     virtual CollidingBlock* clone() { return new CollidingBlock(*this); }
 
