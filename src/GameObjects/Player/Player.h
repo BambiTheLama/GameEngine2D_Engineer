@@ -33,7 +33,9 @@ public:
     /// Destruktor od klasy gracza
     /// </summary>
     ~Player();
-
+    /// <summary>
+    /// Metoda wykonywana przy starcie obiektu
+    /// </summary>
     void start();
     /// <summary>
     /// Metoda aktualizuj¹ca gracza

@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "../core/Scenes/GameScene.h"
 
+
 GameObject::GameObject(GameObject& obj)
 {
 	this->pos = obj.pos;

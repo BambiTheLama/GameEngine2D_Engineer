@@ -5,6 +5,8 @@
 #include "Scenes/Game/PerlinNoice.h"
 #include "../GameObjects/ItemFactory.h"
 #include "../GameObjects/BlockFactory.h"
+#include "Properties.h"
+
 Scene* Engine::scene = NULL;
 
 Engine::Engine()
@@ -26,6 +28,9 @@ Engine::~Engine()
 	SpriteController::closeSprites();
 	Items->clearFactory();
 	Blocks->clearFactory();
+	Properties* prop = Properties::getProperties();
+	if(prop!=NULL)
+		delete prop;
 	CloseWindow();
 }
 void Engine::start()

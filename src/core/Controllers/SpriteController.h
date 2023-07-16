@@ -40,7 +40,7 @@ public:
 	/// </summary>
 	/// <param name="frame">Któr¹ klatkê wzi¹œc</param>
 	/// <returns>Miejsce gdzie jest dana klatka</returns>
-	Rectangle getTextureFrame(int frame) { return { 0,(float)texture.height*(frame% howMuchFrames()),(float)texture.height,(float)texture.height }; }
+	Rectangle getTextureFrame(int frame) { return { (float)texture.height * (frame % howMuchFrames()),0,(float)texture.height,(float)texture.height }; }
 	/// <summary>
 	/// Zwraca ile jest klatek (szerokoœæ/wysokoœæ)
 	/// </summary>

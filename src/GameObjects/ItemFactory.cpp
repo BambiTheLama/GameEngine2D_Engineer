@@ -14,6 +14,7 @@ ItemFactory::ItemFactory()
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", path + "Dirt.png", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", path + "Sand.png", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", path + "Stone.png", blockStackSize));
+
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)

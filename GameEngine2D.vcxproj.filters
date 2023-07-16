@@ -138,6 +138,9 @@
     <ClCompile Include="src\GameObjects\Items\BlockItem.cpp">
       <Filter>src\GameObjects\Items</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Properties.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Items\BlockItem.h">
       <Filter>src\GameObjects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Properties.h">
+      <Filter>src\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

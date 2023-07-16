@@ -132,6 +132,7 @@
     <ClCompile Include="src\core\Controllers\AnimationController.cpp" />
     <ClCompile Include="src\core\Controllers\SpriteController.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
+    <ClCompile Include="src\core\Properties.cpp" />
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
     <ClCompile Include="src\core\Scenes\Game\FourTree.cpp" />
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\core\Controllers\AnimationController.h" />
     <ClInclude Include="src\core\Controllers\SpriteController.h" />
     <ClInclude Include="src\core\Engine.h" />
+    <ClInclude Include="src\core\Properties.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
     <ClInclude Include="src\core\Scenes\Game\FourTree.h" />
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />

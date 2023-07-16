@@ -98,6 +98,12 @@ void Player::move()
 	{
 		setMovePos({ pos.x, pos.y });
 	}
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	{
+		eq->pressOnEq();
+	}
+	if (GetMouseWheelMove() != 0)
+		eq->mouseWeel();
 
 }
 #define changePos {int s=6;pos.x += s;pos.y += s;pos.width -= s+s;pos.height -= s+s; }
@@ -108,11 +114,11 @@ void Player::draw()
 	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
 	if (IsKeyDown(KEY_TAB))
 		Collider::draw(this);
-	eq->draw();
+	eq->drawItem();
 }
 
 void Player::drawInterface()
 {
-	eq->draw(IsKeyDown(KEY_ONE));
+	eq->draw();
 	miniMap->draw();
 }

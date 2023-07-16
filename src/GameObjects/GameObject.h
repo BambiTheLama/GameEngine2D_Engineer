@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include <math.h>
 #include "../core/Controllers/AnimationController.h"
-
+#include "../core/Properties.h"
 float cursorTarget(Vector2 objPos);
 float degreeToRadius(float degree);
 float radiusToDegree(float degree);

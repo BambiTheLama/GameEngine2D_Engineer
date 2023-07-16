@@ -97,7 +97,6 @@ void Eq::updateItemPos(Vector2 movePos)
 
 void Eq::update()
 {
-	usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
 	usingItemX = usingItem % EqWight;
 	usingItemY = usingItem / EqWight;
 	if (items[usingItemY][usingItemX] != NULL)
@@ -105,24 +104,74 @@ void Eq::update()
 		items[usingItemY][usingItemX]->update();
 	}
 }
-void Eq::draw()
+
+void Eq::mouseWeel()
 {
-	if (items[usingItemY][usingItemX] != NULL)
+	usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
+}
+
+
+
+void Eq::pressOnEq()
+{
+	Vector2 cursor = GetMousePosition();
+	cursor.x -= EqStartX - EqSpacing;
+	int endX = EqSize * EqWight + EqSpacing * (EqWight - 1);
+	if (cursor.x >= 0 && cursor.x <= endX)
 	{
-		items[usingItemY][usingItemX]->draw();
+		cursor.y -= EqStartY - EqSpacing;
+		int endY;
+		if (fullEq)
+			endY = EqSize * EqHeight + EqSpacing * (EqHeight - 1);
+		else
+			endY = EqSize;
+		
+		if (cursor.y >= 0 && cursor.y <= endY)
+		{
+
+			if ((int)cursor.x % (EqSize + EqSpacing) > EqSize)
+				return;
+			if ((int)cursor.y % (EqSize + EqSpacing) > EqSize)
+				return;
+			int x = cursor.x / (EqSize + EqSpacing);
+			int y = cursor.y / (EqSize + EqSpacing);
+			usingItem = x + y * EqWight;
+
+		}
+
 	}
 }
 
-void Eq::draw(bool fullEq)
+void Eq::draw()
 {
+	int fontSize = 20;
 	for (int i = 0; i < (fullEq ? EqHeight : 1); i++)
 		for (int j = 0; j < EqWight; j++)
 		{
 			Rectangle posToDraw = { EqStartX + (EqSpacing + EqSize) * j - EqSpacing,
 				EqStartY + (EqSpacing + EqSize) * i - EqSpacing, EqSize, EqSize };
+
 			DrawRectangleRec(posToDraw, usingItem == i * EqWight + j ? BLUE : RED);
 			if (items[i][j] != NULL)
+			{
 				items[i][j]->drawAt(posToDraw);
+				if (items[i][j]->isStacable())
+				{
+					const char* text = TextFormat("%d", items[i][j]->getStackSize());
+					Vector2 textS = textSize(text, fontSize);
+					drawText(text, posToDraw.x + posToDraw.height- textS.x, posToDraw.y + posToDraw.width - textS.y, fontSize, BLACK);
+				}
+			}
+
+			drawText(TextFormat("%d", i * EqWight + j), posToDraw.x, posToDraw.y, fontSize, BLACK);
 
 		}
+}
+
+void Eq::drawItem()
+{
+	if (items[usingItemY][usingItemX] != NULL)
+	{
+		items[usingItemY][usingItemX]->draw();
+	}
 }

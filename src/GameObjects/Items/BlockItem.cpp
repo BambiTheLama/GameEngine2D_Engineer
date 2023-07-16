@@ -4,6 +4,7 @@
 BlockItem::BlockItem(BlockItem& item):Item(item)
 {
 	stackMaxSize = item.stackMaxSize;
+	this->stackSize = 1;
 	sprite = new SpriteController(*item.sprite);
 }
 
@@ -26,7 +27,9 @@ bool BlockItem::use()
 
 void BlockItem::draw()
 {
-	drawAt(getPos());
+	
+	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), getPos(), {0,0}, 0, WHITE);
+
 }
 
 void BlockItem::drawAt(Rectangle pos)

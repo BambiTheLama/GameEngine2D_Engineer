@@ -41,9 +41,11 @@ void AnimationController::draw(Rectangle pos, int frame, int animationIndex, boo
 	if (animationIndex >= sprites.size() || animationIndex < 0)
 		return;
 	Texture2D texture = sprites[animationIndex]->getTexture();
-	int size = texture.height;
-	frame %= (texture.width / size);
-	Rectangle spritePos = { frame * size,0,size * (flipLeftRight ? -1 : 1),size * (flipUpDown ? -1 : 1) };
+	Rectangle spritePos = sprites[animationIndex]->getTextureFrame(frame);
+	if (flipLeftRight)
+		spritePos.width = -spritePos.width;
+	if (flipUpDown)
+		spritePos.height = -spritePos.height;
 	//std::cout << size << " " << frame << " " << animationIndex << "\n";
 	//printRec(spritePos);
 	//printRec(pos);
