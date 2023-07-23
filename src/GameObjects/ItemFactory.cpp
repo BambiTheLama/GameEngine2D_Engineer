@@ -15,12 +15,16 @@ ItemFactory::ItemFactory()
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Stone", blockStackSize));
 	objects.push_back(new ToolItem({ 0,0,32,32 }, "Axe"));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Pickaxe"));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Shovel"));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Hoe"));
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->ID = i;
 	}
+	printf("[FactoryItem]: Stworzono fabryke itemow\n");
 }
 
 ItemFactory::~ItemFactory()
@@ -28,6 +32,7 @@ ItemFactory::~ItemFactory()
 	for (auto i:objects)
 		delete i;
 	objects.clear();
+	printf("[FactoryItem]: Usunieto fabryke itemow\n");
 }
 void ItemFactory::clearFactory()
 {

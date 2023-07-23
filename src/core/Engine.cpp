@@ -26,8 +26,7 @@ Engine::~Engine()
 		delete scene;
 	scene = NULL;
 	SpriteController::closeSprites();
-	Items->clearFactory();
-	Blocks->clearFactory();
+	Factory::deleteAllFactory();
 	Properties* prop = Properties::getProperties();
 	if(prop!=NULL)
 		delete prop;

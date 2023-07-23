@@ -1,11 +1,12 @@
 #pragma once
 #include "../GameObject.h"
 #include "../AddisionalTypes/AllTypes.h"
-
 class Plant :
-    public GameObject
+    public GameObject, public ItemsDrop
 {
+protected:
     Plant(Plant& obj);
+    SpriteController* sprite=NULL;
 public:
     Plant(Rectangle pos,std::string name);
 

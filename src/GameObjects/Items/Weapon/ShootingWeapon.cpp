@@ -25,10 +25,9 @@ void ShootingWeapon::update()
 	Weapon::update();
 	Rectangle pos = getPos();
 	rotation = cursorTarget({ pos.x ,pos.y });
-	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && CDR <= 0)
-	{
-		use();
-	}
+	if (CDR > 0)
+		CDR--;
+
 }
 void ShootingWeapon::draw()
 {

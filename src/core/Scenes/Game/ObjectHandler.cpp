@@ -1,7 +1,7 @@
 #include "ObjectHandler.h"
 #include "../../../GameObjects/BlockFactory.h"
 #include "PerlinNoice.h"
-
+#include "../../../GameObjects/PlantsFactory.h"
 ObjectHandler::ObjectHandler(Rectangle pos)
 {
 	this->pos = pos;
@@ -11,7 +11,7 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 	blocks = new Block** [(int)(h)];
 
 	PerlinNoice* perlin = new PerlinNoice(w, h);
-	perlin->generateNoise2D(10, 1.69, 69);
+	perlin->generateNoise2D(10, 1.69, 369);
 	float** noice = perlin->getNoice();
 	BlockFactory* factory = Blocks;
 
@@ -26,6 +26,23 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 			if (blockID > 0)
 			{
 				blockID = noice[i][j] * factory->getSize()+1;
+				if ((int)(noice[i][j] * 10000) % 100 < 1)
+				{
+					Plant* plant = Plants->getObject(0);
+					plant->setMovePos({ (float)j * tileSize,(float)i * tileSize });
+					objectsToAdd.push_back(plant);
+				}
+				if (blockID == 2)
+				{
+					int val = (int)(noice[i][j] * 10000) % 100;
+					if (val < 6 && val < 69)
+					{
+						Plant* plant = Plants->getObject(1);
+						plant->setMovePos({ (float)j * tileSize,(float)i * tileSize });
+						objectsToAdd.push_back(plant);
+					}
+				}
+					
 
 			}
 
@@ -180,7 +197,7 @@ void ObjectHandler::deleteObject(GameObject* obj)
 
 void ObjectHandler::addObject(GameObject* obj) 
 { 
-	if (objects.size() < 1000 - objectsToAdd.size())
+	if (objects.size() < 69000 - objectsToAdd.size())
 	{
 		objectsToAdd.push_back(obj);
 	}

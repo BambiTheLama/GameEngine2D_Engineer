@@ -1,6 +1,13 @@
 #include "Block.h"
 #include "../../core/Scenes/GameScene.h"
 
+bool isThisToolType(ToolType tool, ToolType requestTool) 
+{ 
+	if ((int)requestTool >= 0)
+		return  ((int)requestTool % (int)tool) == 0;
+	return false;
+}
+
 Block::Block(Block& obj):GameObject(obj)
 {
 	requestType = obj.requestType;

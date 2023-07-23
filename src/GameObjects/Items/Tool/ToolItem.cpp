@@ -15,7 +15,10 @@ ToolItem::~ToolItem()
 {
 	delete sprite;
 }
-
+bool ToolItem::use()
+{
+	return false;
+}
 void ToolItem::draw()
 {
 

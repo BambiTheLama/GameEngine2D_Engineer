@@ -141,6 +141,15 @@
     <ClCompile Include="src\core\Properties.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\Plants\Tree.cpp">
+      <Filter>src\GameObjects\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\PlantsFactory.cpp">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Factory.cpp">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -232,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="src\core\Properties.h">
       <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Plants\Tree.h">
+      <Filter>src\GameObjects\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\PlantsFactory.h">
+      <Filter>src\GameObjects\Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

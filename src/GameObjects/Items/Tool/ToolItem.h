@@ -1,5 +1,6 @@
 #pragma once
 #include "../Item.h"
+#include "../../Blocks/Block.h"
 
 class ToolItem :
     public Item
@@ -10,6 +11,7 @@ public:
     ToolItem(Rectangle pos, std::string name);
     virtual ~ToolItem();
     virtual ToolItem* clone() { return new ToolItem(*this); }
+    bool use();
     void draw();
     void drawAt(Rectangle pos);
 };

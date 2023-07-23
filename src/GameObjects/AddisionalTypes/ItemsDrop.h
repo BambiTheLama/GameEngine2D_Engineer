@@ -29,5 +29,5 @@ public:
 
 	void addItemToDrop(int ID, float chanse, int min, int max);
 
-	std::vector<Item*> getDropFromEnemy();
+	std::vector<Item*> getDrop();
 };

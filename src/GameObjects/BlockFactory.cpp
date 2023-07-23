@@ -16,6 +16,7 @@ BlockFactory::BlockFactory()
 	{
 		objects[i]->ID = i;
 	}
+	printf("[FactoryBlock]: Stworzono fabryke blokow\n");
 }
 
 BlockFactory::~BlockFactory()
@@ -23,6 +24,7 @@ BlockFactory::~BlockFactory()
 	for (Block* b : objects)
 		delete b;
 	objects.clear();
+	printf("[FactoryBlock]: Usuniêto fabryke blokow\n");
 }
 
 BlockFactory* BlockFactory::getFactory()

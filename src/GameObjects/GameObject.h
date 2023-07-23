@@ -3,9 +3,30 @@
 #include <math.h>
 #include "../core/Controllers/AnimationController.h"
 #include "../core/Properties.h"
+/// <summary>
+/// Zwraca kat od obiektu do pozycji kursora
+/// </summary>
+/// <param name="objPos">Pozycja obiketu</param>
+/// <returns>Kat padania</returns>
 float cursorTarget(Vector2 objPos);
+/// <summary>
+/// Konwertuje stopnie na radiany
+/// </summary>
+/// <param name="degree"></param>
+/// <returns></returns>
 float degreeToRadius(float degree);
-float radiusToDegree(float degree);
+/// <summary>
+/// Konwertuje radiany na stopnie
+/// </summary>
+/// <param name="degree"></param>
+/// <returns></returns>
+float radiusToDegree(float radius);
+/// <summary>
+/// Zwraca jak obiekt powinien siê poruszaæ xy z podan¹ prêdkoœci¹ i k¹tem
+/// </summary>
+/// <param name="degree"></param>
+/// <param name="speed"></param>
+/// <returns></returns>
 Vector2 deltaFromDegree(float degree,float speed=1);
 
 /// <summary>
@@ -90,6 +111,7 @@ public:
 	friend class Factory;
 	friend class BlockFactory;
 	friend class ItemFactory;
+	friend class PlantsFactory;
 };
 
 bool checkCollision(GameObject* obj);

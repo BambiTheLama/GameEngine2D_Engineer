@@ -29,7 +29,7 @@ void ItemsDrop::addItemToDrop(int ID, float chanse, int max, int min)
 	items.push_back(drop);
 }
 
-std::vector<Item*> ItemsDrop::getDropFromEnemy()
+std::vector<Item*> ItemsDrop::getDrop()
 {
 	std::vector<Item*> itemsToReturn;
 

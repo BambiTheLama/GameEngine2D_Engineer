@@ -46,5 +46,16 @@ public:
 	/// </summary>
 	/// <returns>iloœæ klatek</returns>
 	int howMuchFrames() { return texture.width / texture.height; }
+	/// <summary>
+	/// Rysuje ca³¹ texture w podanej pozycji
+	/// </summary>
+	/// <param name="pos">Pozycja do rysowania</param>
+	void draw(Rectangle pos);
+	/// <summary>
+	/// Rysuje odpowiedni¹ klatkê w podanej pozycji
+	/// </summary>
+	/// <param name="pos">Pozycja w której rysujemy</param>
+	/// <param name="frame">Klatka któr¹ ma narysowac</param>
+	void draw(Rectangle pos, int frame);
 };
 

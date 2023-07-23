@@ -3,9 +3,31 @@
 #include "../../core/Controllers/SpriteController.h"
 #include "../AddisionalTypes/AllTypes.h"
 #include <string>
+/// <summary>
+/// Enum odpowiadajacy ¿e to jakie narzêdzie mo¿e zniszczyæ jaki blok
+/// </summary>
 enum class ToolType {
-    All = 0, Axe = 2, Shovel = 3, Pickaxe = 5, NON=2137
+    NON = -1,               //Zadne narzêdzie nie mo¿e wykopaæ
+    All = 0,                //Mo¿e wykopaæ wszystko
+    Axe = 2,                //Wszystko to co mo¿e sikiera
+    Shovel = 3,             //Wszystko to co mo¿e ³opata
+    Pickaxe = 5,            //Wszystko to co mo¿e kilof
+    AxeShovel=6,            //Wszystko to co mo¿e sikiera i ³opata
+    AxePickaxe=10,          //Wszystko to co mo¿e sikiera i kilof
+    ShovelPickaxe=15,       //Wszystko to co mo¿e ³opata i kilof
+    AxeShovelPickaxe = 30   //Wszystko to co mo¿e sikiera ³opata i kilof
 };
+/// <summary>
+/// Sprawdzenie czy mo¿na rozwaliæ ten obiekt danym narzêdziem
+/// </summary>
+/// <param name="tool">Narzêdzie które u¿ywamy</param>
+/// <param name="requestTool">Narzêdzie które jest potrzebne</param>
+/// <returns>Czy mo¿emy zniszczyæ tym narzêdziem</returns>
+bool isThisToolType(ToolType tool, ToolType requestTool);
+
+/// <summary>
+/// Klasa od bloków naszej gry
+/// </summary>
 class Block :
     public GameObject
 {

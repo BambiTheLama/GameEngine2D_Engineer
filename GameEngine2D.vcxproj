@@ -145,13 +145,16 @@
     <ClCompile Include="src\GameObjects\BlockFactory.cpp" />
     <ClCompile Include="src\GameObjects\Blocks\Block.cpp" />
     <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp" />
+    <ClCompile Include="src\GameObjects\Factory.cpp" />
     <ClCompile Include="src\GameObjects\GameObject.cpp" />
     <ClCompile Include="src\GameObjects\Items\BlockItem.cpp" />
     <ClCompile Include="src\GameObjects\Items\Item.cpp" />
     <ClCompile Include="src\GameObjects\Items\Tool\ToolItem.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\ShootingWeapon.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\Weapon.cpp" />
+    <ClCompile Include="src\GameObjects\PlantsFactory.cpp" />
     <ClCompile Include="src\GameObjects\Plants\Plant.cpp" />
+    <ClCompile Include="src\GameObjects\Plants\Tree.cpp" />
     <ClCompile Include="src\GameObjects\Player\Eq.cpp" />
     <ClCompile Include="src\GameObjects\Player\MiniMap.cpp" />
     <ClCompile Include="src\GameObjects\Player\Player.cpp" />
@@ -184,7 +187,9 @@
     <ClInclude Include="src\GameObjects\Items\Tool\ToolItem.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\ShootingWeapon.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\Weapon.h" />
+    <ClInclude Include="src\GameObjects\PlantsFactory.h" />
     <ClInclude Include="src\GameObjects\Plants\Plant.h" />
+    <ClInclude Include="src\GameObjects\Plants\Tree.h" />
     <ClInclude Include="src\GameObjects\Player\Eq.h" />
     <ClInclude Include="src\GameObjects\Player\MiniMap.h" />
     <ClInclude Include="src\GameObjects\Player\Player.h" />

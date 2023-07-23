@@ -35,3 +35,13 @@ void SpriteController::closeSprites()
 
 	sprites.clear();
 }
+
+void SpriteController::draw(Rectangle pos)
+{
+	DrawTexturePro(texture, getTextureSize(), pos, {0,0}, 0, WHITE);
+}
+
+void SpriteController::draw(Rectangle pos, int frame)
+{
+	DrawTexturePro(texture, getTextureFrame(frame), pos, { 0,0 }, 0, WHITE);
+}

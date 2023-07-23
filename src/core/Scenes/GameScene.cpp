@@ -45,7 +45,7 @@ void GameScene::update()
 	//printf("CAMERAPOS ={%lf %lf %lf %lf}\n",cameraPos.x, cameraPos.y, cameraPos.width, cameraPos.height);
 	Rectangle updatePos = { camera.target.x - cameraW ,camera.target.y - cameraH ,cameraW*2,cameraH*2 };
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
-	std::list<GameObject*> objects = handler->getObjects(updatePos);
+	std::list<GameObject*> objects = handler->getObjects(updatePos,ObjectToGet::getNoBlocks);
 	for (GameObject* obj : objects)
 		obj->update();
 	handler->update();

@@ -102,6 +102,8 @@ void Eq::update()
 	if (items[usingItemY][usingItemX] != NULL)
 	{
 		items[usingItemY][usingItemX]->update();
+		if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+			items[usingItemY][usingItemX]->use();
 	}
 }
 
