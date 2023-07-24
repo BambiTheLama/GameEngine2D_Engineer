@@ -1,25 +1,16 @@
 #include "Block.h"
 #include "../../core/Scenes/GameScene.h"
 
-bool isThisToolType(ToolType tool, ToolType requestTool) 
-{ 
-	if ((int)requestTool >= 0)
-		return  ((int)requestTool % (int)tool) == 0;
-	return false;
-}
-
-Block::Block(Block& obj):GameObject(obj)
+Block::Block(Block& obj):GameObject(obj),DestroyAble(obj)
 {
-	requestType = obj.requestType;
 	hp = obj.hp;
 	power = obj.power;
 	sprite = obj.sprite;
 	texturePos = obj.texturePos;
 }
 
-Block::Block(Rectangle pos, ToolType requestType, int power, std::string name) :GameObject(pos,name)
+Block::Block(Rectangle pos, ToolType requestType, int power, std::string name) :GameObject(pos,name),DestroyAble(requestType)
 {
-	this->requestType = requestType;
 	int hp = 10;
 	this->power = power;
 	std::string path= "Resource/Blocks/" + name + ".png";
@@ -71,10 +62,10 @@ void Block::drawInMiniMap(int x, int y)
 	DrawTexturePro(sprite->getTexture(), texturePos, { (float)x,(float)y,1,1 }, { 0,0 }, 0, WHITE);
 }
 
-void Block::damageBlock(int power, ToolType tool)
+void Block::damageObject(int power, ToolType tool)
 {
-	if (this->power > power || (tool != requestType && requestType != ToolType::All))return;
-	
+	if (!isThisToolType(tool, itemToolRequest))
+		return;
 	hp -= power / (this->power * 0.5);
 	if (hp <= 0)
 	{

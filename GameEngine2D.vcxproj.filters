@@ -150,6 +150,9 @@
     <ClCompile Include="src\GameObjects\Factory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\PlantsFactory.h">
       <Filter>src\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\DestroyAble.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

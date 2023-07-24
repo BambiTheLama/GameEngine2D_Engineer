@@ -139,6 +139,7 @@
     <ClCompile Include="src\core\Scenes\Game\PerlinNoice.cpp" />
     <ClCompile Include="src\core\Scenes\Scene.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp" />
+    <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\ItemsDrop.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\UserUI.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="src\core\Scenes\Scene.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\DestroyAble.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\ItemsDrop.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\UserUI.h" />

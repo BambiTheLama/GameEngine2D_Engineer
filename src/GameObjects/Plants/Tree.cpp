@@ -10,6 +10,7 @@ Tree::Tree(Rectangle pos, std::string name) :Plant(pos, name), Collider({22.0f /
 {
 	maxAge = sprite->howMuchFrames()-1;
 	addItemToDrop(0, 100, 1, 2);
+	itemToolRequest = ToolType::Axe;
 }
 
 Tree::~Tree() 

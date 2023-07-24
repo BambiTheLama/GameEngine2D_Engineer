@@ -14,10 +14,10 @@ ItemFactory::ItemFactory()
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Stone", blockStackSize));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Axe"));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Pickaxe"));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Shovel"));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Hoe"));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Axe",ToolType::Axe,30));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Pickaxe", ToolType::Pickaxe,30));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Shovel",ToolType::Shovel,30));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Hoe",ToolType::NON,30));
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)
