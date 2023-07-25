@@ -8,7 +8,7 @@ protected:
     Plant(Plant& obj);
     SpriteController* sprite=NULL;
 public:
-    Plant(Rectangle pos,std::string name);
+    Plant(Rectangle pos, std::string name, ToolType tool = ToolType::All, int hp = 1, int power = 0);
 
     virtual ~Plant();
 

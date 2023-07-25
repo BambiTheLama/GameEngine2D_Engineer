@@ -21,10 +21,11 @@ class DestroyAble
 {
 protected:
     ToolType itemToolRequest;
+    int power,hp;
     DestroyAble(DestroyAble& destroyable);
 public:
-    DestroyAble(ToolType toolToDestroy);
+    DestroyAble(ToolType toolToDestroy,int hp=1,int power=0);
 
-    virtual void damageObject(int power, ToolType type) = 0;
+    virtual void damageObject(int power, ToolType type);
 };
 

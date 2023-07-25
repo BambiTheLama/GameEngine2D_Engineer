@@ -54,3 +54,13 @@ Item* ItemFactory::getObject(int i)
 	return NULL;
 }
 
+Item* ItemFactory::getObject(std::string name)
+{
+	for (auto* i : objects)
+	{
+		if (i->getName()._Equal(name))
+			return i->clone();
+	}
+	return NULL;
+}
+

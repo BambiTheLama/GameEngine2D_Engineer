@@ -21,8 +21,14 @@ public:
 
     void draw();
 
+    virtual void setMovePos(Vector2 movePos);
+
     virtual Tree* clone() { return new Tree(*this); }
 
+    virtual void damageObject(int power, ToolType type);
+
     bool isColliding() { return true; }
+
+
 };
 

@@ -11,6 +11,8 @@ public:
 
 	Rectangle getCollisionPos(GameObject* obj);
 
+	Rectangle getCollisionPos() const { return collision; }
+
 	bool isCollidingWithSomething(GameObject* obj);
 
 	void draw(GameObject* obj)

@@ -35,5 +35,11 @@ public:
 	/// <param name="ID">Ite itemu</param>
 	/// <returns>Zwra kopiê itemu</returns>
 	Item* getObject(int ID);
+	/// <summary>
+	/// Zwraca obiekt po nazwie
+	/// </summary>
+	/// <param name="name">nazwa obiektu jaki chcemy</param>
+	/// <returns>obiekt</returns>
+	Item* getObject(std::string name);
 };
 

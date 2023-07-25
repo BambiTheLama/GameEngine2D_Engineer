@@ -6,10 +6,10 @@ BlockFactory* BlockFactory::factory=NULL;
 BlockFactory::BlockFactory()
 {
 	objects.push_back(new CollidingBlock({ 0,0,tileSize,tileSize }, ToolType::NON, 0 ,"Water"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 0 ,"Sand"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 0 ,"Grass"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 0 ,"Dirt"));
-	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Pickaxe, 0 ,"Stone"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 10 ,"Sand"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 20 ,"Grass"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 30 ,"Dirt"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Pickaxe, 10 ,"Stone"));
 
 
 	for (int i = 0; i < objects.size(); i++)

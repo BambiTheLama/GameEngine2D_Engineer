@@ -16,10 +16,9 @@
 /// Klasa od bloków naszej gry
 /// </summary>
 class Block :
-    public GameObject, public DestroyAble
+    public GameObject, public DestroyAble, public ItemsDrop
 {
 protected:
-    int hp, power;
     Block(Block& obj);
     SpriteController* sprite;
     Rectangle texturePos;

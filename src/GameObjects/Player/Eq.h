@@ -79,5 +79,9 @@ public:
 	/// Metoda rysuj¹ca nasz przedmiot w rêce
 	/// </summary>
 	void drawItem();
+	/// <summary>
+	/// Zmienia wstan eq na przeciwny
+	/// </summary>
+	void swapEqLook() { fullEq = !fullEq; }
 };
 

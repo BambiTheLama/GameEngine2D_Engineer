@@ -104,6 +104,8 @@ void Player::move()
 	}
 	if (GetMouseWheelMove() != 0)
 		eq->mouseWeel();
+	if (IsKeyPressed(KEY_I))
+		eq->swapEqLook();
 
 }
 #define changePos {int s=6;pos.x += s;pos.y += s;pos.width -= s+s;pos.height -= s+s; }

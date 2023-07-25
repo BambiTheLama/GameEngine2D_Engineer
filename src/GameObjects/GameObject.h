@@ -107,6 +107,11 @@ public:
 	/// </summary>
 	/// <returns>ID obiektu</returns>
 	unsigned int getID() { return ID; }
+	/// <summary>
+	/// Zwraca nazwê obiektu
+	/// </summary>
+	/// <returns>Nazwa obiektu</returns>
+	std::string getName() { return name; }
 
 	friend class Factory;
 	friend class BlockFactory;
