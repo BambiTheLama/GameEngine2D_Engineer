@@ -4,7 +4,7 @@
 BlockItem::BlockItem(BlockItem& item):Item(item)
 {
 	stackMaxSize = item.stackMaxSize;
-	this->stackSize = 1;
+	this->stackSize = item.stackSize;
 	sprite = new SpriteController(*item.sprite);
 }
 
@@ -36,4 +36,23 @@ void BlockItem::draw()
 void BlockItem::drawAt(Rectangle pos)
 {
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, { 0,0 }, 0, WHITE);
+}
+
+bool BlockItem::addToStack(Item* item)
+{
+	if (getID() != item->getID())
+		return false;
+	int canTake = stackMaxSize - stackSize;
+	if (canTake >= item->getStackSize())
+	{
+		stackSize += item->getStackSize();
+		item->removeFromStack(item->getStackSize());
+		return true;
+	}
+	else
+	{
+		item->removeFromStack(canTake);
+		stackSize = stackMaxSize;
+	}
+	return false;
 }

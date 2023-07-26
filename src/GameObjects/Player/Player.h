@@ -21,6 +21,7 @@ class Player :
     bool canMove = true;
     Eq* eq;
     MiniMap* miniMap;
+    int pickUpRange = 100;
 protected:
     Player(Player& obj);
 public:

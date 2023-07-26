@@ -18,7 +18,11 @@ public:
 
     virtual void drawAt(Rectangle pos);
 
+    virtual bool addToStack(Item* i);
+
     virtual void addToStack(int i) { stackSize += i; }
+
+    virtual void removeFromStack(int i) { stackSize -= i; }
 
     virtual int getStackSize() { return stackSize; }
 

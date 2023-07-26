@@ -46,6 +46,39 @@ void Player::update()
 	eq->update();
 	move();
 	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+	Rectangle pos = getPos();
+	pos.x -= pickUpRange;
+	pos.y -= pickUpRange;
+	pos.width += pickUpRange * 2;
+	pos.height += pickUpRange * 2;
+	std::list<GameObject*> objs = Game->getObjects(pos, ObjectToGet::getNoBlocks);
+	for (GameObject* obj : objs)
+	{
+		if (obj->getType() != ObjectType::Item)
+			continue;
+		Item* item = dynamic_cast<Item*>(obj);
+		if (item != NULL)
+		{
+			Rectangle myPos = getPos();
+			Rectangle itemPos = item->getPos();
+			if (CheckCollisionRecs(myPos, itemPos))
+			{
+				if (eq->addItem(item))
+					Game->deleteObject(obj);
+			}
+			else
+			{
+				Vector2 moveTo = { myPos.x - itemPos.x,myPos.y - itemPos.y };
+				float lenght = abs(moveTo.x) + abs(moveTo.y);
+				moveTo.x /= lenght/2;
+				moveTo.y /= lenght/2;
+				item->addToPos(moveTo);
+			}
+		}
+
+
+
+	}
 	Game->updatePos(this);
 }
 
@@ -75,16 +108,30 @@ void Player::move()
 		if (posTmp.x != 0)
 		{
 			if (posTmp.x > 0)
+			{
 				state = playerAnimationState::MoveRight;
+				eq->setFaceSide(FaceSide::right);
+			}
 			else
+			{
 				state = playerAnimationState::MoveLeft;
+				eq->setFaceSide(FaceSide::left);
+			}
+				
 		}
 		if (posTmp.y != 0)
 		{
 			if (posTmp.y > 0)
+			{
 				state = playerAnimationState::MoveDown;
+				eq->setFaceSide(FaceSide::down);
+			}
 			else
-				state = playerAnimationState::MoveUp;
+			{
+				state = playerAnimationState::MoveUp; 
+				eq->setFaceSide(FaceSide::up);
+			}
+
 		}
 		if (IsKeyDown(KEY_SPACE))
 		{
@@ -115,7 +162,16 @@ void Player::draw()
 
 	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
 	if (IsKeyDown(KEY_TAB))
+	{
+		Rectangle posPickUpRange = getPos();
+		posPickUpRange.x -= pickUpRange;
+		posPickUpRange.y -= pickUpRange;
+		posPickUpRange.width += pickUpRange * 2;
+		posPickUpRange.height += pickUpRange * 2;
 		Collider::draw(this);
+		DrawRectangleRec(posPickUpRange, { 0,0,255,126 });
+	}
+
 	eq->drawItem();
 }
 

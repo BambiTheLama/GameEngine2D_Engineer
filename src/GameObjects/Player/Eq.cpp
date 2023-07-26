@@ -72,12 +72,24 @@ void Eq::sortItems(sortBy type)
 
 bool Eq::addItem(Item* item)
 {
+	if (item->isStacable())
+	{
+		for (int i = 0; i < EqHeight; i++)
+			for (int j = 0; j < EqWight; j++)
+			{
+				if (items[i][j] != NULL && items[i][j]->addToStack(item))
+					return true;
+			}
+	}
+
+
+
 	for (int i = 0; i < EqHeight; i++)
 		for (int j = 0; j < EqWight; j++)
 		{
 			if (items[i][j] == NULL)
 			{
-				items[i][j] = item;
+				items[i][j] = item->clone();
 				return true;
 			}
 		}
@@ -102,6 +114,7 @@ void Eq::update()
 	if (items[usingItemY][usingItemX] != NULL)
 	{
 		items[usingItemY][usingItemX]->update();
+		items[usingItemY][usingItemX]->setFaceSide(faceSide);
 		if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 			items[usingItemY][usingItemX]->use();
 	}

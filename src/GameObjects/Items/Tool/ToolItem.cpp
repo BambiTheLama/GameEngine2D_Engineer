@@ -54,9 +54,47 @@ bool ToolItem::use()
 }
 void ToolItem::draw()
 {
+	Rectangle textureSize = sprite->getTextureSize();
+	Rectangle pos = getPos();
+	float rotation=0;
+	const float rotationAngle = 120;
+	Vector2 origion = { 0,pos.width };
+	switch (faceSide)
+	{
+	case FaceSide::left:
+		textureSize.width = -textureSize.width;
+		//textureSize.height = -textureSize.height;
 
-	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), getPos(), { 0,0 }, 0, WHITE);
-
+		rotation = 320;
+		if (useTime > 0)
+			rotation += (float)useTime / (float)useTimeMax * rotationAngle;
+		else
+			rotation += rotationAngle;
+		origion.x = pos.width;
+		break;
+	case FaceSide::right:
+		rotation = 30;
+		if (useTime > 0)
+			rotation -= (float)useTime / (float)useTimeMax * rotationAngle;
+		else
+			rotation -= rotationAngle;
+		break;
+	case FaceSide::up:
+		rotation = 0;
+		if (useTime > 0)
+			rotation -= (float)useTime / (float)useTimeMax * rotationAngle;
+		else
+			rotation -= rotationAngle;
+		break;
+	case FaceSide::down:
+		rotation = 200;
+		if (useTime > 0)
+			rotation -= (float)useTime / (float)useTimeMax * rotationAngle;
+		else
+			rotation -= rotationAngle;
+		break;
+	}
+	DrawTexturePro(sprite->getTexture(), textureSize, pos, origion, rotation, WHITE);
 }
 
 void ToolItem::drawAt(Rectangle pos)

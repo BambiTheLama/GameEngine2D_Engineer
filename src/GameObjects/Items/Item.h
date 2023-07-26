@@ -1,10 +1,15 @@
 #pragma once
 #include "../GameObject.h"
 
+enum class FaceSide {
+    left,right,up,down
+};
+
 class Item :
     public GameObject
 {
 protected:
+    FaceSide faceSide;
     Item(Item& obj);
 public:
     Item(Rectangle pos, std::string name);
@@ -19,7 +24,11 @@ public:
 
     virtual bool use();
 
-    virtual void addToStack(int i){}
+    virtual bool addToStack(Item* i) { return false; }
+
+    virtual void addToStack(int i) {}
+
+    virtual void removeFromStack(int i){}
 
     virtual int getStackSize() { return 1; }
 
@@ -30,5 +39,9 @@ public:
     ObjectType getType() { return ObjectType::Item; }
 
     virtual Item* clone() { return new Item(*this); }
+
+    void setFaceSide(FaceSide side) { faceSide = side; }
+
+    void addToPos(Vector2 move) { pos.x += move.x; pos.y += move.y; }
 };
 

@@ -17,6 +17,7 @@ class Eq
 	int usingItem = 0, usingItemX = 0, usingItemY = 0;
 	Item*** items = NULL;
 	bool fullEq=false;
+	FaceSide faceSide;
 public:
 	/// <summary>
 	/// Tworzy obiekt ekwipunku
@@ -83,5 +84,7 @@ public:
 	/// Zmienia wstan eq na przeciwny
 	/// </summary>
 	void swapEqLook() { fullEq = !fullEq; }
+
+	void setFaceSide(FaceSide side) { faceSide = side; }
 };
 

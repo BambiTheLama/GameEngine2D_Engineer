@@ -1,5 +1,6 @@
 #include "Tree.h"
 #include "../../core/Scenes/GameScene.h"
+#include "../Particles/ParticleSystem.h"
 Tree::Tree(Tree& tree) :Plant(tree), Collider(tree)
 {
 	age = tree.age;
@@ -65,9 +66,22 @@ void Tree::setMovePos(Vector2 movePos)
 
 void Tree::damageObject(int power, ToolType type)
 {
+	int h = hp;
 	DestroyAble::damageObject(power, type);
+	if (h != hp)
+	{
+		Rectangle pos = getCollisionPos(this);
+		Particle* particle=new Particle({0,0,5,5},40,{2,4},{77,26,1,255},{255,170,30,0});
+		ParticleSystem* particleSystem = new ParticleSystem(pos, "", particle, 10);
+		particleSystem->setTime(30, 60);
+		particleSystem->setVelosity({ -1,-1 }, { 1,1 });
+		Game->addObject(particleSystem);
+	}
 	if (hp > 0)
+	{
 		return;
+	}
+
 	Rectangle pos = getCollisionPos(this);
 	std::vector<Item*> items = getDrop();
 	for (Item* i : items)

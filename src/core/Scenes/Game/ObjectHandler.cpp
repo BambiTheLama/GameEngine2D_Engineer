@@ -136,8 +136,19 @@ std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos, ObjectToGet type
 std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 {
 	std::list<GameObject*> objs = tree->getObjectsAt(pos);
+	std::list<GameObject*> particles;
+	for (auto o : objs)
+	{
+		if (o->getType() == ObjectType::Particle)
+		{
+			particles.push_back(o);
+		}
+	}
+	for (auto o : particles)
+		objs.remove(o);
 
 	GameObject** tmpObj = new GameObject * [objs.size()];
+
 	int n = 0;
 
 	while (objs.size() > 0)
@@ -162,6 +173,8 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 	{
 		objs.push_back(tmpObj[i]);
 	}
+	for (auto o : particles)
+		objs.push_back(o);
 	delete tmpObj;
 
 

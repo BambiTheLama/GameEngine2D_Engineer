@@ -7,7 +7,7 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
-	handler = new ObjectHandler({0,0,32000.0f,32000.0f});
+	handler = new ObjectHandler({0,0,8000.0f,8000.0f});
 	handler->addObject(cameraTarget=new Player());
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
