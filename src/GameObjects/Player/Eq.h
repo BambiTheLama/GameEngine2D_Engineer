@@ -86,5 +86,10 @@ public:
 	void swapEqLook() { fullEq = !fullEq; }
 
 	void setFaceSide(FaceSide side) { faceSide = side; }
+	/// <summary>
+	/// Zwraca wszystkie itemy jakie mamy w EQ
+	/// </summary>
+	/// <returns></returns>
+	std::vector<Item*> getItems();
 };
 

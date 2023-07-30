@@ -4,7 +4,7 @@
 #include "../AddisionalTypes/AllTypes.h"
 #include "Eq.h"
 #include "MiniMap.h"
-
+#include "../Crafting/CraftingStation.h"
 enum class playerAnimationState {
     IDE = 0, MoveUp, MoveDown, MoveLeft, MoveRight = -3, Doge = 4, Die = 5
 };
@@ -20,6 +20,7 @@ class Player :
     float frame = 0;
     bool canMove = true;
     Eq* eq;
+    CraftingStation* crafting;
     MiniMap* miniMap;
     int pickUpRange = 100;
 protected:
@@ -55,6 +56,8 @@ public:
     /// </summary>
     /// <returns></returns>
     ObjectType getType() { return ObjectType::Player; }
+
+    void pickUpItemsClose();
 
     virtual void drawInterface();
 

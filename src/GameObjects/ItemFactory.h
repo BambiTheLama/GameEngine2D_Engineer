@@ -41,5 +41,11 @@ public:
 	/// <param name="name">nazwa obiektu jaki chcemy</param>
 	/// <returns>obiekt</returns>
 	Item* getObject(std::string name);
+	/// <summary>
+	/// Rysuje obiekt przedmiotu w podanej pozycji
+	/// </summary>
+	/// <param name="ID">Id przedmiotu</param>
+	/// <param name="pos">Pozycja gdzie ma byæ narysowany przedmiot</param>
+	void drawObjectAt(int ID, Rectangle pos);
 };
 

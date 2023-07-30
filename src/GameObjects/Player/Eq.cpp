@@ -190,3 +190,18 @@ void Eq::drawItem()
 		items[usingItemY][usingItemX]->draw();
 	}
 }
+
+
+std::vector<Item*> Eq::getItems()
+{
+	std::vector<Item*> itemsToRet;
+
+	for(int i=0;i<EqHeight;i++)
+		for (int j = 0; j < EqWight; j++)
+		{
+			if (items[i][j] != NULL)
+				itemsToRet.push_back(items[i][j]);
+		}
+
+	return itemsToRet;
+}

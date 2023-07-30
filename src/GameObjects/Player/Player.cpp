@@ -5,11 +5,14 @@
 #include "../Projectals/Projectal.h"
 #include "../ItemFactory.h"
 
+
 Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 {
 	animations = new AnimationController(*obj.animations);
 	miniMap = new MiniMap(this);
 	eq = new Eq();
+	crafting = new CraftingStation(CraftingStationEnum::NON);
+
 }
 
 Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
@@ -26,6 +29,9 @@ Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width /
 	animations = new AnimationController(sprites);
 	miniMap = new MiniMap(this);
 	eq = new Eq();
+	crafting = new CraftingStation(CraftingStationEnum::NON);
+
+
 }
 Player::~Player()
 {
@@ -33,6 +39,7 @@ Player::~Player()
 		Game->removeUserUI(this);
 	delete animations;
 	delete miniMap;
+	delete crafting;
 }
 
 void Player::start()
@@ -41,11 +48,8 @@ void Player::start()
 	miniMap->generateMiniMap();
 }
 
-void Player::update()
+void Player::pickUpItemsClose()
 {
-	eq->update();
-	move();
-	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
 	Rectangle pos = getPos();
 	pos.x -= pickUpRange;
 	pos.y -= pickUpRange;
@@ -70,16 +74,25 @@ void Player::update()
 			{
 				Vector2 moveTo = { myPos.x - itemPos.x,myPos.y - itemPos.y };
 				float lenght = abs(moveTo.x) + abs(moveTo.y);
-				moveTo.x /= lenght/2;
-				moveTo.y /= lenght/2;
+				moveTo.x /= lenght / 2;
+				moveTo.y /= lenght / 2;
 				item->addToPos(moveTo);
 			}
 		}
-
-
-
 	}
+}
+
+void Player::update()
+{
+	eq->update();
+	move();
+	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+	pickUpItemsClose();
 	Game->updatePos(this);
+	std::vector<Item*> items=eq->getItems();
+	crafting->updateItemsICanCraft(items);
+	if (IsKeyPressed(KEY_F1))
+		crafting->swapItemsSee();
 }
 
 void Player::move()
@@ -179,4 +192,5 @@ void Player::drawInterface()
 {
 	eq->draw();
 	miniMap->draw();
+	crafting->draw();
 }

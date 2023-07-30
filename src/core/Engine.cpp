@@ -6,6 +6,7 @@
 #include "../GameObjects/ItemFactory.h"
 #include "../GameObjects/BlockFactory.h"
 #include "Properties.h"
+#include "../GameObjects/RecipesFactory.h"
 
 Scene* Engine::scene = NULL;
 
@@ -30,6 +31,8 @@ Engine::~Engine()
 	Properties* prop = Properties::getProperties();
 	if(prop!=NULL)
 		delete prop;
+	RecipesFactory* recipes = CraftingRecipes;
+	delete recipes;
 	CloseWindow();
 }
 void Engine::start()

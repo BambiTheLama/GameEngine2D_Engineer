@@ -52,6 +52,9 @@
     <Filter Include="src\GameObjects\Items\Tool">
       <UniqueIdentifier>{2b990fa1-2400-4726-92ed-5a783329e06b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameObjects\Crafting">
+      <UniqueIdentifier>{1b581e85-55a0-4377-830c-a4e61a7b5c4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -159,11 +162,14 @@
     <ClCompile Include="src\GameObjects\Particles\Particle.cpp">
       <Filter>src\GameObjects\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\Recepies.cpp">
+    <ClCompile Include="src\GameObjects\RecipesFactory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\RecepiesFactory.cpp">
-      <Filter>src\GameObjects\Factories</Filter>
+    <ClCompile Include="src\GameObjects\Crafting\CraftingStation.cpp">
+      <Filter>src\GameObjects\Crafting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Crafting\Recipes.cpp">
+      <Filter>src\GameObjects\Crafting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,11 +278,14 @@
     <ClInclude Include="src\GameObjects\Particles\Particle.h">
       <Filter>src\GameObjects\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\Recepies.h">
+    <ClInclude Include="src\GameObjects\RecipesFactory.h">
       <Filter>src\GameObjects\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\RecepiesFactory.h">
-      <Filter>src\GameObjects\Factories</Filter>
+    <ClInclude Include="src\GameObjects\Crafting\CraftingStation.h">
+      <Filter>src\GameObjects\Crafting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Crafting\Recipes.h">
+      <Filter>src\GameObjects\Crafting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

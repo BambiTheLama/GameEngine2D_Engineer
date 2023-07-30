@@ -64,3 +64,9 @@ Item* ItemFactory::getObject(std::string name)
 	return NULL;
 }
 
+void ItemFactory::drawObjectAt(int ID, Rectangle pos)
+{
+	if (ID < 0 || ID >= objects.size())
+		return;
+	objects[ID]->drawAt(pos);
+}
