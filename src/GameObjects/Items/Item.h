@@ -43,5 +43,7 @@ public:
     void setFaceSide(FaceSide side) { faceSide = side; }
 
     void addToPos(Vector2 move) { pos.x += move.x; pos.y += move.y; }
+
+    virtual std::string getDesctription() { return ""; }
 };
 

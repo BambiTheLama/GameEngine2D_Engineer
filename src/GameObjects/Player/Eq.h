@@ -91,5 +91,6 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	std::vector<Item*> getItems();
+	Item*** getAllItems() { return items; }
 };
 

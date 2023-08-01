@@ -47,5 +47,7 @@ public:
 	/// <param name="ID">Id przedmiotu</param>
 	/// <param name="pos">Pozycja gdzie ma byæ narysowany przedmiot</param>
 	void drawObjectAt(int ID, Rectangle pos);
+
+	std::string getDescription(int ID) { return objects[ID]->getDesctription(); }
 };
 

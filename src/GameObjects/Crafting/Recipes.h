@@ -15,7 +15,7 @@ enum class CraftingStationEnum
 /// Struktura mówi¹ca co jest potrzebne i jakiej iloœci
 /// </summary>
 struct ItemToRecipes {
-	int ItemID, howMany;
+	int itemID, howMany;
 
 };
 /// <summary>
@@ -48,6 +48,8 @@ public:
 	/// Craftuje przedmiot
 	/// </summary>
 	Item* craftItem(Item*** items, int w, int h);
+
+	bool canCraft(Item*** items, int w, int h);
 
 };
 

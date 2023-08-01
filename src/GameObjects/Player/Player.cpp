@@ -93,6 +93,16 @@ void Player::update()
 	crafting->updateItemsICanCraft(items);
 	if (IsKeyPressed(KEY_F1))
 		crafting->swapItemsSee();
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	{
+		if (crafting->isPressedCraft())
+		{
+			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
+			if(item!=NULL)
+				eq->addItem(item);
+		}
+			
+	}
 }
 
 void Player::move()
@@ -165,7 +175,11 @@ void Player::move()
 	if (GetMouseWheelMove() != 0)
 		eq->mouseWeel();
 	if (IsKeyPressed(KEY_I))
+	{
 		eq->swapEqLook();
+		crafting->swapVisibility();
+	}
+
 
 }
 #define changePos {int s=6;pos.x += s;pos.y += s;pos.width -= s+s;pos.height -= s+s; }
