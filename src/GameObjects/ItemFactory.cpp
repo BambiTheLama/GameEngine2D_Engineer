@@ -70,3 +70,14 @@ void ItemFactory::drawObjectAt(int ID, Rectangle pos)
 		return;
 	objects[ID]->drawAt(pos);
 }
+
+void ItemFactory::drawItemDescription(int ID, int x, int y)
+{
+	if (ID < 0 || ID >= objects.size())
+		return;
+	std::string description = getDescription(ID);
+	Vector2 descriptionSize = textSize(description.c_str(), textStandardSize);
+	Rectangle dest = { x, y, descriptionSize.x, descriptionSize.y };
+	DrawRectangleRec(dest, BLUE);
+	drawText(description.c_str(), x, y, textStandardSize, BLACK);
+}

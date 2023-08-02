@@ -19,5 +19,6 @@ public:
     bool use();
     void draw();
     void drawAt(Rectangle pos);
+    virtual std::string getDesctription();
 };
 

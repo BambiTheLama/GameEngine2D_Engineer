@@ -7,6 +7,7 @@ RecipesFactory::RecipesFactory()
 	recipesFactory = this;
 	Recipes *recepe=new Recipes(5);
 	recepe->addItemToRecipes(0, 20);
+	recepe->addItemToRecipes(1, 20);
 	recipes.push_back(recepe);
 	recepe = new Recipes(6);
 	recepe->addItemToRecipes(0, 69);

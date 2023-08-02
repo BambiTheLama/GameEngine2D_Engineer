@@ -12,6 +12,7 @@ class CraftingStation
 	int firstItem = 0;
 	bool onlyICanCraft = true;
 	bool canSee = false;
+	Rectangle pos[9];
 public:
 	CraftingStation(CraftingStationEnum station);
 	/// <summary>
@@ -29,5 +30,8 @@ public:
 	bool isPressedCraft();
 	void draw();
 	void swapVisibility() { canSee = !canSee; }
+
+	int getItemID(int i);
+	Recipes* getRecepies(int i);
 };
 

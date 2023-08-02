@@ -1,17 +1,15 @@
 ﻿  CraftingStation.cpp
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(30,27): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(71,36): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(75,33): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(161,66): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(161,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(161,35): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(161,24): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(166,66): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(166,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(166,35): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(166,24): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(181,48): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(181,39): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(188,80): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(188,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(46,27): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(87,36): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(91,33): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(134,77): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(139,73): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(186,65): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(186,49): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(186,34): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(186,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(206,61): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(206,48): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(220,42): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(220,29): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
   GameEngine2D.vcxproj -> C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\x64\Debug\GameEngine2D.exe

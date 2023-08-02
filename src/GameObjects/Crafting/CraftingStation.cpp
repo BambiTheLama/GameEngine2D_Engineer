@@ -6,6 +6,22 @@ CraftingStation::CraftingStation(CraftingStationEnum station)
 {
 	this->station = station;
 	allRecepies = CraftingRecipes->getAllRecepies(station);
+	pos[4] = {300,260,64,64};
+	for (int i = 1; i < 5; i++)
+	{
+		pos[4 + i] = { pos[4 + i - 1].x + pos[4 + i - 1].width * 5.0f / 4.0f ,
+			pos[4 + i - 1].y + 4,
+			pos[4 + i - 1].width - 8,
+			pos[4 + i - 1].height - 8
+		};
+
+		pos[4 - i] = { pos[4 + 1 - i].x,
+			pos[4 - i + 1].y + 4,
+			pos[4 - i + 1].width - 8,
+			pos[4 - i + 1].height - 8
+		};
+		pos[4 - i].x -= pos[4 - i].width * 5.0f / 4.0f;
+	}
 }
 
 Item* CraftingStation::craftItem(Item*** items,int w,int h)
@@ -21,7 +37,7 @@ Item* CraftingStation::craftItem(Item*** items,int w,int h)
 	{
 		return allRecepies[firstItem]->craftItem(items,w,h);
 	}
-	
+	return NULL;
 }
 
 bool CraftingStation::checkItemsNeed(std::vector<ItemToRecipes> itemsToRec)
@@ -102,31 +118,48 @@ bool CraftingStation::isPressedCraft()
 	if (!canSee)
 		return false;
 	Vector2 mouse = GetMousePosition();
-	Rectangle pos = { 64,260,64,64 };
-	if (CheckCollisionPointRec(mouse, pos))
+
+	if (CheckCollisionPointRec(mouse, pos[4]))
 	{
 		return true;
 	}
-	for (int i = 1; i < 5; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		pos.x += pos.width * 5.0f / 4.0f;
-		pos.width -= 8;
-		pos.height -= 8;
-		pos.y += 4;
-		if (CheckCollisionPointRec(mouse, pos))
+		if (CheckCollisionPointRec(mouse, pos[i]))
 		{
-			firstItem += i;
+			firstItem -= 4 - i;
 			if (onlyICanCraft)
 			{
-				firstItem %= itemsICanCraft.size();
+				if (itemsICanCraft.size() > 0)
+					firstItem = (firstItem + itemsICanCraft.size())%(itemsICanCraft.size());
 			}
 			else
 			{
-				firstItem %= allRecepies.size();
+				if (allRecepies.size() > 0)
+					firstItem = (firstItem + allRecepies.size()) % (allRecepies.size());
 			}
 			return false;
 		}
 		
+	}
+	for (int i = 1; i < 5; i++)
+	{
+		if (CheckCollisionPointRec(mouse, pos[4+i]))
+		{
+			firstItem += i;
+			if (onlyICanCraft)
+			{
+				if (itemsICanCraft.size() > 0)
+					firstItem %= itemsICanCraft.size();
+			}
+			else
+			{
+				if (allRecepies.size() > 0)
+					firstItem %= allRecepies.size();
+			}
+			return false;
+		}
+
 	}
 	return false;
 }
@@ -142,60 +175,82 @@ void CraftingStation::draw()
 {
 	if (!canSee)
 		return;
-	Rectangle pos = { 64,260,64,64 };
 	Vector2 mouse = GetMousePosition();
-	
-	for (int i = 0; i < 5; i++)
+
+	for (int i = 0; i < 9; i++)
 	{
+		Rectangle pos = this->pos[i];
 		///SZUKANIE ID ITEMU I RYSOWANIE KWADRATU
-		int itemID = 0;
-		Recipes* recepy;
-		if (onlyICanCraft)
-		{
-			if (itemsICanCraft.size() > 0)
-			{
-				recepy = itemsICanCraft[(firstItem + i) % itemsICanCraft.size()];
-			}
-			else
-				return;
-			DrawRectangle(pos.x - 2, pos.y - 2, pos.width + 4, pos.height + 4, GREEN);
-		}
-		else
-		{
-			recepy = allRecepies[(firstItem + i) % allRecepies.size()];
-			DrawRectangle(pos.x - 2, pos.y - 2, pos.width + 4, pos.height + 4, hasID(itemID, itemsICanCraft) ? GREEN : RED);
-		}
-		itemID = recepy->getFinalItemID();
+		int itemID = getItemID(i + firstItem);
 		///RYSOWANIE PRZEDMIOTU
+		DrawRectangle(pos.x - 2, pos.y - 2, pos.width + 4, pos.height + 4, hasID(itemID, itemsICanCraft) ? GREEN : RED);
 		DrawRectangleLinesEx({ pos.x - 2, pos.y - 2, pos.width + 4, pos.height + 4 }, 2, BLACK);
 		Items->drawObjectAt(itemID, pos);
 
+	}
+	for (int i = 0; i < 9; i++)
+	{
+		Rectangle pos = this->pos[i];
 		///OPIS ITEMU
 		if (CheckCollisionPointRec(mouse, pos))
 		{
-
+			Vector2 starPoint = { pos.x +pos.width/2, pos.y + pos.width };
+			int itemID = 0;
+			Recipes* recepy = getRecepies(i + firstItem);
+			if (recepy == NULL)
+				return;
+			itemID = recepy->getFinalItemID();
 			std::string description = Items->getDescription(itemID);
-			Vector2 descriptionSize = textSize(description.c_str(), 16);
-			Rectangle dest = { mouse.x, mouse.y, descriptionSize.x, descriptionSize.y };
-			DrawRectangleRounded(dest, 2, 2, BLUE);
-			DrawText(description.c_str(), mouse.x, mouse.y, 16, BLACK);
-			std::vector<ItemToRecipes> getItemsToBuild=recepy->getItemsToBuild();
-			for (int j = 0; j < getItemsToBuild.size();j++)
-			{
-				Rectangle drawItem = { mouse.x + j * 40, mouse.y + descriptionSize.y, 32, 32 };
-				DrawRectangleRec(drawItem, GREEN);
-				Items->drawObjectAt(getItemsToBuild[j].itemID, drawItem);
-				drawText(TextFormat("%d", getItemsToBuild[j].howMany), drawItem.x, drawItem.y, 16, BLACK);
+			Vector2 descriptionSize = textSize(description.c_str(), textStandardSize);
+			starPoint.x -= descriptionSize.x / 2;
+			Items->drawItemDescription(itemID, starPoint.x, starPoint.y);
 
+			///Rysowanie itemów potrzebnych do stworzenia przedmiotu
+			std::vector<ItemToRecipes> getItemsToBuild = recepy->getItemsToBuild();
+			for (int j = 0; j < getItemsToBuild.size(); j++)
+			{
+				Rectangle drawItem = { starPoint.x + j * 32, starPoint.y + descriptionSize.y, 32, 32 };
+
+				DrawRectangleRec(drawItem, YELLOW);
+				Items->drawObjectAt(getItemsToBuild[j].itemID, { drawItem.x + 4,drawItem.y + 4 ,20,20 });
+				const char* text = TextFormat("%d", getItemsToBuild[j].howMany);
+
+				Vector2 textSpace = textSize(text, textStandardSize2);
+				Vector2 textPos = { drawItem.x + drawItem.width - textSpace.x, drawItem.y + drawItem.height - textSpace.y };
+				drawText(text, textPos.x-2, textPos.y-2, textStandardSize2, BLACK);
+				DrawRectangleLinesEx(drawItem, 2, BLACK);
 			}
 		}
-
-
-
-		///OBLICZANIE POZYCJI KOLEJNEGO KWADRATU
-		pos.x += pos.width * 5.0f / 4.0f;
-		pos.width -= 8;
-		pos.height -= 8;
-		pos.y += 4;
 	}
+
+}
+
+int CraftingStation::getItemID(int i)
+{
+	if (onlyICanCraft)
+	{
+		if (itemsICanCraft.size() > 0)
+			return itemsICanCraft[(i) % itemsICanCraft.size()]->getFinalItemID();
+	}
+	else
+	{
+		if (allRecepies.size() > 0)
+			return allRecepies[(i) % allRecepies.size()]->getFinalItemID();
+	}
+	return 0;
+}
+Recipes* CraftingStation::getRecepies(int i)
+{
+	if (onlyICanCraft)
+	{
+		if (itemsICanCraft.size() > 0)
+			return itemsICanCraft[(i) % itemsICanCraft.size()];
+		
+	}
+	else
+	{
+		if (allRecepies.size() > 0)
+			return allRecepies[(i) % allRecepies.size()];
+	}
+	return NULL;
 }

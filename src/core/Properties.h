@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
-
+#define textStandardSize 26
+#define textStandardSize2 16
 void drawText(const char* text, int x, int y, int size, Color color);
 Vector2 textSize(const char* text, int size, int spacing=0);
 class Properties

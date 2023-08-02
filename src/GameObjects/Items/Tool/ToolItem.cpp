@@ -102,3 +102,7 @@ void ToolItem::drawAt(Rectangle pos)
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, { 0,0 }, 0, WHITE);
 	DrawRectangle(pos.x, pos.y, pos.width, pos.height*useTime/useTimeMax, { 159,159,159,159 });
 }
+std::string ToolItem::getDesctription()
+{
+	return getName() + "\n" + "tool power" + std::to_string(power) + "";
+}
