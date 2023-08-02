@@ -176,6 +176,7 @@ void CraftingStation::draw()
 	if (!canSee)
 		return;
 	Vector2 mouse = GetMousePosition();
+	int firstItem = this->firstItem - 4;
 
 	for (int i = 0; i < 9; i++)
 	{
@@ -229,11 +230,16 @@ int CraftingStation::getItemID(int i)
 {
 	if (onlyICanCraft)
 	{
+		if (i < 0)
+			i += itemsICanCraft.size() * 4;
+
 		if (itemsICanCraft.size() > 0)
 			return itemsICanCraft[(i) % itemsICanCraft.size()]->getFinalItemID();
 	}
 	else
 	{
+		if (i < 0)
+			i += allRecepies.size() * 4;
 		if (allRecepies.size() > 0)
 			return allRecepies[(i) % allRecepies.size()]->getFinalItemID();
 	}
@@ -243,14 +249,29 @@ Recipes* CraftingStation::getRecepies(int i)
 {
 	if (onlyICanCraft)
 	{
+
 		if (itemsICanCraft.size() > 0)
 			return itemsICanCraft[(i) % itemsICanCraft.size()];
 		
 	}
 	else
 	{
+
 		if (allRecepies.size() > 0)
 			return allRecepies[(i) % allRecepies.size()];
 	}
 	return NULL;
+}
+
+bool CraftingStation::isStacableItem()
+{
+	return Items->isStacableItem(getItemID());
+}
+int CraftingStation::getItemID()
+{
+	return getItemID(firstItem);
+}
+int CraftingStation::getStackSize()
+{
+	return getRecepies(firstItem)->getHowManyItems();
 }

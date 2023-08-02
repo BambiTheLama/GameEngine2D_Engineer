@@ -50,6 +50,7 @@ void Player::start()
 
 void Player::pickUpItemsClose()
 {
+	bool haveSpace = !eq->isFullEq();
 	Rectangle pos = getPos();
 	pos.x -= pickUpRange;
 	pos.y -= pickUpRange;
@@ -61,24 +62,29 @@ void Player::pickUpItemsClose()
 		if (obj->getType() != ObjectType::Item)
 			continue;
 		Item* item = dynamic_cast<Item*>(obj);
-		if (item != NULL)
+		
+		if (item == NULL)
+			continue;
+		if (!haveSpace && !item->isStacable())
+			continue;
+		if (!haveSpace && !eq->canTakeItem(item))
+			continue;
+		Rectangle myPos = getCollisionPos(this);
+		Rectangle itemPos = item->getPos();
+		if (CheckCollisionRecs(myPos, itemPos))
 		{
-			Rectangle myPos = getPos();
-			Rectangle itemPos = item->getPos();
-			if (CheckCollisionRecs(myPos, itemPos))
-			{
-				if (eq->addItem(item))
-					Game->deleteObject(obj);
-			}
-			else
-			{
-				Vector2 moveTo = { myPos.x - itemPos.x,myPos.y - itemPos.y };
-				float lenght = abs(moveTo.x) + abs(moveTo.y);
-				moveTo.x /= lenght / 2;
-				moveTo.y /= lenght / 2;
-				item->addToPos(moveTo);
-			}
+			if (eq->addItem(item))
+				Game->deleteObject(obj);
 		}
+		else
+		{
+			Vector2 moveTo = { myPos.x - itemPos.x,myPos.y - itemPos.y };
+			float lenght = abs(moveTo.x) + abs(moveTo.y);
+			moveTo.x /= lenght / 2;
+			moveTo.y /= lenght / 2;
+			item->addToPos(moveTo);
+		}
+		
 	}
 }
 
@@ -97,11 +103,34 @@ void Player::update()
 	{
 		if (crafting->isPressedCraft())
 		{
+			if (!eq->canAddItemToHand(crafting->isStacableItem(), crafting->getItemID(), crafting->getStackSize()))
+				return;
 			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
-			if(item!=NULL)
-				eq->addItem(item);
+			if (item != NULL)
+			{
+				eq->addItemToHand(item);
+
+			}
+				
 		}
 			
+	}
+	else if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+	{
+		if (crafting->isPressedCraft())
+		{
+			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
+			if (item != NULL)
+			{
+				if (!eq->addItem(item))
+				{
+					Game->addObject(item);
+					item->setMovePos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+				}
+
+			}
+
+		}
 	}
 }
 
@@ -204,7 +233,7 @@ void Player::draw()
 
 void Player::drawInterface()
 {
-	eq->draw();
 	miniMap->draw();
 	crafting->draw();
+	eq->draw();
 }

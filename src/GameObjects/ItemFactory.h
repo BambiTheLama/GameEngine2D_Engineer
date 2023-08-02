@@ -51,5 +51,7 @@ public:
 	std::string getDescription(int ID) { return objects[ID]->getDesctription(); }
 
 	void drawItemDescription(int ID, int x, int y);
+
+	bool isStacableItem(int ID);
 };
 

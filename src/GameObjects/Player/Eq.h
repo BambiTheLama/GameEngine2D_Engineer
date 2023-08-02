@@ -16,7 +16,8 @@ class Eq
 {
 	int usingItem = 0, usingItemX = 0, usingItemY = 0;
 	Item*** items = NULL;
-	bool fullEq=false;
+	Item* itemInHand = NULL;
+	bool fullEq = false;
 	FaceSide faceSide;
 public:
 	/// <summary>
@@ -84,13 +85,44 @@ public:
 	/// Zmienia wstan eq na przeciwny
 	/// </summary>
 	void swapEqLook() { fullEq = !fullEq; }
-
+	/// <summary>
+	/// Ustawia w jak¹ strone jesteœmy zwróceni
+	/// </summary>
+	/// <param name="side">strona w któr¹ jesteœmy zwróceni</param>
 	void setFaceSide(FaceSide side) { faceSide = side; }
 	/// <summary>
 	/// Zwraca wszystkie itemy jakie mamy w EQ
 	/// </summary>
 	/// <returns></returns>
 	std::vector<Item*> getItems();
+	/// <summary>
+	/// Zwraca wszystkie przedmioty
+	/// </summary>
+	/// <returns></returns>
 	Item*** getAllItems() { return items; }
+	/// <summary>
+	/// Sprawdza czy mo¿emy dodac przedmiot do "Rêki"
+	/// </summary>
+	/// <param name="stacable">Czy przemiot siê stakuje</param>
+	/// <param name="ID">ID przedmiotu</param>
+	/// <param name="stackSize">Ile wynosi stak przedmiotu</param>
+	/// <returns>Czy uda siê dodaæ do rêki</returns>
+	bool canAddItemToHand(bool stacable=false,int ID=0,int stackSize=0);
+	/// <summary>
+	/// Dodaje przemiot do rêki
+	/// </summary>
+	/// <param name="item">Item jaki dodajemy</param>
+	void addItemToHand(Item* item);
+	/// <summary>
+	/// Sprawdza czy mamy wolne miejsce w eq
+	/// </summary>
+	/// <returns>czy jest wolne miejsce</returns>
+	bool isFullEq();
+	/// <summary>
+	/// Sprawdza czy mo¿emy zestakowaæ dany przedmiot
+	/// </summary>
+	/// <param name="item">Item sprawdzany czy mo¿na stakowaæ</param>
+	/// <returns>Czy uda siê zestakowaæ item</returns>
+	bool canTakeItem(Item* item);
 };
 

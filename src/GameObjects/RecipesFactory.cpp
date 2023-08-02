@@ -18,7 +18,9 @@ RecipesFactory::RecipesFactory()
 	recepe = new Recipes(8);
 	recepe->addItemToRecipes(0, 37);
 	recipes.push_back(recepe);
-
+	recepe = new Recipes(1,CraftingStationEnum::NON,4);
+	recepe->addItemToRecipes(0, 1);
+	recipes.push_back(recepe);
 }
 
 RecipesFactory::~RecipesFactory()

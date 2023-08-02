@@ -24,10 +24,11 @@ struct ItemToRecipes {
 class Recipes
 {
 	int finalItemID;
+	int howManyItems;
 	CraftingStationEnum whereToCraft;
 	std::vector<ItemToRecipes> itemsToBuildItem;
 public:
-	Recipes(int finalItemID, CraftingStationEnum whereToCraft = CraftingStationEnum::NON);
+	Recipes(int finalItemID, CraftingStationEnum whereToCraft = CraftingStationEnum::NON, int howManyItems = 1);
 	/// <summary>
 	/// Dodaje item potrzebny by wykraftowaæ przedmiot
 	/// </summary>
@@ -36,6 +37,11 @@ public:
 	/// Zwraca ID itemu który craftujemy
 	/// </summary>
 	int getFinalItemID() { return finalItemID; }
+	/// <summary>
+	/// Zwraca ile wykonamy przedmiotów
+	/// </summary>
+	/// <returns>iloœc przedmiotów</returns>
+	int getHowManyItems() { return howManyItems; }
 	/// <summary>
 	/// Zwraca gdzie mo¿na wykonaæ przedmiot
 	/// </summary>
@@ -48,7 +54,13 @@ public:
 	/// Craftuje przedmiot
 	/// </summary>
 	Item* craftItem(Item*** items, int w, int h);
-
+	/// <summary>
+	/// Sprawdza czy z podanych itemów mo¿na zrobiæ przedmiot
+	/// </summary>
+	/// <param name="items">Itemy z ekwipunku</param>
+	/// <param name="w">szerokoœæ eq</param>
+	/// <param name="h">wysokoœæ eq</param>
+	/// <returns>Czy mo¿na zrobiæ przedmiot</returns>
 	bool canCraft(Item*** items, int w, int h);
 
 };

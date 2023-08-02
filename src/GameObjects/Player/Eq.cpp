@@ -150,6 +150,24 @@ void Eq::pressOnEq()
 				return;
 			int x = cursor.x / (EqSize + EqSpacing);
 			int y = cursor.y / (EqSize + EqSpacing);
+
+			if (items[y][x] != NULL && itemInHand != NULL && items[y][x]->getID() == itemInHand->getID())
+			{
+				if (items[y][x]->addToStack(itemInHand))
+				{
+					delete itemInHand;
+					itemInHand = NULL;
+				}
+			}
+			else
+			{
+				Item* i = items[y][x];
+				items[y][x] = itemInHand;
+				itemInHand = i;
+			}
+
+
+
 			usingItem = x + y * EqWight;
 
 		}
@@ -159,7 +177,6 @@ void Eq::pressOnEq()
 
 void Eq::draw()
 {
-	int fontSize = 20;
 	for (int i = 0; i < (fullEq ? EqHeight : 1); i++)
 		for (int j = 0; j < EqWight; j++)
 		{
@@ -173,14 +190,27 @@ void Eq::draw()
 				if (items[i][j]->isStacable())
 				{
 					const char* text = TextFormat("%d", items[i][j]->getStackSize());
-					Vector2 textS = textSize(text, fontSize);
-					drawText(text, posToDraw.x + posToDraw.height- textS.x, posToDraw.y + posToDraw.width - textS.y, fontSize, BLACK);
+					Vector2 textS = textSize(text, textStandardSize);
+					drawText(text, posToDraw.x + posToDraw.height- textS.x, posToDraw.y + posToDraw.width - textS.y, textStandardSize, BLACK);
 				}
 			}
 
-			drawText(TextFormat("%d", i * EqWight + j), posToDraw.x, posToDraw.y, fontSize, BLACK);
+			drawText(TextFormat("%d", i * EqWight + j), posToDraw.x, posToDraw.y, textStandardSize, BLACK);
 
 		}
+	if (itemInHand != NULL)
+	{
+		Vector2 mouse = GetMousePosition();
+		Rectangle pos = { mouse.x,mouse.y,32,32 };
+		DrawRectangleRec(pos, BLUE);
+		itemInHand->drawAt(pos);
+		if(itemInHand->isStacable())
+		{
+			const char* text = TextFormat("%d", itemInHand->getStackSize());
+			Vector2 textS = textSize(text, textStandardSize);
+			drawText(text, pos.x + pos.height - textS.x, pos.y + pos.width - textS.y, textStandardSize, BLACK);
+		}
+	}
 }
 
 void Eq::drawItem()
@@ -204,4 +234,46 @@ std::vector<Item*> Eq::getItems()
 		}
 
 	return itemsToRet;
+}
+bool Eq::canAddItemToHand(bool stacable, int ID, int stackSize)
+{
+	if (itemInHand == NULL)
+		return true;
+	if (stacable && itemInHand->getID() == ID)
+		if (itemInHand->getStackMaxSize() - itemInHand->getStackSize() >= stackSize)
+			return true;
+
+	return false;
+}
+void Eq::addItemToHand(Item* item)
+{
+	if (itemInHand == NULL)
+	{
+		itemInHand = item;
+		return;
+	}
+	itemInHand->addToStack(item);
+	delete item;
+}
+bool Eq::isFullEq()
+{
+	for (int i = 0; i < EqHeight; i++)
+		for (int j = 0; j < EqWight; j++)
+			if (items[i][j] == NULL)
+				return false;
+	return true;
+}
+bool Eq::canTakeItem(Item* item)
+{
+	if (!item->isStacable())
+		return false;
+	for (int i = 0; i < EqHeight; i++)
+		for (int j = 0; j < EqWight; j++)
+			if (items[i][j] != NULL && items[i][j]->getID() == item->getID())
+			{
+				if (items[i][j]->getStackSize() < items[i][j]->getStackMaxSize())
+					return true;
+			}
+				
+	return false;
 }

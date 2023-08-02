@@ -81,3 +81,11 @@ void ItemFactory::drawItemDescription(int ID, int x, int y)
 	DrawRectangleRec(dest, BLUE);
 	drawText(description.c_str(), x, y, textStandardSize, BLACK);
 }
+
+bool ItemFactory::isStacableItem(int ID)
+{
+	if (ID < 0 || ID >= objects.size())
+		return false;
+	return objects[ID]->isStacable();
+
+}

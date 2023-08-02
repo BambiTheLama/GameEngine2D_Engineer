@@ -2,10 +2,14 @@
 #include "../ItemFactory.h"
 
 
-Recipes::Recipes(int finalItemID,CraftingStationEnum whereToCraft)
+Recipes::Recipes(int finalItemID,CraftingStationEnum whereToCraft,int howManyItems)
 {
 	this->finalItemID = finalItemID;
 	this->whereToCraft = whereToCraft;
+	if (!Items->isStacableItem(finalItemID))
+		howManyItems = 1;
+	this->howManyItems = howManyItems;
+
 }
 
 void Recipes::addItemToRecipes(int ID, int howMany)
@@ -88,5 +92,7 @@ Item* Recipes::craftItem(Item*** items,int w,int h)
 		
 		}
 	}
-	return Items->getObject(finalItemID);
+	Item* item = Items->getObject(finalItemID);
+	item->setStackSize(howManyItems);
+	return item;
 }

@@ -7,6 +7,7 @@ class BlockItem :
     int stackMaxSize;
     SpriteController* sprite;
     BlockItem(BlockItem& item);
+    virtual void setStackSize(int s) { stackSize = s; }
 public:
     BlockItem(Rectangle pos, std::string name, int stackSize);
 
@@ -31,5 +32,7 @@ public:
     virtual bool isStacable() { return true; }
 
     virtual BlockItem* clone() { return new BlockItem(*this); }
+
+
 };
 

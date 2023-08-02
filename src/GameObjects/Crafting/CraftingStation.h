@@ -33,5 +33,9 @@ public:
 
 	int getItemID(int i);
 	Recipes* getRecepies(int i);
+	bool isStacableItem();
+	int getItemID();
+	int getStackSize();
+
 };
 

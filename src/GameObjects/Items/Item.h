@@ -11,6 +11,7 @@ class Item :
 protected:
     FaceSide faceSide;
     Item(Item& obj);
+    virtual void setStackSize(int s){}
 public:
     Item(Rectangle pos, std::string name);
 
@@ -45,5 +46,7 @@ public:
     void addToPos(Vector2 move) { pos.x += move.x; pos.y += move.y; }
 
     virtual std::string getDesctription() { return ""; }
+
+    friend class Recipes;
 };
 
