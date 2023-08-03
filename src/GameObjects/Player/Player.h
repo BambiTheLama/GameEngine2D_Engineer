@@ -72,7 +72,9 @@ public:
     /// Rysuje interface
     /// </summary>
     virtual void drawInterface();
-
+    /// <summary>
+    /// Wszystko co jest wykonywane z Eq
+    /// </summary>
     void updateEq();
 
     virtual Player* clone() { return new Player(*this); }
