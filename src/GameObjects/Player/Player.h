@@ -73,6 +73,8 @@ public:
     /// </summary>
     virtual void drawInterface();
 
+    void updateEq();
+
     virtual Player* clone() { return new Player(*this); }
 
     virtual void setCanMoveObject(bool canMove) { this->canMove = canMove; }

@@ -72,9 +72,13 @@ public:
 	/// </summary>
 	void mouseWeel();
 	/// <summary>
-	/// Aktualizuje u¿ywany item na podstawie klikniêcia myszy
+	/// Sprawdza czy klikneliœmy na eq
 	/// </summary>
-	void pressOnEq();
+	bool isPressedOnEq();
+	/// <summary>
+	/// Aktualizuje pozycjie przedmiotów jeœli klikneliœmy na eq
+	/// </summary>
+	void updateEqPressed();
 	/// <summary>
 	/// Metoda od rysowania ekwipunku
 	/// </summary>

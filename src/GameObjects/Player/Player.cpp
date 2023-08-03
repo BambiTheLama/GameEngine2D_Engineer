@@ -33,6 +33,7 @@ Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width /
 
 
 }
+
 Player::~Player()
 {
 	if(Game!=NULL)
@@ -134,20 +135,45 @@ void Player::updateCrafting()
 		}
 	}
 }
-void Player::update()
+
+void Player::updateEq()
 {
 	eq->update();
-	move();
+
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	{
+		if (!eq->isPressedOnEq())
+			eq->useItem();
+	}
+	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+		eq->dropItemFromHand();
+	if (GetMouseWheelMove() != 0)
+		eq->mouseWeel();
+	if (IsKeyPressed(KEY_I))
+	{
+		eq->swapEqLook();
+		crafting->swapVisibility();
+		updateRecepies();
+	}
+
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+		eq->updateEqPressed();
 	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
-	pickUpItemsClose();
-	Game->updatePos(this);
-	updateCrafting();
 	if (IsKeyPressed(KEY_F2))
 		eq->sortItems(sortBy::ID);
 	if (IsKeyPressed(KEY_F3))
 		eq->sortItems(sortBy::NAME);
 	if (IsKeyPressed(KEY_F4))
 		eq->sortItems(sortBy::Type);
+}
+
+void Player::update()
+{
+	move();
+	Game->updatePos(this);
+	updateEq();
+	pickUpItemsClose();
+	updateCrafting();
 }
 
 void Player::move()
@@ -213,24 +239,8 @@ void Player::move()
 	{
 		setMovePos({ pos.x, pos.y });
 	}
-	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-	{
-		eq->pressOnEq();
-		eq->useItem();
-	}
-	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
-		eq->dropItemFromHand();
-	if (GetMouseWheelMove() != 0)
-		eq->mouseWeel();
-	if (IsKeyPressed(KEY_I))
-	{
-		eq->swapEqLook();
-		crafting->swapVisibility();
-	}
-
-
 }
-#define changePos {int s=6;pos.x += s;pos.y += s;pos.width -= s+s;pos.height -= s+s; }
+
 void Player::draw()
 {
 	Rectangle pos = getPos();

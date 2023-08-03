@@ -152,8 +152,6 @@ void Eq::update()
 		{
 			items[usingItemY][usingItemX]->update();
 			items[usingItemY][usingItemX]->setFaceSide(faceSide);
-			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-				items[usingItemY][usingItemX]->use();
 		}
 	}
 }
@@ -163,7 +161,7 @@ void Eq::mouseWeel()
 	usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
 }
 
-void Eq::pressOnEq()
+bool Eq::isPressedOnEq()
 {
 	Vector2 cursor = GetMousePosition();
 	cursor.x -= EqStartX - EqSpacing;
@@ -179,38 +177,45 @@ void Eq::pressOnEq()
 		
 		if (cursor.y >= 0 && cursor.y <= endY)
 		{
-
 			if ((int)cursor.x % (EqSize + EqSpacing) > EqSize)
-				return;
+				return false;
 			if ((int)cursor.y % (EqSize + EqSpacing) > EqSize)
-				return;
-			int x = cursor.x / (EqSize + EqSpacing);
-			int y = cursor.y / (EqSize + EqSpacing);
+				return false;
 
-			if (items[y][x] != NULL && itemInHand != NULL && items[y][x]->getID() == itemInHand->getID())
-			{
-				if (items[y][x]->addToStack(itemInHand))
-				{
-					delete itemInHand;
-					itemInHand = NULL;
-					player->updateRecepies();
-				}
-			}
-			else
-			{
-				Item* i = items[y][x];
-				items[y][x] = itemInHand;
-				itemInHand = i;
-				player->updateRecepies();
-			}
-
-
-
-			usingItem = x + y * EqWight;
-
+			return true;
 		}
 
 	}
+	return false;
+}
+
+void Eq::updateEqPressed()
+{
+	if (!isPressedOnEq())
+		return;
+	Vector2 cursor = GetMousePosition();
+	cursor.x -= EqStartX - EqSpacing;
+	cursor.y -= EqStartY - EqSpacing;
+	int x = cursor.x / (EqSize + EqSpacing);
+	int y = cursor.y / (EqSize + EqSpacing);
+
+	if (items[y][x] != NULL && itemInHand != NULL && items[y][x]->getID() == itemInHand->getID())
+	{
+		if (items[y][x]->addToStack(itemInHand))
+		{
+			delete itemInHand;
+			itemInHand = NULL;
+			player->updateRecepies();
+		}
+	}
+	else
+	{
+		Item* i = items[y][x];
+		items[y][x] = itemInHand;
+		itemInHand = i;
+		player->updateRecepies();
+	}
+	usingItem = x + y * EqWight;
 }
 
 void Eq::draw()
