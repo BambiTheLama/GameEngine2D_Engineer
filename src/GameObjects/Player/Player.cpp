@@ -142,6 +142,12 @@ void Player::update()
 	pickUpItemsClose();
 	Game->updatePos(this);
 	updateCrafting();
+	if (IsKeyPressed(KEY_F2))
+		eq->sortItems(sortBy::ID);
+	if (IsKeyPressed(KEY_F3))
+		eq->sortItems(sortBy::NAME);
+	if (IsKeyPressed(KEY_F4))
+		eq->sortItems(sortBy::Type);
 }
 
 void Player::move()
@@ -210,7 +216,10 @@ void Player::move()
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 	{
 		eq->pressOnEq();
+		eq->useItem();
 	}
+	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+		eq->dropItemFromHand();
 	if (GetMouseWheelMove() != 0)
 		eq->mouseWeel();
 	if (IsKeyPressed(KEY_I))

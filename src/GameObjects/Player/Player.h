@@ -56,13 +56,21 @@ public:
     /// </summary>
     /// <returns></returns>
     ObjectType getType() { return ObjectType::Player; }
-
+    /// <summary>
+    /// Aktualizuje receptury do craftowania
+    /// </summary>
     void updateRecepies();
-
+    /// <summary>
+    /// Aktualizuje craftowanie przedmiotów sprawdza czy coœ craftujemy 
+    /// </summary>
     void updateCrafting();
-
+    /// <summary>
+    /// Przyci¹ga przedmioty z pewnej odleg³oœci i dodaje do eq te co siê stykaj¹ z nami
+    /// </summary>
     void pickUpItemsClose();
-
+    /// <summary>
+    /// Rysuje interface
+    /// </summary>
     virtual void drawInterface();
 
     virtual Player* clone() { return new Player(*this); }

@@ -126,5 +126,9 @@ public:
 	/// <param name="item">Item sprawdzany czy mo¿na stakowaæ</param>
 	/// <returns>Czy uda siê zestakowaæ item</returns>
 	bool canTakeItem(Item* item);
+	/// <summary>
+	/// Powoduje upuszczenie przedmiotu
+	/// </summary>
+	void dropItemFromHand();
 };
 

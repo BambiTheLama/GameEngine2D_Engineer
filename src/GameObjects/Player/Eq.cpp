@@ -32,6 +32,7 @@ Eq::~Eq()
 void Eq::sortItems(sortBy type)
 {
 	std::vector<Item*> itemsTmp;
+
 	for (int i = 1; i < EqHeight; i++)
 		for (int j = 0; j < EqWight; j++)
 		{
@@ -45,8 +46,7 @@ void Eq::sortItems(sortBy type)
 	{
 		for (int i = 0; i < itemsTmp.size(); i++)
 		{
-
-			for (int j = 0; j < itemsTmp.size() / 2; j++)
+			for (int j = 0; j < itemsTmp.size()-1; j++)
 			{
 				if (itemsTmp[j]->getID() > itemsTmp[j + 1]->getID())
 				{
@@ -54,14 +54,23 @@ void Eq::sortItems(sortBy type)
 					itemsTmp[j] = itemsTmp[j + 1];
 					itemsTmp[j + 1] = tmp;
 				}
-				int n = itemsTmp.size() - 1 - j;
-				if (itemsTmp[n - 1]->getID() > itemsTmp[n]->getID())
-				{
-					Item* tmp = itemsTmp[n];
-					itemsTmp[n] = itemsTmp[n - 1];
-					itemsTmp[n - 1] = tmp;
-				}
+			}
+		}
+	}
+	else if (sortBy::NAME == type)
+	{
+		for (int i = 0; i < itemsTmp.size(); i++)
+		{
 
+			for (int j = 0; j < itemsTmp.size() -1; j++)
+			{
+				int compare = itemsTmp[j]->getName().compare(itemsTmp[j + 1]->getName());
+				if (compare>0)
+				{
+					Item* tmp = itemsTmp[j];
+					itemsTmp[j] = itemsTmp[j + 1];
+					itemsTmp[j + 1] = tmp;
+				}
 			}
 		}
 	}
@@ -69,7 +78,7 @@ void Eq::sortItems(sortBy type)
 
 	for (int i = 0; i < itemsTmp.size(); i++)
 	{
-		items[1 + (i) / 10][i % 10] = itemsTmp[i];
+		addItem(itemsTmp[i]);
 	}
 }
 
@@ -77,8 +86,8 @@ bool Eq::addItem(Item* item)
 {
 	if (item->isStacable())
 	{
-		for (int i = 0; i < EqHeight; i++)
-			for (int j = 0; j < EqWight; j++)
+		for (int i = EqHeight - 1; i >= 0; i--)
+			for (int j = EqWight - 1; j >= 0; j--)
 			{
 				if (items[i][j] != NULL && items[i][j]->addToStack(item))
 				{
@@ -87,13 +96,14 @@ bool Eq::addItem(Item* item)
 				}
 
 			}
+
 		player->updateRecepies();
 	}
 
 
 
-	for (int i = 0; i < EqHeight; i++)
-		for (int j = 0; j < EqWight; j++)
+	for (int i = EqHeight - 1; i >= 0; i--)
+		for (int j = EqWight - 1; j >= 0; j--)
 		{
 			if (items[i][j] == NULL)
 			{
@@ -108,24 +118,43 @@ bool Eq::addItem(Item* item)
 
 bool Eq::useItem()
 {
+	if (itemInHand != NULL)
+	{
+		return itemInHand->use();
+	}
+	if (items[usingItemY][usingItemX] != NULL)
+	{
+		return items[usingItemY][usingItemX]->use();
+	}
 	return false;
 }
+
 void Eq::updateItemPos(Vector2 movePos)
 { 
-	if (items[usingItemY][usingItemX] != NULL) 
+	if (itemInHand != NULL)
+		itemInHand->setMovePos(movePos);
+	else if (items[usingItemY][usingItemX] != NULL) 
 		items[usingItemY][usingItemX]->setMovePos(movePos);;
 }
 
 void Eq::update()
 {
-	usingItemX = usingItem % EqWight;
-	usingItemY = usingItem / EqWight;
-	if (items[usingItemY][usingItemX] != NULL)
+	if (itemInHand != NULL)
 	{
-		items[usingItemY][usingItemX]->update();
-		items[usingItemY][usingItemX]->setFaceSide(faceSide);
-		if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-			items[usingItemY][usingItemX]->use();
+		itemInHand->update();
+		itemInHand->setFaceSide(faceSide);
+	}
+	else
+	{
+		usingItemX = usingItem % EqWight;
+		usingItemY = usingItem / EqWight;
+		if (items[usingItemY][usingItemX] != NULL)
+		{
+			items[usingItemY][usingItemX]->update();
+			items[usingItemY][usingItemX]->setFaceSide(faceSide);
+			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				items[usingItemY][usingItemX]->use();
+		}
 	}
 }
 
@@ -133,8 +162,6 @@ void Eq::mouseWeel()
 {
 	usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
 }
-
-
 
 void Eq::pressOnEq()
 {
@@ -226,12 +253,11 @@ void Eq::draw()
 
 void Eq::drawItem()
 {
-	if (items[usingItemY][usingItemX] != NULL)
-	{
+	if (itemInHand != NULL)
+		itemInHand->draw();
+	else if (items[usingItemY][usingItemX] != NULL)
 		items[usingItemY][usingItemX]->draw();
-	}
 }
-
 
 std::vector<Item*> Eq::getItems()
 {
@@ -246,6 +272,7 @@ std::vector<Item*> Eq::getItems()
 
 	return itemsToRet;
 }
+
 bool Eq::canAddItemToHand(bool stacable, int ID, int stackSize)
 {
 	if (itemInHand == NULL)
@@ -256,6 +283,7 @@ bool Eq::canAddItemToHand(bool stacable, int ID, int stackSize)
 
 	return false;
 }
+
 void Eq::addItemToHand(Item* item)
 {
 	if (itemInHand == NULL)
@@ -268,6 +296,7 @@ void Eq::addItemToHand(Item* item)
 	delete item;
 	player->updateRecepies();
 }
+
 bool Eq::isFullEq()
 {
 	for (int i = 0; i < EqHeight; i++)
@@ -276,6 +305,7 @@ bool Eq::isFullEq()
 				return false;
 	return true;
 }
+
 bool Eq::canTakeItem(Item* item)
 {
 	if (!item->isStacable())
@@ -289,4 +319,14 @@ bool Eq::canTakeItem(Item* item)
 			}
 				
 	return false;
+}
+
+void Eq::dropItemFromHand()
+{
+	if (itemInHand == NULL)
+		return;
+	Game->addObject(itemInHand);
+	Vector2 cursor = Game->getCursorPos();
+	itemInHand->setMovePos(cursor);
+	itemInHand = NULL;
 }
