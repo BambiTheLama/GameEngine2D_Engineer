@@ -10,7 +10,7 @@ Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 {
 	animations = new AnimationController(*obj.animations);
 	miniMap = new MiniMap(this);
-	eq = new Eq();
+	eq = new Eq(this);
 	crafting = new CraftingStation(CraftingStationEnum::NON);
 
 }
@@ -28,7 +28,7 @@ Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width /
 	}
 	animations = new AnimationController(sprites);
 	miniMap = new MiniMap(this);
-	eq = new Eq();
+	eq = new Eq(this);
 	crafting = new CraftingStation(CraftingStationEnum::NON);
 
 
@@ -88,17 +88,18 @@ void Player::pickUpItemsClose()
 	}
 }
 
-void Player::update()
+void Player::updateRecepies()
 {
-	eq->update();
-	move();
-	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
-	pickUpItemsClose();
-	Game->updatePos(this);
-	std::vector<Item*> items=eq->getItems();
+	std::vector<Item*> items = eq->getItems();
 	crafting->updateItemsICanCraft(items);
+}
+
+void Player::updateCrafting()
+{
 	if (IsKeyPressed(KEY_F1))
 		crafting->swapItemsSee();
+
+
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 	{
 		if (crafting->isPressedCraft())
@@ -111,9 +112,9 @@ void Player::update()
 				eq->addItemToHand(item);
 
 			}
-				
+
 		}
-			
+
 	}
 	else if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
 	{
@@ -132,6 +133,15 @@ void Player::update()
 
 		}
 	}
+}
+void Player::update()
+{
+	eq->update();
+	move();
+	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+	pickUpItemsClose();
+	Game->updatePos(this);
+	updateCrafting();
 }
 
 void Player::move()

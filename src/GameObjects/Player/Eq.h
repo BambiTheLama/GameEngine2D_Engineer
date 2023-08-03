@@ -9,6 +9,7 @@
 enum class sortBy {
 	ID,NAME,Type
 };
+class Player;
 /// <summary>
 /// Klasa odpowiedzalna za ekwipunek gracza
 /// </summary>
@@ -19,11 +20,12 @@ class Eq
 	Item* itemInHand = NULL;
 	bool fullEq = false;
 	FaceSide faceSide;
+	Player* player=NULL;
 public:
 	/// <summary>
 	/// Tworzy obiekt ekwipunku
 	/// </summary>
-	Eq();
+	Eq(Player* player);
 	/// <summary>
 	/// Destruktor ekwipunku
 	/// </summary>

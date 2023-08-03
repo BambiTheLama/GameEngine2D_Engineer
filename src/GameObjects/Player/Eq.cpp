@@ -1,7 +1,9 @@
 #include "Eq.h"
 #include <vector>
 #include "../ItemFactory.h"
-Eq::Eq()
+#include "Player.h"
+
+Eq::Eq(Player* player)
 {
 	items = new Item * *[EqHeight];
 	for (int i = 0; i < EqHeight; i++)
@@ -10,7 +12,8 @@ Eq::Eq()
 		for (int j = 0; j < EqWight; j++)
 			items[i][j] = Items->getObject(i * EqWight + j);
 	}
-
+	items[1][0]= Items->getObject(0);
+	this->player = player;
 }
 
 Eq::~Eq()
@@ -78,8 +81,13 @@ bool Eq::addItem(Item* item)
 			for (int j = 0; j < EqWight; j++)
 			{
 				if (items[i][j] != NULL && items[i][j]->addToStack(item))
+				{
+					player->updateRecepies();
 					return true;
+				}
+
 			}
+		player->updateRecepies();
 	}
 
 
@@ -90,6 +98,7 @@ bool Eq::addItem(Item* item)
 			if (items[i][j] == NULL)
 			{
 				items[i][j] = item->clone();
+				player->updateRecepies();
 				return true;
 			}
 		}
@@ -157,6 +166,7 @@ void Eq::pressOnEq()
 				{
 					delete itemInHand;
 					itemInHand = NULL;
+					player->updateRecepies();
 				}
 			}
 			else
@@ -164,6 +174,7 @@ void Eq::pressOnEq()
 				Item* i = items[y][x];
 				items[y][x] = itemInHand;
 				itemInHand = i;
+				player->updateRecepies();
 			}
 
 
@@ -250,10 +261,12 @@ void Eq::addItemToHand(Item* item)
 	if (itemInHand == NULL)
 	{
 		itemInHand = item;
+		player->updateRecepies();
 		return;
 	}
 	itemInHand->addToStack(item);
 	delete item;
+	player->updateRecepies();
 }
 bool Eq::isFullEq()
 {

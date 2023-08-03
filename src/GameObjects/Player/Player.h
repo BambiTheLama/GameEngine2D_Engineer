@@ -57,6 +57,10 @@ public:
     /// <returns></returns>
     ObjectType getType() { return ObjectType::Player; }
 
+    void updateRecepies();
+
+    void updateCrafting();
+
     void pickUpItemsClose();
 
     virtual void drawInterface();
