@@ -120,3 +120,5 @@ public:
 };
 
 bool checkCollision(GameObject* obj);
+bool checkCollision(Vector2 points[4], Rectangle pos);
+bool checkCollision(Vector2 points[4], Vector2 points2[4]);

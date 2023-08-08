@@ -63,3 +63,72 @@ bool checkCollision(GameObject* obj)
 			
 	return false;
 }
+
+
+bool checkCollision(Vector2 points[4], Rectangle pos)
+{
+	for (int i = 0; i < 4; i++)
+	{
+
+		Vector2 p1 = points[i];
+		Vector2 p2 = points[(i + 1) % 4];
+		int a = (p1.y - p2.y) / (p1.x - p2.x);
+		int b = p1.y - a * p1.x;
+		int x = (pos.y - b) / a;
+		if (x >= pos.x && x <= pos.x + pos.width)
+		{
+			return true;
+		}
+		x = (pos.y + pos.height - b) / a;
+		if (x >= pos.x && x <= pos.x + pos.width)
+		{
+			return true;
+		}
+		int y = pos.x * a + b;
+		if (y >= pos.y && y <= pos.y + pos.height)
+		{
+			return true;
+		}
+		y = (pos.x + pos.width) * a + b;
+		if (y >= pos.y && y <= pos.y + pos.height)
+		{
+			return true;
+		}
+
+	}
+	return false;
+}
+bool isOnLine(int p1, int p2, int x)
+{
+	if (p1 > p2)
+	{
+		return x >= p2 && x <= p1;
+	}
+	else
+	{
+		return x >= p1 && x <= p2;
+	}
+}
+bool checkCollision(Vector2 points[4], Vector2 points2[4])
+{
+	for (int i = 0; i < 4; i++)
+	{
+
+		Vector2 p1 = points[i];
+		Vector2 p2 = points[(i + 1) % 4];
+		int a1 = (p1.y - p2.y) / (p1.x - p2.x);
+		int b1 = p1.y - a1 * p1.x;
+		for (int j = 0; j < 4; j++)
+		{
+			Vector2 p3 = points2[i];
+			Vector2 p4 = points2[(i + 1) % 4];
+			int a2 = (p3.y - p4.y) / (p3.x - p4.x);
+			int b2 = p3.y - a2 * p3.x;
+			int x = (b2 - b1) / (a1 - a2);
+			if (isOnLine(p1.x, p2.x, x) && isOnLine(p3.x, p4.x, x))
+				return true;
+		}
+
+	}
+	return false;
+}

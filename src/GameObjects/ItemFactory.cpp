@@ -17,7 +17,8 @@ ItemFactory::ItemFactory()
 	objects.push_back(new ToolItem({ 0,0,32,32 }, "Axe",ToolType::Axe,30));
 	objects.push_back(new ToolItem({ 0,0,32,32 }, "Pickaxe", ToolType::Pickaxe,30));
 	objects.push_back(new ToolItem({ 0,0,32,32 }, "Shovel",ToolType::Shovel,30));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Hoe",ToolType::NON,30));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Hoe"));
+	objects.push_back(new ToolItem({ 0,0,32,32 }, "Sword"));
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)

@@ -19,7 +19,6 @@ public:
 	{
 		Rectangle pos = obj->getPos();
 		DrawRectangle(pos.x + collision.x, pos.y + collision.y, collision.width, collision.height, RED);
-		
 	}
 };
 

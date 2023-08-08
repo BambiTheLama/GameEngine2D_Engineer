@@ -140,12 +140,12 @@ void Player::updateEq()
 {
 	eq->update();
 
-	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
-		if (!eq->isPressedOnEq())
+		if (!eq->isPressedOnEq() &&!crafting->isPressedInCraftingUI())
 			eq->useItem();
 	}
-	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON) && !eq->isPressedOnEq())
 		eq->dropItemFromHand();
 	if (GetMouseWheelMove() != 0)
 		eq->mouseWeel();

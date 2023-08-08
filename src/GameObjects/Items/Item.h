@@ -41,7 +41,7 @@ public:
 
     virtual Item* clone() { return new Item(*this); }
 
-    void setFaceSide(FaceSide side) { faceSide = side; }
+    virtual void setFaceSide(FaceSide side) { faceSide = side; }
 
     void addToPos(Vector2 move) { pos.x += move.x; pos.y += move.y; }
 

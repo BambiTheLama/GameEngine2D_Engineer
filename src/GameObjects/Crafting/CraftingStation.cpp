@@ -277,3 +277,14 @@ int CraftingStation::getStackSize()
 {
 	return getRecepies(firstItem)->getHowManyItems();
 }
+
+bool CraftingStation::isPressedInCraftingUI()
+{
+	Rectangle craftingPos;
+	craftingPos.x = pos[0].x;
+	craftingPos.width = pos[8].x + pos[8].width;
+	craftingPos.y = pos[4].y;
+	craftingPos.height = pos[4].height;
+	Vector2 mouse = GetMousePosition();
+	return CheckCollisionPointRec(mouse, craftingPos);
+}

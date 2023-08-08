@@ -75,6 +75,11 @@ public:
 	/// Zwraca ile wykraftujemy tego przedmiotu
 	/// </summary>
 	int getStackSize();
+	/// <summary>
+	/// Sprawdza czy zosta³ klikniêty panel tworzenia itemów
+	/// </summary>
+	/// <returns>Czy klikneliœmy panel tworzenia itemów</returns>
+	bool isPressedInCraftingUI();
 
 	void goToPrevisItem();
 	void goToNextItem();

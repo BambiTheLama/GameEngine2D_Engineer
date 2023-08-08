@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "raylib.h"
 #include "../../GameObjects/Player/Player.h"
-
+#include "../../GameObjects/NPCs/Enemy.h"
 
 GameScene* GameScene::game = NULL;
 
@@ -29,6 +29,7 @@ GameScene::~GameScene()
 void GameScene::start()
 {
 	handler->start();
+	addObject(new Enemy());
 }
 void GameScene::update()
 {

@@ -171,6 +171,15 @@
     <ClCompile Include="src\GameObjects\Crafting\Recipes.cpp">
       <Filter>src\GameObjects\Crafting</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\NPCs\Enemy.cpp">
+      <Filter>src\GameObjects\NPCs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\HitAble.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp">
+      <Filter>src\GameObjects\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -286,6 +295,15 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Crafting\Recipes.h">
       <Filter>src\GameObjects\Crafting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\NPCs\Enemy.h">
+      <Filter>src\GameObjects\NPCs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\HitAble.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Particles\TextParticle.h">
+      <Filter>src\GameObjects\Particles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
