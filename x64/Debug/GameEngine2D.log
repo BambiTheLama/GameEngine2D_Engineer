@@ -1,8 +1,19 @@
-﻿  Enemy.cpp
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,85): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,44): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.h(33,57): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.h(33,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+﻿  CraftingStation.cpp
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(29,9): warning C4477: „printf”: ciąg formatu „%d” wymaga argumentu typu „int”, ale argument 2 ze zmienną liczbą argumentów ma typ „unsigned __int64”
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(29,9): message : rozważ użycie elementu „%zd” w ciągu formatu
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(49,27): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(90,36): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(94,33): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(139,77): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(144,73): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(192,65): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(192,49): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(192,34): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(192,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(212,61): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(212,48): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(226,42): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(226,29): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(239,31): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\CraftingStation.cpp(247,28): warning C4267: "+=": konwersja z "size_t" do "int", możliwa utrata danych
   GameEngine2D.vcxproj -> C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\x64\Debug\GameEngine2D.exe

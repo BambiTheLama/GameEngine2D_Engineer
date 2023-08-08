@@ -21,6 +21,7 @@ void Recipes::addItemToRecipes(int ID, int howMany)
 }
 bool Recipes::canCraft(Item*** items, int w, int h)
 {
+
 	std::list<ItemToRecipes> itemsNeedToCraft;
 	for (ItemToRecipes i : itemsToBuildItem)
 	{
@@ -54,7 +55,10 @@ bool Recipes::canCraft(Item*** items, int w, int h)
 Item* Recipes::craftItem(Item*** items,int w,int h)
 {
 	if (!canCraft(items, w, h))
+	{
 		return NULL;
+	}
+
 	std::list<ItemToRecipes*> itemsNeedToCraft;
 	for (ItemToRecipes i : itemsToBuildItem)
 	{
@@ -71,7 +75,7 @@ Item* Recipes::craftItem(Item*** items,int w,int h)
 				continue;
 
 
-			for (ItemToRecipes *recepy : itemsNeedToCraft)
+			for (ItemToRecipes* recepy : itemsNeedToCraft)
 			{
 				if (recepy != NULL && items[y][x]->getID() == recepy->itemID && recepy->howMany > 0)
 				{
@@ -93,13 +97,15 @@ Item* Recipes::craftItem(Item*** items,int w,int h)
 
 				}
 			}
-		
+
 		}
 	}
 	for (ItemToRecipes *i : itemsNeedToCraft)
 		if(i!=NULL)
 			delete i;
 	Item* item = Items->getObject(finalItemID);
+
 	item->setStackSize(howManyItems);
+
 	return item;
 }

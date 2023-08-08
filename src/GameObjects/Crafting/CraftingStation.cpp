@@ -28,8 +28,10 @@ Item* CraftingStation::craftItem(Item*** items,int w,int h)
 {
 	if (onlyICanCraft)
 	{
-		if (itemsICanCraft.size() > 0)
-			return itemsICanCraft[firstItem]->craftItem(items,w,h);
+		if (itemsICanCraft.size() > 0 && firstItem< itemsICanCraft.size())
+		{
+			return itemsICanCraft[firstItem]->craftItem(items, w, h);
+		}
 		else
 			return NULL;
 	}

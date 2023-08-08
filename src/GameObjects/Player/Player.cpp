@@ -107,12 +107,15 @@ void Player::updateCrafting()
 		{
 			if (!eq->canAddItemToHand(crafting->isStacableItem(), crafting->getItemID(), crafting->getStackSize()))
 				return;
+
 			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
 			if (item != NULL)
 			{
+
 				eq->addItemToHand(item);
 
 			}
+			
 
 		}
 
