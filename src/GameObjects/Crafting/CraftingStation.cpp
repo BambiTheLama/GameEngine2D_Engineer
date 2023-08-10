@@ -42,21 +42,30 @@ Item* CraftingStation::craftItem(Item*** items,int w,int h)
 	return NULL;
 }
 
-bool CraftingStation::checkItemsNeed(std::vector<ItemToRecipes> itemsToRec)
+bool CraftingStation::checkItemsNeed(Recipes* recepies)
 {
-
+	std::vector<ItemToRecipes> itemsToRec = recepies->getItemsToBuild();
 	int n = itemsToRec.size();
-	for (ItemToRecipes r : itemsToRec)
+	for (int i=0;i<itemsToRec.size();i++)
 	{
-		for (Item* i : items)
+		ItemToRecipes r = itemsToRec[i];
+		recepies->setItemStatus(i,CraftStatus::DontHave);
+		for (Item* item : items)
 		{
-			if (i->getID() == r.itemID)
+			if (item->getID() == r.itemID)
 			{
-				r.howMany -= i->getStackSize();
+				
+
+				r.howMany -= item->getStackSize();
 				if (r.howMany <= 0)
 				{
 					n--;
+					recepies->setItemStatus(i, CraftStatus::Have);
 					break;
+				}
+				else
+				{
+					recepies->setItemStatus(i, CraftStatus::NotEnough);
 				}
 
 			}
@@ -74,7 +83,7 @@ void CraftingStation::updateItemsICanCraft(std::vector<Item*> items)
 	for (Recipes* recepies : allRecepies)
 	{
 		std::vector<ItemToRecipes> itemsToRec = recepies->getItemsToBuild();
-		if (checkItemsNeed(itemsToRec))
+		if (checkItemsNeed(recepies))
 			itemsICanCraft.push_back(recepies);
 	}
 }
@@ -94,6 +103,7 @@ void CraftingStation::goToPrevisItem()
 		}
 	}
 }
+
 void CraftingStation::goToNextItem()
 {
 	firstItem++;
@@ -106,15 +116,18 @@ void CraftingStation::goToNextItem()
 		firstItem %= allRecepies.size();
 	}
 }
+
 void CraftingStation::changeItemsSee(bool itemsOnlyIcanCraft) 
 { 
 	onlyICanCraft = itemsOnlyIcanCraft; 
 	firstItem = 0;
 }
+
 void CraftingStation::swapItemsSee()
 {
 	onlyICanCraft = !onlyICanCraft;
 }
+
 bool CraftingStation::isPressedCraft()
 {
 	if (!canSee)
@@ -175,6 +188,7 @@ bool hasID(int ID, std::vector<Recipes*> recepies)
 			return true;
 	return false;
 }
+
 void CraftingStation::draw()
 {
 	if (!canSee)
@@ -215,8 +229,20 @@ void CraftingStation::draw()
 			for (int j = 0; j < getItemsToBuild.size(); j++)
 			{
 				Rectangle drawItem = { starPoint.x + j * 32, starPoint.y + descriptionSize.y, 32, 32 };
-
-				DrawRectangleRec(drawItem, YELLOW);
+				Color itemColor=GRAY;
+				switch (getItemsToBuild[j].status)
+				{
+				case CraftStatus::DontHave:
+					itemColor = RED;
+					break;
+				case CraftStatus::NotEnough:
+					itemColor = YELLOW;
+					break;
+				case CraftStatus::Have:
+					itemColor = GREEN;
+					break;		
+				}
+				DrawRectangleRec(drawItem, itemColor);
 				Items->drawObjectAt(getItemsToBuild[j].itemID, { drawItem.x + 4,drawItem.y + 4 ,20,20 });
 				const char* text = TextFormat("%d", getItemsToBuild[j].howMany);
 
@@ -249,20 +275,33 @@ int CraftingStation::getItemID(int i)
 	}
 	return 0;
 }
+
 Recipes* CraftingStation::getRecepies(int i)
 {
 	if (onlyICanCraft)
 	{
 
 		if (itemsICanCraft.size() > 0)
-			return itemsICanCraft[(i) % itemsICanCraft.size()];
+		{
+			if (i < 0)
+				return itemsICanCraft[(i + itemsICanCraft.size() * (-i)) % itemsICanCraft.size()];
+			else
+				return itemsICanCraft[(i) % itemsICanCraft.size()];
+
+		}
+
 		
 	}
 	else
 	{
 
 		if (allRecepies.size() > 0)
-			return allRecepies[(i) % allRecepies.size()];
+		{
+			if (i < 0)
+				return allRecepies[(i+(-i)* allRecepies.size()) % allRecepies.size()];
+			else
+				return allRecepies[(i) % allRecepies.size()];
+		}
 	}
 	return NULL;
 }
@@ -271,10 +310,12 @@ bool CraftingStation::isStacableItem()
 {
 	return Items->isStacableItem(getItemID());
 }
+
 int CraftingStation::getItemID()
 {
 	return getItemID(firstItem);
 }
+
 int CraftingStation::getStackSize()
 {
 	return getRecepies(firstItem)->getHowManyItems();

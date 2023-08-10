@@ -43,7 +43,8 @@ void ToolItem::update()
 		if (useTime <= 0)
 			isUsing = false;
 	}
-
+	if (!isUsing)
+		return;
 	Rectangle pos = getPos();
 	origion.x = 0;
 	rotation = 0;
@@ -186,7 +187,7 @@ bool ToolItem::use()
 }
 void ToolItem::draw()
 {
-	if (!isUsing)
+	if (useTime<=0)
 		return;
 	Rectangle textureSize = sprite->getTextureSize();
 	Rectangle pos = getPos();

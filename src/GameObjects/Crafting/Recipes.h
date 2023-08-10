@@ -12,11 +12,20 @@ enum class CraftingStationEnum
 	Anvil = 2,			//Dostêpne w kowadle
 };
 /// <summary>
+/// Definiuje czy posiadamy dany sk³adnik do scraftowania
+/// </summary>
+enum class CraftStatus
+{
+	DontHave,			//Nie Posiadasz tego itemu
+	NotEnough,			//Posiadasz item ale nie wystarczaj¹ca iloœæ
+	Have				//Posiadasz item i ile potrzebujesz 
+};
+/// <summary>
 /// Struktura mówi¹ca co jest potrzebne i jakiej iloœci
 /// </summary>
 struct ItemToRecipes {
 	int itemID, howMany;
-
+	CraftStatus status=CraftStatus::DontHave;
 };
 /// <summary>
 /// Classa o receptur
@@ -50,6 +59,7 @@ public:
 	/// Zwraca vektor potrzebnych przedmiotów do wykonania przedmiotu
 	/// </summary>
 	std::vector<ItemToRecipes> getItemsToBuild()const { return itemsToBuildItem; }
+	void setItemStatus(int i, CraftStatus status) { itemsToBuildItem[i].status = status; }
 	/// <summary>
 	/// Craftuje przedmiot
 	/// </summary>

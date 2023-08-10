@@ -31,7 +31,7 @@ public:
 	/// <summary>
 	/// Sprawdz itemy potrzebne
 	/// </summary>
-	bool checkItemsNeed(std::vector<ItemToRecipes> itemsToRec);
+	bool checkItemsNeed(Recipes* recepies);
 	/// <summary>
 	/// Zmienia czy widzimy itemy co mo¿emy tylko stworzyæ lub wszystkie dostêpne w danym miejscu
 	/// </summary>

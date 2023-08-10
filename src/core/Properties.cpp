@@ -29,7 +29,7 @@ void DrawTextWithOutline(const char* text, int x, int y, int fontSize, Color tex
 
 Properties::Properties()
 {
-	font = LoadFont("Resource/ComicStans.ttf");
+	font = LoadFont("Resource/RobotoSlab-Regular.ttf");
 }
 Properties::~Properties()
 {
