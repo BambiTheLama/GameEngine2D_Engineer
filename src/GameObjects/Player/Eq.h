@@ -134,5 +134,10 @@ public:
 	/// Powoduje upuszczenie przedmiotu
 	/// </summary>
 	void dropItemFromHand();
+	/// <summary>
+	/// Czy mo¿na zmieniæ item czyli np jeœli u¿ywamy sikiery nie mo¿na zmieniæ podczas uderzania
+	/// </summary>
+	/// <returns></returns>
+	bool canChangeItem();
 };
 

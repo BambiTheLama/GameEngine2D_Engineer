@@ -194,13 +194,17 @@ void ToolItem::draw()
 	if(faceSide==FaceSide::left)
 		textureSize.width = -textureSize.width;
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origion, rotation, WHITE);
-	for (int i = 0; i < 4; i++)
-		DrawLineV(points[i], points[(i+1)%4], BLACK);
-	for (int i = 0; i < 4; i++)
+	if (collidersToDraw)
 	{
-		DrawCircleV(points[i], 3, BLACK);
-		DrawText(TextFormat("%d", i), points[i].x, points[i].y, 16, RED);
+		for (int i = 0; i < 4; i++)
+			DrawLineV(points[i], points[(i + 1) % 4], BLACK);
+		for (int i = 0; i < 4; i++)
+		{
+			DrawCircleV(points[i], 3, BLACK);
+			DrawText(TextFormat("%d", i), points[i].x, points[i].y, 16, RED);
+		}
 	}
+
 }
 
 void ToolItem::drawAt(Rectangle pos)

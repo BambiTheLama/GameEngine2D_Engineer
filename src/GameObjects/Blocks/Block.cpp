@@ -53,7 +53,7 @@ void Block::draw()
 	Rectangle pos = getPos();
 
 	DrawTexturePro(sprite->getTexture(), texturePos, pos, { 0,0 }, 0, WHITE);
-	if(IsKeyDown(KEY_TAB))
+	if (collidersToDraw)
 		DrawRectangleLinesEx(pos, 2, BLACK);
 }
 

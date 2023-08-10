@@ -54,6 +54,8 @@ void Engine::start()
 void Engine::update()
 {
 	scene->update();
+	if (IsKeyPressed(KEY_F1) && IsKeyDown(KEY_LEFT_SHIFT))
+		Properties::getProperties()->showColliders = !collidersToDraw;
 }
 void Engine::draw()
 {

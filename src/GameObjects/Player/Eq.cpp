@@ -339,3 +339,14 @@ void Eq::dropItemFromHand()
 	itemInHand->setMovePos(cursor);
 	itemInHand = NULL;
 }
+bool Eq::canChangeItem()
+{
+	if (itemInHand == NULL)
+	{
+		if (items[usingItemY][usingItemX] == NULL)
+			return true;
+		else
+			return items[usingItemY][usingItemX]->canChangeItem();
+	}
+	return itemInHand->canChangeItem();
+}

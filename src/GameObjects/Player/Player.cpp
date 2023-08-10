@@ -168,6 +168,7 @@ void Player::updateEq()
 		eq->sortItems(sortBy::NAME);
 	if (IsKeyPressed(KEY_F4))
 		eq->sortItems(sortBy::Type);
+
 }
 
 void Player::update()
@@ -201,35 +202,38 @@ void Player::move()
 		{
 			posTmp.y += speed;
 		}
-
-		if (posTmp.x != 0)
+		if (eq->canChangeItem())
 		{
-			if (posTmp.x > 0)
+			if (posTmp.x != 0)
 			{
-				state = playerAnimationState::MoveRight;
-				eq->setFaceSide(FaceSide::right);
-			}
-			else
-			{
-				state = playerAnimationState::MoveLeft;
-				eq->setFaceSide(FaceSide::left);
-			}
-				
-		}
-		if (posTmp.y != 0)
-		{
-			if (posTmp.y > 0)
-			{
-				state = playerAnimationState::MoveDown;
-				eq->setFaceSide(FaceSide::down);
-			}
-			else
-			{
-				state = playerAnimationState::MoveUp; 
-				eq->setFaceSide(FaceSide::up);
-			}
+				if (posTmp.x > 0)
+				{
+					state = playerAnimationState::MoveRight;
+					eq->setFaceSide(FaceSide::right);
+				}
+				else
+				{
+					state = playerAnimationState::MoveLeft;
+					eq->setFaceSide(FaceSide::left);
+				}
 
+			}
+			if (posTmp.y != 0)
+			{
+				if (posTmp.y > 0)
+				{
+					state = playerAnimationState::MoveDown;
+					eq->setFaceSide(FaceSide::down);
+				}
+				else
+				{
+					state = playerAnimationState::MoveUp;
+					eq->setFaceSide(FaceSide::up);
+				}
+
+			}
 		}
+
 		if (IsKeyDown(KEY_SPACE))
 		{
 			state = playerAnimationState::Doge;
@@ -249,7 +253,7 @@ void Player::draw()
 	Rectangle pos = getPos();
 
 	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
-	if (IsKeyDown(KEY_TAB))
+	if (collidersToDraw)
 	{
 		Rectangle posPickUpRange = getPos();
 		posPickUpRange.x -= pickUpRange;

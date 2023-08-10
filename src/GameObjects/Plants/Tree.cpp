@@ -54,7 +54,7 @@ void Tree::update()
 void Tree::draw()
 {
 	sprite->draw(getPos(), age);
-	if (IsKeyDown(KEY_TAB))
+	if (collidersToDraw)
 	{
 		Collider::draw(this);
 	}

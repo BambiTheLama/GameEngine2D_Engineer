@@ -80,7 +80,7 @@ void GameScene::draw()
 	BeginMode2D(camera);
 	for (GameObject* obj : objects)
 		obj->draw();
-	if(IsKeyDown(KEY_TAB))
+	if (collidersToDraw)
 		handler->draw();
 	EndMode2D();
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
