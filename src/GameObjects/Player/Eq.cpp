@@ -12,7 +12,7 @@ Eq::Eq(Player* player)
 		for (int j = 0; j < EqWight; j++)
 			items[i][j] = Items->getObject(i * EqWight + j);
 	}
-	items[1][0]= Items->getObject(0);
+
 	this->player = player;
 }
 
@@ -158,7 +158,7 @@ void Eq::update()
 
 void Eq::mouseWeel()
 {
-	if (items[usingItemY][usingItemX] == NULL || items[usingItemY][usingItem]->canChangeItem())
+	if (items[usingItemY][usingItemX] == NULL || items[usingItemY][usingItemX]->canChangeItem())
 		usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
 }
 
