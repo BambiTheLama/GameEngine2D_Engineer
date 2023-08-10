@@ -142,7 +142,7 @@ void Player::updateCrafting()
 void Player::updateEq()
 {
 	eq->update();
-
+	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
 		if (!eq->isPressedOnEq() &&!crafting->isPressedInCraftingUI())
@@ -161,7 +161,7 @@ void Player::updateEq()
 
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 		eq->updateEqPressed();
-	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+
 	if (IsKeyPressed(KEY_F2))
 		eq->sortItems(sortBy::ID);
 	if (IsKeyPressed(KEY_F3))

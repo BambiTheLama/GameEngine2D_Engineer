@@ -14,6 +14,8 @@ class ToolItem :
     Vector2 origion= { 0,pos.width };
     float rotation=0;
     Vector2 points[4];
+    Vector2 startPoints[4];
+    bool isUsing = false;
     ToolItem(ToolItem& item);
 public:
     ToolItem(Rectangle pos, std::string name,ToolType destroyType=ToolType::NON,int power=0);
@@ -25,5 +27,7 @@ public:
     void drawAt(Rectangle pos);
     virtual void setFaceSide(FaceSide side) { if(useTime<=0)faceSide = side; }
     virtual std::string getDesctription();
+    void setStartPoints(Vector2 startPoints[4]);
+    virtual bool canChangeItem() { return useTime<=0; }
 };
 

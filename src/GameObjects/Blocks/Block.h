@@ -43,6 +43,8 @@ public:
 
     virtual Block* clone() { return new Block(*this); }
 
+    virtual Rectangle getCollisionPos() { return pos; }
+
     void generateTexturePos();
 };
 

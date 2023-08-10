@@ -14,11 +14,45 @@ ItemFactory::ItemFactory()
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", blockStackSize));
 	objects.push_back(new BlockItem({ 0,0,32,32 }, "Stone", blockStackSize));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Axe",ToolType::Axe,30));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Pickaxe", ToolType::Pickaxe,30));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Shovel",ToolType::Shovel,30));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Hoe"));
-	objects.push_back(new ToolItem({ 0,0,32,32 }, "Sword"));
+	ToolItem* tool = new ToolItem({ 0,0,32,32 }, "Axe", ToolType::Axe, 30);
+	Vector2 points[4];
+	points[0] = { 14,31 };
+	points[1] = { 31,20 };
+	points[2] = { 19,10 };
+	points[3] = { 9,26 };
+	tool->setStartPoints(points);
+	objects.push_back(tool);
+	tool = new ToolItem({ 0,0,32,32 }, "Pickaxe", ToolType::Pickaxe, 30);
+	points[0] = { 5,28 };
+	points[1] = { 17,31 };
+	points[2] = { 29,16 };
+	points[3] = { 28,6 };
+	tool->setStartPoints(points);
+	objects.push_back(tool);
+	tool = new ToolItem({ 0,0,32,32 }, "Hoe");
+	points[0] = { 19,30 };
+	points[1] = { 31,12 };
+	points[2] = { 29,8 };
+	points[3] = { 13,25 };
+	tool->setStartPoints(points);
+	objects.push_back(tool);
+	tool = new ToolItem({ 0,0,32,32 }, "Shovel", ToolType::Shovel, 30);
+	objects.push_back(tool);
+	points[0] = { 14,24};
+	points[1] = { 24,31};
+	points[2] = { 31,23};
+	points[3] = { 23,15};
+	tool->setStartPoints(points);
+	tool = new ToolItem({ 0,0,32,32 }, "Sword");
+	points[0] = { 7,12 };
+	points[1] = { 27,31 };
+	points[2] = { 31,28 };
+	points[3] = { 12,8 };
+
+	tool->setStartPoints(points);
+	objects.push_back(tool);
+
+
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)

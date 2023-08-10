@@ -21,5 +21,7 @@ public:
     virtual Plant* clone() { return new Plant(*this); }
 
     virtual void damageObject(int power, ToolType type);
+
+    virtual Rectangle getCollisionPos() { return pos; }
 };
 

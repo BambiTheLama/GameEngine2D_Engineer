@@ -158,7 +158,8 @@ void Eq::update()
 
 void Eq::mouseWeel()
 {
-	usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
+	if (items[usingItemY][usingItemX] == NULL || items[usingItemY][usingItem]->canChangeItem())
+		usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
 }
 
 bool Eq::isPressedOnEq()
@@ -192,6 +193,8 @@ bool Eq::isPressedOnEq()
 void Eq::updateEqPressed()
 {
 	if (!isPressedOnEq())
+		return;
+	if (items[usingItemY][usingItemX] != NULL && !items[usingItemY][usingItemX]->canChangeItem())
 		return;
 	Vector2 cursor = GetMousePosition();
 	cursor.x -= EqStartX - EqSpacing;
@@ -234,12 +237,10 @@ void Eq::draw()
 				{
 					const char* text = TextFormat("%d", items[i][j]->getStackSize());
 					Vector2 textS = textSize(text, textStandardSize);
-					drawText(text, posToDraw.x + posToDraw.height- textS.x, posToDraw.y + posToDraw.width - textS.y, textStandardSize, BLACK);
+					DrawTextWithOutline(text, posToDraw.x + posToDraw.height - textS.x, posToDraw.y + posToDraw.width - textS.y, textStandardSize, WHITE, BLACK);
 				}
 			}
-
-			drawText(TextFormat("%d", i * EqWight + j), posToDraw.x, posToDraw.y, textStandardSize, BLACK);
-
+			DrawTextWithOutline(TextFormat("%d", i * EqWight + j), posToDraw.x, posToDraw.y, textStandardSize, WHITE, BLACK);
 		}
 	if (itemInHand != NULL)
 	{
@@ -251,7 +252,7 @@ void Eq::draw()
 		{
 			const char* text = TextFormat("%d", itemInHand->getStackSize());
 			Vector2 textS = textSize(text, textStandardSize);
-			drawText(text, pos.x + pos.height - textS.x, pos.y + pos.width - textS.y, textStandardSize, BLACK);
+			DrawTextWithOutline(text, pos.x + pos.height - textS.x, pos.y + pos.width - textS.y, textStandardSize, WHITE, BLACK);
 		}
 	}
 }
@@ -328,7 +329,10 @@ bool Eq::canTakeItem(Item* item)
 
 void Eq::dropItemFromHand()
 {
+	
 	if (itemInHand == NULL)
+		return;
+	if (!itemInHand->canChangeItem())
 		return;
 	Game->addObject(itemInHand);
 	Vector2 cursor = Game->getCursorPos();

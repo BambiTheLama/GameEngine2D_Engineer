@@ -29,7 +29,11 @@ void TextParticle::update()
 
 void TextParticle::draw()
 {
-	Color color=RED;
+	Color color = RED;
+	Color color2 = BLACK;
 	color.a = (256 * time) / timeMax;
-	drawText(getName().c_str(), pos.x+pos.width/2, pos.y+pos.height/2, textStandardSize, color);
+	color2.a = (256 * time) / timeMax;
+	DrawTextWithOutline(getName().c_str(), pos.x + pos.width / 2 - 1, pos.y + pos.height / 2,
+		textStandardSize, color, color2);
+
 }

@@ -7,17 +7,26 @@ ToolItem::ToolItem(ToolItem& item) :Item(item)
 	this->useTimeMax=item.useTimeMax;
 	useTime = 0;
 	this->destroyType = item.destroyType;
+	this->damage = item.damage;
+	this->origion = item.origion;
 	this->power = item.power;
+	setStartPoints(item.startPoints);
 }
 
 ToolItem::ToolItem(Rectangle pos, std::string name,ToolType destroyType,int power) :Item(pos, name)
 {
 	std::string path = "Resource/Items/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
-	useTimeMax = 30;
+	useTimeMax = 20;
 	useTime = 0;
+	damage = 5;
+	origion = { 0,pos.width };
 	this->destroyType = destroyType;
 	this->power = power;
+	startPoints[0] = { pos.x ,pos.y };
+	startPoints[1] = { pos.x + pos.width,pos.y };
+	startPoints[2] = { pos.x + pos.width,pos.y + pos.height };
+	startPoints[3] = { pos.x ,pos.y + pos.height };
 }
 ToolItem::~ToolItem()
 {
@@ -31,14 +40,15 @@ void ToolItem::update()
 	if (useTime > 0)
 	{
 		useTime--;
-
+		if (useTime <= 0)
+			isUsing = false;
 	}
 
 	Rectangle pos = getPos();
 	origion.x = 0;
 	rotation = 0;
 	const float rotationAngle = 120;
-
+	///Wiliczanie obeotu narzêdzia
 	switch (faceSide)
 	{
 	case FaceSide::left:
@@ -71,70 +81,97 @@ void ToolItem::update()
 			rotation -= rotationAngle;
 		break;
 	}
-	if (useTime > 0)
+	if (!isUsing)
+		return;
+	///Szukanie pozycji punktów do kolizji
+	float k = ((rotation - 90) * (PI / 180.0f));
+	Vector2 rotationPoint = origion;
+	rotationPoint.x += pos.x;
+	rotationPoint.y += pos.y;
+	rotationPoint.y -= pos.height;
+	if (faceSide == FaceSide::left)
 	{
-		float k = ((rotation - 90) * (PI / 180.0f));
-		Vector2 rotationPoint = origion;
-		rotationPoint.x += pos.x;
-		rotationPoint.y += pos.y;
-		rotationPoint.y -= pos.height;
-		if (faceSide == FaceSide::left)
-		{
-			rotationPoint.x -= pos.width;
-			k = ((rotation + 180) * (PI / 180.0f));
-		}
-		else
-		{
-			k = ((rotation - 90) * (PI / 180.0f));
-		}
+		rotationPoint.x -= pos.width;
 
+	}
+	k = ((rotation + 180) * (PI / 180.0f));
 
-		Vector2 points[4] = { {pos.x,pos.y},
-			{pos.x + pos.width,pos.y},
-			{pos.x + pos.width,pos.y + pos.height},
-			{pos.x, pos.y + pos.height} };
-		
+	Vector2 points[4];
+	if (faceSide == FaceSide::left)
+	{
 		for (int i = 0; i < 4; i++)
 		{
-			float x = cos(k) * (points[i].x - rotationPoint.x) - sin(k) * (points[i].y - rotationPoint.y) + rotationPoint.x;
-			float y = sin(k) * (points[i].x - rotationPoint.x) + cos(k) * (points[i].y - rotationPoint.y) + rotationPoint.y;
-			points[i].x = x;
-			points[i].y = y;
+			points[i].x = pos.x + startPoints[i].x;
+			points[i].y = pos.y + startPoints[i].y;
 		}
-		int minx = points[0].x;
-		int maxx = points[0].x;
-		int miny = points[0].y;
-		int maxy = points[0].y;
-		for (int i = 1; i < 4; i++)
+	}
+	else
+	{
+		for (int i = 0; i < 4; i++) 
 		{
-			if (minx > points[i].x)
-				minx = points[i].x;
-			if (miny > points[i].y)
-				miny = points[i].y;
-			if (maxx < points[i].x)
-				maxx = points[i].x;
-			if (maxy < points[i].y)
-				maxy = points[i].y;
+			points[i].x = pos.x - startPoints[i].x;
+			points[i].y = pos.y + startPoints[i].y;
 		}
-		Rectangle getObj = { minx,miny,maxx - minx,maxy - miny };
-		std::list<GameObject*>objs=Game->getObjects(getObj,ObjectToGet::getNoBlocks);
-		for (auto* o : objs)
+
+	}
+
+	///Wiliczanie wszystkich punktów obiektu
+	for (int i = 0; i < 4; i++)
+	{
+		float x = cos(k) * (points[i].x - rotationPoint.x) - sin(k) * (points[i].y - rotationPoint.y) + rotationPoint.x;
+		float y = sin(k) * (points[i].x - rotationPoint.x) + cos(k) * (points[i].y - rotationPoint.y) + rotationPoint.y;
+		points[i].x = x;
+		points[i].y = y;
+	}
+	///Minimum i maximum x i y
+	int minx = points[0].x;
+	int maxx = points[0].x;
+	int miny = points[0].y;
+	int maxy = points[0].y;
+	for (int i = 1; i < 4; i++)
+	{
+		if (minx > points[i].x)
+			minx = points[i].x;
+		if (miny > points[i].y)
+			miny = points[i].y;
+		if (maxx < points[i].x)
+			maxx = points[i].x;
+		if (maxy < points[i].y)
+			maxy = points[i].y;
+	}
+	///Pobranie wszystkich obiektów z sceny na pozycji gdzie mieœci siê narzêdzie
+	Rectangle getObj = { minx,miny,maxx - minx,maxy - miny };
+	std::list<GameObject*>objs = Game->getObjects(getObj,ObjectToGet::getNoBlocks);
+	for (auto* o : objs)
+	{
+		HitAble* hit = dynamic_cast<HitAble*>(o);
+		if (hit != NULL)
 		{
-			HitAble* hit = dynamic_cast<HitAble*>(o);
-			if (hit == NULL)
-				continue;
 			if (checkCollision(points, hit->getCollisionPos()))
 			{
 				hit->dealDamage(damage, 10);
 			}
-			
-			
-			
 		}
-		for (int i = 0; i < 4; i++)
-			this->points[i] = points[i];
+		DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
+		if (toDestory != NULL)
+		{
+			Rectangle rec = toDestory->getCollisionPos();
+			if (checkCollision(points, rec))
+			{
+				toDestory->damageObject(power, destroyType);
+				if (toDestory->isToolGoBack())
+					isUsing = false;
+			}
+		}
+
+
 
 	}
+	///Przekazanie punktów do zmiennych w klassie
+	for (int i = 0; i < 4; i++)
+		this->points[i] = points[i];
+
+	
 
 }
 
@@ -144,33 +181,25 @@ bool ToolItem::use()
 {
 	if (useTime>0)
 		return false;
-
-	Vector2 cursorPos = Game->getCursorPos();
-	Rectangle pos = { cursorPos.x,cursorPos.y,1,1 };
-	std::list<GameObject*> obj = Game->getObjects(pos);
-	for (auto* o : obj)
-	{
-		if (!CheckCollisionRecs(pos, o->getPos())) continue;
-
-		DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
-		if (toDestory != NULL)
-		{
-			toDestory->damageObject(power, destroyType);
-		}
-	}
+	isUsing = true;
 	useTime = useTimeMax;
 }
 void ToolItem::draw()
 {
+	if (!isUsing)
+		return;
 	Rectangle textureSize = sprite->getTextureSize();
 	Rectangle pos = getPos();
 	if(faceSide==FaceSide::left)
 		textureSize.width = -textureSize.width;
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origion, rotation, WHITE);
 	for (int i = 0; i < 4; i++)
-		DrawCircleV(points[i], 3, BLACK);
-	for (int i = 0; i < 4; i++)
 		DrawLineV(points[i], points[(i+1)%4], BLACK);
+	for (int i = 0; i < 4; i++)
+	{
+		DrawCircleV(points[i], 3, BLACK);
+		DrawText(TextFormat("%d", i), points[i].x, points[i].y, 16, RED);
+	}
 }
 
 void ToolItem::drawAt(Rectangle pos)
@@ -181,4 +210,9 @@ void ToolItem::drawAt(Rectangle pos)
 std::string ToolItem::getDesctription()
 {
 	return getName() + "\n" + "tool power" + std::to_string(power) + "";
+}
+void ToolItem::setStartPoints(Vector2 startPoints[4])
+{
+	for (int i = 0; i < 4; i++)
+		this->startPoints[i] = startPoints[i];
 }

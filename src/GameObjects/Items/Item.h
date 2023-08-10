@@ -47,6 +47,8 @@ public:
 
     virtual std::string getDesctription() { return ""; }
 
+    virtual bool canChangeItem() { return true; }
+
     friend class Recipes;
 };
 

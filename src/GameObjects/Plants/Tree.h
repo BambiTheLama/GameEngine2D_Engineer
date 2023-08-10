@@ -29,6 +29,8 @@ public:
 
     bool isColliding() { return true; }
 
+    virtual Rectangle getCollisionPos() { return Collider::getCollisionPos(this); }
 
+    virtual bool isToolGoBack() { return true; }
 };
 

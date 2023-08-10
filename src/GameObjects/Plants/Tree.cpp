@@ -55,7 +55,11 @@ void Tree::draw()
 {
 	sprite->draw(getPos(), age);
 	if (IsKeyDown(KEY_TAB))
+	{
 		Collider::draw(this);
+	}
+
+
 }
 void Tree::setMovePos(Vector2 movePos)
 { 
@@ -70,7 +74,7 @@ void Tree::damageObject(int power, ToolType type)
 	DestroyAble::damageObject(power, type);
 	if (h != hp)
 	{
-		Rectangle pos = getCollisionPos(this);
+		Rectangle pos = getCollisionPos();
 		Particle* particle=new Particle({0,0,5,5},40,{2,4},{77,26,1,255},{255,170,30,0});
 		ParticleSystem* particleSystem = new ParticleSystem(pos, "", particle, 10);
 		particleSystem->setTime(30, 60);
@@ -82,7 +86,7 @@ void Tree::damageObject(int power, ToolType type)
 		return;
 	}
 
-	Rectangle pos = getCollisionPos(this);
+	Rectangle pos = getCollisionPos();
 	std::vector<Item*> items = getDrop();
 	for (Item* i : items)
 	{

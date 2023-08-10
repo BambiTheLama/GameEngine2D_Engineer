@@ -1,4 +1,5 @@
 #pragma once
+#include "raylib.h"
 /// <summary>
 /// Enum odpowiadajacy ¿e to jakie narzêdzie mo¿e zniszczyæ jaki blok
 /// </summary>
@@ -27,5 +28,9 @@ public:
     DestroyAble(ToolType toolToDestroy,int hp=1,int power=0);
 
     virtual void damageObject(int power, ToolType type);
+
+    virtual Rectangle getCollisionPos() = 0;
+
+    virtual bool isToolGoBack() { return false; }
 };
 

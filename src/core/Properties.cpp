@@ -16,7 +16,16 @@ Properties* Properties::getProperties()
 		properties = new Properties();
 	return properties;
 }
-
+void DrawTextWithOutline(const char* text, int x, int y, int fontSize, Color textColor, Color outlineColor) {
+	for (int ox = -1; ox <= 1; ox++) {
+		for (int oy = -1; oy <= 1; oy++) {
+			if (ox != 0 || oy != 0) {
+				Properties::getProperties()->drawText(text, x + ox, y + oy, fontSize, outlineColor);
+			}
+		}
+		Properties::getProperties()->drawText(text, x, y, fontSize, textColor);
+	}
+}
 
 Properties::Properties()
 {
