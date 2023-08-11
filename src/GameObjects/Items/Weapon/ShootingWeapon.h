@@ -5,7 +5,7 @@ class ShootingWeapon :
     public Weapon
 {
     float rotation;
-    Vector2 orgin;
+    Vector2 origin;
     Projectal* projectal=NULL;
 protected:
     ShootingWeapon(ShootingWeapon& obj);

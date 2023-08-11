@@ -30,7 +30,14 @@ Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width /
 	miniMap = new MiniMap(this);
 	eq = new Eq(this);
 	crafting = new CraftingStation(CraftingStationEnum::NON);
-
+	
+	for (int i = 0; i < Items->getSize(); i++)
+	{
+		Item* item= Items->getObject(i);
+		eq->addItem(item);
+		delete item;
+	}
+		
 
 }
 
@@ -147,6 +154,12 @@ void Player::updateEq()
 	{
 		if (!eq->isPressedOnEq() &&!crafting->isPressedInCraftingUI())
 			eq->useItem();
+		else
+			eq->endUsingItem();
+	}
+	else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+	{
+		eq->endUsingItem();
 	}
 	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON) && !eq->isPressedOnEq())
 		eq->dropItemFromHand();

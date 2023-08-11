@@ -53,5 +53,7 @@ public:
 	void drawItemDescription(int ID, int x, int y);
 
 	bool isStacableItem(int ID);
+
+	int getSize() { return objects.size(); }
 };
 

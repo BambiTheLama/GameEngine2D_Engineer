@@ -4,13 +4,13 @@
 
 ShootingWeapon::ShootingWeapon(ShootingWeapon& obj):Weapon(obj)
 {
-	orgin = obj.orgin;
+	origin = obj.origin;
 	projectal = obj.projectal->clone();
 }
 
 ShootingWeapon::ShootingWeapon(Rectangle pos, std::string name) :Weapon(pos,name)
 {
-	orgin = { pos.width / 2, pos.height};
+	origin = { pos.width / 2, pos.height};
 	Rectangle bulletPos = { pos.x - 8,pos.y - 8 , 16,16 };
 	projectal = new Projectal(bulletPos, rotation, 1000);
 }
@@ -31,7 +31,7 @@ void ShootingWeapon::update()
 }
 void ShootingWeapon::draw()
 {
-	DrawRectanglePro(pos, orgin, rotation, YELLOW);
+	DrawRectanglePro(pos, origin, rotation, YELLOW);
 }
 
 void ShootingWeapon::drawAt(Rectangle pos)

@@ -40,12 +40,12 @@ public:
 	/// </summary>
 	/// <param name="frame">Któr¹ klatkê wzi¹œc</param>
 	/// <returns>Miejsce gdzie jest dana klatka</returns>
-	Rectangle getTextureFrame(int frame) { return { (float)texture.height * (frame % howMuchFrames()),0,(float)texture.height,(float)texture.height }; }
+	Rectangle getTextureFrame(int frame) { return { (float)texture.height * (frame % getHowMuchFrames()),0,(float)texture.height,(float)texture.height }; }
 	/// <summary>
 	/// Zwraca ile jest klatek (szerokoœæ/wysokoœæ)
 	/// </summary>
 	/// <returns>iloœæ klatek</returns>
-	int howMuchFrames() { return texture.width / texture.height; }
+	int getHowMuchFrames() { return texture.width / texture.height; }
 	/// <summary>
 	/// Rysuje ca³¹ texture w podanej pozycji
 	/// </summary>

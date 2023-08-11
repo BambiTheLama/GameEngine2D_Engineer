@@ -8,7 +8,7 @@ ToolItem::ToolItem(ToolItem& item) :Item(item)
 	useTime = 0;
 	this->destroyType = item.destroyType;
 	this->damage = item.damage;
-	this->origion = item.origion;
+	this->origin = item.origin;
 	this->power = item.power;
 	setStartPoints(item.startPoints);
 }
@@ -20,7 +20,7 @@ ToolItem::ToolItem(Rectangle pos, std::string name,ToolType destroyType,int powe
 	useTimeMax = 20;
 	useTime = 0;
 	damage = 5;
-	origion = { 0,pos.width };
+	origin = { 0,pos.width };
 	this->destroyType = destroyType;
 	this->power = power;
 	startPoints[0] = { pos.x ,pos.y };
@@ -46,7 +46,7 @@ void ToolItem::update()
 	if (!isUsing)
 		return;
 	Rectangle pos = getPos();
-	origion.x = 0;
+	origin.x = 0;
 	rotation = 0;
 	const float rotationAngle = 120;
 	///Wiliczanie obeotu narzêdzia
@@ -58,7 +58,7 @@ void ToolItem::update()
 			rotation += (float)useTime / (float)useTimeMax * rotationAngle;
 		else
 			rotation += rotationAngle;
-		origion.x = pos.width;
+		origin.x = pos.width;
 		break;
 	case FaceSide::right:
 		rotation = 30;
@@ -86,7 +86,7 @@ void ToolItem::update()
 		return;
 	///Szukanie pozycji punktów do kolizji
 	float k = ((rotation - 90) * (PI / 180.0f));
-	Vector2 rotationPoint = origion;
+	Vector2 rotationPoint = origin;
 	rotationPoint.x += pos.x;
 	rotationPoint.y += pos.y;
 	rotationPoint.y -= pos.height;
@@ -193,7 +193,7 @@ void ToolItem::draw()
 	Rectangle pos = getPos();
 	if(faceSide==FaceSide::left)
 		textureSize.width = -textureSize.width;
-	DrawTexturePro(sprite->getTexture(), textureSize, pos, origion, rotation, WHITE);
+	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
 	if (collidersToDraw)
 	{
 		for (int i = 0; i < 4; i++)

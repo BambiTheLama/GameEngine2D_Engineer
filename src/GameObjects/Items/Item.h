@@ -5,6 +5,12 @@ enum class FaceSide {
     left,right,up,down
 };
 
+enum class ItemType {
+    Normal,
+    Weapon,
+    Ammo
+};
+class Eq;
 class Item :
     public GameObject
 {
@@ -25,6 +31,8 @@ public:
 
     virtual bool use();
 
+    virtual void endUsing(){}
+
     virtual bool addToStack(Item* i) { return false; }
 
     virtual void addToStack(int i) {}
@@ -39,6 +47,8 @@ public:
 
     ObjectType getType() { return ObjectType::Item; }
 
+    virtual ItemType getItemType() { return ItemType::Normal; }
+
     virtual Item* clone() { return new Item(*this); }
 
     virtual void setFaceSide(FaceSide side) { faceSide = side; }
@@ -48,6 +58,8 @@ public:
     virtual std::string getDesctription() { return ""; }
 
     virtual bool canChangeItem() { return true; }
+
+    virtual void setEq(Eq *eq){}
 
     friend class Recipes;
 };

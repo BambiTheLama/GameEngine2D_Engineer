@@ -11,7 +11,7 @@ class ToolItem :
     int useTimeMax;
     int power;
     int damage = 5;
-    Vector2 origion= { 0,pos.width };
+    Vector2 origin= { 0,pos.width };
     float rotation=0;
     Vector2 points[4];
     Vector2 startPoints[4];
@@ -29,5 +29,6 @@ public:
     virtual std::string getDesctription();
     void setStartPoints(Vector2 startPoints[4]);
     virtual bool canChangeItem() { return useTime<=0; }
+    virtual ItemType getItemType() { return ItemType::Weapon; }
 };
 

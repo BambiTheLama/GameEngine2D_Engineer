@@ -10,7 +10,7 @@ Tree::Tree(Tree& tree) :Plant(tree), Collider(tree)
 Tree::Tree(Rectangle pos, std::string name) :Plant(pos, name,ToolType::Axe,10,10),
 Collider({ 24.0f / 64 * pos.width,48.0f / 64 * pos.height,16.0f / 64 * pos.width,15.0f / 64 * pos.height })
 {
-	maxAge = sprite->howMuchFrames()-1;
+	maxAge = sprite->getHowMuchFrames()-1;
 	addItemToDrop(0, 100, 1, 2);
 	itemToolRequest = ToolType::Axe;
 

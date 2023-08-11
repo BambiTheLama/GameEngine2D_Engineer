@@ -10,7 +10,7 @@ Eq::Eq(Player* player)
 	{
 		items[i] = new  Item * [EqWight];
 		for (int j = 0; j < EqWight; j++)
-			items[i][j] = Items->getObject(i * EqWight + j);
+			items[i][j] = NULL;
 	}
 
 	this->player = player;
@@ -108,6 +108,7 @@ bool Eq::addItem(Item* item)
 			if (items[i][j] == NULL)
 			{
 				items[i][j] = item->clone();
+				items[i][j]->setEq(this);
 				player->updateRecepies();
 				return true;
 			}
@@ -295,11 +296,12 @@ void Eq::addItemToHand(Item* item)
 	if (itemInHand == NULL)
 	{
 		itemInHand = item;
+		itemInHand->setEq(this);
 		player->updateRecepies();
 		return;
 	}
-	itemInHand->addToStack(item);
-	delete item;
+	if(itemInHand->addToStack(item))
+		delete item;
 	player->updateRecepies();
 }
 
@@ -329,7 +331,6 @@ bool Eq::canTakeItem(Item* item)
 
 void Eq::dropItemFromHand()
 {
-	
 	if (itemInHand == NULL)
 		return;
 	if (!itemInHand->canChangeItem())
@@ -337,8 +338,10 @@ void Eq::dropItemFromHand()
 	Game->addObject(itemInHand);
 	Vector2 cursor = Game->getCursorPos();
 	itemInHand->setMovePos(cursor);
+	itemInHand->setEq(NULL);
 	itemInHand = NULL;
 }
+
 bool Eq::canChangeItem()
 {
 	if (itemInHand == NULL)
@@ -349,4 +352,33 @@ bool Eq::canChangeItem()
 			return items[usingItemY][usingItemX]->canChangeItem();
 	}
 	return itemInHand->canChangeItem();
+}
+
+void Eq::endUsingItem()
+{
+	if (itemInHand != NULL)
+	{
+		itemInHand->endUsing();
+	}
+	else if (items[usingItemY][usingItemX] != NULL)
+	{
+		items[usingItemY][usingItemX]->endUsing();
+	}
+}
+
+void Eq::removeItem(Item* item)
+{
+	item->setEq(NULL);
+	if (itemInHand == item)
+		itemInHand = NULL;
+	for (int i = 0; i < EqHeight; i++)
+	{
+		for (int j = 0; j < EqWight; j++)
+		{
+			if (items[i][j] == item)
+			{
+				items[i][j] = NULL;
+			}
+		}
+	}
 }

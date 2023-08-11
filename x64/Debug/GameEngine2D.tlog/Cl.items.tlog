@@ -20,9 +20,11 @@ C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Craftin
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Crafting\Recipes.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Recipes.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Factory.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Factory.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\GameObject.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\GameObject.obj
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\BlockItem.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\BlockItem.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\StackItem.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\StackItem.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Item.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Item.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Tool\ToolItem.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ToolItem.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Ammo.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Ammo.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Bow.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Bow.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\ShootingWeapon.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ShootingWeapon.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Weapon.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Weapon.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\NPCs\Enemy.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Enemy.obj

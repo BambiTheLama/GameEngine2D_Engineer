@@ -1,19 +1,21 @@
 #include "ItemFactory.h"
 #include "Items/Item.h"
 #include "Items/Weapon/ShootingWeapon.h"
-#include "Items/BlockItem.h"
+#include "Items/StackItem.h"
 #include "Items/Tool/ToolItem.h"
+#include "Items/Weapon/Ammo.h"
+#include "Items/Weapon/Bow.h"
 ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
 {
 	int blockStackSize = 100;
 	objects = std::vector<Item*>();
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Wood", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Plank", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Dirt", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Sand", blockStackSize));
-	objects.push_back(new BlockItem({ 0,0,32,32 }, "Stone", blockStackSize));
+	objects.push_back(new StackItem({ 0,0,32,32 }, "Wood", blockStackSize));
+	objects.push_back(new StackItem({ 0,0,32,32 }, "Plank", blockStackSize));
+	objects.push_back(new StackItem({ 0,0,32,32 }, "Dirt", blockStackSize));
+	objects.push_back(new StackItem({ 0,0,32,32 }, "Sand", blockStackSize));
+	objects.push_back(new StackItem({ 0,0,32,32 }, "Stone", blockStackSize));
 	ToolItem* tool = new ToolItem({ 0,0,32,32 }, "Axe", ToolType::Axe, 30);
 	Vector2 points[4];
 	points[0] = { 14,31 };
@@ -52,7 +54,8 @@ ItemFactory::ItemFactory()
 	tool->setStartPoints(points);
 	objects.push_back(tool);
 
-
+	objects.push_back(new Bow({ 0,0,32,32 }, "Bow"));
+	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", AmmoType::Arrow));
 	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)

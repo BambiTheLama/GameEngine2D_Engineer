@@ -1,20 +1,2 @@
-﻿  Eq.cpp
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,85): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,44): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.h(33,57): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.h(33,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(202,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(203,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(229,64): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(229,64): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(230,41): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(230,41): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(240,104): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(240,63): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(243,81): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(243,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(255,78): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Player\Eq.cpp(255,49): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+﻿  Ammo.cpp
   GameEngine2D.vcxproj -> C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\x64\Debug\GameEngine2D.exe

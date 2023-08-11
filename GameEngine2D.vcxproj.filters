@@ -138,7 +138,7 @@
     <ClCompile Include="src\GameObjects\Items\Tool\ToolItem.cpp">
       <Filter>src\GameObjects\Items\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\Items\BlockItem.cpp">
+    <ClCompile Include="src\GameObjects\Items\StackItem.cpp">
       <Filter>src\GameObjects\Items</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Properties.cpp">
@@ -179,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp">
       <Filter>src\GameObjects\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\Weapon\Ammo.cpp">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\Weapon\Bow.cpp">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,7 +272,7 @@
     <ClInclude Include="src\GameObjects\Items\Tool\ToolItem.h">
       <Filter>src\GameObjects\Items\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\Items\BlockItem.h">
+    <ClInclude Include="src\GameObjects\Items\StackItem.h">
       <Filter>src\GameObjects\Items</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Properties.h">
@@ -304,6 +310,12 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Particles\TextParticle.h">
       <Filter>src\GameObjects\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\Weapon\Ammo.h">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h">
+      <Filter>src\GameObjects\Items\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

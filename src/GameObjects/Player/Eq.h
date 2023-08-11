@@ -139,5 +139,9 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	bool canChangeItem();
+
+	void endUsingItem();
+
+	void removeItem(Item *item);
 };
 
