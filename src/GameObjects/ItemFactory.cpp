@@ -1,6 +1,5 @@
 #include "ItemFactory.h"
 #include "Items/Item.h"
-#include "Items/Weapon/ShootingWeapon.h"
 #include "Items/StackItem.h"
 #include "Items/Tool/ToolItem.h"
 #include "Items/Weapon/Ammo.h"
@@ -56,7 +55,6 @@ ItemFactory::ItemFactory()
 
 	objects.push_back(new Bow({ 0,0,32,32 }, "Bow"));
 	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", AmmoType::Arrow));
-	objects.push_back(new ShootingWeapon({ 0,0,32,32 }, ""));
 	
 	for (int i = 0; i < objects.size(); i++)
 	{

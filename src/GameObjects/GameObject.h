@@ -3,6 +3,7 @@
 #include <math.h>
 #include "../core/Controllers/AnimationController.h"
 #include "../core/Properties.h"
+
 /// <summary>
 /// Zwraca kat od obiektu do pozycji kursora
 /// </summary>

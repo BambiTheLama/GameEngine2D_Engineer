@@ -3,7 +3,7 @@
 #include "../../Blocks/Block.h"
 #include "../../../core/Scenes/GameScene.h"
 class ToolItem :
-    public Item
+    public Item , public LinesCollider
 {
     SpriteController* sprite;
     ToolType destroyType;
@@ -11,10 +11,8 @@ class ToolItem :
     int useTimeMax;
     int power;
     int damage = 5;
-    Vector2 origin= { 0,pos.width };
+    Vector2 origin= { 0,0 };
     float rotation=0;
-    Vector2 points[4];
-    Vector2 startPoints[4];
     bool isUsing = false;
     ToolItem(ToolItem& item);
 public:
@@ -30,5 +28,7 @@ public:
     void setStartPoints(Vector2 startPoints[4]);
     virtual bool canChangeItem() { return useTime<=0; }
     virtual ItemType getItemType() { return ItemType::Weapon; }
+    virtual void onCollisionHitable(HitAble* hit);
+    virtual void onCollisionDestroyAble(DestroyAble* dest);
 };
 

@@ -90,12 +90,6 @@
     <ClCompile Include="src\GameObjects\Items\Item.cpp">
       <Filter>src\GameObjects\Items</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\Items\Weapon\Weapon.cpp">
-      <Filter>src\GameObjects\Items\Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\Items\Weapon\ShootingWeapon.cpp">
-      <Filter>src\GameObjects\Items\Weapons</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp">
       <Filter>src\core\Scenes\Game</Filter>
     </ClCompile>
@@ -186,6 +180,9 @@
     <ClCompile Include="src\GameObjects\Items\Weapon\Bow.cpp">
       <Filter>src\GameObjects\Items\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\LinesCollider.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -217,12 +214,6 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Items\Item.h">
       <Filter>src\GameObjects\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjects\Items\Weapon\Weapon.h">
-      <Filter>src\GameObjects\Items\Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjects\Items\Weapon\ShootingWeapon.h">
-      <Filter>src\GameObjects\Items\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h">
       <Filter>src\core\Scenes\Game</Filter>
@@ -316,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h">
       <Filter>src\GameObjects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\LinesCollider.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

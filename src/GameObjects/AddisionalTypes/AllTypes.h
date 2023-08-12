@@ -3,4 +3,5 @@
 #include "DodgeInterface.h"
 #include "HitAble.h"
 #include "ItemsDrop.h"
+#include "LinesCollider.h"
 #include "UserUI.h"

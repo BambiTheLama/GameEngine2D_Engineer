@@ -2,13 +2,13 @@
 #include <iostream>
 #include "../../core/Scenes/GameScene.h"
 
-Projectal::Projectal(Projectal& obj):GameObject(obj)
+Projectal::Projectal(Projectal& obj):GameObject(obj),Collider(obj)
 {
 	this->range = obj.range;
 	this->speed = obj.speed;
 }
 
-Projectal::Projectal(Rectangle pos, float rotation,float range):GameObject(pos,"")
+Projectal::Projectal(Rectangle pos, float speed, float rotation, float range, SpriteController* sprite, Vector2 collision[4]):GameObject(pos,""),Collider({0,0,0,0})
 {
 	this->rotation = rotation;
 	this->range = range;

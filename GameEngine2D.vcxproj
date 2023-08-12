@@ -143,6 +143,7 @@
     <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\HitAble.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\ItemsDrop.cpp" />
+    <ClCompile Include="src\GameObjects\AddisionalTypes\LinesCollider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\UserUI.cpp" />
     <ClCompile Include="src\GameObjects\BlockFactory.cpp" />
     <ClCompile Include="src\GameObjects\Blocks\Block.cpp" />
@@ -156,8 +157,6 @@
     <ClCompile Include="src\GameObjects\Items\Tool\ToolItem.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\Ammo.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\Bow.cpp" />
-    <ClCompile Include="src\GameObjects\Items\Weapon\ShootingWeapon.cpp" />
-    <ClCompile Include="src\GameObjects\Items\Weapon\Weapon.cpp" />
     <ClCompile Include="src\GameObjects\NPCs\Enemy.cpp" />
     <ClCompile Include="src\GameObjects\Particles\Particle.cpp" />
     <ClCompile Include="src\GameObjects\Particles\ParticleSystem.cpp" />
@@ -189,6 +188,7 @@
     <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\HitAble.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\ItemsDrop.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\LinesCollider.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\UserUI.h" />
     <ClInclude Include="src\GameObjects\BlockFactory.h" />
     <ClInclude Include="src\GameObjects\Blocks\Block.h" />
@@ -202,8 +202,6 @@
     <ClInclude Include="src\GameObjects\Items\Tool\ToolItem.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\Ammo.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h" />
-    <ClInclude Include="src\GameObjects\Items\Weapon\ShootingWeapon.h" />
-    <ClInclude Include="src\GameObjects\Items\Weapon\Weapon.h" />
     <ClInclude Include="src\GameObjects\NPCs\Enemy.h" />
     <ClInclude Include="src\GameObjects\Particles\Particle.h" />
     <ClInclude Include="src\GameObjects\Particles\ParticleSystem.h" />

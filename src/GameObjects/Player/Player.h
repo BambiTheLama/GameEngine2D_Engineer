@@ -1,6 +1,5 @@
 #pragma once
 #include "../GameObject.h"
-#include "../Items/Weapon/Weapon.h"
 #include "../AddisionalTypes/AllTypes.h"
 #include "Eq.h"
 #include "MiniMap.h"
