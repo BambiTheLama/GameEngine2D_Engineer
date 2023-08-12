@@ -80,8 +80,6 @@ void ToolItem::update()
 	}
 	if (!isUsing)
 		return;
-	///Szukanie pozycji punktów do kolizji
-	
 
 	float k = ((rotation + 180) * (PI / 180.0f));
 
@@ -109,8 +107,8 @@ void ToolItem::draw()
 	if(faceSide==FaceSide::left)
 		textureSize.width = -textureSize.width;
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
-
-	LinesCollider::draw();
+	if (collidersToDraw)
+		LinesCollider::draw();
 	
 
 }

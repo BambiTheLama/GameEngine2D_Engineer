@@ -2,24 +2,33 @@
 #include <iostream>
 #include "../../core/Scenes/GameScene.h"
 
-Projectal::Projectal(Projectal& obj):GameObject(obj),Collider(obj)
+Projectal::Projectal(Projectal& obj):GameObject(obj),LinesCollider(obj)
 {
+	this->rotation = obj.rotation;
 	this->range = obj.range;
 	this->speed = obj.speed;
+
+	delta = deltaFromDegree(rotation, speed);
+	sprite = new SpriteController(*obj.sprite);
 }
 
-Projectal::Projectal(Rectangle pos, float speed, float rotation, float range, SpriteController* sprite, Vector2 collision[4]):GameObject(pos,""),Collider({0,0,0,0})
+Projectal::Projectal(Rectangle pos, float speed, float rotation, float range,
+	SpriteController* sprite, Vector2 collision[4], CollisionsCheckType collisionType)
+	:GameObject(pos,""),LinesCollider(collisionType)
 {
 	this->rotation = rotation;
 	this->range = range;
-	this->speed = 5;
+	this->speed = speed;
 
 	delta = deltaFromDegree(rotation,speed);
+	this->sprite = new SpriteController(*sprite);
+	addLines(4, collision);
 }
 
 Projectal::~Projectal()
 {
-
+	if (sprite != NULL)
+		delete sprite;
 }
 
 void Projectal::update()
@@ -27,33 +36,33 @@ void Projectal::update()
 	pos.x += delta.x;
 	pos.y += delta.y;
 	range -= speed;
-	if (range <= 0)
+	float k = ((rotation) * (PI / 180.0f));
+	LinesCollider::updateRotation(k, { pos.x ,pos.y }, { pos.x - pos.width / 2,pos.y - pos.height / 2 });
+	LinesCollider::update();
+	if (range <= 0 || destory)
 	{
 		Game->deleteObject(this);
 	}
 	else
 	{
-		toUpdate--;
-		if (toUpdate <= 0)
-		{
-			toUpdate = 5;
-			Game->updatePos(this);
-		}
-			
+		Game->updatePos(this);
 	}
-	std::list<Block*> objs=Game->getBlocks(pos);
 
-	for (auto* obj : objs)
-	{
-		if(obj->isColliding())
-			Game->deleteBlocks(obj->getPos());
-
-	}
 }
 
 void Projectal::draw()
 {
-	//DrawRectanglePro(pos, { pos.width / 2, pos.height / 2 }, rotation, BLACK);
-	DrawRectanglePro(pos, { 0, 0 }, 0, BLACK);
-	
+	Vector2 origin = { pos.width / 2,pos.height / 2 };
+	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, origin, rotation-45, WHITE);
+	LinesCollider::draw();
+}
+
+void Projectal::onCollisionHitable(HitAble* hit)
+{
+	hit->dealDamage(3, 10);
+}
+void Projectal::onCollisionDestroyAble(DestroyAble* dest)
+{
+
+
 }

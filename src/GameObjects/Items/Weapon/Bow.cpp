@@ -1,7 +1,8 @@
 #include "Bow.h"
 #include "Ammo.h"
 #include "../../Player/Eq.h"
-
+#include "../../Projectals/Projectal.h"
+#include ",,/../../../../core/Scenes/GameScene.h"
 Bow::Bow(Bow& b):Item(b)
 {
 	sprite = new SpriteController(*b.sprite);
@@ -85,7 +86,34 @@ void Bow::endUsing()
 {
 	if (chargeTime <= 0)
 		return;
+	if (ammo != NULL)
+	{
+		Rectangle pos = getPos();
+		Vector2 col[4] = { { 0,0 },
+			{ pos.width/6,0 },
+			{ pos.width/6,pos.height/6 },
+			{ 0,pos.height/6 },
+		};
+		for (int i = 0; i < 4; i++)
+		{
+			col[i].x += 13;
+			col[i].y += 6;
+		}
+		pos.x -= numberOfProjectal / 2;
+		pos.y -= numberOfProjectal / 2;
+		for (int i = 0; i < numberOfProjectal; i++)
+		{
+
+			Projectal* pro = new Projectal(pos, (5.0f* chargeTime)/ (float)chargeTimeMax, rotation+45, 500 * (float)chargeTime / (float)chargeTimeMax, ammo->getSprite(), col, CollisionsCheckType::All);
+
+			Game->addObject(pro);
+			pos.x++;
+			pos.y++;
+		}
+	}
+
 	chargeTime = 0;
+
 	if (ammo == NULL)
 	{
 		lookForAmmo();

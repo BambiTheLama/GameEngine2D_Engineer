@@ -34,6 +34,6 @@ public:
 
     virtual StackItem* clone() { return new StackItem(*this); }
 
-
+    SpriteController* getSprite() { return sprite; }
 };
 

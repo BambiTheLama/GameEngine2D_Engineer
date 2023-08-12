@@ -46,8 +46,7 @@ void LinesCollider::draw()
 		DrawLineV(points[i], points[(i + 1) % nPoints], BLACK);
 	for (int i = 0; i < nPoints; i++)
 	{
-		DrawCircleV(points[i], 4, BLUE);
-		DrawText(TextFormat("%d", i), points[i].x, points[i].y, 8, RED);
+		DrawCircleV(points[i], 1, BLUE);
 	}
 }
 void LinesCollider::updateRotation(float rotation, Vector2 origin, Vector2 pos, bool leftSide)
@@ -96,8 +95,10 @@ void LinesCollider::update()
 			maxy = points[i].y;
 	}
 	Rectangle getObj = { minx,miny,maxx - minx,maxy - miny };
-	printf("%lf %lf %lf %lf\n", minx, maxx, miny, maxy);
 	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);
+	GameObject* thisObj = dynamic_cast<GameObject*>(this);
+	if (thisObj != NULL)
+		objs.remove(thisObj);
 	if (type == CollisionsCheckType::All)
 	{
 		for (auto* o : objs)

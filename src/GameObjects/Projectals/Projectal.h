@@ -5,7 +5,7 @@
 /// Klasa która odpowiada za Pociski w naszej grze
 /// </summary>
 class Projectal :
-    public GameObject , public Collider
+    public GameObject , public LinesCollider
 {
     SpriteController* sprite=NULL;
     float rotation;
@@ -13,11 +13,13 @@ class Projectal :
     float range;
     float speed;
     int toUpdate;
+    bool destory = false;
 protected:
     Projectal(Projectal& obj);
 public:
 
-    Projectal(Rectangle pos,float speed, float rotation,float range,SpriteController* sprite,Vector2 collision[4]);
+    Projectal(Rectangle pos, float speed, float rotation, float range,
+        SpriteController* sprite, Vector2 collision[4], CollisionsCheckType collisionType);
 
     ~Projectal();
 
@@ -30,5 +32,9 @@ public:
     ObjectType getType() { return ObjectType::Projectal; }
 
     virtual Projectal* clone() { return new Projectal(*this); }
+
+    void onCollisionHitable(HitAble* hit);
+
+    void onCollisionDestroyAble(DestroyAble* dest);
 };
 

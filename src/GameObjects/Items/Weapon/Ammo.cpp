@@ -15,11 +15,10 @@ void Ammo::drawAmmo(Rectangle pos, float rotation,float chargeProcent,Vector2 or
 	Vector2 origin;
 	origin = { pos.width * 3.0f/ 8.0f,pos.height *5.0f/ 8.0f };
 
-	if (IsKeyUp(KEY_ONE))
-	{
-		origin.x += pos.width / 4 * chargeProcent;
-		origin.y -= pos.height / 4 * chargeProcent;
-	}
+
+	origin.x += pos.width / 4 * chargeProcent;
+	origin.y -= pos.height / 4 * chargeProcent;
+	
 	origin.x += orginOfset.x;
 	origin.y += orginOfset.y;
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, origin, rotation, WHITE);
