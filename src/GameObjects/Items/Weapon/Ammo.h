@@ -20,6 +20,6 @@ public:
 
     virtual ItemType getItemType() { return ItemType::Ammo; }
 
-    void drawAmmo(Rectangle pos, float rotation, float chargeProcent);
+    void drawAmmo(Rectangle pos, float rotation, float chargeProcent, Vector2 orginOfset);
 };
 

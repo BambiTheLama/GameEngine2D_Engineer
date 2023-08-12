@@ -12,6 +12,8 @@ class Bow :
     SpriteController* sprite;
     Eq* eq=NULL;
     Ammo* ammo = NULL;
+    int numberOfProjectal = 3;
+    int numberOfProjectalMax = 3;
 private:
     Bow(Bow& b);
 public:
@@ -36,5 +38,7 @@ public:
     virtual void setEq(Eq* eq) { this->eq = eq; }
 
     void lookForAmmo();
+
+    void setProjectalUsing();
 };
 

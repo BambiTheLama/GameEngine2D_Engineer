@@ -41,8 +41,15 @@ void Bow::draw()
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
 	if (ammo != NULL && chargeTime > 0)
 	{
-		Rectangle ammoPos = pos;
-		ammo->drawAmmo(ammoPos, rotation, (float)chargeTime / (float)chargeTimeMax);
+		Vector2 ammoOffset = { -numberOfProjectal / 2,-numberOfProjectal / 2 };
+
+		for (int i = 0; i < numberOfProjectal; i++)
+		{
+			ammo->drawAmmo(pos, rotation, (float)chargeTime / (float)chargeTimeMax,ammoOffset);
+			ammoOffset.x += 1;
+			ammoOffset.y += 1;
+		}
+
 	}
 
 	//sprite->draw(getPos(), );
@@ -55,6 +62,17 @@ void Bow::drawAt(Rectangle pos)
 
 bool Bow::use()
 {
+	if (chargeTime == 0)
+	{
+		if(ammo==NULL)
+			lookForAmmo();
+		if (ammo != NULL)
+		{
+			setProjectalUsing();
+		}
+	}
+
+
 	if (chargeTime + 1 < chargeTimeMax)
 	{
 		chargeTime++;
@@ -73,8 +91,7 @@ void Bow::endUsing()
 		lookForAmmo();
 		return;
 	}
-
-	ammo->removeFromStack(1);
+	ammo->removeFromStack(numberOfProjectal);
 	if (ammo->getStackSize() <= 0)
 	{
 		eq->removeItem(ammo);
@@ -98,7 +115,15 @@ void Bow::lookForAmmo()
 			if (ammo == NULL)
 				continue;
 			this->ammo = ammo;
-
+			return;
 		}
 	
+}
+
+void Bow::setProjectalUsing()
+{
+	if (numberOfProjectalMax <= ammo->getStackSize())
+		numberOfProjectal = numberOfProjectalMax;
+	else
+		numberOfProjectal = ammo->getStackSize();
 }

@@ -1,2 +1,19 @@
-﻿  Ammo.cpp
+﻿  ItemFactory.cpp
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\ItemFactory.h(57,16): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,85): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,44): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.h(21,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.h(33,57): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.h(33,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\ItemFactory.cpp(118,21): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\ItemFactory.cpp(118,21): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\ItemFactory.cpp(118,24): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\ItemFactory.cpp(118,24): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+  Bow.cpp
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Bow.cpp(44,45): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Bow.cpp(44,45): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Bow.cpp(44,68): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Bow.cpp(44,68): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+  Generowanie kodu...
   GameEngine2D.vcxproj -> C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\x64\Debug\GameEngine2D.exe
