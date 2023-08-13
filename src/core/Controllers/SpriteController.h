@@ -8,8 +8,9 @@
 class SpriteController
 {
 	static std::vector<SpriteController*> sprites;
+	std::string path;
 	Texture2D texture;
-	std::string path;	
+
 public:
 	/// <summary>
 	/// Konstruktor do klasy poprzez œcie¿kê

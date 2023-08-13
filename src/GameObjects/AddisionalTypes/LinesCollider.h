@@ -9,11 +9,10 @@ enum class CollisionsCheckType
 };
 class LinesCollider
 {
+    int nPoints = 0;
+    float rotation = 0;
     Vector2* points = NULL;
     Vector2* startPoints = NULL;
-    int nPoints=0;
-    float rotation = 0;
-
     CollisionsCheckType type;
 protected:
     LinesCollider(LinesCollider& lines);

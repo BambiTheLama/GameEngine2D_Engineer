@@ -92,6 +92,7 @@ bool Eq::addItem(Item* item)
 				if (items[i][j] != NULL && items[i][j]->addToStack(item))
 				{
 					player->updateRecepies();
+
 					return true;
 				}
 
@@ -109,6 +110,7 @@ bool Eq::addItem(Item* item)
 			{
 				items[i][j] = item->clone();
 				items[i][j]->setEq(this);
+				items[i][j]->setInHand(true);
 				player->updateRecepies();
 				return true;
 			}
@@ -160,7 +162,12 @@ void Eq::update()
 void Eq::mouseWeel()
 {
 	if (items[usingItemY][usingItemX] == NULL || items[usingItemY][usingItemX]->canChangeItem())
+	{
 		usingItem = (int)(EqWight + usingItem + GetMouseWheelMove()) % EqWight;
+		changeItem();
+
+	}
+
 }
 
 bool Eq::isPressedOnEq()
@@ -220,6 +227,7 @@ void Eq::updateEqPressed()
 		player->updateRecepies();
 	}
 	usingItem = x + y * EqWight;
+	changeItem();
 }
 
 void Eq::draw()
@@ -297,6 +305,7 @@ void Eq::addItemToHand(Item* item)
 	{
 		itemInHand = item;
 		itemInHand->setEq(this);
+		itemInHand->setInHand(false);
 		player->updateRecepies();
 		return;
 	}
@@ -337,6 +346,7 @@ void Eq::dropItemFromHand()
 		return;
 	Game->addObject(itemInHand);
 	Vector2 cursor = Game->getCursorPos();
+	itemInHand->setInHand(false);
 	itemInHand->setMovePos(cursor);
 	itemInHand->setEq(NULL);
 	itemInHand = NULL;
@@ -381,4 +391,18 @@ void Eq::removeItem(Item* item)
 			}
 		}
 	}
+}
+
+void Eq::changeItem()
+{
+	if (itemInHand == NULL)
+	{
+		usingItemX = usingItem % EqWight;
+		usingItemY = usingItem / EqWight;
+		if (items[usingItemY][usingItemX] != NULL)
+			items[usingItemY][usingItemX]->updateAfterSwap();
+	}
+	else
+		itemInHand->updateAfterSwap();
+
 }

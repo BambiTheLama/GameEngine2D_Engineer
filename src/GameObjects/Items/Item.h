@@ -31,6 +31,8 @@ public:
 
     virtual bool use();
 
+    virtual void updateAfterSwap() {};
+
     virtual void endUsing(){}
 
     virtual bool addToStack(Item* i) { return false; }
@@ -60,6 +62,8 @@ public:
     virtual bool canChangeItem() { return true; }
 
     virtual void setEq(Eq *eq){}
+
+    virtual void setInHand(bool inHand) { }
 
     friend class Recipes;
 };

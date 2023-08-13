@@ -53,9 +53,10 @@ ItemFactory::ItemFactory()
 	tool->setStartPoints(points);
 	objects.push_back(tool);
 
-	objects.push_back(new Bow({ 0,0,32,32 }, "Bow"));
-	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", AmmoType::Arrow));
-	
+	objects.push_back(new Bow({ 0,0,32,32 }, "Bow",20, 1.1f, 1.0f, 1));
+	objects.push_back(new Bow({ 0,0,32,32 }, "Bow",60, 0.1f, 2.0f, 69));
+	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", 5, 500, AmmoType::Arrow));
+	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", 15, 500, AmmoType::Arrow));
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->ID = i;

@@ -5,8 +5,9 @@
 /// </summary>
 class AnimationController
 {
+	bool toDelete = false;
 	std::vector<SpriteController*> sprites;
-	bool toDelete=false;
+
 public:
 	/// <summary>
 	/// konstruktor do której podajemy vektor z wszystkimi animacjami

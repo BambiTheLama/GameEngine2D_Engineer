@@ -2,12 +2,12 @@
 #include "raylib.h"
 class Particle
 {
-	Rectangle pos;
-	Vector2 velosity;
-	Color colorStart;
-	Color colorEnd;
 	int time;
 	int timeMax;
+	Rectangle pos;
+	Color colorEnd;
+	Color colorStart;
+	Vector2 velosity;
 	Particle(Particle& particle);
 public:
 	Particle(Rectangle pos,int time,Vector2 velosity,Color color,Color end={0,0,0,0});

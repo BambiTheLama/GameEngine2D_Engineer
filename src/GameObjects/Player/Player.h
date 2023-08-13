@@ -13,15 +13,16 @@ enum class playerAnimationState {
 class Player :
     public GameObject, public Collider , public UserUI
 {
+    bool canMove = true;
+    int pickUpRange = 100;
     float speed;
+    float frame = 0;
+    Eq* eq;
+    MiniMap* miniMap;
+    CraftingStation* crafting;
     AnimationController* animations;
     playerAnimationState state = playerAnimationState::IDE;
-    float frame = 0;
-    bool canMove = true;
-    Eq* eq;
-    CraftingStation* crafting;
-    MiniMap* miniMap;
-    int pickUpRange = 100;
+
 protected:
     Player(Player& obj);
 public:

@@ -205,6 +205,9 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 
 void ObjectHandler::deleteObject(GameObject* obj) 
 {
+	for (auto* o : objectsToDelete)
+		if (o == obj)
+			return;
 	objectsToDelete.push_back(obj); 
 }
 

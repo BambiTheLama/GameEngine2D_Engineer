@@ -15,12 +15,13 @@ class Player;
 /// </summary>
 class Eq
 {
-	int usingItem = 0, usingItemX = 0, usingItemY = 0;
-	Item*** items = NULL;
-	Item* itemInHand = NULL;
 	bool fullEq = false;
+	int usingItem = 0, usingItemX = 0, usingItemY = 0;
 	FaceSide faceSide;
-	Player* player=NULL;
+	Item*** items = NULL;
+	Player* player = NULL;
+	Item* itemInHand = NULL;
+
 public:
 	/// <summary>
 	/// Tworzy obiekt ekwipunku
@@ -143,5 +144,7 @@ public:
 	void endUsingItem();
 
 	void removeItem(Item *item);
+
+	void changeItem();
 };
 

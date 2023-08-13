@@ -19,10 +19,13 @@ class Block :
     public GameObject, public DestroyAble, public ItemsDrop
 {
 protected:
-    Block(Block& obj);
-    SpriteController* sprite;
-    Rectangle texturePos;
     bool right = true, left = true, down = true, up = true;
+    Rectangle texturePos;
+    SpriteController* sprite;
+    Block(Block& obj);
+
+
+
     
 public:
     Block(Rectangle pos, ToolType requestType, int power, std::string name);

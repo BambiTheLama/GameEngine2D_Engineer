@@ -3,10 +3,14 @@
 Ammo::Ammo(Ammo& ammo):StackItem(ammo)
 {
 	this->ammoType = ammo.ammoType;
+	this->speed = ammo.speed;
+	this->range = ammo.range;
 }
-Ammo::Ammo(Rectangle pos, std::string name, AmmoType ammoType):StackItem(pos,name,999)
+Ammo::Ammo(Rectangle pos, std::string name, float speed, float range, AmmoType ammoType):StackItem(pos,name,999)
 {
 	this->ammoType = ammoType;
+	this->speed = speed;
+	this->range = range;
 	setStackSize(100);
 }
 

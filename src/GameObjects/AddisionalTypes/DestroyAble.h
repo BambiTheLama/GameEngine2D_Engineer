@@ -21,8 +21,8 @@ bool isThisToolType(ToolType tool, ToolType requestTool);
 class DestroyAble
 {
 protected:
+    int power, hp;
     ToolType itemToolRequest;
-    int power,hp;
     DestroyAble(DestroyAble& destroyable);
 public:
     DestroyAble(ToolType toolToDestroy,int hp=1,int power=0);

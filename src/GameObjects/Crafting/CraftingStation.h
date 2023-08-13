@@ -5,14 +5,16 @@
 
 class CraftingStation
 {
+	bool onlyICanCraft = true;
+	bool canSee = false;
+	int firstItem = 0;
+	Rectangle pos[9];
+	std::vector<Item*> items;
 	CraftingStationEnum station;
 	std::vector<Recipes*> allRecepies;
 	std::vector<Recipes*> itemsICanCraft;
-	std::vector<Item*> items;
-	int firstItem = 0;
-	bool onlyICanCraft = true;
-	bool canSee = false;
-	Rectangle pos[9];
+
+
 public:
 	CraftingStation(CraftingStationEnum station);
 	/// <summary>

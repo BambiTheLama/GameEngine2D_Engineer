@@ -10,14 +10,14 @@
 class GameScene :
     public Scene
 {
-    static GameScene* game;
-    ObjectHandler *handler;
-    std::list<UserUI*> userUI;
-    Vector2 cursorPos;
+    float zoom = 1;
     Camera2D camera;
-    GameObject* cameraTarget;
-    float zoom=1;
+    Vector2 cursorPos;
     Rectangle cameraPos;
+    ObjectHandler* handler;
+    GameObject* cameraTarget;
+    std::list<UserUI*> userUI;
+    static GameScene* game;
 public:
     /// <summary>
     /// Konstruktor od sceny gry

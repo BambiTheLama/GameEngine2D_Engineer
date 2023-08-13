@@ -100,6 +100,11 @@ bool ToolItem::use()
 }
 void ToolItem::draw()
 {
+	if (!inHand)
+	{
+		sprite->draw(getPos(), 0);
+		return;
+	}
 	if (useTime<=0)
 		return;
 	Rectangle textureSize = sprite->getTextureSize();

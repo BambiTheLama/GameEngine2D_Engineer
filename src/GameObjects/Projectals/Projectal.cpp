@@ -37,15 +37,16 @@ void Projectal::update()
 	pos.y += delta.y;
 	range -= speed;
 	float k = ((rotation) * (PI / 180.0f));
-	LinesCollider::updateRotation(k, { pos.x ,pos.y }, { pos.x - pos.width / 2,pos.y - pos.height / 2 });
-	LinesCollider::update();
-	if (range <= 0 || destory)
+
+	if (range <= 0)
 	{
 		Game->deleteObject(this);
 	}
 	else
 	{
 		Game->updatePos(this);
+		LinesCollider::updateRotation(k, { pos.x ,pos.y }, { pos.x - pos.width / 2,pos.y - pos.height / 2 });
+		LinesCollider::update();
 	}
 
 }
@@ -59,10 +60,13 @@ void Projectal::draw()
 
 void Projectal::onCollisionHitable(HitAble* hit)
 {
-	hit->dealDamage(3, 10);
+	hit->dealDamage(3, 5);
+
 }
 void Projectal::onCollisionDestroyAble(DestroyAble* dest)
 {
-
+	dest->damageObject(0, ToolType::NON);
+	if (dest->isToolGoBack())
+		Game->deleteObject(this);
 
 }

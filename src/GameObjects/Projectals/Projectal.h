@@ -7,13 +7,13 @@
 class Projectal :
     public GameObject , public LinesCollider
 {
-    SpriteController* sprite=NULL;
-    float rotation;
-    Vector2 delta;
+    bool destory = false;
+    int toUpdate;
     float range;
     float speed;
-    int toUpdate;
-    bool destory = false;
+    float rotation;
+    Vector2 delta;
+    SpriteController* sprite = NULL;
 protected:
     Projectal(Projectal& obj);
 public:
