@@ -51,6 +51,7 @@ void LinesCollider::draw()
 }
 void LinesCollider::updateRotation(float rotation, Vector2 origin, Vector2 pos, bool leftSide)
 {
+	rotation = ((rotation) * (PI / 180.0f));
 	if (leftSide)
 	{
 		for (int i = 0; i < nPoints; i++)
@@ -77,7 +78,7 @@ void LinesCollider::updateRotation(float rotation, Vector2 origin, Vector2 pos, 
 
 }
 
-void LinesCollider::update()
+void LinesCollider::update(float deltaTime)
 {
 	float minx = points[0].x;
 	float maxx = points[0].x;

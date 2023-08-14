@@ -2,17 +2,17 @@
 #include "raylib.h"
 class Particle
 {
-	int time;
-	int timeMax;
+	float time;
+	float timeMax;
 	Rectangle pos;
 	Color colorEnd;
 	Color colorStart;
 	Vector2 velosity;
 	Particle(Particle& particle);
 public:
-	Particle(Rectangle pos,int time,Vector2 velosity,Color color,Color end={0,0,0,0});
+	Particle(Rectangle pos,float time,Vector2 velosity,Color color,Color end={0,0,0,0});
 
-	void update();
+	void update(float deltaTime);
 
 	void draw();
 
@@ -20,7 +20,7 @@ public:
 
 	void moveTo(Vector2 pos) { this->pos.x = pos.x; this->pos.y = pos.y; }
 
-	void setTime(int time) { this->time = time; timeMax = time; }
+	void setTime(float time) { this->time = time; timeMax = time; }
 
 	void setVelosity(Vector2 velosity) { this->velosity = velosity; }
 

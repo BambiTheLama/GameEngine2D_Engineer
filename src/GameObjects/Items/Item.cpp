@@ -12,7 +12,7 @@ Item::~Item()
 
 }
 
-void Item::update()
+void Item::update(float deltaTime)
 {
 
 }
@@ -27,7 +27,7 @@ void Item::drawAt(Rectangle pos)
 
 }
 
-bool Item::use()
+bool Item::use(float deltaTime)
 {
 	return false;
 }

@@ -31,12 +31,11 @@ Projectal::~Projectal()
 		delete sprite;
 }
 
-void Projectal::update()
+void Projectal::update(float deltaTime)
 {
-	pos.x += delta.x;
-	pos.y += delta.y;
-	range -= speed;
-	float k = ((rotation) * (PI / 180.0f));
+	pos.x += delta.x * 64.0f * deltaTime;
+	pos.y += delta.y * 64.0f * deltaTime;
+	range -= speed * 64.0f * deltaTime;
 
 	if (range <= 0)
 	{
@@ -45,8 +44,8 @@ void Projectal::update()
 	else
 	{
 		Game->updatePos(this);
-		LinesCollider::updateRotation(k, { pos.x ,pos.y }, { pos.x - pos.width / 2,pos.y - pos.height / 2 });
-		LinesCollider::update();
+		LinesCollider::updateRotation(rotation, { pos.x ,pos.y }, { pos.x - pos.width / 2,pos.y - pos.height / 2 });
+		LinesCollider::update(deltaTime);
 	}
 
 }
@@ -60,7 +59,7 @@ void Projectal::draw()
 
 void Projectal::onCollisionHitable(HitAble* hit)
 {
-	hit->dealDamage(3, 5);
+	hit->dealDamage(3, 0.1f);
 
 }
 void Projectal::onCollisionDestroyAble(DestroyAble* dest)

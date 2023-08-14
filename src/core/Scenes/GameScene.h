@@ -34,7 +34,7 @@ public:
     /// <summary>
     /// Aktualizacja wszystkich obiektów
     /// </summary>
-    void update();
+    void update(float deltaTime);
     /// <summary>
     /// Rysowanie wszystkich obiektów
     /// </summary>

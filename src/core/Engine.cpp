@@ -14,7 +14,7 @@ Engine::Engine()
 {
 	InitWindow(1600, 900, "MyGame");
 	InitAudioDevice();
-	SetTargetFPS(60);
+	//SetTargetFPS(60);
 
 	scene = new GameScene();
 	Items;
@@ -37,23 +37,31 @@ Engine::~Engine()
 }
 void Engine::start()
 {
-	
+
+	float deltaTime = 0;
 	scene->start();
+	double time = 0;
+	double time2 = GetTime();
 	while (!WindowShouldClose())
 	{
-		update();
+		deltaTime = time2 - time;
+		printf("Delta Time %lf\n",deltaTime);
+		update(deltaTime);
 		BeginDrawing();
 		ClearBackground(WHITE);
 		draw();
 		DrawFPS(0, 0);
 		EndDrawing();
+		time = time2;
+		time2 = GetTime();
+		
 	}
 
 }
 
-void Engine::update()
+void Engine::update(float deltaTime)
 {
-	scene->update();
+	scene->update(deltaTime);
 	if (IsKeyPressed(KEY_F1) && IsKeyDown(KEY_LEFT_SHIFT))
 		Properties::getProperties()->showColliders = !collidersToDraw;
 }

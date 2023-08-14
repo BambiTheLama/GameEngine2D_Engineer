@@ -40,7 +40,7 @@ public:
 	/// Metoda wykonuj¹c uzycie przedmiotu który mamy aktualnie w rêce
 	/// </summary>
 	/// <returns>Czy uda³o siê u¿yæ przedmiot</returns>
-	bool useItem();
+	bool useItem(float deltaTime);
 	/// <summary>
 	/// Dodaje item do plecaka
 	/// </summary>
@@ -67,7 +67,7 @@ public:
 	/// <summary>
 	/// Metoda która aktualizuje ekwipunek
 	/// </summary>
-	void update();
+	void update(float deltaTime);
 	/// <summary>
 	/// Aktualizuje u¿ywany przedmiot na podstawie poruszenia kó³kiem od myszy
 	/// </summary>

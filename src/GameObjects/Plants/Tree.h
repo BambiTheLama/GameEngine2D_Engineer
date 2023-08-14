@@ -6,7 +6,7 @@ class Tree :
 {
     int age = 0;
     int maxAge = 0;
-    int timer = 60;
+    float timer = 60;
     Tree(Tree& tree);
 public:
     Tree(Rectangle pos,std::string name);
@@ -17,7 +17,7 @@ public:
 
     void incrementAge();
 
-    void update();
+    void update(float deltaTime);
 
     void draw();
 

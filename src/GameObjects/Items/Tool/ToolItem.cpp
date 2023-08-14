@@ -16,7 +16,7 @@ ToolItem::ToolItem(Rectangle pos, std::string name,ToolType destroyType,int powe
 {
 	std::string path = "Resource/Items/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
-	useTimeMax = 20;
+	useTimeMax = 0.5f;
 	useTime = 0;
 	damage = 5;
 	origin = { 0,pos.width };
@@ -31,11 +31,11 @@ ToolItem::~ToolItem()
 
 
 
-void ToolItem::update()
+void ToolItem::update(float deltaTime)
 {
 	if (useTime > 0)
 	{
-		useTime--;
+		useTime-=deltaTime;
 		if (useTime <= 0)
 			isUsing = false;
 	}
@@ -81,17 +81,15 @@ void ToolItem::update()
 	if (!isUsing)
 		return;
 
-	float k = ((rotation + 180) * (PI / 180.0f));
-
-	LinesCollider::updateRotation(k, { pos.x,pos.y }, { pos.x,pos.y }, faceSide == FaceSide::left);
+	LinesCollider::updateRotation(rotation + 180, { pos.x,pos.y }, { pos.x,pos.y }, faceSide == FaceSide::left);
 	
-	LinesCollider::update();
+	LinesCollider::update(deltaTime);
 
 }
 
 
 
-bool ToolItem::use()
+bool ToolItem::use(float deltaTime)
 {
 	if (useTime>0)
 		return false;
@@ -134,7 +132,7 @@ void ToolItem::setStartPoints(Vector2 startPoints[4])
 
 void ToolItem::onCollisionHitable(HitAble* hit)
 {
-	hit->dealDamage(damage, 10);
+	hit->dealDamage(damage, 2);
 }
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)
 {

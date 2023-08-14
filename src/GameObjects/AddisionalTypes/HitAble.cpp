@@ -14,17 +14,17 @@ HitAble::HitAble(int hp)
 	this->hp = hp;
 }
 
-void HitAble::update()
+void HitAble::update(float deltaTime)
 {
 	if (invisibleFrame > 0)
-		invisibleFrame--;
+		invisibleFrame-=deltaTime;
 }
 void HitAble::draw(Rectangle pos)
 {
 	DrawRectangleRec(pos, GRAY);
 	DrawRectangle(pos.x, pos.y, pos.width * hp / maxHp, pos.height, GREEN);
 }
-bool HitAble::dealDamage(int damage, int invisibleFrame)
+bool HitAble::dealDamage(int damage, float invisibleFrame)
 {
 	if(this->invisibleFrame > 0)
 	{

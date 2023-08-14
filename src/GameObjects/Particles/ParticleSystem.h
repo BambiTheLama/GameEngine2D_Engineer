@@ -6,17 +6,19 @@ class ParticleSystem :
 {
 
 protected:
-    Particle** particles;
+
     int n;
+    float timeMin = 0;
+    float timeMax = 0;
+    Particle** particles;
     Vector2 velosityRandMin = { 0,0 };
     Vector2 velosityRandMax = { 0,0 };
-    int timeMin = 0;
-    int timeMax = 0;
+
     ParticleSystem(ParticleSystem& particleSystem);
 public:
     ParticleSystem(Rectangle pos, std::string name, Particle* particle, int n = 10);
 
-    void setTime(int timeMin, int timeMax) { this->timeMax = timeMax; this->timeMin = timeMin; }
+    void setTime(float timeMin, float timeMax) { this->timeMax = timeMax; this->timeMin = timeMin; }
 
     void setVelosity(Vector2 velosityMin, Vector2 velostyMax) { velosityRandMax = velostyMax; velosityRandMin = velosityMin; }
 
@@ -24,7 +26,7 @@ public:
 
     virtual void start();
 
-    virtual void update();
+    virtual void update(float deltaTime);
 
     virtual void draw();
 

@@ -22,7 +22,7 @@ public:
     void addLines(int n, Vector2* points);
     void draw();
     void updateRotation(float rotation, Vector2 origin, Vector2 pos,bool leftSide=true);
-    void update();
+    void update(float deltaTime);
     virtual void onCollisionHitable(HitAble* hit);
     virtual void onCollisionDestroyAble(DestroyAble* dest);
 };

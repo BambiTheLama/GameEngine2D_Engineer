@@ -19,7 +19,7 @@ Plant::~Plant()
 	delete sprite;
 }
 
-void Plant::update()
+void Plant::update(float deltaTime)
 {
 
 }

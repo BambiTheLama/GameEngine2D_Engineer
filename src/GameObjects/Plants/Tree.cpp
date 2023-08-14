@@ -38,11 +38,11 @@ void Tree::incrementAge()
 
 }
 
-void Tree::update()
+void Tree::update(float deltaTime)
 {
 	if (timer > 0 && age<maxAge)
 	{
-		timer--;
+		timer-=deltaTime;
 		if (timer <= 0)
 		{
 			incrementAge();
@@ -75,9 +75,9 @@ void Tree::damageObject(int power, ToolType type)
 	if (h != hp)
 	{
 		Rectangle pos = getCollisionPos();
-		Particle* particle=new Particle({0,0,5,5},40,{2,4},{77,26,1,255},{255,170,30,0});
+		Particle* particle=new Particle({0,0,5,5},1,{2,4},{77,26,1,255},{255,170,30,0});
 		ParticleSystem* particleSystem = new ParticleSystem(pos, "", particle, 10);
-		particleSystem->setTime(30, 60);
+		particleSystem->setTime(0.5f, 1.0f);
 		particleSystem->setVelosity({ -1,-1 }, { 1,1 });
 		Game->addObject(particleSystem);
 	}

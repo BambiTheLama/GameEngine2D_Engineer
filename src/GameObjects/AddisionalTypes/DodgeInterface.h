@@ -26,7 +26,7 @@ public:
 	/// <summary>
 	/// Aktualizuje dane
 	/// </summary>
-	void update();
+	void update(float deltaTime);
 	/// <summary>
 	/// Metoda wykonuj¹ca unik w podan¹ pozycjê
 	/// </summary>

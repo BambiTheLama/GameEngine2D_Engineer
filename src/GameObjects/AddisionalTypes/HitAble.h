@@ -8,15 +8,15 @@ class HitAble
 protected:
 	int hp=0;
 	int maxHp=0;
-	int invisibleFrame=0;
+	float invisibleFrame=0;
 	HitAble(HitAble& h);
 public:
 
 	HitAble(int hp);
 
-	virtual void update();
+	virtual void update(float deltaTime);
 
-	virtual bool dealDamage(int damage,int invisibleFrame=0);
+	virtual bool dealDamage(int damage,float invisibleFrame=0);
 
 	virtual void draw(Rectangle pos);
 

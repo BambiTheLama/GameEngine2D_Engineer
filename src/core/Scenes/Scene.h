@@ -16,7 +16,7 @@ public:
 	/// <summary>
 	/// Metoda aktualizujaca
 	/// </summary>
-	virtual void update() = 0;
+	virtual void update(float deltaTime) = 0;
 	/// <summary>
 	/// Metoda rysuj¹ca
 	/// </summary>

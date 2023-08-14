@@ -42,11 +42,11 @@ public:
     /// <summary>
     /// Metoda aktualizuj¹ca gracza
     /// </summary>
-    void update();
+    void update(float deltaTime);
     /// <summary>
     /// Metoda od poruszania siê gracza
     /// </summary>
-    void move();
+    void move(float deltaTime);
     /// <summary>
     /// Metoda rysuj¹ca gracza
     /// </summary>
@@ -75,7 +75,7 @@ public:
     /// <summary>
     /// Wszystko co jest wykonywane z Eq
     /// </summary>
-    void updateEq();
+    void updateEq(float deltaTime);
 
     virtual Player* clone() { return new Player(*this); }
 

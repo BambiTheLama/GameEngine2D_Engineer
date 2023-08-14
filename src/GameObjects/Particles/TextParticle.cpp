@@ -17,10 +17,10 @@ TextParticle::~TextParticle()
 }
 
 
-void TextParticle::update()
+void TextParticle::update(float deltaTime)
 {
-	time--;
-	pos.y--;
+	time-=deltaTime;
+	pos.y-=deltaTime*64.0f;
 	if (time <= 0)
 	{
 		Game->deleteObject(this);

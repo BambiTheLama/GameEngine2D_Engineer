@@ -6,8 +6,8 @@ class Bow :
     public Item
 {
     bool inHand = false;
-    int chargeTime;
-    int chargeTimeMax;
+    float chargeTime;
+    float chargeTimeMax;
     int numberOfProjectal = 3;
     int numberOfProjectalMax = 3;
     float rotation=0;
@@ -20,17 +20,17 @@ class Bow :
 private:
     Bow(Bow& b);
 public:
-    Bow(Rectangle pos, std::string name,int chargeTime,float speedMultiplier, float rangeMultiplier ,int numberOfProjectal=1);
+    Bow(Rectangle pos, std::string name,float chargeTime,float speedMultiplier, float rangeMultiplier ,int numberOfProjectal=1);
 
     ~Bow();
 
-    virtual void update();
+    virtual void update(float deltaTime);
 
     virtual void draw();
 
     virtual void drawAt(Rectangle pos);
 
-    virtual bool use();
+    virtual bool use(float deltaTime);
 
     virtual void updateAfterSwap();
 

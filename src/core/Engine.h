@@ -23,7 +23,7 @@ public:
 	/// <summary>
 	/// Metoda która aktualizuje wszsytkie obiekty
 	/// </summary>
-	void update();
+	void update(float deltaTime);
 	/// <summary>
 	/// Metoda która rysuje wszystkie obiekty
 	/// </summary>

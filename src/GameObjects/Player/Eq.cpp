@@ -119,15 +119,15 @@ bool Eq::addItem(Item* item)
 	return false;
 }
 
-bool Eq::useItem()
+bool Eq::useItem(float deltaTime)
 {
 	if (itemInHand != NULL)
 	{
-		return itemInHand->use();
+		return itemInHand->use(deltaTime);
 	}
 	if (items[usingItemY][usingItemX] != NULL)
 	{
-		return items[usingItemY][usingItemX]->use();
+		return items[usingItemY][usingItemX]->use(deltaTime);
 	}
 	return false;
 }
@@ -140,11 +140,11 @@ void Eq::updateItemPos(Vector2 movePos)
 		items[usingItemY][usingItemX]->setMovePos(movePos);;
 }
 
-void Eq::update()
+void Eq::update(float deltaTime)
 {
 	if (itemInHand != NULL)
 	{
-		itemInHand->update();
+		itemInHand->update(deltaTime);
 		itemInHand->setFaceSide(faceSide);
 	}
 	else
@@ -153,7 +153,7 @@ void Eq::update()
 		usingItemY = usingItem / EqWight;
 		if (items[usingItemY][usingItemX] != NULL)
 		{
-			items[usingItemY][usingItemX]->update();
+			items[usingItemY][usingItemX]->update(deltaTime);
 			items[usingItemY][usingItemX]->setFaceSide(faceSide);
 		}
 	}

@@ -21,7 +21,7 @@ StackItem::~StackItem()
 	delete sprite;
 }
 
-bool StackItem::use()
+bool StackItem::use(float deltaTime)
 {
 	return false;
 }

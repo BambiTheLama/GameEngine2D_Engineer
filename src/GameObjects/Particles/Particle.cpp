@@ -10,7 +10,7 @@ Particle::Particle(Particle& particle)
 	timeMax = time;
 }
 
-Particle::Particle(Rectangle pos, int time, Vector2 velosity,Color start,Color end)
+Particle::Particle(Rectangle pos, float time, Vector2 velosity,Color start,Color end)
 {
 	this->pos = pos;
 	this->time = time;
@@ -20,11 +20,11 @@ Particle::Particle(Rectangle pos, int time, Vector2 velosity,Color start,Color e
 	timeMax = time;
 }
 
-void Particle::update()
+void Particle::update(float deltaTime)
 {
-	time--;
-	pos.x += velosity.x;
-	pos.y += velosity.y;
+	time-=deltaTime;
+	pos.x += velosity.x*deltaTime*64;
+	pos.y += velosity.y*deltaTime*64;
 }
 Color blendColor(Color c1, Color c2, float p)
 {

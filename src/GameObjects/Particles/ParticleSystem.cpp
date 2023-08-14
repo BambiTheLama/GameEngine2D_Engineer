@@ -45,8 +45,15 @@ void ParticleSystem::start()
 			float x = pos.x + rand() % (int)pos.width;
 			float y = pos.y + rand() % (int)pos.height;
 			particles[i]->moveTo({ x,y });
-			int time = timeMin + rand() % (timeMax - timeMin);
-			particles[i]->setTime(time);
+
+			int t = (timeMax - timeMin) * 1000;
+			if (t > 0)
+			{
+				float time = timeMin + (rand() % t) / 1000.0f;
+
+				particles[i]->setTime(time);
+			}
+
 			Vector2 velosty = {0,0};
 			velosty.y = velosityRandMin.y + (rand() % (int)((velosityRandMax.y - velosityRandMin.y)*1000))/1000.0f;
 			velosty.x = velosityRandMin.x + (rand() % (int)((velosityRandMax.x - velosityRandMin.x)*1000))/1000.0f;
@@ -55,14 +62,14 @@ void ParticleSystem::start()
 
 }
 
-void ParticleSystem::update()
+void ParticleSystem::update(float deltaTime)
 {
 	int active = n;
 	for (int i = 0; i < n; i++)
 	{
 		if (particles[i] != NULL)
 		{
-			particles[i]->update();
+			particles[i]->update(deltaTime);
 			if (particles[i]->canDestory())
 			{
 				active--;

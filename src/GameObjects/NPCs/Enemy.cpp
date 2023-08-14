@@ -18,9 +18,9 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::update()
+void Enemy::update(float deltaTime)
 {
-	HitAble::update();
+	HitAble::update(deltaTime);
 }
 
 void Enemy::draw()

@@ -3,15 +3,15 @@
 class TextParticle :
     public GameObject
 {
-    int time = 60;
-    int timeMax = 60;
+    float time = 1.0f;
+    float timeMax = 1.0f;
     TextParticle(TextParticle& e);
 public:
     TextParticle(Rectangle pos, std::string name);
 
     virtual ~TextParticle();
 
-    virtual void update();
+    virtual void update(float deltaTime);
 
     virtual void draw();
 

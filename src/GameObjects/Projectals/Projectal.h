@@ -23,7 +23,7 @@ public:
 
     ~Projectal();
 
-    void update();
+    void update(float deltaTime);
 
     void draw();
 

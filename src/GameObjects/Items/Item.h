@@ -23,13 +23,13 @@ public:
 
     virtual ~Item();
 
-    virtual void update();
+    virtual void update(float deltaTime);
 
     virtual void draw();
 
     virtual void drawAt(Rectangle pos);
 
-    virtual bool use();
+    virtual bool use(float deltaTime);
 
     virtual void updateAfterSwap() {};
 

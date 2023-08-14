@@ -75,7 +75,7 @@ ObjectHandler::~ObjectHandler()
 }
 void ObjectHandler::clearLists()
 {
-	update();
+	update(0);
 	for (GameObject* obj : objects)
 		delete obj;
 	objects.clear();
@@ -226,7 +226,7 @@ void ObjectHandler::removeObject(GameObject* obj)
 	objectsToRemove.push_back(obj); 
 }
 
-void ObjectHandler::update()
+void ObjectHandler::update(float deltaTime)
 {
 	if (objectsToRemove.size() > 0)
 	{

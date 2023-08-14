@@ -56,7 +56,7 @@ public:
     /// <summary>
     /// Usuwa i dodaje nowe obiekty do kolekcji
     /// </summary>
-    void update();
+    void update(float deltaTime);
     /// <summary>
     /// Usuwa obiekt z kolekcji oraz czysci go z pamiêci
     /// </summary>

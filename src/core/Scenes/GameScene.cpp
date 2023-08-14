@@ -31,7 +31,7 @@ void GameScene::start()
 	handler->start();
 	addObject(new Enemy());
 }
-void GameScene::update()
+void GameScene::update(float deltaTime)
 {
 	Rectangle pos = cameraTarget->getPos();
 	camera.target = { pos.x + pos.width/2, pos.y + pos.height/2 };
@@ -48,8 +48,8 @@ void GameScene::update()
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
 	std::list<GameObject*> objects = handler->getObjects(updatePos,ObjectToGet::getNoBlocks);
 	for (GameObject* obj : objects)
-		obj->update();
-	handler->update();
+		obj->update(deltaTime);
+	handler->update(deltaTime);
 
 	//printf("Iloœæ elementów: %d\n", objects.size());
 

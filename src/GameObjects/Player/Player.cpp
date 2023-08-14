@@ -146,14 +146,14 @@ void Player::updateCrafting()
 	}
 }
 
-void Player::updateEq()
+void Player::updateEq(float deltaTime)
 {
-	eq->update();
+	eq->update(deltaTime);
 	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
 		if (!eq->isPressedOnEq() &&!crafting->isPressedInCraftingUI())
-			eq->useItem();
+			eq->useItem(deltaTime);
 		else
 			eq->endUsingItem();
 	}
@@ -184,16 +184,16 @@ void Player::updateEq()
 
 }
 
-void Player::update()
+void Player::update(float deltaTime)
 {
-	move();
+	move(deltaTime);
 	Game->updatePos(this);
-	updateEq();
+	updateEq(deltaTime);
 	pickUpItemsClose();
 	updateCrafting();
 }
 
-void Player::move()
+void Player::move(float deltaTime)
 {
 	
 	Vector2 posTmp = { 0,0 };
@@ -201,24 +201,25 @@ void Player::move()
 	{
 		if (IsKeyDown(KEY_A))
 		{
-			posTmp.x -= speed;
+			posTmp.x -= 1;
 		}
 		if (IsKeyDown(KEY_D))
 		{
-			posTmp.x += speed;
+			posTmp.x += 1;
 		}
 		if (IsKeyDown(KEY_W))
 		{
-			posTmp.y -= speed;
+			posTmp.y -= 1;
 		}
 		if (IsKeyDown(KEY_S))
 		{
-			posTmp.y += speed;
+			posTmp.y += 1;
 		}
 		if (eq->canChangeItem())
 		{
 			if (posTmp.x != 0)
 			{
+				posTmp.x *= speed * 64.0f * deltaTime;
 				if (posTmp.x > 0)
 				{
 					state = playerAnimationState::MoveRight;
@@ -233,6 +234,7 @@ void Player::move()
 			}
 			if (posTmp.y != 0)
 			{
+				posTmp.y *= speed * 64.0f * deltaTime;
 				if (posTmp.y > 0)
 				{
 					state = playerAnimationState::MoveDown;

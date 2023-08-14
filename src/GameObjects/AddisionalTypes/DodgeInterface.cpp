@@ -8,7 +8,7 @@ DodgeInterface::DodgeInterface(int dodgeTime, int dodgeCDR)
 	this->dodgeTime = dodgeTime;
 }
 
-void DodgeInterface::update()
+void DodgeInterface::update(float deltaTime)
 {
 	if (dodgeTime > 0)
 	{

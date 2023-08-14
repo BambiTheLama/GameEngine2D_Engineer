@@ -12,7 +12,7 @@ public:
 
     virtual ~Plant();
 
-    virtual void update();
+    virtual void update(float deltaTime);
 
     virtual void draw();
 

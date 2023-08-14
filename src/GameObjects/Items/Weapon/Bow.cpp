@@ -20,7 +20,7 @@ Bow::Bow(Bow& b):Item(b)
 	this->rangeMultiplier = b.rangeMultiplier;
 }
 
-Bow::Bow(Rectangle pos, std::string name, int chargeTime, float speedMultiplier, float rangeMultiplier, int numberOfProjectal) :Item(pos, name)
+Bow::Bow(Rectangle pos, std::string name, float chargeTime, float speedMultiplier, float rangeMultiplier, int numberOfProjectal) :Item(pos, name)
 {
 	std::string path = "Resource/Items/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
@@ -43,7 +43,7 @@ Bow::~Bow()
 	delete sprite;
 }
 
-void Bow::update()
+void Bow::update(float deltaTime)
 {
 	Rectangle pos = getPos();
 	rotation = cursorTarget({ pos.x ,pos.y }) - 45;
@@ -81,7 +81,7 @@ void Bow::drawAt(Rectangle pos)
 	sprite->draw(pos, 0);
 }
 
-bool Bow::use()
+bool Bow::use(float deltaTime)
 {
 	if (chargeTime == 0)
 	{
@@ -96,8 +96,8 @@ bool Bow::use()
 
 	if (chargeTime < chargeTimeMax)
 	{
-		chargeTime++;
-		if (chargeTime == chargeTimeMax)
+		chargeTime += deltaTime;
+		if (chargeTime >= chargeTimeMax)
 		{
 			spawnArrow();
 			chargeTime = 0;

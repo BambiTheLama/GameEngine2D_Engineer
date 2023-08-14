@@ -21,7 +21,7 @@ void FourTree::addObj(GameObject* obj)
 	objects.push_back(obj);
 	if (tree == NULL)
 	{
-		if ((pos.width > 64 || pos.height > 64) && objects.size() > 10)
+		if ((pos.width > 64 || pos.height > 64) && objects.size() > 16)
 		{
 			openTree();
 		}
@@ -46,7 +46,7 @@ void FourTree::removeObj(GameObject* obj)
 
 	for (int i = 0; i < 4; i++)
 		tree[i]->removeObj(obj);
-	if (objects.size() < 3)
+	if (objects.size() < 10)
 	{
 		closeTree();
 	}
