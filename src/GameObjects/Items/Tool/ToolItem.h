@@ -9,6 +9,7 @@ class ToolItem :
     bool inHand = false;
     int power;
     int damage = 5;
+    float invisibleFrame = 0.2;
     float useTime;
     float useTimeMax;
     float rotation = 0;

@@ -131,12 +131,16 @@
   <ItemGroup>
     <ClCompile Include="src\core\Controllers\AnimationController.cpp" />
     <ClCompile Include="src\core\Controllers\SpriteController.cpp" />
+    <ClCompile Include="src\core\Elements\CheckBox.cpp" />
+    <ClCompile Include="src\core\Elements\Element.cpp" />
+    <ClCompile Include="src\core\Elements\TextEnter.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
     <ClCompile Include="src\core\Properties.cpp" />
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
     <ClCompile Include="src\core\Scenes\Game\FourTree.cpp" />
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp" />
     <ClCompile Include="src\core\Scenes\Game\PerlinNoice.cpp" />
+    <ClCompile Include="src\core\Scenes\ItemEdytor.cpp" />
     <ClCompile Include="src\core\Scenes\Scene.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp" />
@@ -175,12 +179,16 @@
   <ItemGroup>
     <ClInclude Include="src\core\Controllers\AnimationController.h" />
     <ClInclude Include="src\core\Controllers\SpriteController.h" />
+    <ClInclude Include="src\core\Elements\CheckBox.h" />
+    <ClInclude Include="src\core\Elements\Element.h" />
+    <ClInclude Include="src\core\Elements\TextEnter.h" />
     <ClInclude Include="src\core\Engine.h" />
     <ClInclude Include="src\core\Properties.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
     <ClInclude Include="src\core\Scenes\Game\FourTree.h" />
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />
     <ClInclude Include="src\core\Scenes\Game\PerlinNoice.h" />
+    <ClInclude Include="src\core\Scenes\ItemEdytor.h" />
     <ClInclude Include="src\core\Scenes\Scene.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h" />
@@ -215,6 +223,7 @@
     <ClInclude Include="src\GameObjects\Projectals\Projectal.h" />
     <ClInclude Include="src\GameObjects\ItemFactory.h" />
     <ClInclude Include="src\GameObjects\RecipesFactory.h" />
+    <ClInclude Include="src\json.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -132,7 +132,7 @@ void ToolItem::setStartPoints(Vector2 startPoints[4])
 
 void ToolItem::onCollisionHitable(HitAble* hit)
 {
-	hit->dealDamage(damage, 2);
+	hit->dealDamage(damage, invisibleFrame);
 }
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)
 {

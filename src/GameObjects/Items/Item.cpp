@@ -31,3 +31,7 @@ bool Item::use(float deltaTime)
 {
 	return false;
 }
+void Item::saveToJson(nlohmann::json j)
+{
+	j[getID()]["ItemType"] = getItemType();
+}

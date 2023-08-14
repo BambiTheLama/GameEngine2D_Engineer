@@ -12,14 +12,11 @@ SpriteController::SpriteController(const char* path)
 			texture = sprite->texture;
 			return;
 		}
-
 	texture = LoadTexture(path);
 	if (texture.id > 0)
 	{
 		sprites.push_back(this);
 	}
-		
-	
 }
 
 SpriteController::SpriteController(SpriteController& controller)
@@ -45,3 +42,4 @@ void SpriteController::draw(Rectangle pos, int frame)
 {
 	DrawTexturePro(texture, getTextureFrame(frame), pos, { 0,0 }, 0, WHITE);
 }
+

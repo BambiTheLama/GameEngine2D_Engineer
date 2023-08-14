@@ -67,7 +67,7 @@ public:
     /// <summary>
     /// Przyci¹ga przedmioty z pewnej odleg³oœci i dodaje do eq te co siê stykaj¹ z nami
     /// </summary>
-    void pickUpItemsClose();
+    void pickUpItemsClose(float deltaTime);
     /// <summary>
     /// Rysuje interface
     /// </summary>

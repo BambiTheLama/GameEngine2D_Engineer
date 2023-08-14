@@ -58,5 +58,11 @@ public:
 	/// <param name="pos">Pozycja w której rysujemy</param>
 	/// <param name="frame">Klatka któr¹ ma narysowac</param>
 	void draw(Rectangle pos, int frame);
+	/// <summary>
+	/// Sprawdza czy textura zosta³a wczytana
+	/// </summary>
+	/// <returns></returns>
+	bool isLoaded() { return texture.id > 0; }
+
 };
 

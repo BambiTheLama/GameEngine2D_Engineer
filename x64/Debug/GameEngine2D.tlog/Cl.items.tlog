@@ -1,11 +1,15 @@
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Controllers\AnimationController.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\AnimationController.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Controllers\SpriteController.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\SpriteController.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Elements\CheckBox.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\CheckBox.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Elements\Element.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Element.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Elements\TextEnter.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\TextEnter.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Engine.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Engine.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Properties.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Properties.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\GameScene.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\GameScene.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\FourTree.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\FourTree.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\ObjectHandler.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ObjectHandler.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\PerlinNoice.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\PerlinNoice.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\ItemEdytor.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ItemEdytor.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Scene.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Scene.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Collider.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\DestroyAble.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\DestroyAble.obj

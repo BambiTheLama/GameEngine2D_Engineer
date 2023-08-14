@@ -26,6 +26,19 @@ void DrawTextWithOutline(const char* text, int x, int y, int fontSize, Color tex
 		Properties::getProperties()->drawText(text, x, y, fontSize, textColor);
 	}
 }
+int key;
+int keyPressed()
+{
+
+	return key;
+}
+bool isAnyKeyPressed()
+{
+	key = GetKeyPressed();
+	if (key > 0)
+		return true;
+	return false;
+}
 
 Properties::Properties()
 {

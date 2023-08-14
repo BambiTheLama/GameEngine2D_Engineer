@@ -7,6 +7,7 @@
 #include "../GameObjects/BlockFactory.h"
 #include "Properties.h"
 #include "../GameObjects/RecipesFactory.h"
+#include "Scenes/ItemEdytor.h"
 
 Scene* Engine::scene = NULL;
 
@@ -16,7 +17,8 @@ Engine::Engine()
 	InitAudioDevice();
 	//SetTargetFPS(60);
 
-	scene = new GameScene();
+	//scene = new GameScene();
+	scene = new ItemEdytor();
 	Items;
 
 }
@@ -45,12 +47,11 @@ void Engine::start()
 	while (!WindowShouldClose())
 	{
 		deltaTime = time2 - time;
-		printf("Delta Time %lf\n",deltaTime);
 		update(deltaTime);
 		BeginDrawing();
-		ClearBackground(WHITE);
+		ClearBackground(DARKBLUE);
 		draw();
-		DrawFPS(0, 0);
+		//DrawFPS(0, 0);
 		EndDrawing();
 		time = time2;
 		time2 = GetTime();

@@ -56,7 +56,7 @@ void Player::start()
 	miniMap->generateMiniMap();
 }
 
-void Player::pickUpItemsClose()
+void Player::pickUpItemsClose(float deltaTime)
 {
 	bool haveSpace = !eq->isFullEq();
 	Rectangle pos = getPos();
@@ -88,8 +88,8 @@ void Player::pickUpItemsClose()
 		{
 			Vector2 moveTo = { myPos.x - itemPos.x,myPos.y - itemPos.y };
 			float lenght = abs(moveTo.x) + abs(moveTo.y);
-			moveTo.x /= lenght / 2;
-			moveTo.y /= lenght / 2;
+			moveTo.x /= lenght / (2*deltaTime * 64);
+			moveTo.y /= lenght / (2*deltaTime * 64);
 			item->addToPos(moveTo);
 		}
 		
@@ -189,7 +189,7 @@ void Player::update(float deltaTime)
 	move(deltaTime);
 	Game->updatePos(this);
 	updateEq(deltaTime);
-	pickUpItemsClose();
+	pickUpItemsClose(deltaTime);
 	updateCrafting();
 }
 

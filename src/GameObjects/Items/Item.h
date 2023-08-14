@@ -1,5 +1,6 @@
 #pragma once
 #include "../GameObject.h"
+#include "../../json.hpp"
 
 enum class FaceSide {
     left,right,up,down
@@ -64,6 +65,8 @@ public:
     virtual void setEq(Eq *eq){}
 
     virtual void setInHand(bool inHand) { }
+
+    virtual void saveToJson(nlohmann::json j);
 
     friend class Recipes;
 };
