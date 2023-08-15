@@ -1,12 +1,22 @@
 [
   {
+    "Damage": 0.0,
+    "DestoryType": 1111111111,
+    "InvisibleFrame": 0.0,
+    "LineCollsionN": 0,
     "Name": "",
     "Pos": [
-      6.0,
-      9.0,
-      69.0,
-      369.0
+      0.0,
+      0.0,
+      0.0,
+      0.0
     ],
-    "Type": 0
+    "Power": 0,
+    "Projectals": 0,
+    "Range": 0.0,
+    "Speed": 0.0,
+    "StackSize": 0,
+    "Type": 0,
+    "UseTime": 1.2230000495910645
   }
 ]

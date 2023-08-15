@@ -133,6 +133,7 @@
     <ClCompile Include="src\core\Controllers\SpriteController.cpp" />
     <ClCompile Include="src\core\Elements\CheckBox.cpp" />
     <ClCompile Include="src\core\Elements\Element.cpp" />
+    <ClCompile Include="src\core\Elements\FloatEnter.cpp" />
     <ClCompile Include="src\core\Elements\RectangleEnter.cpp" />
     <ClCompile Include="src\core\Elements\TextEnter.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="src\core\Controllers\SpriteController.h" />
     <ClInclude Include="src\core\Elements\CheckBox.h" />
     <ClInclude Include="src\core\Elements\Element.h" />
+    <ClInclude Include="src\core\Elements\FloatEnter.h" />
     <ClInclude Include="src\core\Elements\RectangleEnter.h" />
     <ClInclude Include="src\core\Elements\TextEnter.h" />
     <ClInclude Include="src\core\Engine.h" />

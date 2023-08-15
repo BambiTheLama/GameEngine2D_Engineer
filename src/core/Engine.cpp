@@ -17,8 +17,8 @@ Engine::Engine()
 	InitAudioDevice();
 	//SetTargetFPS(60);
 
-	scene = new GameScene();
-	//scene = new ItemEdytor();
+	//scene = new GameScene();
+	scene = new ItemEdytor();
 	Items;
 
 }

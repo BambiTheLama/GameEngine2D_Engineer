@@ -3,6 +3,7 @@
 #include "../../GameObjects/Items/Tool/ToolItem.h"
 #include "../../GameObjects/Items/Weapon/Ammo.h"
 #include "../../GameObjects/Items/Weapon/Bow.h"
+#include "../Elements/FloatEnter.h"
 #include "../../json.hpp"
 #include "../Elements/TextEnter.h"
 #include "../Elements/CheckBox.h"
@@ -207,6 +208,8 @@ ItemEdytor::ItemEdytor()
 	}
 	RectangleEnter* recEnter = new RectangleEnter({ 300,100,500,64 },"Pos:",&item.pos);
 	elements.push_back(recEnter);
+	FloatEnter* floatEnter = new FloatEnter({ 300,200,200,64 }, "MyFloat", &item.useTime);
+	elements.push_back(floatEnter);
 }
 ItemEdytor::~ItemEdytor()
 {
