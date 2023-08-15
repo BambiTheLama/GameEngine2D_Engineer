@@ -29,7 +29,6 @@ void DrawTextWithOutline(const char* text, int x, int y, int fontSize, Color tex
 int key;
 int keyPressed()
 {
-
 	return key;
 }
 bool isAnyKeyPressed()

@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "../../GameObjects/Items/Item.h"
 #include "../../GameObjects/Items/Tool/ToolItem.h"
+#include "../Elements/RectangleEnter.h"
 #include "../Elements/Element.h"
 #include <list>
 #include <vector>

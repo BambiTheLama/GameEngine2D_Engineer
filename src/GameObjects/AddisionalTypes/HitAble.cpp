@@ -38,5 +38,5 @@ bool HitAble::dealDamage(int damage, float invisibleFrame)
 		std::string text = std::to_string(damage);
 		Game->addObject(new TextParticle(obj->getPos(), text));
 	}
-	
+	return true;
 }

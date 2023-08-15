@@ -198,6 +198,9 @@
     <ClCompile Include="src\core\Elements\CheckBox.cpp">
       <Filter>src\core\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Elements\RectangleEnter.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -339,6 +342,9 @@
       <Filter>src\core\Elements</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Elements\CheckBox.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\RectangleEnter.h">
       <Filter>src\core\Elements</Filter>
     </ClInclude>
   </ItemGroup>

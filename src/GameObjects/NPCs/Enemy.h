@@ -15,7 +15,7 @@ public:
 
     virtual void draw();
 
-    virtual bool dealDamage(int damage, int invisibleFrame = 0);
+    virtual bool dealDamage(int damage, float invisibleFrame);
 
     ObjectType getType() { return ObjectType::NPC; }
 

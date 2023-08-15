@@ -17,8 +17,8 @@ Engine::Engine()
 	InitAudioDevice();
 	//SetTargetFPS(60);
 
-	//scene = new GameScene();
-	scene = new ItemEdytor();
+	scene = new GameScene();
+	//scene = new ItemEdytor();
 	Items;
 
 }
@@ -46,15 +46,18 @@ void Engine::start()
 	double time2 = GetTime();
 	while (!WindowShouldClose())
 	{
+		time = time2;
+		time2 = GetTime();
 		deltaTime = time2 - time;
+		printf("DELTA TIME %lf\n", deltaTime);
+
 		update(deltaTime);
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 		draw();
 		//DrawFPS(0, 0);
 		EndDrawing();
-		time = time2;
-		time2 = GetTime();
+
 		
 	}
 

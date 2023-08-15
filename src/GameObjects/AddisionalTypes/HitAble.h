@@ -16,7 +16,7 @@ public:
 
 	virtual void update(float deltaTime);
 
-	virtual bool dealDamage(int damage,float invisibleFrame=0);
+	virtual bool dealDamage(int damage,float invisibleFrame);
 
 	virtual void draw(Rectangle pos);
 

@@ -219,7 +219,7 @@ void Player::move(float deltaTime)
 		{
 			if (posTmp.x != 0)
 			{
-				posTmp.x *= speed * 64.0f * deltaTime;
+
 				if (posTmp.x > 0)
 				{
 					state = playerAnimationState::MoveRight;
@@ -234,7 +234,7 @@ void Player::move(float deltaTime)
 			}
 			if (posTmp.y != 0)
 			{
-				posTmp.y *= speed * 64.0f * deltaTime;
+
 				if (posTmp.y > 0)
 				{
 					state = playerAnimationState::MoveDown;
@@ -254,8 +254,10 @@ void Player::move(float deltaTime)
 			state = playerAnimationState::Doge;
 		}
 	}
-
+	posTmp.x *= speed * 64.0f * deltaTime;
+	posTmp.y *= speed * 64.0f * deltaTime;
 	Rectangle pos = getPos();
+	printf("DELTA POS (%lf,%lf)\n", posTmp.x, posTmp.y);
 	setMovePos({ posTmp.x + pos.x, pos.y + posTmp.y });
 	if (isCollidingWithSomething(this))
 	{

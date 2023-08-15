@@ -95,6 +95,7 @@ bool ToolItem::use(float deltaTime)
 		return false;
 	isUsing = true;
 	useTime = useTimeMax;
+	return true;
 }
 void ToolItem::draw()
 {
@@ -136,6 +137,7 @@ void ToolItem::onCollisionHitable(HitAble* hit)
 }
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)
 {
+
 	dest->damageObject(power, destroyType);
 	if (dest->isToolGoBack())
 		isUsing = false;

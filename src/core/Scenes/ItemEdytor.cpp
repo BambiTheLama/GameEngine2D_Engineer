@@ -205,6 +205,8 @@ ItemEdytor::ItemEdytor()
 		elements.push_back(new CheckBox(pos, names[i], bPointers[i]));
 		pos.y += 48;
 	}
+	RectangleEnter* recEnter = new RectangleEnter({ 300,100,500,64 },"Pos:",&item.pos);
+	elements.push_back(recEnter);
 }
 ItemEdytor::~ItemEdytor()
 {

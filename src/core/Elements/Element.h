@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "../Properties.h"
+#include <string>
 class Element {
 	bool showElement = true;
 	Rectangle pos;
