@@ -1,9 +1,5 @@
 [
   {
-    "Damage": 1.0,
-    "DestoryType": 1111111111,
-    "InvisibleFrame": -107374176.0,
-    "LineCollsionN": 0,
     "Name": "kurwa",
     "Pos": [
       69.0,
@@ -11,12 +7,6 @@
       69.0,
       69.0
     ],
-    "Power": 1,
-    "Projectals": 1,
-    "Range": 1.0,
-    "Speed": 1.0,
-    "StackSize": 666,
-    "Type": 0,
-    "UseTime": 69.0
+    "Type": 0
   }
 ]

@@ -7,6 +7,7 @@ ItemProperty::ItemProperty()
 
 ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 {
+	clearData();
 	this->ID = ID;
 	name=j[ID]["Name"];
 	pos.x = j[ID]["Pos"][0];

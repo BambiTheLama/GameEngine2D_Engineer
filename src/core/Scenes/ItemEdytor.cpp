@@ -24,7 +24,6 @@ ItemEdytor::ItemEdytor()
 		
 	}
 	reader.close();
-	item.clearData();
 	item =ItemProperty(j, 0);
 	//Dodanie wszystkich przyciskow
 

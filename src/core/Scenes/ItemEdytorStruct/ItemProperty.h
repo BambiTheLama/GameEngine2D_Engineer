@@ -18,7 +18,7 @@ struct ItemProperty
 	///Od kolizji obiektu
 	bool hasLinesCollider;
 	int nPoints = 0;
-	Vector2* points;
+	Vector2* points=NULL;
 	///Czy mo¿na stakowaæ przedmioty
 	bool isStacable;
 	int stackSize;
