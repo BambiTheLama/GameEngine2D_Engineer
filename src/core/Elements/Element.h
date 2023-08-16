@@ -3,9 +3,7 @@
 #include "../Properties.h"
 #include <string>
 class Element {
-	bool showElement = true;
 	Rectangle pos;
-
 public:
 	Element(Rectangle pos);
 
@@ -19,7 +17,11 @@ public:
 
 	virtual void draw();
 
-	virtual void setShowElement(bool show) { showElement = show; }
+	virtual void updatePos(){}
 
-	Rectangle getPos() const { return pos; }
+	virtual Rectangle getPos() const { return pos; }
+
+	void moveTo(Vector2 moveTo) { pos.x = moveTo.x; pos.y = moveTo.y; }
+
+	void setPos(Rectangle pos) { this->pos = pos; }
 };

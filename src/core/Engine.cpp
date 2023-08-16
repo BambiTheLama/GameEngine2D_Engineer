@@ -49,7 +49,6 @@ void Engine::start()
 		time = time2;
 		time2 = GetTime();
 		deltaTime = time2 - time;
-		printf("DELTA TIME %lf\n", deltaTime);
 
 		update(deltaTime);
 		BeginDrawing();

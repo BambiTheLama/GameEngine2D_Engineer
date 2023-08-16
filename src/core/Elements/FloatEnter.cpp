@@ -4,6 +4,7 @@ FloatEnter::FloatEnter(Rectangle pos, std::string name, float* val):Element(pos)
 {
 	this->name = name;
 	this->val = val;
+	floatVal = std::to_string(*val);
 }
 void FloatEnter::update()
 {

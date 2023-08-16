@@ -8,7 +8,7 @@ CheckBox::CheckBox(Rectangle pos, std::string text, bool* isPress) : Element(pos
 
 bool CheckBox::press()
 {
-	if (CheckCollisionPointRec(GetMousePosition(),getPos()))
+	if (CheckCollisionPointRec(GetMousePosition(),Element::getPos()))
 	{
 		(*isPress) = !(*isPress);
 		return true;
@@ -19,7 +19,7 @@ bool CheckBox::press()
 void CheckBox::draw()
 {
 	Element::draw();
-	Rectangle pos = getPos();
+	Rectangle pos = Element::getPos();
 	int y = textSize(text.c_str(), textStandardSize).y;
 	drawText(text.c_str(), pos.x, (pos.height-y)/2+pos.y, textStandardSize, BLACK);
 

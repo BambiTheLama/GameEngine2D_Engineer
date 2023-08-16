@@ -1,22 +1,22 @@
 [
   {
-    "Damage": 0.0,
+    "Damage": 1.0,
     "DestoryType": 1111111111,
-    "InvisibleFrame": 0.0,
+    "InvisibleFrame": -107374176.0,
     "LineCollsionN": 0,
-    "Name": "",
+    "Name": "kurwa",
     "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+      69.0,
+      69.0,
+      69.0,
+      69.0
     ],
-    "Power": 0,
-    "Projectals": 0,
-    "Range": 0.0,
-    "Speed": 0.0,
-    "StackSize": 0,
+    "Power": 1,
+    "Projectals": 1,
+    "Range": 1.0,
+    "Speed": 1.0,
+    "StackSize": 666,
     "Type": 0,
-    "UseTime": 1.2230000495910645
+    "UseTime": 69.0
   }
 ]

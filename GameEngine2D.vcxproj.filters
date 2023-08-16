@@ -58,6 +58,9 @@
     <Filter Include="src\core\Elements">
       <UniqueIdentifier>{66bd2915-65d6-4e2d-a629-05982eb163f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\core\Scenes\ItemEdytorStruct">
+      <UniqueIdentifier>{475d8fc8-9d88-44b5-9e15-3c757fa0400c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -203,6 +206,12 @@
     </ClCompile>
     <ClCompile Include="src\core\Elements\FloatEnter.cpp">
       <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\CheckBoxOpenElements.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.cpp">
+      <Filter>src\core\Scenes\ItemEdytorStruct</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +361,12 @@
     </ClInclude>
     <ClInclude Include="src\core\Elements\FloatEnter.h">
       <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\CheckBoxOpenElements.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.h">
+      <Filter>src\core\Scenes\ItemEdytorStruct</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

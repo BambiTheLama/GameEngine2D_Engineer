@@ -28,4 +28,5 @@ void Element::unPress()
 void Element::draw()
 {
 	DrawRectangleRec(pos, WHITE);
+	DrawRectangleLinesEx(pos, 2, BLACK);
 }

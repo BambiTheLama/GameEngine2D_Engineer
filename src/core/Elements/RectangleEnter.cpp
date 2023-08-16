@@ -4,13 +4,7 @@ RectangleEnter::RectangleEnter(Rectangle pos, std::string name, Rectangle* rec) 
 {
 	this->rec = rec;
 	this->name = name;
-	int x = textSize(name.c_str(), textStandardSize).x;
-	enterRets[0] = { pos.x+x,pos.y,(pos.width- x)/4,pos.height };
-	for (int i = 1; i < 4; i++)
-	{
-		enterRets[i] = enterRets[i - 1];
-		enterRets[i].x += enterRets[i].width;
-	}
+	updatePos();
 	usingRec = -1;
 
 }
@@ -23,7 +17,10 @@ void chagneValue(float* p, int val)
 {
 	if (val < 0)
 	{
-		(*p) = (int)((*p) / 10);
+		if(val==-1)
+			(*p) = (int)((*p) / 10);
+		if (val == -2)
+			(*p) = -(*p);
 	}
 	else
 	{
@@ -32,6 +29,18 @@ void chagneValue(float* p, int val)
 	}
 
 }
+void RectangleEnter::updatePos()
+{
+	Rectangle pos = getPos();
+	int x = textSize(name.c_str(), textStandardSize).x;
+	enterRets[0] = { pos.x + x,pos.y,(pos.width - x) / 4,pos.height };
+	for (int i = 1; i < 4; i++)
+	{
+		enterRets[i] = enterRets[i - 1];
+		enterRets[i].x += enterRets[i].width;
+	}
+}
+
 void RectangleEnter::update()
 {
 	if (usingRec < 0 || !isAnyKeyPressed())
@@ -45,6 +54,8 @@ void RectangleEnter::update()
 	{
 		val = -1;
 	}
+	else if (key >= '-')
+		val = -2;
 	else
 		return;
 	if (usingRec == 0)

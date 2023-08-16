@@ -4,13 +4,14 @@
 class CheckBox :
     public Element
 {
+protected:
     bool *isPress;
     std::string text;
 public:
     CheckBox(Rectangle pos, std::string text, bool* isPress);
 
-    bool press();
+    virtual bool press();
 
-    void draw();
+    virtual void draw();
 };
 

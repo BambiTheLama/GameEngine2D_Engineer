@@ -17,6 +17,8 @@ public:
 
 	virtual void update();
 
+	virtual void updatePos();
+
 	virtual bool press();
 
 	virtual void unPress();
