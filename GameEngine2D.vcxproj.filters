@@ -213,6 +213,9 @@
     <ClCompile Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.cpp">
       <Filter>src\core\Scenes\ItemEdytorStruct</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Elements\IntEnter.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.h">
       <Filter>src\core\Scenes\ItemEdytorStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\IntEnter.h">
+      <Filter>src\core\Elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

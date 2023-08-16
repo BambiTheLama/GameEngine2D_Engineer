@@ -8,6 +8,7 @@
 #include "../Elements/FloatEnter.h"
 #include "../Elements/TextEnter.h"
 #include "../Elements/CheckBox.h"
+#include "../Elements/IntEnter.h"
 #include <fstream>
 
 
@@ -23,7 +24,13 @@ ItemEdytor::ItemEdytor()
 		reader >> j;
 		
 	}
+	std::cout << j.dump(2)<<std::endl;
 	reader.close();
+	for(int i=0;i<j.size();i++)
+	{
+		items.push_back(new ItemProperty(j, i));
+	}
+
 	item =ItemProperty(j, 0);
 	//Dodanie wszystkich przyciskow
 
@@ -43,6 +50,7 @@ ItemEdytor::ItemEdytor()
 	elements.push_back(recEnter);
 	elements.push_back(checkBoxs[0]);
 	checkBoxs[0]->setElementAbrow(recEnter);
+	checkBoxs[0]->setElementBellow(checkBoxs[1]);
 	for (int i = 1; i < 5; i++)
 	{
 		checkBoxs[i]->setElementAbrow(checkBoxs[i - 1]);
@@ -51,26 +59,46 @@ ItemEdytor::ItemEdytor()
 	}
 	checkBoxs[5]->setElementAbrow(checkBoxs[4]);
 	elements.push_back(checkBoxs[5]);
-	FloatEnter* floatEnter = new FloatEnter({ 500,500,200,64 }, "UseTime", &item.useTime);
-	checkBoxs[2]->addElement(floatEnter);
+	float h = 32;
+	Element* e = new IntEnter({ 0,0,200,h }, "How Many Points: ", &item.nPoints);
+	checkBoxs[0]->addElement(e);
+
+	e = new IntEnter({ 0,0,200,h }, "StackSize: ", &item.stackSize);
+	checkBoxs[1]->addElement(e);
+
+	e = new FloatEnter({ 500,500,200,h }, "UseTime: ", &item.useTime);
+	checkBoxs[2]->addElement(e);
+
+	e = new FloatEnter({ 0,0,200,h }, "Damage: ", &item.damage);
+	checkBoxs[3]->addElement(e);
+	e = new FloatEnter({ 00,00,200,h }, "Invisible Frames: ", &item.invisibleFrame);
+	checkBoxs[3]->addElement(e);
+
+	e = new IntEnter({ 0,0,200,h }, "Power: ", &item.power);
+	checkBoxs[4]->addElement(e);
+
+
+	e = new FloatEnter({ 00,00,200,h }, "Projectal Range: ", &item.projectalRange);
+	checkBoxs[5]->addElement(e);
+	e = new IntEnter({ 0,0,200,h }, "Number Of Projectal: ", &item.numberOfProjectal);
+	checkBoxs[5]->addElement(e);
+	e = new FloatEnter({ 00,00,200,h }, "Projectal Speed:", &item.projectalSpeed);
+	checkBoxs[5]->addElement(e);
 }
 
 ItemEdytor::~ItemEdytor()
 {
-	ItemProperty* i = new ItemProperty();
-	i->setDataFrom(item);
-	items.push_back(i);
+
 	nlohmann::json j;
 	for (auto i : items)
 	{
 		i->saveToJson(j);
-		delete i;
 	}
 
 	std::cout << j.dump(2);
 	std::ofstream writer;
 	writer.open("Items.json");
-	writer << j.dump(2);
+	writer << j.dump(2)<<std::endl;
 	writer.close();
 
 	for (Element* e : elements)

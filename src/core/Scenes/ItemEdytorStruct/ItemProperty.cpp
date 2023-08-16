@@ -8,6 +8,11 @@ ItemProperty::ItemProperty()
 ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 {
 	clearData();
+	if (!j[ID].contains("Name"))
+	{
+		printf("NIE MA DANYCH DLA ITEMU O ID %d\n", ID);
+		return;
+	}
 	this->ID = ID;
 	name=j[ID]["Name"];
 	pos.x = j[ID]["Pos"][0];

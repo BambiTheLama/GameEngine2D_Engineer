@@ -30,7 +30,7 @@ void CheckBoxOpenElements::updatePos()
 		for (auto* e : elements)
 		{
 			Rectangle pos = e->getPos();
-			e->setPos({ componetPos.x,componetPos.y+componetPos.height,componetPos.width,componetPos.height });
+			e->setPos({ componetPos.x,componetPos.y+componetPos.height,componetPos.width,pos.height });
 			e->updatePos();
 			componetPos.height += pos.height;
 		}

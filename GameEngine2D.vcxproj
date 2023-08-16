@@ -135,6 +135,7 @@
     <ClCompile Include="src\core\Elements\CheckBoxOpenElements.cpp" />
     <ClCompile Include="src\core\Elements\Element.cpp" />
     <ClCompile Include="src\core\Elements\FloatEnter.cpp" />
+    <ClCompile Include="src\core\Elements\IntEnter.cpp" />
     <ClCompile Include="src\core\Elements\RectangleEnter.cpp" />
     <ClCompile Include="src\core\Elements\TextEnter.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="src\core\Elements\CheckBoxOpenElements.h" />
     <ClInclude Include="src\core\Elements\Element.h" />
     <ClInclude Include="src\core\Elements\FloatEnter.h" />
+    <ClInclude Include="src\core\Elements\IntEnter.h" />
     <ClInclude Include="src\core\Elements\RectangleEnter.h" />
     <ClInclude Include="src\core\Elements\TextEnter.h" />
     <ClInclude Include="src\core\Engine.h" />
