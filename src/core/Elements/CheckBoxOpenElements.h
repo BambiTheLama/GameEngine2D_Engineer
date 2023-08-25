@@ -4,18 +4,24 @@
 class CheckBoxOpenElements :
     public CheckBox
 {
-    std::list<Element*> elements;
+
     bool openElements = false;
     Element* lastPress = NULL;
-    Rectangle componetPos;
+
     Element* up = NULL;
     Element* down = NULL;
+
+protected:
+    Rectangle componetPos;
+    std::list<Element*> elements;
 public:
     CheckBoxOpenElements(Rectangle pos, std::string text, bool* isPress);
 
     ~CheckBoxOpenElements();
 
-    void addElement(Element* e) { elements.push_back(e); }
+    void addElement(Element* e) { elements.push_back(e); updatePos();}
+
+    void removeLastElement() { delete elements.back(); elements.pop_back(); updatePos();}
 
     void updatePos();
 

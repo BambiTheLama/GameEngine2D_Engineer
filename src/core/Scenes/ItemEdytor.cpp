@@ -3,12 +3,15 @@
 #include "../../GameObjects/Items/Tool/ToolItem.h"
 #include "../../GameObjects/Items/Weapon/Ammo.h"
 #include "../../GameObjects/Items/Weapon/Bow.h"
+#include "../Elements/LineColliderCheckBox.h"
 #include "../Elements/CheckBoxOpenElements.h"
 #include "../Elements/RectangleEnter.h"
+#include "../Elements/VectorEnter.h"
 #include "../Elements/FloatEnter.h"
 #include "../Elements/TextEnter.h"
 #include "../Elements/CheckBox.h"
 #include "../Elements/IntEnter.h"
+
 #include <fstream>
 
 
@@ -41,7 +44,9 @@ ItemEdytor::ItemEdytor()
 	bool* bPointers[6] = { &item.hasLinesCollider ,&item.isStacable, &item.isUsingItem,
 		&item.isDealingDamage, &item.isDestoryAble,&item.isRangeWeapon };
 	CheckBoxOpenElements* checkBoxs[6];
-	for (int i = 0; i < 6; i++)
+	checkBoxs[0] = new LineColliderCheckBox(pos, names[0], bPointers[0],&item);
+	pos.y += 48;
+	for (int i = 1; i < 6; i++)
 	{
 		checkBoxs[i] = new CheckBoxOpenElements(pos, names[i], bPointers[i]);
 		pos.y += 48;
@@ -88,7 +93,7 @@ ItemEdytor::ItemEdytor()
 
 ItemEdytor::~ItemEdytor()
 {
-
+	items[0]->setDataFrom(item);
 	nlohmann::json j;
 	for (auto i : items)
 	{

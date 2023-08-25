@@ -9,6 +9,7 @@
 
 struct ItemProperty
 {
+	
 	int ID = 0;
 	SpriteController* sprite = NULL;
 	///Dane Kazdego obiektu
@@ -47,6 +48,8 @@ struct ItemProperty
 
 	void clearData();
 
+	void updatePointsToCollisions();
+
 	void addPointToCollisions();
 
 	void removePointToCollisions();
@@ -56,4 +59,8 @@ struct ItemProperty
 	void setDataFrom(ItemProperty item);
 
 	void reLoadTexture();
+
+
+private:
+	int sizePointsBefore=0;
 };

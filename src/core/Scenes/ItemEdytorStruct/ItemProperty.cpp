@@ -24,6 +24,7 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 	{
 		hasLinesCollider = true;
 		nPoints = j[ID]["LineCollsionN"];
+		sizePointsBefore = nPoints;
 		points = new Vector2[nPoints];
 		std::string s= "Point0";
 		for(int i=0;i<nPoints;i++)
@@ -109,7 +110,46 @@ void ItemProperty::clearData()
 	numberOfProjectal = 0;
 	projectalSpeed = 0;
 }
+void ItemProperty::updatePointsToCollisions()
+{
+	if (points != NULL)
+	{
+		
+		if (nPoints <= 0)
+		{
+			delete points;
+			points = NULL;
+			sizePointsBefore = nPoints;
+			return;
+		}
 
+		Vector2 *points = new Vector2[nPoints];
+		int n = sizePointsBefore < nPoints ? sizePointsBefore : nPoints;
+		for (int i = 0; i < n; i++)
+		{
+			points[i] = this->points[i];
+		}
+		for (int i = n; i < nPoints; i++)
+		{
+			points[i] = { 0,0 };
+		}
+		delete this->points;
+		this->points = points;
+		sizePointsBefore = nPoints;
+	}
+	else
+	{
+		if (nPoints <= 0)
+			return;
+		points = new Vector2[nPoints];
+		for (int i = 0; i < nPoints; i++)
+		{
+			points[i] = { 0,0 };
+		}
+		sizePointsBefore = nPoints;
+	}
+
+}
 void ItemProperty::addPointToCollisions()
 {
 	if (nPoints <= 0)
@@ -128,6 +168,7 @@ void ItemProperty::addPointToCollisions()
 		delete this->points;
 		this->points = points;
 	}
+	sizePointsBefore = nPoints;
 }
 
 void ItemProperty::removePointToCollisions()
@@ -136,10 +177,12 @@ void ItemProperty::removePointToCollisions()
 	{
 		nPoints = 0;
 		points = NULL;
+		sizePointsBefore = nPoints;
 	}
 	else
 	{
 		nPoints--;
+		sizePointsBefore = nPoints;
 		if (nPoints <= 0)
 		{
 			delete points;
@@ -152,6 +195,7 @@ void ItemProperty::removePointToCollisions()
 		delete this->points;
 		this->points = points;
 	}
+
 }
 
 void ItemProperty::saveToJson(nlohmann::json& j)

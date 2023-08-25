@@ -192,9 +192,6 @@
     <ClCompile Include="src\core\Scenes\ItemEdytor.cpp">
       <Filter>src\core\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Elements\Element.cpp">
-      <Filter>src\core\Elements</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\Elements\TextEnter.cpp">
       <Filter>src\core\Elements</Filter>
     </ClCompile>
@@ -214,6 +211,15 @@
       <Filter>src\core\Scenes\ItemEdytorStruct</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Elements\IntEnter.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\Element.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\LineColliderCheckBox.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\VectorEnter.cpp">
       <Filter>src\core\Elements</Filter>
     </ClCompile>
   </ItemGroup>
@@ -372,6 +378,12 @@
       <Filter>src\core\Scenes\ItemEdytorStruct</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Elements\IntEnter.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\LineColliderCheckBox.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\VectorEnter.h">
       <Filter>src\core\Elements</Filter>
     </ClInclude>
   </ItemGroup>

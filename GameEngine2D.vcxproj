@@ -136,8 +136,10 @@
     <ClCompile Include="src\core\Elements\Element.cpp" />
     <ClCompile Include="src\core\Elements\FloatEnter.cpp" />
     <ClCompile Include="src\core\Elements\IntEnter.cpp" />
+    <ClCompile Include="src\core\Elements\LineColliderCheckBox.cpp" />
     <ClCompile Include="src\core\Elements\RectangleEnter.cpp" />
     <ClCompile Include="src\core\Elements\TextEnter.cpp" />
+    <ClCompile Include="src\core\Elements\VectorEnter.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
     <ClCompile Include="src\core\Properties.cpp" />
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
@@ -189,8 +191,10 @@
     <ClInclude Include="src\core\Elements\Element.h" />
     <ClInclude Include="src\core\Elements\FloatEnter.h" />
     <ClInclude Include="src\core\Elements\IntEnter.h" />
+    <ClInclude Include="src\core\Elements\LineColliderCheckBox.h" />
     <ClInclude Include="src\core\Elements\RectangleEnter.h" />
     <ClInclude Include="src\core\Elements\TextEnter.h" />
+    <ClInclude Include="src\core\Elements\VectorEnter.h" />
     <ClInclude Include="src\core\Engine.h" />
     <ClInclude Include="src\core\Properties.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
