@@ -21,7 +21,7 @@ Eq::~Eq()
 	for (int i = 0; i < EqHeight; i++)
 	{
 		for (int j = 0; j < EqWight; j++)
-			if (items[i][j] != NULL)
+			if (items[i][j])
 				delete items[i][j];
 		delete items[i];
 	}
@@ -36,7 +36,7 @@ void Eq::sortItems(sortBy type)
 	for (int i = 1; i < EqHeight; i++)
 		for (int j = 0; j < EqWight; j++)
 		{
-			if (items[i][j] != NULL)
+			if (items[i][j])
 			{
 				itemsTmp.push_back(items[i][j]);
 				items[i][j] = NULL;
@@ -89,7 +89,7 @@ bool Eq::addItem(Item* item)
 		for (int i = EqHeight - 1; i >= 0; i--)
 			for (int j = EqWight - 1; j >= 0; j--)
 			{
-				if (items[i][j] != NULL && items[i][j]->addToStack(item))
+				if (items[i][j] && items[i][j]->addToStack(item))
 				{
 					player->updateRecepies();
 
@@ -121,11 +121,11 @@ bool Eq::addItem(Item* item)
 
 bool Eq::useItem(float deltaTime)
 {
-	if (itemInHand != NULL)
+	if (itemInHand)
 	{
 		return itemInHand->use(deltaTime);
 	}
-	if (items[usingItemY][usingItemX] != NULL)
+	if (items[usingItemY][usingItemX])
 	{
 		return items[usingItemY][usingItemX]->use(deltaTime);
 	}
@@ -134,15 +134,15 @@ bool Eq::useItem(float deltaTime)
 
 void Eq::updateItemPos(Vector2 movePos)
 { 
-	if (itemInHand != NULL)
+	if (itemInHand)
 		itemInHand->setMovePos(movePos);
-	else if (items[usingItemY][usingItemX] != NULL) 
+	else if (items[usingItemY][usingItemX]) 
 		items[usingItemY][usingItemX]->setMovePos(movePos);;
 }
 
 void Eq::update(float deltaTime)
 {
-	if (itemInHand != NULL)
+	if (itemInHand)
 	{
 		itemInHand->update(deltaTime);
 		itemInHand->setFaceSide(faceSide);
@@ -151,7 +151,7 @@ void Eq::update(float deltaTime)
 	{
 		usingItemX = usingItem % EqWight;
 		usingItemY = usingItem / EqWight;
-		if (items[usingItemY][usingItemX] != NULL)
+		if (items[usingItemY][usingItemX])
 		{
 			items[usingItemY][usingItemX]->update(deltaTime);
 			items[usingItemY][usingItemX]->setFaceSide(faceSide);
@@ -202,7 +202,7 @@ void Eq::updateEqPressed()
 {
 	if (!isPressedOnEq())
 		return;
-	if (items[usingItemY][usingItemX] != NULL && !items[usingItemY][usingItemX]->canChangeItem())
+	if (items[usingItemY][usingItemX] && !items[usingItemY][usingItemX]->canChangeItem())
 		return;
 	Vector2 cursor = GetMousePosition();
 	cursor.x -= EqStartX - EqSpacing;
@@ -210,7 +210,7 @@ void Eq::updateEqPressed()
 	int x = cursor.x / (EqSize + EqSpacing);
 	int y = cursor.y / (EqSize + EqSpacing);
 
-	if (items[y][x] != NULL && itemInHand != NULL && items[y][x]->getID() == itemInHand->getID())
+	if (items[y][x] && itemInHand && items[y][x]->getID() == itemInHand->getID())
 	{
 		if (items[y][x]->addToStack(itemInHand))
 		{
@@ -239,7 +239,7 @@ void Eq::draw()
 				EqStartY + (EqSpacing + EqSize) * i - EqSpacing, EqSize, EqSize };
 
 			DrawRectangleRec(posToDraw, usingItem == i * EqWight + j ? BLUE : RED);
-			if (items[i][j] != NULL)
+			if (items[i][j])
 			{
 				items[i][j]->drawAt(posToDraw);
 				if (items[i][j]->isStacable())
@@ -251,7 +251,7 @@ void Eq::draw()
 			}
 			DrawTextWithOutline(TextFormat("%d", i * EqWight + j), posToDraw.x, posToDraw.y, textStandardSize, WHITE, BLACK);
 		}
-	if (itemInHand != NULL)
+	if (itemInHand)
 	{
 		Vector2 mouse = GetMousePosition();
 		Rectangle pos = { mouse.x,mouse.y,32,32 };
@@ -268,9 +268,9 @@ void Eq::draw()
 
 void Eq::drawItem()
 {
-	if (itemInHand != NULL)
+	if (itemInHand)
 		itemInHand->draw();
-	else if (items[usingItemY][usingItemX] != NULL)
+	else if (items[usingItemY][usingItemX])
 		items[usingItemY][usingItemX]->draw();
 }
 
@@ -281,7 +281,7 @@ std::vector<Item*> Eq::getItems()
 	for(int i=0;i<EqHeight;i++)
 		for (int j = 0; j < EqWight; j++)
 		{
-			if (items[i][j] != NULL)
+			if (items[i][j])
 				itemsToRet.push_back(items[i][j]);
 		}
 
@@ -329,7 +329,7 @@ bool Eq::canTakeItem(Item* item)
 		return false;
 	for (int i = 0; i < EqHeight; i++)
 		for (int j = 0; j < EqWight; j++)
-			if (items[i][j] != NULL && items[i][j]->getID() == item->getID())
+			if (items[i][j] && items[i][j]->getID() == item->getID())
 			{
 				if (items[i][j]->getStackSize() < items[i][j]->getStackMaxSize())
 					return true;
@@ -366,11 +366,11 @@ bool Eq::canChangeItem()
 
 void Eq::endUsingItem()
 {
-	if (itemInHand != NULL)
+	if (itemInHand)
 	{
 		itemInHand->endUsing();
 	}
-	else if (items[usingItemY][usingItemX] != NULL)
+	else if (items[usingItemY][usingItemX])
 	{
 		items[usingItemY][usingItemX]->endUsing();
 	}
@@ -399,7 +399,7 @@ void Eq::changeItem()
 	{
 		usingItemX = usingItem % EqWight;
 		usingItemY = usingItem / EqWight;
-		if (items[usingItemY][usingItemX] != NULL)
+		if (items[usingItemY][usingItemX])
 			items[usingItemY][usingItemX]->updateAfterSwap();
 	}
 	else

@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include "../../../GameObjects/GameObject.h"
-#define allTreeIf if (tree != NULL) for (int i = 0; i < 4; i++)tree[i]
+#define allTreeIf if (tree) for (int i = 0; i < 4; i++)tree[i]
 #define allTree	for (int i = 0; i < 4; i++)tree[i]
 #define allObjects GameObject* o : objects
 
@@ -24,7 +24,7 @@ public:
 	std::list<GameObject*> getObjectsAt(Rectangle pos);
 	void draw()
 	{
-		if (tree != NULL)
+		if (tree)
 			for (int i = 0; i < 4; i++)
 				tree[i]->draw();
 		else

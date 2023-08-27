@@ -129,7 +129,7 @@ void ItemEdytor::update(float deltaTime)
 		e->update();
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 	{
-		if (lastPressed != NULL)
+		if (lastPressed)
 		{
 			lastPressed->unPress();
 			lastPressed = NULL;
@@ -208,7 +208,7 @@ void ItemEdytor::removeItem()
 {
 	if (item.ID >= 0 && item.ID < items.size())
 	{
-		if (items[item.ID] != NULL)
+		if (items[item.ID])
 		{
 			delete items[item.ID];
 			items[item.ID] = NULL;
@@ -220,7 +220,7 @@ void ItemEdytor::draw()
 {
 	for (Element* e : elements)
 		e->draw();
-	if (item.sprite != NULL)
+	if (item.sprite)
 	{
 		Rectangle pos = itemDraw;
 		int w = item.pos.width / 16;

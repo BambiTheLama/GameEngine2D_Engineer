@@ -30,7 +30,7 @@ ParticleSystem::ParticleSystem(Rectangle pos,std::string name, Particle* particl
 ParticleSystem::~ParticleSystem()
 {
 	for(int i=0;i<n;i++)
-		if (particles[i] != NULL)
+		if (particles[i])
 		{
 			delete particles[i];
 		}
@@ -40,7 +40,7 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::start()
 {
 	for (int i = 0; i < n; i++)
-		if (particles[i] != NULL)
+		if (particles[i])
 		{
 			float x = pos.x + rand() % (int)pos.width;
 			float y = pos.y + rand() % (int)pos.height;
@@ -67,7 +67,7 @@ void ParticleSystem::update(float deltaTime)
 	int active = n;
 	for (int i = 0; i < n; i++)
 	{
-		if (particles[i] != NULL)
+		if (particles[i])
 		{
 			particles[i]->update(deltaTime);
 			if (particles[i]->canDestory())
@@ -89,6 +89,6 @@ void ParticleSystem::update(float deltaTime)
 void ParticleSystem::draw()
 {
 	for (int i = 0; i < n; i++)
-		if (particles[i] != NULL)
+		if (particles[i])
 			particles[i]->draw();
 }

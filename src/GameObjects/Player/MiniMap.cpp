@@ -19,7 +19,7 @@ void MiniMap::generateMiniMap()
 	for (int y = 0; y < h; y++)
 		for (int x = 0; x < w; x++)
 		{
-			if(blocks[y][x]!=NULL)
+			if(blocks[y][x])
 				blocks[y][x]->drawInMiniMap(x, y);
 		}
 	EndTextureMode();

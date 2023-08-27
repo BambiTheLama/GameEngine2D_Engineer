@@ -27,7 +27,7 @@ Projectal::Projectal(Rectangle pos, float speed, float rotation, float range,
 
 Projectal::~Projectal()
 {
-	if (sprite != NULL)
+	if (sprite)
 		delete sprite;
 }
 

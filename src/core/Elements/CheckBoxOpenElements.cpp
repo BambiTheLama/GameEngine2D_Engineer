@@ -14,7 +14,7 @@ CheckBoxOpenElements::~CheckBoxOpenElements()
 void CheckBoxOpenElements::updatePos()
 {
 	componetPos = Element::getPos();
-	if (up != NULL)
+	if (up)
 	{
 		Rectangle pos = up->getPos();
 		componetPos.y = pos.y + pos.height;
@@ -37,7 +37,7 @@ void CheckBoxOpenElements::updatePos()
 	}
 	componetPos.x -= 20;
 	componetPos.width += 20;
-	if(down!=NULL)
+	if(down)
 		down->updatePos();
 }
 
@@ -75,7 +75,7 @@ bool CheckBoxOpenElements::press()
 
 void CheckBoxOpenElements::unPress()
 {
-	if (lastPress != NULL)
+	if (lastPress)
 	{
 		lastPress->unPress();
 		lastPress = NULL;

@@ -77,7 +77,7 @@ Item* Recipes::craftItem(Item*** items,int w,int h)
 
 			for (ItemToRecipes* recepy : itemsNeedToCraft)
 			{
-				if (recepy != NULL && items[y][x]->getID() == recepy->itemID && recepy->howMany > 0)
+				if (recepy && items[y][x]->getID() == recepy->itemID && recepy->howMany > 0)
 				{
 					if (items[y][x]->getStackSize() > recepy->howMany)
 					{
@@ -101,7 +101,7 @@ Item* Recipes::craftItem(Item*** items,int w,int h)
 		}
 	}
 	for (ItemToRecipes *i : itemsNeedToCraft)
-		if(i!=NULL)
+		if(i)
 			delete i;
 	Item* item = Items->getObject(finalItemID);
 

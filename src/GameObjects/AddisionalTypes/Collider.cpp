@@ -29,7 +29,7 @@ bool Collider::isCollidingWithSomething(GameObject* obj)
 		if (o->isColliding())
 		{
 			Collider* collider = dynamic_cast<Collider*>(o);
-			if (collider != NULL)
+			if (collider)
 			{
 				Rectangle colliderPos = collider->getCollisionPos(o);
 				if (CheckCollisionRecs(collisonPos, colliderPos))

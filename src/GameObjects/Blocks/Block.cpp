@@ -25,16 +25,16 @@ Block::~Block()
 	if (game == NULL)
 		return;
 	Block* b=Game->getBlock({ pos.x + tileSize,pos.y,pos.width,pos.height });
-	if (b != NULL)
+	if (b)
 		b->generateTexturePos();
 	b=Game->getBlock({ pos.x - tileSize,pos.y,pos.width,pos.height });
-	if (b != NULL)
+	if (b)
 		b->generateTexturePos();
 	b=Game->getBlock({ pos.x,pos.y + tileSize,pos.width,pos.height });
-	if (b != NULL)
+	if (b)
 		b->generateTexturePos();
 	b=Game->getBlock({ pos.x,pos.y - tileSize,pos.width,pos.height });
-	if (b != NULL)
+	if (b)
 		b->generateTexturePos();
 
 }
@@ -80,7 +80,7 @@ void Block::damageObject(int power, ToolType tool)
 bool isTheSameBlock(Rectangle pos, unsigned int ID)
 {
 	Block* block = Game->getBlock(pos);
-	if (block != NULL)
+	if (block)
 	{
 		return ID == block->getID();
 	}

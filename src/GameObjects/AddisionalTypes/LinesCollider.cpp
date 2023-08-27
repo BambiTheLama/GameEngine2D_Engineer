@@ -23,16 +23,16 @@ LinesCollider::LinesCollider(CollisionsCheckType type)
 }
 LinesCollider::~LinesCollider()
 {
-	if(startPoints!=NULL)
+	if(startPoints)
 		delete startPoints;
-	if (points != NULL)
+	if (points)
 		delete this->points;
 }
 void LinesCollider::addLines(int n, Vector2* points)
 {
-	if (startPoints != NULL)
+	if (startPoints)
 		delete startPoints;
-	if (points != NULL)
+	if (points)
 		delete this->points;
 	nPoints = n;
 	startPoints = new Vector2[nPoints];
@@ -98,14 +98,14 @@ void LinesCollider::update(float deltaTime)
 	Rectangle getObj = { minx,miny,maxx - minx,maxy - miny };
 	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);
 	GameObject* thisObj = dynamic_cast<GameObject*>(this);
-	if (thisObj != NULL)
+	if (thisObj)
 		objs.remove(thisObj);
 	if (type == CollisionsCheckType::All)
 	{
 		for (auto* o : objs)
 		{
 			HitAble* hit = dynamic_cast<HitAble*>(o);
-			if (hit != NULL)
+			if (hit)
 			{
 				if (checkCollision(points, hit->getCollisionPos()))
 				{
@@ -113,7 +113,7 @@ void LinesCollider::update(float deltaTime)
 				}
 			}
 			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
-			if (toDestory != NULL)
+			if (toDestory)
 			{
 				Rectangle rec = toDestory->getCollisionPos();
 				if (checkCollision(points, rec))
@@ -128,7 +128,7 @@ void LinesCollider::update(float deltaTime)
 		for (auto* o : objs)
 		{
 			HitAble* hit = dynamic_cast<HitAble*>(o);
-			if (hit != NULL)
+			if (hit)
 			{
 				if (checkCollision(points, hit->getCollisionPos()))
 				{
@@ -142,7 +142,7 @@ void LinesCollider::update(float deltaTime)
 		for (auto* o : objs)
 		{
 			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
-			if (toDestory != NULL)
+			if (toDestory)
 			{
 				Rectangle rec = toDestory->getCollisionPos();
 				if (checkCollision(points, rec))

@@ -36,7 +36,7 @@ BlockFactory* BlockFactory::getFactory()
 
 void BlockFactory::clearFactory()
 {
-	if (factory != NULL)
+	if (factory)
 		delete factory;
 	factory = NULL;
 }

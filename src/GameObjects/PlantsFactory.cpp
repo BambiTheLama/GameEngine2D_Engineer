@@ -30,7 +30,7 @@ PlantsFactory* PlantsFactory::getFactory()
 
 void PlantsFactory::clearFactory()
 {
-	if (plantFactory != NULL)
+	if (plantFactory)
 		delete plantFactory;
 
 }

@@ -8,7 +8,7 @@ FourTree::FourTree(Rectangle pos)
 }
 FourTree::~FourTree()
 {
-	if (tree != NULL)
+	if (tree)
 		closeTree();
 
 }
@@ -111,7 +111,7 @@ bool FourTree::hasObj(GameObject* obj)
 
 void FourTree::getObjectsAt(Rectangle pos, std::list<GameObject*>& objs)
 {
-	if (tree != NULL)
+	if (tree)
 	{
 		for (int i = 0; i < 4; i++)
 			if (CheckCollisionRecs(pos, tree[i]->pos))

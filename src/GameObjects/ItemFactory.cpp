@@ -34,6 +34,7 @@ ItemFactory::ItemFactory()
 			objects.push_back(new Ammo(j, i));
 			break;
 		default:
+			objects.push_back(NULL);
 			break;
 		}
 	}
@@ -50,7 +51,7 @@ ItemFactory::~ItemFactory()
 }
 void ItemFactory::clearFactory()
 {
-	if (factory != NULL)
+	if (factory)
 		delete factory;
 }
 
@@ -82,7 +83,8 @@ void ItemFactory::drawObjectAt(int ID, Rectangle pos)
 {
 	if (ID < 0 || ID >= objects.size())
 		return;
-	objects[ID]->drawAt(pos);
+	if(objects[ID])
+		objects[ID]->drawAt(pos);
 }
 
 void ItemFactory::drawItemDescription(int ID, int x, int y)
@@ -100,6 +102,7 @@ bool ItemFactory::isStacableItem(int ID)
 {
 	if (ID < 0 || ID >= objects.size())
 		return false;
-	return objects[ID]->isStacable();
-
+	if (objects[ID])
+		return objects[ID]->isStacable();
+	return false;
 }

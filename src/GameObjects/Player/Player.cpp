@@ -43,7 +43,7 @@ Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width /
 
 Player::~Player()
 {
-	if(Game!=NULL)
+	if(Game)
 		Game->removeUserUI(this);
 	delete animations;
 	delete miniMap;
@@ -116,7 +116,7 @@ void Player::updateCrafting()
 				return;
 
 			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
-			if (item != NULL)
+			if (item)
 			{
 
 				eq->addItemToHand(item);
@@ -132,7 +132,7 @@ void Player::updateCrafting()
 		if (crafting->isPressedCraft())
 		{
 			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
-			if (item != NULL)
+			if (item)
 			{
 				if (!eq->addItem(item))
 				{

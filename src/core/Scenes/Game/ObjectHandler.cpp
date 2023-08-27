@@ -47,7 +47,7 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 			}
 
 			blocks[i][j] = factory->getObject(blockID);
-			if (blocks[i][j] != NULL)
+			if (blocks[i][j])
 				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
 		}
 		//printf("\n");
@@ -65,7 +65,7 @@ ObjectHandler::~ObjectHandler()
 	for (int i = 0; i < h; i++)
 	{
 		for (int j = 0; j < w; j++)
-			if (blocks[i][j] != NULL)
+			if (blocks[i][j])
 			{
 				delete blocks[i][j];
 			}
@@ -86,7 +86,7 @@ void ObjectHandler::start()
 		obj->start();
 	for (int i = 0; i < h; i++)
 		for (int j = 0; j < w; j++)
-			if(blocks[i][j]!=NULL)
+			if(blocks[i][j])
 				blocks[i][j]->start();
 }
 std::list<GameObject*> ObjectHandler::getObjects()
@@ -96,7 +96,7 @@ std::list<GameObject*> ObjectHandler::getObjects()
 		objs.push_back(o);
 	for (int i = 0; i < h; i++)
 		for (int j = 0; j < w; j++)
-			if (blocks[i][j] != NULL)
+			if (blocks[i][j])
 			{
 				objs.push_back(blocks[i][j]);
 			}
@@ -126,7 +126,7 @@ std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos, ObjectToGet type
 			h = this->h - 1;
 		for (int y = startY; y < h; y++)
 			for (int x = startX; x < w; x++)
-				if (blocks[y][x] != NULL)
+				if (blocks[y][x])
 					objs.push_back(blocks[y][x]);
 	}
 	
@@ -194,7 +194,7 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 	for (int y = startY; y < h; y++)
 	{
 		for (int x = startX; x < w; x++)
-			if (blocks[y][x] != NULL)
+			if (blocks[y][x])
 				objs.push_front(blocks[y][x]);
 		
 	}
@@ -276,7 +276,7 @@ bool ObjectHandler::addBlock(Block* block,int x,int y)
 
 void ObjectHandler::deleteBlock(int x, int y)
 {
-	if (blocks[y][x] != NULL)
+	if (blocks[y][x])
 	{
 		objectsToDelete.push_back(blocks[y][x]);
 		Rectangle pos = blocks[y][x]->getPos();
@@ -291,7 +291,7 @@ void ObjectHandler::deleteBlock(int x, int y)
 
 void ObjectHandler::removeBlock(int x, int y)
 {
-	if (blocks[y][x] != NULL)
+	if (blocks[y][x])
 	{
 		blocks[y][x] = NULL;
 	}
@@ -321,7 +321,7 @@ std::list<Block*> ObjectHandler::getBlocks(int x, int y, int w, int h)
 		for (int j = 0; j < h; j++)
 		{
 			Block* thisBlock = blocks[y + j][x + i];
-			if (thisBlock != NULL)
+			if (thisBlock)
 			{
 				bool breaked = false;
 				for (Block* b : blockToReturn)

@@ -71,13 +71,13 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 
 ItemProperty::~ItemProperty()
 {
-	if (sprite != NULL)
+	if (sprite)
 		delete sprite;
 }
 
 void ItemProperty::clearData()
 {
-	if (sprite != NULL)
+	if (sprite)
 		delete sprite;
 	sprite = NULL;
 	name = "";
@@ -85,7 +85,7 @@ void ItemProperty::clearData()
 	///Od kolizji obiektu
 	hasLinesCollider = false;
 	nPoints = 0;
-	if (points != NULL)
+	if (points)
 		delete points;
 	points = NULL;
 	///Czy mo¿na stakowaæ przedmioty
@@ -110,7 +110,7 @@ void ItemProperty::clearData()
 }
 void ItemProperty::updatePointsToCollisions()
 {
-	if (points != NULL)
+	if (points)
 	{
 		
 		if (nPoints <= 0)
@@ -244,7 +244,7 @@ void ItemProperty::setDataFrom(ItemProperty item)
 	///Od kolizji obiektu
 	hasLinesCollider = item.hasLinesCollider;
 	nPoints = item.nPoints;
-	if (item.points != NULL)
+	if (item.points)
 	{
 		points = new Vector2[nPoints];
 		for (int i = 0; i < nPoints; i++)
@@ -273,7 +273,7 @@ void ItemProperty::setDataFrom(ItemProperty item)
 
 void ItemProperty::reLoadTexture()
 {
-	if (sprite != NULL)
+	if (sprite)
 	{
 		delete sprite;
 		sprite = NULL;

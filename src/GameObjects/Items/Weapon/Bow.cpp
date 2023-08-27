@@ -83,7 +83,7 @@ void Bow::draw()
 	Rectangle pos = getPos();
 
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
-	if (ammo != NULL && chargeTime > 0)
+	if (ammo && chargeTime > 0)
 	{
 		Vector2 ammoOffset = { -numberOfProjectal / 2,-numberOfProjectal / 2 };
 
@@ -110,7 +110,7 @@ bool Bow::use(float deltaTime)
 	{
 		if(ammo==NULL)
 			lookForAmmo();
-		if (ammo != NULL)
+		if (ammo)
 		{
 			setProjectalUsing();
 		}
@@ -173,7 +173,7 @@ void Bow::setProjectalUsing()
 
 void Bow::spawnArrow()
 {
-	if (ammo != NULL)
+	if (ammo)
 	{
 		Rectangle pos = getPos();
 		Vector2* col = ammo->getCollsions();

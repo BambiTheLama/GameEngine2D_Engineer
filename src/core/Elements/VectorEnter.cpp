@@ -8,7 +8,7 @@ VectorEnter::VectorEnter(Rectangle pos, std::string name, Vector2* val) :Element
 void VectorEnter::updateVal(Vector2* val) 
 { 
 	this->val = val; 
-	if (val != NULL)
+	if (val)
 	{
 		if(val->x==(int)val->x)
 			floatVal = std::to_string((int)val->x);

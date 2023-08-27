@@ -25,13 +25,13 @@ Engine::Engine()
 Engine::~Engine()
 {
 
-	if (scene != NULL)
+	if (scene)
 		delete scene;
 	scene = NULL;
 	SpriteController::closeSprites();
 	Factory::deleteAllFactory();
 	Properties* prop = Properties::getProperties();
-	if(prop!=NULL)
+	if(prop)
 		delete prop;
 	RecipesFactory* recipes = CraftingRecipes;
 	delete recipes;
@@ -75,7 +75,7 @@ void Engine::draw()
 
 void Engine::setScene(Scene* scene) 
 {
-	if (Engine::scene != NULL)
+	if (Engine::scene)
 		delete Engine::scene;
 	Engine::scene = scene;
 }
