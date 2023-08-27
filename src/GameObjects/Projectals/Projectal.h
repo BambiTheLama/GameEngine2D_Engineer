@@ -19,7 +19,7 @@ protected:
 public:
 
     Projectal(Rectangle pos, float speed, float rotation, float range,
-        SpriteController* sprite, Vector2 collision[4], CollisionsCheckType collisionType);
+        SpriteController* sprite, Vector2 *collision,int n, CollisionsCheckType collisionType);
 
     ~Projectal();
 

@@ -21,7 +21,7 @@ private:
     Bow(Bow& b);
 public:
     Bow(Rectangle pos, std::string name,float chargeTime,float speedMultiplier, float rangeMultiplier ,int numberOfProjectal=1);
-
+    Bow(nlohmann::json j, int ID);
     ~Bow();
 
     virtual void update(float deltaTime);

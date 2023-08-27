@@ -7,15 +7,23 @@
 #include <vector>
 #include <iostream>
 
+enum class ItemClass
+{
+	StackItem,
+	ToolItem,
+	Bow,
+	Ammo,
+};
+
 struct ItemProperty
 {
-	
+
 	int ID = 0;
 	SpriteController* sprite = NULL;
 	///Dane Kazdego obiektu
+	ItemClass itemClass=ItemClass::StackItem;
 	std::string name;
 	Rectangle pos;
-	ItemType type;
 	///Od kolizji obiektu
 	bool hasLinesCollider;
 	int nPoints = 0;

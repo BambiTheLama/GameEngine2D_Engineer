@@ -3,7 +3,7 @@
 #include <math.h>
 #include "../core/Controllers/AnimationController.h"
 #include "../core/Properties.h"
-
+#include "../json.hpp"
 /// <summary>
 /// Zwraca kat od obiektu do pozycji kursora
 /// </summary>
@@ -52,6 +52,7 @@ protected:
 	GameObject(GameObject& obj);
 public:
 	GameObject(Rectangle pos,std::string name);
+	GameObject(nlohmann::json j, int ID);
 	/// <summary>
 	/// Wiztualny destruktor by by³ wywo³any odpowiedni z klas dziedzicz¹cych
 	/// </summary>

@@ -20,6 +20,7 @@ class ToolItem :
     ToolItem(ToolItem& item);
 public:
     ToolItem(Rectangle pos, std::string name,ToolType destroyType=ToolType::NON,int power=0);
+    ToolItem(nlohmann::json j, int ID);
     virtual ~ToolItem();
     virtual ToolItem* clone() { return new ToolItem(*this); }
     void update(float deltaTime);

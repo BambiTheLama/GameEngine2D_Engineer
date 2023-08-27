@@ -13,7 +13,7 @@ Projectal::Projectal(Projectal& obj):GameObject(obj),LinesCollider(obj)
 }
 
 Projectal::Projectal(Rectangle pos, float speed, float rotation, float range,
-	SpriteController* sprite, Vector2 collision[4], CollisionsCheckType collisionType)
+	SpriteController* sprite, Vector2 *collision,int n, CollisionsCheckType collisionType)
 	:GameObject(pos,""),LinesCollider(collisionType)
 {
 	this->rotation = rotation;
@@ -22,7 +22,7 @@ Projectal::Projectal(Rectangle pos, float speed, float rotation, float range,
 
 	delta = deltaFromDegree(rotation,speed);
 	this->sprite = new SpriteController(*sprite);
-	addLines(4, collision);
+	addLines(n, collision);
 }
 
 Projectal::~Projectal()
@@ -33,10 +33,12 @@ Projectal::~Projectal()
 
 void Projectal::update(float deltaTime)
 {
-	pos.x += delta.x * 64.0f * deltaTime;
-	pos.y += delta.y * 64.0f * deltaTime;
-	range -= speed * 64.0f * deltaTime;
-
+	//pos.x += delta.x * 64.0f * deltaTime;
+	//pos.y += delta.y * 64.0f * deltaTime;
+	//range -= speed * 64.0f * deltaTime;
+	rotation+=deltaTime*36;
+	if (IsKeyDown(KEY_TWO))
+		rotation = 0;
 	if (range <= 0)
 	{
 		Game->deleteObject(this);
@@ -53,7 +55,13 @@ void Projectal::update(float deltaTime)
 void Projectal::draw()
 {
 	Vector2 origin = { pos.width / 2,pos.height / 2 };
-	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, origin, rotation-45, WHITE);
+	Rectangle pos = getPos();
+	DrawRectangleRec(pos, RED);
+	pos.x -= pos.width / 2;
+	pos.y -= pos.height / 2;
+	DrawRectangleRec(pos, YELLOW);
+	pos = getPos();
+	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, origin, rotation, WHITE);
 	LinesCollider::draw();
 }
 

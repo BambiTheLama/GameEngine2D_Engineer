@@ -51,7 +51,7 @@ ItemEdytor::ItemEdytor()
 		checkBoxs[i] = new CheckBoxOpenElements(pos, names[i], bPointers[i]);
 		pos.y += 48;
 	}
-	RectangleEnter* recEnter = new RectangleEnter({ 0,100,500,64 }, "Pos:", &item.pos);
+	RectangleEnter* recEnter = new RectangleEnter({ 0,100,400,64 }, "Pos:", &item.pos);
 	elements.push_back(recEnter);
 	elements.push_back(checkBoxs[0]);
 	checkBoxs[0]->setElementAbrow(recEnter);
@@ -93,6 +93,8 @@ ItemEdytor::ItemEdytor()
 
 ItemEdytor::~ItemEdytor()
 {
+	if (items.size() <= 0)
+		items.push_back(new ItemProperty());
 	items[0]->setDataFrom(item);
 	nlohmann::json j;
 	for (auto i : items)
@@ -129,7 +131,15 @@ void ItemEdytor::update(float deltaTime)
 		{
 			lastPressed->unPress();
 			lastPressed = NULL;
+			if (item.sprite == NULL)
+				item.reLoadTexture();
+			else
+			{
+				if (!item.sprite->getPath().find(item.name + ".png"));
+				item.reLoadTexture();
+			}
 		}
+		
 		for (Element* e : elements)
 		{
 			if (e->press())
@@ -137,10 +147,51 @@ void ItemEdytor::update(float deltaTime)
 				lastPressed = e;
 				break;
 			}
-			
 		}
-			
+		if (lastPressed == NULL)
+		{
+			if (CheckCollisionPointRec(GetMousePosition(), itemDraw))
+			{
+				Rectangle pos = itemDraw;
+				for (int i = 0; i < item.nPoints; i++)
+				{
+					Vector2 p = item.points[i];
+					p.x *= pos.width / item.pos.width;
+					p.y *= pos.height / item.pos.height;
+					p.x += pos.x;
+					p.y += pos.y;
+					if (CheckCollisionPointCircle(GetMousePosition(), p, 7))
+					{
+						holdPoint = i;
+					}
+				}
+			}
+		}
 	}
+	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+	{
+		if (CheckCollisionPointRec(GetMousePosition(), itemDraw))
+		{
+			if (holdPoint >= 0 && holdPoint < item.nPoints)
+			{
+				Rectangle pos = itemDraw;
+				Vector2 p = GetMousePosition();
+				p.x -= pos.x;
+				p.y -= pos.y;
+				p.x *= item.pos.width / pos.width;
+				p.y *= item.pos.height / pos.height;
+				item.points[holdPoint] = p;
+			}
+			else
+				holdPoint = -1;
+		}
+
+	}
+	if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+	{
+		holdPoint = -1;
+	}
+	
 }
 
 void ItemEdytor::newItem()
@@ -167,4 +218,42 @@ void ItemEdytor::draw()
 {
 	for (Element* e : elements)
 		e->draw();
+	if (item.sprite != NULL)
+	{
+		Rectangle pos = itemDraw;
+		int w = item.pos.width / 16;
+		int h = item.pos.height / 16;
+		int sizeW = pos.width / w;
+		int sizeH = pos.height / h;
+		for (int x = 0; x < w; x++)
+			for (int y = 0; y < h; y++)
+				DrawRectangle(pos.x + x * sizeW, pos.y + y * sizeH, sizeW, sizeH, x % 2 == y % 2 ? GRAY : WHITE);
+		drawText(TextFormat("{0,0}"), pos.x, pos.y, textStandardSize, BLACK);
+		drawText(TextFormat("{%d,0}",(int)item.pos.width), pos.x+pos.width, pos.y, textStandardSize, BLACK);
+		drawText(TextFormat("{%d,%d}", (int)item.pos.width, (int)item.pos.height), pos.x + pos.width, pos.y + pos.height, textStandardSize, BLACK);
+		drawText(TextFormat("{0,%d}", (int) item.pos.height), pos.x, pos.y + pos.height, textStandardSize, BLACK);
+
+		drawText(TextFormat("{%d,0}", (int)item.pos.width / 2), pos.x + pos.width/2, pos.y, textStandardSize, BLACK);
+
+		drawText(TextFormat("{%d,%d}", (int)item.pos.width/2, (int)item.pos.height), pos.x + pos.width/2, pos.y + pos.height, textStandardSize, BLACK);
+
+		drawText(TextFormat("{0,%d}", (int)item.pos.height/2), pos.x , pos.y + pos.height/2, textStandardSize, BLACK);
+		drawText(TextFormat("{%d,%d}", (int)item.pos.width, (int)item.pos.height/2), pos.x + pos.width, pos.y + pos.height/2, textStandardSize, BLACK);
+
+		DrawRectangleLinesEx({ pos.x - 3,pos.y - 3,pos.width + 6,pos.height + 6 }, 3, BLACK);	
+		item.sprite->draw(pos);
+
+		for (int i = 0; i < item.nPoints; i++)
+		{
+			Vector2 p = item.points[i];
+			p.x *= pos.width / item.pos.width;
+			p.y *= pos.height / item.pos.height;
+			p.x += pos.x;
+			p.y += pos.y;
+			DrawCircleV(p, 7, holdPoint==i?GREEN:RED);
+			drawText(TextFormat("%d", i), p.x, p.y, textStandardSize, BLACK);
+		}
+
+	}
+
 }

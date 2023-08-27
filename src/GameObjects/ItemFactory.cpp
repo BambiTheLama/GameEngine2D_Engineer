@@ -4,63 +4,40 @@
 #include "Items/Tool/ToolItem.h"
 #include "Items/Weapon/Ammo.h"
 #include "Items/Weapon/Bow.h"
+#include "../core/Scenes/ItemEdytorStruct/ItemProperty.h"
+#include <fstream>
 ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
 {
-	int blockStackSize = 100;
-	objects = std::vector<Item*>();
-	objects.push_back(new StackItem({ 0,0,32,32 }, "Wood", blockStackSize));
-	objects.push_back(new StackItem({ 0,0,32,32 }, "Plank", blockStackSize));
-	objects.push_back(new StackItem({ 0,0,32,32 }, "Dirt", blockStackSize));
-	objects.push_back(new StackItem({ 0,0,32,32 }, "Sand", blockStackSize));
-	objects.push_back(new StackItem({ 0,0,32,32 }, "Stone", blockStackSize));
-	ToolItem* tool = new ToolItem({ 0,0,32,32 }, "Axe", ToolType::Axe, 30);
-	Vector2 points[4];
-	points[0] = { 14,31 };
-	points[1] = { 31,20 };
-	points[2] = { 19,10 };
-	points[3] = { 9,26 };
-	tool->setStartPoints(points);
-	objects.push_back(tool);
-	tool = new ToolItem({ 0,0,32,32 }, "Pickaxe", ToolType::Pickaxe, 30);
-	points[0] = { 5,28 };
-	points[1] = { 17,31 };
-	points[2] = { 29,16 };
-	points[3] = { 28,6 };
-	tool->setStartPoints(points);
-	objects.push_back(tool);
-	tool = new ToolItem({ 0,0,32,32 }, "Hoe");
-	points[0] = { 19,30 };
-	points[1] = { 31,12 };
-	points[2] = { 29,8 };
-	points[3] = { 13,25 };
-	tool->setStartPoints(points);
-	objects.push_back(tool);
-	tool = new ToolItem({ 0,0,32,32 }, "Shovel", ToolType::Shovel, 30);
-	objects.push_back(tool);
-	points[0] = { 14,24};
-	points[1] = { 24,31};
-	points[2] = { 31,23};
-	points[3] = { 23,15};
-	tool->setStartPoints(points);
-	tool = new ToolItem({ 0,0,32,32 }, "Sword");
-	points[0] = { 7,12 };
-	points[1] = { 27,31 };
-	points[2] = { 31,28 };
-	points[3] = { 12,8 };
-
-	tool->setStartPoints(points);
-	objects.push_back(tool);
-
-	objects.push_back(new Bow({ 0,0,32,32 }, "Bow",0.5, 1.0f, 1.0f, 1));
-	objects.push_back(new Bow({ 0,0,32,32 }, "Bow",3, 0.5f, 2.0f, 5));
-	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", 10, 900, AmmoType::Arrow));
-	objects.push_back(new Ammo({ 0,0,32,32 }, "Arrow", 15, 900, AmmoType::Arrow));
-	for (int i = 0; i < objects.size(); i++)
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open("Items.json");
+	if (reader.is_open())
+		reader >> j;
+	reader.close();
+	for (int i = 0; i < j.size(); i++)
 	{
-		objects[i]->ID = i;
+		ItemClass type = (ItemClass)j[i]["ItemClass"];
+		switch (type)
+		{
+		case ItemClass::StackItem:
+			objects.push_back(new StackItem(j, i));
+			break;
+		case ItemClass::ToolItem:
+			objects.push_back(new ToolItem(j, i));
+			break;
+		case ItemClass::Bow:
+			objects.push_back(new Bow(j, i));
+			break;
+		case ItemClass::Ammo:
+			objects.push_back(new Ammo(j, i));
+			break;
+		default:
+			break;
+		}
 	}
+
 	printf("[FactoryItem]: Stworzono fabryke itemow\n");
 }
 

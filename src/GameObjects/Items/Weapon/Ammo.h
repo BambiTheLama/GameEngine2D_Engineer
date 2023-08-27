@@ -7,17 +7,22 @@ enum class AmmoType
     Bullet,
 };
 
+AmmoType readAmmoType(std::string name);
+
 class Ammo :
     public StackItem
 {
+    int nCollisions;
     float speed;
     float range;
     AmmoType ammoType;
-
+    Vector2* collisions;
 protected:
     Ammo(Ammo& ammo);
 public:
     Ammo(Rectangle pos, std::string name,float speed,float range, AmmoType ammoType);
+
+    Ammo(nlohmann::json j, int ID);
 
     virtual Ammo* clone() { return new Ammo(*this); }
 
@@ -28,5 +33,9 @@ public:
     float getSpeed() const { return speed; }
 
     float getRange() const { return range; }
+
+    Vector2* getCollsions()const { return collisions; }
+
+    int getNCollisions()const { return nCollisions; }
 };
 

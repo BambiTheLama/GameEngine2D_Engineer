@@ -7,6 +7,12 @@ Item::Item(Rectangle pos, std::string name):GameObject(pos,name)
 {
 
 }
+
+Item::Item(nlohmann::json j, int ID):GameObject(j,ID)
+{
+
+}
+
 Item::~Item()
 {
 

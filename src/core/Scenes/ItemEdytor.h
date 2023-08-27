@@ -18,6 +18,8 @@ class ItemEdytor :
 	std::list<Element*> elements;
 	std::vector<ItemProperty*> items;
 	Element* lastPressed = NULL;
+	Rectangle itemDraw= { 500,100,600,600 };
+	int holdPoint = -1;
 public:
     ItemEdytor();
 

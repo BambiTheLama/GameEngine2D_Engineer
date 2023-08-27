@@ -14,6 +14,15 @@ GameObject::GameObject(Rectangle pos,std::string name)
 	this->name = name;
 }
 
+GameObject::GameObject(nlohmann::json j, int ID)
+{
+	this->ID = ID;
+	pos.x = j[ID]["Pos"][0];
+	pos.y = j[ID]["Pos"][1];
+	pos.width = j[ID]["Pos"][2];
+	pos.height = j[ID]["Pos"][3];
+	name = j[ID]["Name"];
+}
 GameObject::~GameObject()
 {
 

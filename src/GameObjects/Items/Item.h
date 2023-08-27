@@ -22,6 +22,8 @@ protected:
 public:
     Item(Rectangle pos, std::string name);
 
+    Item(nlohmann::json j, int ID);
+
     virtual ~Item();
 
     virtual void update(float deltaTime);

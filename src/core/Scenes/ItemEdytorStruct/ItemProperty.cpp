@@ -15,11 +15,11 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 	}
 	this->ID = ID;
 	name=j[ID]["Name"];
+	itemClass = j[ID]["ItemClass"];;
 	pos.x = j[ID]["Pos"][0];
 	pos.y = j[ID]["Pos"][1];
 	pos.width = j[ID]["Pos"][2];
 	pos.height = j[ID]["Pos"][3];
-	type = j[ID]["Type"];
 	if (j[ID].contains("LineCollsionN"))
 	{
 		hasLinesCollider = true;
@@ -82,8 +82,6 @@ void ItemProperty::clearData()
 	sprite = NULL;
 	name = "";
 	pos = { 0,0,0,0 };
-
-	type = ItemType::Normal;
 	///Od kolizji obiektu
 	hasLinesCollider = false;
 	nPoints = 0;
@@ -200,9 +198,10 @@ void ItemProperty::removePointToCollisions()
 
 void ItemProperty::saveToJson(nlohmann::json& j)
 {
+
 	j[ID]["Name"] = name;
+	j[ID]["ItemClass"] = itemClass;
 	j[ID]["Pos"] = { pos.x,pos.y,pos.width,pos.height };
-	j[ID]["Type"] = type;
 	if (hasLinesCollider)
 	{
 		j[ID]["LineCollsionN"] = nPoints;
@@ -238,9 +237,9 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 void ItemProperty::setDataFrom(ItemProperty item)
 {
 	ID = item.ID;
+	itemClass = item.itemClass;
 	name = item.name;
 	pos = item.pos;
-	type = item.type;
 	///Od kolizji obiektu
 	hasLinesCollider = item.hasLinesCollider;
 	nPoints = item.nPoints;
@@ -276,7 +275,14 @@ void ItemProperty::reLoadTexture()
 	if (sprite != NULL)
 	{
 		delete sprite;
+		sprite = NULL;
 	}
 	std::string path = "Resource/Items/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
+	if (!sprite->isLoaded())
+	{
+		delete sprite;
+		sprite = NULL;
+	}
+
 }

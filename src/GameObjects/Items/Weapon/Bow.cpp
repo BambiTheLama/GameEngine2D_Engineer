@@ -37,7 +37,30 @@ Bow::Bow(Rectangle pos, std::string name, float chargeTime, float speedMultiplie
 	this->speedMultiplier = speedMultiplier;
 	this->rangeMultiplier = rangeMultiplier;
 }
-
+Bow::Bow(nlohmann::json j, int ID):Item(j,ID)
+{
+	origin = { 43.0f / 64.0f * pos.width, 21.0f / 64.0f * pos.height };
+	chargeTime = 0;
+	rotation = 0;
+	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + name + ".png";
+	sprite = new SpriteController(path.c_str());
+	if (j[ID].contains("Projectals"))
+		numberOfProjectalMax = j[ID].contains("Projectals");
+	else
+		numberOfProjectalMax = 1;
+	if (j[ID].contains("Range"))
+		rangeMultiplier = j[ID]["Range"];
+	else
+		rangeMultiplier = 1;
+	if (j[ID].contains("Speed"))
+		speedMultiplier = j[ID]["Speed"];
+	else
+		speedMultiplier = 1;
+	if (j[ID].contains("UseTime"))
+		chargeTimeMax = j[ID]["UseTime"];
+	else
+		chargeTimeMax = 1;
+}
 Bow::~Bow()
 {
 	delete sprite;
@@ -153,16 +176,8 @@ void Bow::spawnArrow()
 	if (ammo != NULL)
 	{
 		Rectangle pos = getPos();
-		Vector2 col[4] = { { 0,0 },
-			{ pos.width / 6,0 },
-			{ pos.width / 6,pos.height / 6 },
-			{ 0,pos.height / 6 },
-		};
-		for (int i = 0; i < 4; i++)
-		{
-			col[i].x += 13;
-			col[i].y += 6;
-		}
+		Vector2* col = ammo->getCollsions();
+		int n = ammo->getNCollisions();
 		pos.x -= numberOfProjectal / 2;
 		pos.y -= numberOfProjectal / 2;
 		for (int i = 0; i < numberOfProjectal; i++)
@@ -171,8 +186,8 @@ void Bow::spawnArrow()
 			float speed = ammo->getSpeed() * speedMultiplier * procent;
 			float range = ammo->getRange() * rangeMultiplier * procent;
 			
-			Projectal* pro = new Projectal(pos, speed, rotation + 45, range, ammo->getSprite(),
-				col, CollisionsCheckType::All);
+			Projectal* pro = new Projectal(pos, speed, rotation, range, ammo->getSprite(),
+				col,n, CollisionsCheckType::All);
 
 			Game->addObject(pro);
 			pos.x++;

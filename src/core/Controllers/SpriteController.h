@@ -10,6 +10,7 @@ class SpriteController
 	static std::vector<SpriteController*> sprites;
 	std::string path;
 	Texture2D texture;
+	bool isLoadedFromPath=false;
 
 public:
 	/// <summary>
@@ -22,6 +23,7 @@ public:
 	/// </summary>
 	/// <param name="controller"></param>
 	SpriteController(SpriteController& controller);
+	~SpriteController();
 	/// <summary>
 	/// Zwraca texturê która posiada obiekt
 	/// </summary>
@@ -63,6 +65,8 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	bool isLoaded() { return texture.id > 0; }
+
+	std::string getPath()const { return path; }
 
 };
 
