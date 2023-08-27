@@ -20,7 +20,10 @@ void IntEnter::update()
 
 	if (IsKeyPressed(KEY_BACKSPACE))
 		(*val) = (*val) / 10;
-
+	if (IsKeyPressed(KEY_UP))
+		(*val)++;
+	if (IsKeyPressed(KEY_DOWN))
+		(*val)--;
 }
 
 bool IntEnter::press()

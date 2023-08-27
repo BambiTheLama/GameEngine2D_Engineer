@@ -32,25 +32,10 @@ SpriteController::~SpriteController()
 {
 	if (!isLoadedFromPath)
 		return;
-	if (sprites.size() <= 0)
-		return;
-	std::vector<SpriteController*> ::iterator it;
-
-	if (sprites.size() > 1)
-	{
-		for (it = sprites.begin(); it != sprites.end(); it++)
-		{
-			if (*it == this)
-				break;
-		}
-		if(it != sprites.end())
-			sprites.erase(it);
-		else if (it == sprites.end() && *sprites.end() == this)
-			sprites.pop_back();
-	}
-	else
-		sprites.clear();
-	UnloadTexture(texture);
+	for (SpriteController* s : sprites)
+		if (s == this)
+			s = new SpriteController(*this);
+	
 }
 
 void SpriteController::closeSprites()

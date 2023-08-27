@@ -89,25 +89,27 @@ ItemEdytor::ItemEdytor()
 	checkBoxs[5]->addElement(e);
 	e = new FloatEnter({ 00,00,200,h }, "Projectal Speed:", &item.projectalSpeed);
 	checkBoxs[5]->addElement(e);
+	if (items.size() <= 0)
+		items.push_back(new ItemProperty());
+	//items[0]->setDataFrom(item);
 }
 
 ItemEdytor::~ItemEdytor()
 {
-	if (items.size() <= 0)
-		items.push_back(new ItemProperty());
-	items[0]->setDataFrom(item);
+
+
 	nlohmann::json j;
 	for (auto i : items)
 	{
 		i->saveToJson(j);
+		delete i;
 	}
-
+	items.clear();
 	std::cout << j.dump(2);
 	std::ofstream writer;
 	writer.open("Items.json");
 	writer << j.dump(2)<<std::endl;
 	writer.close();
-
 	for (Element* e : elements)
 		delete e;
 
@@ -118,7 +120,7 @@ void ItemEdytor::start()
 {
 	for (auto* e : elements)
 		e->updatePos();
-
+	item.reLoadTexture();
 }
 
 void ItemEdytor::update(float deltaTime)
@@ -242,7 +244,21 @@ void ItemEdytor::draw()
 
 		DrawRectangleLinesEx({ pos.x - 3,pos.y - 3,pos.width + 6,pos.height + 6 }, 3, BLACK);	
 		item.sprite->draw(pos);
-
+		for (int i = 0; i < item.nPoints; i++)
+		{
+			Vector2 p = item.points[i];
+			p.x *= pos.width / item.pos.width;
+			p.y *= pos.height / item.pos.height;
+			p.x += pos.x;
+			p.y += pos.y;
+			Vector2 p2 = item.points[(i+1)%item.nPoints];
+			p2.x *= pos.width / item.pos.width;
+			p2.y *= pos.height / item.pos.height;
+			p2.x += pos.x;
+			p2.y += pos.y;
+			DrawLineEx(p, p2, 4, WHITE);
+			DrawLineEx(p, p2, 2, BLACK);
+		}
 		for (int i = 0; i < item.nPoints; i++)
 		{
 			Vector2 p = item.points[i];
@@ -251,7 +267,7 @@ void ItemEdytor::draw()
 			p.x += pos.x;
 			p.y += pos.y;
 			DrawCircleV(p, 7, holdPoint==i?GREEN:RED);
-			drawText(TextFormat("%d", i), p.x, p.y, textStandardSize, BLACK);
+			DrawTextWithOutline(TextFormat("%d", i), p.x, p.y, textStandardSize, BLACK,WHITE);
 		}
 
 	}

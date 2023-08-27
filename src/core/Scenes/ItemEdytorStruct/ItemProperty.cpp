@@ -67,7 +67,6 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 		numberOfProjectal = j[ID]["Projectals"];
 		projectalSpeed = j[ID]["Speed"];
 	}
-
 }
 
 ItemProperty::~ItemProperty()
@@ -78,7 +77,8 @@ ItemProperty::~ItemProperty()
 
 void ItemProperty::clearData()
 {
-
+	if (sprite != NULL)
+		delete sprite;
 	sprite = NULL;
 	name = "";
 	pos = { 0,0,0,0 };
@@ -236,6 +236,7 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 
 void ItemProperty::setDataFrom(ItemProperty item)
 {
+	sprite = new SpriteController(*item.sprite);
 	ID = item.ID;
 	itemClass = item.itemClass;
 	name = item.name;

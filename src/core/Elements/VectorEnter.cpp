@@ -10,7 +10,6 @@ void VectorEnter::updateVal(Vector2* val)
 	this->val = val; 
 	if (val != NULL)
 	{
-		printf("PUNKT:%lf %lf\n", val->x, val->y);
 		if(val->x==(int)val->x)
 			floatVal = std::to_string((int)val->x);
 		else
@@ -50,7 +49,36 @@ std::string VectorEnter::stringValue(std::string s, int c)
 	}
 	return s;
 }
+std::string floatToString(float f)
+{
+	std::string s;
+	int tmp = f;
+	if (tmp == 0)
+		s = "0";
+	else
+		s = "-";
+	std::string s2;
+	while (tmp != 0)
+	{
+		s2 += (tmp % 10) + '0';
+		tmp /= 10;
+	}
+	for (int i = s2.size() - 1; i >= 0; i--)
+		s += s2.at(i);
 
+	f -= (int)f;
+	if (f != 0)
+	{
+		s += ".";
+		for (int i = 0; i < 6; i++)
+			s += ((int)(pow(10, i + 1) * f) % 10) + '0';
+		while (s.at(s.size()-1) == '0')
+		{
+			s.pop_back();
+		}
+	}
+	return s;
+}
 void VectorEnter::update()
 {
 	if (pressed)
@@ -71,6 +99,11 @@ void VectorEnter::update()
 			floatVal2 = stringValue(floatVal2, key);
 			val->y = std::stof(floatVal2);
 		}
+	}
+	else
+	{
+		floatVal = floatToString(val->x);
+		floatVal2 = floatToString(val->y);
 	}
 }
 
