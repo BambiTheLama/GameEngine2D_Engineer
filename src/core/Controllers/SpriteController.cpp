@@ -4,20 +4,18 @@ std::vector<SpriteController*> SpriteController::sprites = std::vector<SpriteCon
 
 SpriteController::SpriteController(const char* path)
 {
-	this->path = path;
-	for(SpriteController* sprite:sprites)
-		if (sprite->path.compare(path)==0)
+	this->path = (std::string)path;
+	for (SpriteController* sprite : sprites)
+		if (sprite->path.compare(path) == 0)
 		{
 			std::cout << path << " = " << sprite->path << "\n";
 			texture = sprite->texture;
-			isLoadedFromPath = false;
 			return;
 		}
 	texture = LoadTexture(path);
 	if (texture.id > 0)
 	{
-		sprites.push_back(this);
-		isLoadedFromPath = true;
+		sprites.push_back(new SpriteController(*this));
 	}
 }
 
@@ -25,23 +23,22 @@ SpriteController::SpriteController(SpriteController& controller)
 {
 	this->path = controller.path;
 	this->texture = controller.texture;
-	isLoadedFromPath = false;
 }
 
 SpriteController::~SpriteController()
 {
-	if (!isLoadedFromPath)
-		return;
-	for (SpriteController* s : sprites)
-		if (s == this)
-			s = new SpriteController(*this);
+
 	
 }
 
 void SpriteController::closeSprites()
 {
 	for (SpriteController* sprite : sprites)
+	{
 		UnloadTexture(sprite->texture);
+		delete sprite;
+	}
+
 
 	sprites.clear();
 }

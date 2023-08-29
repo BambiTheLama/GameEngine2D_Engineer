@@ -2,7 +2,7 @@
 
 ItemProperty::ItemProperty()
 {
-
+	clearData();
 }
 
 ItemProperty::ItemProperty(nlohmann::json& j, int ID)
@@ -234,9 +234,12 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 	}
 }
 
-void ItemProperty::setDataFrom(ItemProperty item)
+void ItemProperty::setDataFrom(ItemProperty& item)
 {
-	sprite = new SpriteController(*item.sprite);
+	if (item.sprite)
+		sprite = new SpriteController(*item.sprite);
+	else
+		sprite = NULL;
 	ID = item.ID;
 	itemClass = item.itemClass;
 	name = item.name;
@@ -286,4 +289,22 @@ void ItemProperty::reLoadTexture()
 		sprite = NULL;
 	}
 
+}
+
+void ItemProperty::draw(Rectangle pos)
+{
+	DrawRectangleRec(pos, WHITE);
+	DrawRectangleLinesEx(pos, 2, BLACK);
+	if (sprite && sprite->isLoaded())
+		sprite->draw(pos);
+}
+
+bool ItemProperty::checkTexture()
+{
+	if (sprite)
+	{
+		std::string path = "Resource/Items/" + name + ".png"; 
+		return sprite->comparePath(path);
+	}
+	return false;
 }

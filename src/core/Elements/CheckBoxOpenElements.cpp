@@ -53,7 +53,7 @@ void CheckBoxOpenElements::update()
 bool CheckBoxOpenElements::press()
 {
 	CheckBox::press();
-	Rectangle pos = getPos();
+	Rectangle pos = Element::getPos();
 	if (CheckCollisionPointRec(GetMousePosition(), {pos.x + pos.width, pos.y, pos.height, pos.height}))
 	{
 		openElements = !openElements;

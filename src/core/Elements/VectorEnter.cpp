@@ -41,11 +41,21 @@ std::string VectorEnter::stringValue(std::string s, int c)
 				return s;
 		s += '.';
 	}
+	else if (c == '-')
+	{
+		if (s.at(0) != '-')
+			s = '-' + s;
+		else
+			s = s.substr(1);
+	}
 	if (IsKeyPressed(KEY_BACKSPACE))
 	{
 		s.pop_back();
 		if (s.size() <= 0)
 			s = "0";
+		else if(s.size()==1 && s.at(0)=='-')
+			s = "0";
+
 	}
 	return s;
 }
@@ -55,7 +65,7 @@ std::string floatToString(float f)
 	int tmp = f;
 	if (tmp == 0)
 		s = "0";
-	else
+	else if (tmp < 0)
 		s = "-";
 	std::string s2;
 	while (tmp != 0)

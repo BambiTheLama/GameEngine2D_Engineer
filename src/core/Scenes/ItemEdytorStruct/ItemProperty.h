@@ -64,11 +64,13 @@ struct ItemProperty
 
 	void saveToJson(nlohmann::json& j);
 
-	void setDataFrom(ItemProperty item);
+	void setDataFrom(ItemProperty& item);
 
 	void reLoadTexture();
 
+	void draw(Rectangle pos);
 
+	bool checkTexture();
 private:
 	int sizePointsBefore=0;
 };

@@ -2,16 +2,15 @@
 #include <vector>
 #include <string>
 #include "raylib.h"
+#include <iostream>
 /// <summary>
 /// Klasa do trzymania textur w jednym miejscu i sprawdzaniu czy ju¿ zosta³a takowa wczytana
 /// </summary>
 class SpriteController
 {
 	static std::vector<SpriteController*> sprites;
-	std::string path;
+	std::string path="";
 	Texture2D texture;
-	bool isLoadedFromPath=false;
-
 public:
 	/// <summary>
 	/// Konstruktor do klasy poprzez œcie¿kê
@@ -66,7 +65,9 @@ public:
 	/// <returns></returns>
 	bool isLoaded() { return texture.id > 0; }
 
-	std::string getPath()const { return path; }
+	std::string getPath() { return path; }
+
+	bool comparePath(std::string p) { return p.compare(path)==0; }
 
 };
 
