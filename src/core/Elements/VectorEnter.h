@@ -1,5 +1,7 @@
 #pragma once
 #include "Element.h"
+
+
 class VectorEnter :
     public Element
 {
@@ -11,7 +13,7 @@ class VectorEnter :
     Rectangle pos2;
     bool pressed = false;
     bool left=false;
-    std::string stringValue(std::string s, int c);
+
 public:
     VectorEnter(Rectangle pos, std::string name, Vector2* val);
 

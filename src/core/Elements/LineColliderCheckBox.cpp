@@ -11,8 +11,6 @@ void LineColliderCheckBox::updateVectorPoints()
 {
 	int n = last;
 	last = prop->nPoints;
-	if (n == last)
-		return;
 	if (n < last)
 	{
 		for (int i = n; i < last; i++)
@@ -66,4 +64,9 @@ void LineColliderCheckBox::draw()
 {
 	updateVectorPoints();
 	CheckBoxOpenElements::draw();
+}
+
+void LineColliderCheckBox::reloadData()
+{
+	updateVectorPoints();
 }

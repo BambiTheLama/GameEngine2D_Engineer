@@ -117,7 +117,8 @@ void ItemProperty::updatePointsToCollisions()
 		{
 			delete points;
 			points = NULL;
-			sizePointsBefore = nPoints;
+			sizePointsBefore = 0;
+			nPoints = 0;
 			return;
 		}
 
@@ -236,6 +237,9 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 
 void ItemProperty::setDataFrom(ItemProperty& item)
 {
+	printf("----------------------------------------\n");
+	printf("ITEM ID %d  - kopy form %d\n", ID, item.ID);
+	printf("----------------------------------------\n");
 	if (item.sprite)
 		sprite = new SpriteController(*item.sprite);
 	else
@@ -249,9 +253,17 @@ void ItemProperty::setDataFrom(ItemProperty& item)
 	nPoints = item.nPoints;
 	if (item.points)
 	{
+		if (points)
+			delete points;
+		printf("----------------------------------------\n");
+		sizePointsBefore = nPoints;
 		points = new Vector2[nPoints];
 		for (int i = 0; i < nPoints; i++)
+		{
 			points[i] = item.points[i];
+			printf("point(%d) {%.2lf %.2lf}\n", i, points[i].x, points[i].y);
+		}
+		printf("----------------------------------------\n");
 	}
 	///Czy mo¿na stakowaæ przedmioty
 	isStacable = item.isStacable;
@@ -296,7 +308,7 @@ void ItemProperty::draw(Rectangle pos)
 	DrawRectangleRec(pos, WHITE);
 	DrawRectangleLinesEx(pos, 2, BLACK);
 	if (sprite && sprite->isLoaded())
-		sprite->draw(pos);
+		sprite->draw(pos,0);
 }
 
 bool ItemProperty::checkTexture()

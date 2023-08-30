@@ -8,7 +8,6 @@ SpriteController::SpriteController(const char* path)
 	for (SpriteController* sprite : sprites)
 		if (sprite->path.compare(path) == 0)
 		{
-			std::cout << path << " = " << sprite->path << "\n";
 			texture = sprite->texture;
 			return;
 		}

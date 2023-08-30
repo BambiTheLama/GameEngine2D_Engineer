@@ -1,11 +1,77 @@
 #include "FloatEnter.h"
+std::string floatToString(float f)
+{
+	std::string s;
+	int tmp = f;
+	if (tmp == 0)
+		s = "0";
+	else if (tmp < 0)
+		s = "-";
+	std::string s2;
+	while (tmp != 0)
+	{
+		s2 += (tmp % 10) + '0';
+		tmp /= 10;
+	}
+	for (int i = s2.size() - 1; i >= 0; i--)
+		s += s2.at(i);
+
+	f -= (int)f;
+	if (f != 0)
+	{
+		s += ".";
+		for (int i = 0; i < 6; i++)
+			s += ((int)(pow(10, i + 1) * f) % 10) + '0';
+		while (s.at(s.size() - 1) == '0')
+		{
+			s.pop_back();
+		}
+	}
+	return s;
+}
+
+std::string stringValue(std::string s, int c)
+{
+	if (c >= '0' && c <= '9')
+	{
+		if (s.size() <= 1 && s.at(0) == '0')
+			s = c;
+		else
+			s += c;
+	}
+	else if (c == '.' || c == ',')
+	{
+		int n = s.size();
+		for (int i = 0; i < n; i++)
+			if (s.at(i) == '.')
+				return s;
+		s += '.';
+	}
+	else if (c == '-')
+	{
+		if (s.at(0) != '-')
+			s = '-' + s;
+		else
+			s = s.substr(1);
+	}
+	if (IsKeyPressed(KEY_BACKSPACE))
+	{
+		s.pop_back();
+		if (s.size() <= 0)
+			s = "0";
+		else if (s.size() == 1 && s.at(0) == '-')
+			s = "0";
+
+	}
+	return s;
+}
 
 FloatEnter::FloatEnter(Rectangle pos, std::string name, float* val):Element(pos)
 {
 	this->name = name;
 	this->val = val;
-	if(*val!=0)
-		floatVal = std::to_string(*val);
+	if(val)
+		floatVal = floatToString(*val);
 }
 void FloatEnter::update()
 {
@@ -14,33 +80,7 @@ void FloatEnter::update()
 	if (!isAnyKeyPressed())
 		return;
 	int key = keyPressed();
-	if (key >= '0' && key <= '9')
-	{
-		if (floatVal.size() == 1 && floatVal.at(0)=='0')
-		{
-			floatVal = key;
-		}
-		else
-		{
-			floatVal += key;
-		}
-
-	}
-
-	if (IsKeyPressed(KEY_BACKSPACE))
-	{
-		floatVal.pop_back();
-		if (floatVal.size() <= 0)
-			floatVal = '0';
-	}
-
-	if (key == '.' || key == ',')
-	{
-		for (int i = 0; i < floatVal.size(); i++)
-			if (floatVal.at(i) == '.')
-				return;
-		floatVal += '.';
-	}
+	floatVal = stringValue(floatVal, key);
 	(*val) = std::stof(floatVal);
 }
 
@@ -57,6 +97,7 @@ bool FloatEnter::press()
 void FloatEnter::unPress()
 {
 	pressed = false;
+	floatVal = floatToString(*val);
 }
 
 void FloatEnter::draw()

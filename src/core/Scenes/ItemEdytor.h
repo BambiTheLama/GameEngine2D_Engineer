@@ -13,13 +13,14 @@
 class ItemEdytor :
     public Scene
 {
-	ItemProperty item;
+	ItemProperty* item=NULL;
 	std::list<Element*> elements;
 	std::vector<ItemProperty*> items;
 	Element* lastPressed = NULL;
 	Rectangle itemDraw= { 500,100,600,600 };
 	int holdPoint = -1;
-	Rectangle itemsDraw = { 1200,100,300,600 };
+	Rectangle itemsSelect = { 1200,100,300,600 };
+	int firstItem = 0;
 public:
     ItemEdytor();
 
@@ -37,12 +38,12 @@ public:
 
 	Rectangle itemPos(int i);
 
-	void setItemData();
 	void lastElementPressed();
 	void checkPress();
 	void itemDrawPointsClick();
+	void itemsSelectPointClick();
 	void itemDrawPointsHold();
 	void itemDrawShow();
-	
+	void loadNewItem(int i);
 };
 

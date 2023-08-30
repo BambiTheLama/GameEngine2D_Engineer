@@ -16,5 +16,7 @@ public:
     virtual bool press();
 
     virtual void draw();
+
+    virtual void reloadData();
 };
 

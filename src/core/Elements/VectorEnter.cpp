@@ -1,94 +1,30 @@
 #include "VectorEnter.h"
-
+#include "FloatEnter.h"
 VectorEnter::VectorEnter(Rectangle pos, std::string name, Vector2* val) :Element(pos)
 {
 	this->val = val;
 	this->name = name;
+	if (val)
+	{
+		floatVal = floatToString(val->x);
+		floatVal2 = floatToString(val->y);
+	}
+
 }
 void VectorEnter::updateVal(Vector2* val) 
 { 
 	this->val = val; 
 	if (val)
 	{
-		if(val->x==(int)val->x)
-			floatVal = std::to_string((int)val->x);
-		else
-			floatVal = std::to_string(val->x);
-
-		if (val->y == (int)val->y)
-			floatVal2 = std::to_string((int)val->y);
-		else
-			floatVal2 = std::to_string(val->y);
+		floatVal = floatToString(val->x);
+		floatVal2 = floatToString(val->y);
 		val->x = std::stof(floatVal);
 		val->y = std::stof(floatVal2);
 	}
 }
 
-std::string VectorEnter::stringValue(std::string s, int c)
-{
-	if (c >= '0' && c <= '9')
-	{
-		if (s.size() <= 1 && s.at(0) == '0')
-			s = c;
-		else
-			s += c;
-	}
-	else if (c == '.' || c == ',')
-	{
-		int n = s.size();
-		for (int i = 0; i < n; i++)
-			if (s.at(i) == '.')
-				return s;
-		s += '.';
-	}
-	else if (c == '-')
-	{
-		if (s.at(0) != '-')
-			s = '-' + s;
-		else
-			s = s.substr(1);
-	}
-	if (IsKeyPressed(KEY_BACKSPACE))
-	{
-		s.pop_back();
-		if (s.size() <= 0)
-			s = "0";
-		else if(s.size()==1 && s.at(0)=='-')
-			s = "0";
 
-	}
-	return s;
-}
-std::string floatToString(float f)
-{
-	std::string s;
-	int tmp = f;
-	if (tmp == 0)
-		s = "0";
-	else if (tmp < 0)
-		s = "-";
-	std::string s2;
-	while (tmp != 0)
-	{
-		s2 += (tmp % 10) + '0';
-		tmp /= 10;
-	}
-	for (int i = s2.size() - 1; i >= 0; i--)
-		s += s2.at(i);
 
-	f -= (int)f;
-	if (f != 0)
-	{
-		s += ".";
-		for (int i = 0; i < 6; i++)
-			s += ((int)(pow(10, i + 1) * f) % 10) + '0';
-		while (s.at(s.size()-1) == '0')
-		{
-			s.pop_back();
-		}
-	}
-	return s;
-}
 void VectorEnter::update()
 {
 	if (pressed)

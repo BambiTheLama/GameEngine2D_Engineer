@@ -24,4 +24,6 @@ public:
 	void moveTo(Vector2 moveTo) { pos.x = moveTo.x; pos.y = moveTo.y; }
 
 	void setPos(Rectangle pos) { this->pos = pos; }
+
+	virtual void reloadData(){}
 };

@@ -1,5 +1,10 @@
 #pragma once
 #include "Element.h"
+
+
+std::string floatToString(float f);
+std::string stringValue(std::string s, int c);
+
 class FloatEnter :
     public Element
 {
