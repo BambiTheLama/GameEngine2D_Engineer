@@ -73,7 +73,7 @@ void ToolItem::update(float deltaTime)
 	Rectangle pos = getPos();
 	origin.x = 0;
 	rotation = 0;
-	const float rotationAngle = 360;
+	const float rotationAngle = 120;
 	///Wiliczanie obeotu narzêdzia
 	switch (faceSide)
 	{

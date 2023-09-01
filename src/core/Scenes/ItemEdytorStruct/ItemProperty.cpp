@@ -14,6 +14,7 @@ std::string itemClassDescription()
 ItemProperty::ItemProperty()
 {
 	clearData();
+	update();
 }
 
 ItemProperty::ItemProperty(nlohmann::json& j, int ID)
@@ -86,6 +87,7 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 		else
 			ammoType = 0;
 	}
+	update();
 }
 
 ItemProperty::~ItemProperty()

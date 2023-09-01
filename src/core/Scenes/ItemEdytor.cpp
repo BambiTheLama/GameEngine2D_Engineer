@@ -14,6 +14,8 @@
 #include "../Elements/Add.h"
 #include "../Elements/Remove.h"
 #include "../Elements/EnumEnter.h"
+#include "../Elements/AddItem.h"
+#include "../Elements/RemoveItem.h"
 #include <fstream>
 
 
@@ -48,11 +50,12 @@ ItemEdytor::ItemEdytor()
 	CheckBoxOpenElements* checkBoxs[7];
 	checkBoxs[0] = new LineColliderCheckBox(pos, names[0], bPointers[0],item);
 	pos.y += 48;
-	for (int i = 1; i < 7; i++)
+	for (int i = 1; i < 6; i++)
 	{
 		checkBoxs[i] = new CheckBoxOpenElements(pos, names[i], bPointers[i]);
 		pos.y += 48;
 	}
+	checkBoxs[6] = new CheckBoxOpenElements(pos, names[6], bPointers[6],false);
 	RectangleEnter* recEnter = new RectangleEnter({ 0,100,400,64 }, "Pos:", &item->pos);
 	elements.push_back(recEnter);
 	elements.push_back(checkBoxs[0]);
@@ -107,6 +110,11 @@ ItemEdytor::ItemEdytor()
 	elements.push_back(new Add(buttons, &firstItem));
 	buttons.x += 80;
 	elements.push_back(new Remove(buttons, &firstItem));
+	buttons.x += 80;
+	elements.push_back(new AddItem(buttons, this));
+	buttons.x += 80;
+	elements.push_back(new RemoveItem(buttons, this));
+	buttons.x += 80;
 	elements.push_back(new EnumEnter({400,0,150,32},"ItemType:",&item->itemClass,(int)ItemClass::EnumSize, itemClassDescription()));
 	if (items.size() > 0)
 	{
@@ -132,8 +140,9 @@ ItemEdytor::~ItemEdytor()
 	}
 	items.clear();
 	std::ofstream writer;
+	std::cout << j.dump(2) << std::endl;
 	writer.open("Items.json");
-	writer << j.dump(2)<<std::endl;
+	writer << j.dump(2) << std::endl;
 	writer.close();
 	for (Element* e : elements)
 		delete e;
@@ -174,14 +183,34 @@ void ItemEdytor::newItem()
 
 void ItemEdytor::removeItem()
 {
-	if (item->ID >= 0 && item->ID < items.size())
+	int ID = item->ID;
+	if (ID >= 0 && ID < items.size())
 	{
-		if (items[item->ID])
+		if (items[ID])
 		{
-			delete items[item->ID];
-			items[item->ID] = NULL;
+			delete items[ID];
+			items[ID] = NULL;
 		}
+		for (int i = ID; i < items.size()-1; i++)
+		{
+			items[i] = items[i + 1];
+			items[i]->ID = i;
+		}
+		items.pop_back();
 	}
+}
+
+void ItemEdytor::popBackItem()
+{
+	if (items.size() <= 0)
+		return;
+	delete items[items.size() - 1];
+	items.pop_back();
+}
+void ItemEdytor::addItem()
+{
+	items.push_back(new ItemProperty());
+	items[items.size() - 1]->ID = items.size() - 1;
 }
 
 void ItemEdytor::draw()
@@ -374,6 +403,8 @@ void ItemEdytor::loadNewItem(int i)
 {
 	items[item->ID]->setDataFrom(*item);
 	item->setDataFrom(*items[i]);
+	item->update();
 	for (auto e : elements)
 		e->reloadData();
+	first->updatePos();
 }

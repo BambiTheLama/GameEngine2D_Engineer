@@ -132,6 +132,7 @@
     <ClCompile Include="src\core\Controllers\AnimationController.cpp" />
     <ClCompile Include="src\core\Controllers\SpriteController.cpp" />
     <ClCompile Include="src\core\Elements\Add.cpp" />
+    <ClCompile Include="src\core\Elements\AddItem.cpp" />
     <ClCompile Include="src\core\Elements\CheckBox.cpp" />
     <ClCompile Include="src\core\Elements\CheckBoxOpenElements.cpp" />
     <ClCompile Include="src\core\Elements\Element.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="src\core\Elements\LineColliderCheckBox.cpp" />
     <ClCompile Include="src\core\Elements\RectangleEnter.cpp" />
     <ClCompile Include="src\core\Elements\Remove.cpp" />
+    <ClCompile Include="src\core\Elements\RemoveItem.cpp" />
     <ClCompile Include="src\core\Elements\TextEnter.cpp" />
     <ClCompile Include="src\core\Elements\VectorEnter.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
@@ -190,6 +192,7 @@
     <ClInclude Include="src\core\Controllers\AnimationController.h" />
     <ClInclude Include="src\core\Controllers\SpriteController.h" />
     <ClInclude Include="src\core\Elements\Add.h" />
+    <ClInclude Include="src\core\Elements\AddItem.h" />
     <ClInclude Include="src\core\Elements\CheckBox.h" />
     <ClInclude Include="src\core\Elements\CheckBoxOpenElements.h" />
     <ClInclude Include="src\core\Elements\Element.h" />
@@ -199,6 +202,7 @@
     <ClInclude Include="src\core\Elements\LineColliderCheckBox.h" />
     <ClInclude Include="src\core\Elements\RectangleEnter.h" />
     <ClInclude Include="src\core\Elements\Remove.h" />
+    <ClInclude Include="src\core\Elements\RemoveItem.h" />
     <ClInclude Include="src\core\Elements\TextEnter.h" />
     <ClInclude Include="src\core\Elements\VectorEnter.h" />
     <ClInclude Include="src\core\Engine.h" />

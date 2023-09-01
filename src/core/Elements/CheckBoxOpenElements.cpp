@@ -1,9 +1,10 @@
 #include "CheckBoxOpenElements.h"
 
-CheckBoxOpenElements::CheckBoxOpenElements(Rectangle pos, std::string text, bool* isPress):
+CheckBoxOpenElements::CheckBoxOpenElements(Rectangle pos, std::string text, bool* isPress,bool hide):
 	CheckBox(pos,text,isPress)
 {
 	componetPos = pos;
+	this->hide = hide;
 }
 
 CheckBoxOpenElements::~CheckBoxOpenElements()
@@ -43,7 +44,7 @@ void CheckBoxOpenElements::updatePos()
 
 void CheckBoxOpenElements::update()
 {
-	if (!*isPress)
+	if (!*isPress && hide)
 		return;
 	if (openElements)
 	{
@@ -54,10 +55,12 @@ void CheckBoxOpenElements::update()
 
 bool CheckBoxOpenElements::press()
 {
-	if (!*isPress)
+	if (!*isPress && hide)
 		return false;
+	if (!hide)
+		CheckBox::press();
 	Rectangle pos = Element::getPos();
-	if (CheckCollisionPointRec(GetMousePosition(), {pos.x + pos.width, pos.y, pos.height, pos.height}))
+	if (CheckCollisionPointRec(GetMousePosition(), {pos.x + pos.width-pos.height, pos.y, pos.height, pos.height}))
 	{
 		openElements = !openElements;
 		updatePos();
@@ -87,11 +90,11 @@ void CheckBoxOpenElements::unPress()
 
 void CheckBoxOpenElements::draw()
 {
-	if (!*isPress)
+	if (!*isPress && hide)
 		return;
 	CheckBox::draw();
 	Rectangle pos = Element::getPos();
-	DrawRectangle(pos.x + pos.width, pos.y, pos.height, pos.height, openElements?GREEN: RED);
+	DrawRectangle(pos.x + pos.width-pos.height, pos.y, pos.height, pos.height, openElements?GREEN: RED);
 	if (openElements)
 	{
 		for (auto* e : elements)

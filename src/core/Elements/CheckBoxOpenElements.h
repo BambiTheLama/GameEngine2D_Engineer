@@ -9,12 +9,12 @@ class CheckBoxOpenElements :
     Element* lastPress = NULL;
     Element* up = NULL;
     Element* down = NULL;
-
+    bool hide;
 protected:
     Rectangle componetPos;
     std::list<Element*> elements;
 public:
-    CheckBoxOpenElements(Rectangle pos, std::string text, bool* isPress);
+    CheckBoxOpenElements(Rectangle pos, std::string text, bool* isPress,bool hide=true);
 
     ~CheckBoxOpenElements();
 
@@ -34,7 +34,7 @@ public:
 
     virtual Rectangle getPos() const 
     { 
-        if (*isPress)
+        if (*isPress || !hide)
             return componetPos;
         else
             return { componetPos.x,componetPos.y,componetPos.width,0 };

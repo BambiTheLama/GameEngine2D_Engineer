@@ -228,7 +228,15 @@
     <ClCompile Include="src\core\Elements\Remove.cpp">
       <Filter>src\core\Elements</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Elements\EnumEnter.cpp" />
+    <ClCompile Include="src\core\Elements\AddItem.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\EnumEnter.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\RemoveItem.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -399,6 +407,14 @@
     <ClInclude Include="src\core\Elements\Remove.h">
       <Filter>src\core\Elements</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Elements\EnumEnter.h" />
+    <ClInclude Include="src\core\Elements\AddItem.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\EnumEnter.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\RemoveItem.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

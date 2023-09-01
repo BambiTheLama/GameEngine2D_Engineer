@@ -1,5 +1,6 @@
 [
   {
+    "Animated": true,
     "ItemClass": 0,
     "Name": "plank",
     "Pos": [
@@ -7,6 +8,117 @@
       0.0,
       32.0,
       32.0
+    ],
+    "StackSize": 32
+  },
+  {
+    "ItemClass": 0,
+    "Name": "wood",
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "StackSize": 0
+  },
+  {
+    "Animated": true,
+    "Damage": 0.0,
+    "DestoryType": 0,
+    "InvisibleFrame": 0.0,
+    "ItemClass": 1,
+    "LineCollsionN": 5,
+    "Name": "sword",
+    "Point0": [
+      26.61333465576172,
+      0.37333300709724426
+    ],
+    "Point1": [
+      7.733333110809326,
+      19.360000610351563
+    ],
+    "Point2": [
+      12.58666706085205,
+      24.64000129699707
+    ],
+    "Point3": [
+      31.84000015258789,
+      4.960000038146973
+    ],
+    "Point4": [
+      32.0,
+      0.31999900937080383
+    ],
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "Power": 0,
+    "UseTime": 0.0
+  },
+  {
+    "AmmoType": 0,
+    "Animated": true,
+    "Damage": 0.0,
+    "InvisibleFrame": 0.0,
+    "ItemClass": 3,
+    "LineCollsionN": 0,
+    "Name": "bow",
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "Projectals": 0,
+    "Range": 0.0,
+    "Speed": 0.0,
+    "StackSize": 0
+  },
+  {
+    "ItemClass": 0,
+    "Name": "",
+    "Pos": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "StackSize": 0
+  },
+  {
+    "ItemClass": 0,
+    "Name": "",
+    "Pos": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "StackSize": 0
+  },
+  {
+    "ItemClass": 0,
+    "Name": "",
+    "Pos": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "StackSize": 0
+  },
+  {
+    "ItemClass": 0,
+    "Name": "",
+    "Pos": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
     ],
     "StackSize": 0
   }

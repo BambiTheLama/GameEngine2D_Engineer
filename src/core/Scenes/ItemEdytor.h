@@ -19,7 +19,7 @@ class ItemEdytor :
 	Element* lastPressed = NULL;
 	Rectangle itemDraw= { 500,100,600,600 };
 	int holdPoint = -1;
-	Rectangle itemsSelect = { 1200,169,400,600 };
+	Rectangle itemsSelect = { 1200,169,300,600 };
 	CheckBoxOpenElements* first = NULL;
 	int firstItem = 0;
 public:
@@ -34,6 +34,10 @@ public:
 	void newItem();
 
 	void removeItem();
+
+	void addItem();
+
+	void popBackItem();
 
 	virtual void draw();
 
