@@ -3,10 +3,10 @@
 std::string itemClassDescription()
 {
 	std::string s="";
-	s += std::to_string((int)ItemClass::StackItem) + " - StackItem\n";
-	s += std::to_string((int)ItemClass::ToolItem) + " - ToolItem\n";
-	s += std::to_string((int)ItemClass::Bow) + " - Bow\n";
-	s += std::to_string((int)ItemClass::Ammo) + " - Ammo\n";
+	s += std::to_string((int)ItemClass::StackItem) + " - StackItem";
+	s += "\n" + std::to_string((int)ItemClass::ToolItem) + " - ToolItem";
+	s += "\n" + std::to_string((int)ItemClass::Bow) + " - Bow";
+	s += "\n" + std::to_string((int)ItemClass::Ammo) + " - Ammo";
 
 	return s;
 }
@@ -371,6 +371,7 @@ void ItemProperty::draw(Rectangle pos)
 		else
 			sprite->draw(pos);
 	}
+	DrawTextWithOutline(TextFormat("%d\n",ID), pos.x, pos.y, textStandardSize, WHITE, BLACK);
 		
 }
 

@@ -107,9 +107,9 @@ ItemEdytor::ItemEdytor()
 	buttons.y = 85;
 	buttons.width = 64;
 	buttons.height = 64;
-	elements.push_back(new Add(buttons, &firstItem));
-	buttons.x += 80;
 	elements.push_back(new Remove(buttons, &firstItem));
+	buttons.x += 80;
+	elements.push_back(new Add(buttons, &firstItem));
 	buttons.x += 80;
 	elements.push_back(new AddItem(buttons, this));
 	buttons.x += 80;
@@ -219,6 +219,12 @@ void ItemEdytor::draw()
 
 	itemDrawShow();
 	int n = items.size() - firstItem;
+
+	const int size = 64;
+	int howManyElementsInRow = getHowManyElementsInTheRow();
+
+	if (n > howManyElementsInRow * 7)
+		n = howManyElementsInRow * 7;
 	
 	for (int i = 0; i < n; i++)
 		items[i+firstItem]->draw(itemPos(i));
@@ -232,11 +238,9 @@ void ItemEdytor::draw()
 Rectangle ItemEdytor::itemPos(int i)
 {
 	const int size = 64;
-	int n = itemsSelect.width / size;
-	if (n <= 0)
-		n = 1;
-	int x = i % n;
-	int y = i / n;
+	int howManyElementsInRow = getHowManyElementsInTheRow();
+	int x = i % howManyElementsInRow;
+	int y = i / howManyElementsInRow;
 	return { itemsSelect.x + x * size * 1.25f,itemsSelect.y + y * size * 1.25f,size,size };
 }
 
@@ -366,6 +370,7 @@ void ItemEdytor::itemDrawShow()
 		item->sprite->draw(pos,item->frame);
 	else
 		item->sprite->draw(pos);
+	DrawTextWithOutline(TextFormat("%d", item->ID), pos.x-32, pos.y-32, textStandardSize, WHITE, BLACK);
 	if (!item->points)
 		return;
 
@@ -407,4 +412,13 @@ void ItemEdytor::loadNewItem(int i)
 	for (auto e : elements)
 		e->reloadData();
 	first->updatePos();
+}
+
+int ItemEdytor::getHowManyElementsInTheRow()
+{
+	const int size = 64;
+	int howManyElementsInRow = itemsSelect.width / size;
+	if (howManyElementsInRow <= 0)
+		howManyElementsInRow = 1;
+	return howManyElementsInRow;
 }

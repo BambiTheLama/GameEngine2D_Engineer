@@ -50,5 +50,6 @@ public:
 	void itemDrawPointsHold();
 	void itemDrawShow();
 	void loadNewItem(int i);
+	int getHowManyElementsInTheRow();
 };
 

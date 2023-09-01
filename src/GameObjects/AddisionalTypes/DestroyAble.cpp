@@ -3,15 +3,15 @@
 std::string toolTypeDescription()
 {
 	std::string s="";
-	s += "This Tool cant destory anything (" + std::to_string((int)(ToolType::NON))+")";
-	s += "\nThis Tool can destory that need axe (" + std::to_string((int)(ToolType::Axe)) + ")";
-	s += "\nThis Tool can destory that need shovel (" + std::to_string((int)(ToolType::Shovel)) + ")";
-	s += "\nThis Tool can destory that need pickaxe (" + std::to_string((int)(ToolType::Pickaxe)) + ")";
-	s += "\nThis Tool can destory that need axe and shovel (" + std::to_string((int)(ToolType::AxeShovel)) + ")";
-	s += "\nThis Tool can destory that need axe and pickaxe (" + std::to_string((int)(ToolType::AxePickaxe)) + ")";
-	s += "\nThis Tool can destory that need shovel and pickaxe (" + std::to_string((int)(ToolType::ShovelPickaxe)) + ")";
-	s += "\nThis Tool can destory that need axe shovel and pickaxe (" + std::to_string((int)(ToolType::AxeShovelPickaxe)) + ")";
-	s += "\nThis Tool can destory that need ALL TOOL (" + std::to_string((int)(ToolType::All)) + ")";
+	s += std::to_string((int)(ToolType::NON)) + " - This Tool cant destory anything";
+	s += "\n"+ std::to_string((int)(ToolType::Axe)) +" - This Tool can destory that need axe";
+	s += "\n"+ std::to_string((int)(ToolType::Shovel)) +" - This Tool can destory that need shovel";
+	s += "\n"+ std::to_string((int)(ToolType::Pickaxe)) +" - This Tool can destory that need pickaxe";
+	s += "\n"+ std::to_string((int)(ToolType::AxeShovel)) +" - This Tool can destory that need axe and shovel";
+	s += "\n"+ std::to_string((int)(ToolType::AxePickaxe)) +" - This Tool can destory that need axe and pickaxe";
+	s += "\n"+ std::to_string((int)(ToolType::ShovelPickaxe)) +" - This Tool can destory that need shovel and pickaxe";
+	s += "\n"+ std::to_string((int)(ToolType::AxeShovelPickaxe)) +" - This Tool can destory that need axe shovel and pickaxe";
+	s += "\n"+ std::to_string((int)(ToolType::All)) +" - This Tool can destory that need ALL TOOL";
 	return s;
 }
 
