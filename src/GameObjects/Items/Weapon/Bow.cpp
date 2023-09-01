@@ -42,7 +42,7 @@ Bow::Bow(nlohmann::json j, int ID):Item(j,ID)
 	origin = { 43.0f / 64.0f * pos.width, 21.0f / 64.0f * pos.height };
 	chargeTime = 0;
 	rotation = 0;
-	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + name + ".png";
+	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + ".png";
 	sprite = new SpriteController(path.c_str());
 	if (j[ID].contains("Projectals"))
 		numberOfProjectalMax = j[ID].contains("Projectals");
@@ -86,10 +86,12 @@ void Bow::draw()
 	if (ammo && chargeTime > 0)
 	{
 		Vector2 ammoOffset = { -numberOfProjectal / 2,-numberOfProjectal / 2 };
-
+		Rectangle pos2 = ammo->getPos();
+		pos2.x = pos.x;
+		pos2.y = pos.y;
 		for (int i = 0; i < numberOfProjectal; i++)
 		{
-			ammo->drawAmmo(pos, rotation, (float)chargeTime / (float)chargeTimeMax,ammoOffset);
+			ammo->drawAmmo(pos2, rotation, (float)chargeTime / (float)chargeTimeMax,ammoOffset);
 			ammoOffset.x += 1;
 			ammoOffset.y += 1;
 		}
@@ -176,6 +178,9 @@ void Bow::spawnArrow()
 	if (ammo)
 	{
 		Rectangle pos = getPos();
+		Rectangle pos2 = ammo->getPos();
+		pos.width = pos2.width;
+		pos.height = pos2.height;
 		Vector2* col = ammo->getCollsions();
 		int n = ammo->getNCollisions();
 		pos.x -= numberOfProjectal / 2;

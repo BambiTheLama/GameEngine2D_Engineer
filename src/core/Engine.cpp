@@ -13,12 +13,17 @@ Scene* Engine::scene = NULL;
 
 Engine::Engine()
 {
+	int t = 0;
+	std::cin >> t;
 	InitWindow(1600, 900, "MyGame");
 	InitAudioDevice();
 	//SetTargetFPS(60);
 
-	//scene = new GameScene();
-	scene = new ItemEdytor();
+
+	if(t==0)
+		scene = new GameScene();
+	else
+		scene = new ItemEdytor();
 	Items;
 
 }

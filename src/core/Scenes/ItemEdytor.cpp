@@ -11,7 +11,9 @@
 #include "../Elements/TextEnter.h"
 #include "../Elements/CheckBox.h"
 #include "../Elements/IntEnter.h"
-
+#include "../Elements/Add.h"
+#include "../Elements/Remove.h"
+#include "../Elements/EnumEnter.h"
 #include <fstream>
 
 
@@ -28,7 +30,6 @@ ItemEdytor::ItemEdytor()
 		reader >> j;
 		
 	}
-	std::cout << j.dump(2)<<std::endl;
 	reader.close();
 	for(int i=0;i<j.size();i++)
 	{
@@ -39,15 +40,15 @@ ItemEdytor::ItemEdytor()
 	//Dodanie wszystkich przyciskow
 
 	elements.push_back(new TextEnter({ 0,0,300,64 },"Name", &item->name));
-	Rectangle pos = { 0,100,200,32 };
-	std::string names[6] = { "has lines collider", "Is stacable" ,"is using item",
-		"is dealing damage","is destory able","Is range weapon"};
-	bool* bPointers[6] = { &item->hasLinesCollider ,&item->isStacable, &item->isUsingItem,
-		&item->isDealingDamage, &item->isDestoryAble,&item->isRangeWeapon };
-	CheckBoxOpenElements* checkBoxs[6];
+	Rectangle pos = { 5,100,200,32 };
+	std::string names[7] = { "has lines collider", "Is stacable" ,"is using item",
+		"is dealing damage","is destory able","Is range weapon","IsAnimated"};
+	bool* bPointers[7] = { &item->hasLinesCollider ,&item->isStacable, &item->isUsingItem,
+		&item->isDealingDamage, &item->isDestoryAble,&item->isRangeWeapon,&item->animated };
+	CheckBoxOpenElements* checkBoxs[7];
 	checkBoxs[0] = new LineColliderCheckBox(pos, names[0], bPointers[0],item);
 	pos.y += 48;
-	for (int i = 1; i < 6; i++)
+	for (int i = 1; i < 7; i++)
 	{
 		checkBoxs[i] = new CheckBoxOpenElements(pos, names[i], bPointers[i]);
 		pos.y += 48;
@@ -57,47 +58,72 @@ ItemEdytor::ItemEdytor()
 	elements.push_back(checkBoxs[0]);
 	checkBoxs[0]->setElementAbrow(recEnter);
 	checkBoxs[0]->setElementBellow(checkBoxs[1]);
-	for (int i = 1; i < 5; i++)
+	first = checkBoxs[0];
+	for (int i = 1; i < 6; i++)
 	{
 		checkBoxs[i]->setElementAbrow(checkBoxs[i - 1]);
 		checkBoxs[i]->setElementBellow(checkBoxs[i + 1]);
 		elements.push_back(checkBoxs[i]);
 	}
-	checkBoxs[5]->setElementAbrow(checkBoxs[4]);
-	elements.push_back(checkBoxs[5]);
+	checkBoxs[6]->setElementAbrow(checkBoxs[5]);
+	elements.push_back(checkBoxs[6]);
 	float h = 32;
+	////////////////////////////////////////////////////////////////////////////////////
 	Element* e = new IntEnter({ 0,0,200,h }, "How Many Points: ", &item->nPoints);
 	checkBoxs[0]->addElement(e);
-
+	////////////////////////////////////////////////////////////////////////////////////
 	e = new IntEnter({ 0,0,200,h }, "StackSize: ", &item->stackSize);
 	checkBoxs[1]->addElement(e);
-
+	////////////////////////////////////////////////////////////////////////////////////
 	e = new FloatEnter({ 500,500,200,h }, "UseTime: ", &item->useTime);
 	checkBoxs[2]->addElement(e);
-
+	////////////////////////////////////////////////////////////////////////////////////
 	e = new FloatEnter({ 0,0,200,h }, "Damage: ", &item->damage);
 	checkBoxs[3]->addElement(e);
 	e = new FloatEnter({ 00,00,200,h }, "Invisible Frames: ", &item->invisibleFrame);
 	checkBoxs[3]->addElement(e);
-
+	////////////////////////////////////////////////////////////////////////////////////
 	e = new IntEnter({ 0,0,200,h }, "Power: ", &item->power);
 	checkBoxs[4]->addElement(e);
-
-
+	e = new EnumEnter({ 0,0,200,h }, "DestroyType: ", &item->destroyType, (int)ToolType::EnumSize, toolTypeDescription());
+	checkBoxs[4]->addElement(e);
+	////////////////////////////////////////////////////////////////////////////////////
 	e = new FloatEnter({ 00,00,200,h }, "Projectal Range: ", &item->projectalRange);
 	checkBoxs[5]->addElement(e);
 	e = new IntEnter({ 0,0,200,h }, "Number Of Projectal: ", &item->numberOfProjectal);
 	checkBoxs[5]->addElement(e);
 	e = new FloatEnter({ 00,00,200,h }, "Projectal Speed:", &item->projectalSpeed);
 	checkBoxs[5]->addElement(e);
-
-	if(items.size()>0)
+	e = new EnumEnter({ 0,0,200,h }, "AmmoType: ", &item->ammoType, (int)AmmoType::EnumSize, ammoTypeDescription());
+	checkBoxs[5]->addElement(e);
+	//////////////////////////////////////////////////////////////////////////////////////
+	e = new IntEnter({ 0,0,200,h }, "Frame: ", &item->frame);
+	checkBoxs[6]->addElement(e);
+	////////////////////////////////////////////////////////////////////////////////////
+	Rectangle buttons = itemsSelect;
+	buttons.y = 85;
+	buttons.width = 64;
+	buttons.height = 64;
+	elements.push_back(new Add(buttons, &firstItem));
+	buttons.x += 80;
+	elements.push_back(new Remove(buttons, &firstItem));
+	elements.push_back(new EnumEnter({400,0,150,32},"ItemType:",&item->itemClass,(int)ItemClass::EnumSize, itemClassDescription()));
+	if (items.size() > 0)
+	{
 		item->setDataFrom(*items[0]);
+	}
+
+	else
+	{
+		items.push_back(new ItemProperty());
+		item->setDataFrom(*items[0]);
+	}
 
 }
 
 ItemEdytor::~ItemEdytor()
 {
+	loadNewItem(0);
 	nlohmann::json j;
 	for (auto i : items)
 	{
@@ -105,7 +131,6 @@ ItemEdytor::~ItemEdytor()
 		delete i;
 	}
 	items.clear();
-	std::cout << j.dump(2);
 	std::ofstream writer;
 	writer.open("Items.json");
 	writer << j.dump(2)<<std::endl;
@@ -126,8 +151,14 @@ void ItemEdytor::start()
 
 void ItemEdytor::update(float deltaTime)
 {
+	int itemClass = item->itemClass;
 	for (Element* e : elements)
 		e->update();
+	if (itemClass != item->itemClass)
+	{
+		item->update();
+		first->updatePos();
+	}
 
 	checkPress();
 	
@@ -155,14 +186,19 @@ void ItemEdytor::removeItem()
 
 void ItemEdytor::draw()
 {
-	for (Element* e : elements)
-		e->draw();
+
 
 	itemDrawShow();
 	int n = items.size() - firstItem;
 	
 	for (int i = 0; i < n; i++)
 		items[i+firstItem]->draw(itemPos(i));
+	std::list<Element*>::iterator it = elements.end();
+	do {
+		it--;
+		(*it)->draw();
+	} while (*it != *elements.begin());
+
 }
 Rectangle ItemEdytor::itemPos(int i)
 {
@@ -297,7 +333,14 @@ void ItemEdytor::itemDrawShow()
 	drawText(TextFormat("{%d,%d}", (int)item->pos.width, (int)item->pos.height / 2), pos.x + pos.width, pos.y + pos.height / 2, textStandardSize, BLACK);
 
 	DrawRectangleLinesEx({ pos.x - 3,pos.y - 3,pos.width + 6,pos.height + 6 }, 3, BLACK);
-	item->sprite->draw(pos,0);
+	if(item->animated)
+		item->sprite->draw(pos,item->frame);
+	else
+		item->sprite->draw(pos);
+	if (!item->points)
+		return;
+
+	
 	for (int i = 0; i < item->nPoints; i++)
 	{
 		Vector2 p = item->points[i];

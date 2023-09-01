@@ -46,9 +46,7 @@ void AnimationController::draw(Rectangle pos, int frame, int animationIndex, boo
 		spritePos.width = -spritePos.width;
 	if (flipUpDown)
 		spritePos.height = -spritePos.height;
-	//std::cout << size << " " << frame << " " << animationIndex << "\n";
-	//printRec(spritePos);
-	//printRec(pos);
+
 	DrawTexturePro(texture, spritePos, pos, { 0,0 }, 0, WHITE);
 }
 

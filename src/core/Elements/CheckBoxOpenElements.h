@@ -7,7 +7,6 @@ class CheckBoxOpenElements :
 
     bool openElements = false;
     Element* lastPress = NULL;
-
     Element* up = NULL;
     Element* down = NULL;
 
@@ -33,10 +32,18 @@ public:
 
     virtual void draw();
 
-    virtual Rectangle getPos() const { return componetPos; }
+    virtual Rectangle getPos() const 
+    { 
+        if (*isPress)
+            return componetPos;
+        else
+            return { componetPos.x,componetPos.y,componetPos.width,0 };
+    }
 
     void setElementAbrow(Element* up) { this->up = up; }
 
     void setElementBellow(Element* down) { this->down = down; }
+
+    virtual void reloadData();
 };
 

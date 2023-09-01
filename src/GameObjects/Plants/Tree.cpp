@@ -22,7 +22,7 @@ Tree::~Tree()
 
 void Tree::start()
 {
-	//printf("DODAJE DRZEWO %lf %lf\n", pos.x, pos.y);
+
 }
 
 void Tree::incrementAge()
@@ -34,7 +34,6 @@ void Tree::incrementAge()
 	}
 	age++;
 	addItemToDrop(0, 100, 4, 6);
-	//printf("ROSNÊ %lf %lf\n", pos.x, pos.y);
 
 }
 

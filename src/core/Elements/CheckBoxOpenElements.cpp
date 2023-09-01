@@ -43,6 +43,8 @@ void CheckBoxOpenElements::updatePos()
 
 void CheckBoxOpenElements::update()
 {
+	if (!*isPress)
+		return;
 	if (openElements)
 	{
 		for (auto* e : elements)
@@ -52,7 +54,8 @@ void CheckBoxOpenElements::update()
 
 bool CheckBoxOpenElements::press()
 {
-	CheckBox::press();
+	if (!*isPress)
+		return false;
 	Rectangle pos = Element::getPos();
 	if (CheckCollisionPointRec(GetMousePosition(), {pos.x + pos.width, pos.y, pos.height, pos.height}))
 	{
@@ -84,7 +87,8 @@ void CheckBoxOpenElements::unPress()
 
 void CheckBoxOpenElements::draw()
 {
-	
+	if (!*isPress)
+		return;
 	CheckBox::draw();
 	Rectangle pos = Element::getPos();
 	DrawRectangle(pos.x + pos.width, pos.y, pos.height, pos.height, openElements?GREEN: RED);
@@ -94,4 +98,10 @@ void CheckBoxOpenElements::draw()
 			e->draw();
 	}
 
+}
+
+void CheckBoxOpenElements::reloadData()
+{
+	for (auto* e : elements)
+		e->reloadData();
 }

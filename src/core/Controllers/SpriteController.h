@@ -9,7 +9,7 @@
 class SpriteController
 {
 	static std::vector<SpriteController*> sprites;
-	std::string path="";
+	std::string path = "";
 	Texture2D texture;
 public:
 	/// <summary>
@@ -42,12 +42,12 @@ public:
 	/// </summary>
 	/// <param name="frame">Któr¹ klatkê wzi¹œc</param>
 	/// <returns>Miejsce gdzie jest dana klatka</returns>
-	Rectangle getTextureFrame(int frame) { return { (float)texture.height * (frame % getHowMuchFrames()),0,(float)texture.height,(float)texture.height }; }
+	Rectangle getTextureFrame(int frame);
 	/// <summary>
 	/// Zwraca ile jest klatek (szerokoœæ/wysokoœæ)
 	/// </summary>
 	/// <returns>iloœæ klatek</returns>
-	int getHowMuchFrames() { return texture.width / texture.height; }
+	int getHowMuchFrames() { return texture.height!=0?texture.width / texture.height:0; }
 	/// <summary>
 	/// Rysuje ca³¹ texture w podanej pozycji
 	/// </summary>

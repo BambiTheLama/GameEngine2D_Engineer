@@ -31,6 +31,6 @@ void MiniMap::draw()
 	DrawRectangle(pos.x-3,pos.y-3,pos.width+6,pos.height+6, BLACK);
 	DrawTexturePro(minimapBuffor.texture, { 0,0,(float)w,-(float)h }, pos, { 0,0 }, 0, WHITE);
 	Vector2 point = { pos.x + target->getPos().x / tileSize / w * pos.width, pos.y + target->getPos().y / tileSize / h * pos.height };
-	//printf("(%lf %lf) (%lf %lf)\n", point.x, point.y, target->getPos().x, target->getPos().y);
+	
 	DrawCircle(point.x, point.y, 4, RED);
 }

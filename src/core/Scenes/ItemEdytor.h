@@ -8,7 +8,7 @@
 #include <list>
 #include <vector>
 #include <iostream>
-
+#include "../Elements/CheckBoxOpenElements.h"
 
 class ItemEdytor :
     public Scene
@@ -19,7 +19,8 @@ class ItemEdytor :
 	Element* lastPressed = NULL;
 	Rectangle itemDraw= { 500,100,600,600 };
 	int holdPoint = -1;
-	Rectangle itemsSelect = { 1200,100,300,600 };
+	Rectangle itemsSelect = { 1200,169,400,600 };
+	CheckBoxOpenElements* first = NULL;
 	int firstItem = 0;
 public:
     ItemEdytor();

@@ -3,6 +3,7 @@
 #include "../../Controllers/SpriteController.h"
 #include "../../../GameObjects/Items/Tool/ToolItem.h"
 #include "../../../json.hpp"
+#include "../../../GameObjects/Items/Weapon/Ammo.h"
 #include <list>
 #include <vector>
 #include <iostream>
@@ -13,15 +14,22 @@ enum class ItemClass
 	ToolItem,
 	Bow,
 	Ammo,
+
+
+	EnumSize
 };
+
+std::string itemClassDescription();
 
 struct ItemProperty
 {
 
 	int ID = 0;
 	SpriteController* sprite = NULL;
+	bool animated = false;
+	int frame = 0;
 	///Dane Kazdego obiektu
-	ItemClass itemClass=ItemClass::StackItem;
+	int itemClass=(int)ItemClass::StackItem;
 	std::string name;
 	Rectangle pos;
 	///Od kolizji obiektu
@@ -41,9 +49,10 @@ struct ItemProperty
 	///czy item niszczy bloki
 	bool isDestoryAble;
 	int power;
-	ToolType destroyType = ToolType::NON;
+	int destroyType = (int)ToolType::NON;
 	///Czy jest broni¹ daleko zasiêgow¹
 	bool isRangeWeapon;
+	int ammoType=(int)AmmoType::Arrow;
 	float projectalRange;
 	int numberOfProjectal;
 	float projectalSpeed;
@@ -53,6 +62,8 @@ struct ItemProperty
 	ItemProperty(nlohmann::json& j,int ID);
 
 	~ItemProperty();
+
+	void update();
 
 	void clearData();
 

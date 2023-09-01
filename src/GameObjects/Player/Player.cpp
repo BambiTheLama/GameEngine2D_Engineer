@@ -257,7 +257,6 @@ void Player::move(float deltaTime)
 	posTmp.x *= speed * 64.0f * deltaTime;
 	posTmp.y *= speed * 64.0f * deltaTime;
 	Rectangle pos = getPos();
-	printf("DELTA POS (%lf,%lf)\n", posTmp.x, posTmp.y);
 	setMovePos({ posTmp.x + pos.x, pos.y + posTmp.y });
 	if (isCollidingWithSomething(this))
 	{

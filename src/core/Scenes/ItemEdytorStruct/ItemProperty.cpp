@@ -1,5 +1,16 @@
 #include "ItemProperty.h"
 
+std::string itemClassDescription()
+{
+	std::string s="";
+	s += std::to_string((int)ItemClass::StackItem) + " - StackItem\n";
+	s += std::to_string((int)ItemClass::ToolItem) + " - ToolItem\n";
+	s += std::to_string((int)ItemClass::Bow) + " - Bow\n";
+	s += std::to_string((int)ItemClass::Ammo) + " - Ammo\n";
+
+	return s;
+}
+
 ItemProperty::ItemProperty()
 {
 	clearData();
@@ -20,6 +31,10 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 	pos.y = j[ID]["Pos"][1];
 	pos.width = j[ID]["Pos"][2];
 	pos.height = j[ID]["Pos"][3];
+	if (j[ID].contains("Animated"))
+		animated = j[ID]["Animated"];
+	else
+		animated = false;
 	if (j[ID].contains("LineCollsionN"))
 	{
 		hasLinesCollider = true;
@@ -66,6 +81,10 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 		projectalRange = j[ID]["Range"];
 		numberOfProjectal = j[ID]["Projectals"];
 		projectalSpeed = j[ID]["Speed"];
+		if (j[ID].contains("AmmoType"))
+			ammoType = j[ID]["AmmoType"];
+		else
+			ammoType = 0;
 	}
 }
 
@@ -74,7 +93,43 @@ ItemProperty::~ItemProperty()
 	if (sprite)
 		delete sprite;
 }
-
+void ItemProperty::update()
+{
+	ItemClass item = (ItemClass)itemClass;
+	hasLinesCollider = false;
+	isStacable = false;
+	isUsingItem = false;
+	isDealingDamage = false;
+	isDestoryAble = false;
+	isRangeWeapon = false;
+	switch (item)
+	{
+	case ItemClass::StackItem:
+		isStacable = true;
+		break;
+	case ItemClass::ToolItem:
+		hasLinesCollider = true;
+		isUsingItem = true;
+		isDealingDamage = true;
+		isDestoryAble = true;
+		break;
+	case ItemClass::Bow:
+		isUsingItem = true;
+		isDealingDamage = true;
+		isRangeWeapon = true;
+		break;
+	case ItemClass::Ammo:
+		hasLinesCollider = true;
+		isStacable = true;
+		isDealingDamage = true;
+		isRangeWeapon = true;
+		break;
+	case ItemClass::EnumSize:
+		break;
+	default:
+		break;
+	}
+}
 void ItemProperty::clearData()
 {
 	if (sprite)
@@ -101,7 +156,7 @@ void ItemProperty::clearData()
 	///czy item niszczy bloki
 	isDestoryAble = false;
 	power = 0;
-	destroyType = ToolType::NON;
+	destroyType = (int)ToolType::NON;
 	///Czy jest broni¹ daleko zasiêgow¹
 	isRangeWeapon = false;
 	projectalRange = 0;
@@ -203,6 +258,9 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 	j[ID]["Name"] = name;
 	j[ID]["ItemClass"] = itemClass;
 	j[ID]["Pos"] = { pos.x,pos.y,pos.width,pos.height };
+	if (animated)
+		j[ID]["Animated"] = true;
+
 	if (hasLinesCollider)
 	{
 		j[ID]["LineCollsionN"] = nPoints;
@@ -232,18 +290,18 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 		j[ID]["Range"] = projectalRange;
 		j[ID]["Projectals"] = numberOfProjectal;
 		j[ID]["Speed"] = projectalSpeed;
+		j[ID]["AmmoType"] = ammoType;
 	}
 }
 
 void ItemProperty::setDataFrom(ItemProperty& item)
 {
-	printf("----------------------------------------\n");
-	printf("ITEM ID %d  - kopy form %d\n", ID, item.ID);
-	printf("----------------------------------------\n");
 	if (item.sprite)
 		sprite = new SpriteController(*item.sprite);
 	else
 		sprite = NULL;
+	animated = item.animated;
+	frame = item.frame;
 	ID = item.ID;
 	itemClass = item.itemClass;
 	name = item.name;
@@ -255,15 +313,12 @@ void ItemProperty::setDataFrom(ItemProperty& item)
 	{
 		if (points)
 			delete points;
-		printf("----------------------------------------\n");
 		sizePointsBefore = nPoints;
 		points = new Vector2[nPoints];
 		for (int i = 0; i < nPoints; i++)
 		{
 			points[i] = item.points[i];
-			printf("point(%d) {%.2lf %.2lf}\n", i, points[i].x, points[i].y);
 		}
-		printf("----------------------------------------\n");
 	}
 	///Czy mo¿na stakowaæ przedmioty
 	isStacable = item.isStacable;
@@ -308,7 +363,13 @@ void ItemProperty::draw(Rectangle pos)
 	DrawRectangleRec(pos, WHITE);
 	DrawRectangleLinesEx(pos, 2, BLACK);
 	if (sprite && sprite->isLoaded())
-		sprite->draw(pos,0);
+	{
+		if (animated)
+			sprite->draw(pos, frame);
+		else
+			sprite->draw(pos);
+	}
+		
 }
 
 bool ItemProperty::checkTexture()

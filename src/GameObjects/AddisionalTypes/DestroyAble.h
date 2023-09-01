@@ -1,20 +1,24 @@
 #pragma once
 #include "raylib.h"
+#include <string>
 /// <summary>
 /// Enum odpowiadajacy ¿e to jakie narzêdzie mo¿e zniszczyæ jaki blok
 /// </summary>
 enum class ToolType {
+    NON = 0,            //Zadne narzêdzie nie mo¿e wykopaæ
+    Axe,                //Wszystko to co mo¿e sikiera
+    Shovel,             //Wszystko to co mo¿e ³opata
+    Pickaxe,            //Wszystko to co mo¿e kilof
+    AxeShovel,              //Wszystko to co mo¿e sikiera i ³opata
+    AxePickaxe,             //Wszystko to co mo¿e sikiera i kilof
+    ShovelPickaxe,          //Wszystko to co mo¿e ³opata i kilof
+    AxeShovelPickaxe,       //Wszystko to co mo¿e sikiera ³opata i kilof
+    All,                    //Mo¿e wykopaæ wszystko
 
-    All = 0,                //Mo¿e wykopaæ wszystko
-    Axe = 2,                //Wszystko to co mo¿e sikiera
-    Shovel = 3,             //Wszystko to co mo¿e ³opata
-    Pickaxe = 5,            //Wszystko to co mo¿e kilof
-    AxeShovel = 6,            //Wszystko to co mo¿e sikiera i ³opata
-    AxePickaxe = 10,          //Wszystko to co mo¿e sikiera i kilof
-    ShovelPickaxe = 15,       //Wszystko to co mo¿e ³opata i kilof
-    AxeShovelPickaxe = 30,   //Wszystko to co mo¿e sikiera ³opata i kilof
-    NON = 1111111111              //Zadne narzêdzie nie mo¿e wykopaæ
+
+    EnumSize
 };
+std::string toolTypeDescription();
 
 bool isThisToolType(ToolType tool, ToolType requestTool);
 

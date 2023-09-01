@@ -68,5 +68,6 @@ void LineColliderCheckBox::draw()
 
 void LineColliderCheckBox::reloadData()
 {
+	CheckBoxOpenElements::reloadData();
 	updateVectorPoints();
 }

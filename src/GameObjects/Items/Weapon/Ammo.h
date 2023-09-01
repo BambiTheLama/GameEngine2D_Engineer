@@ -5,18 +5,22 @@ enum class AmmoType
 {
     Arrow,
     Bullet,
+
+    EnumSize
 };
+
+std::string ammoTypeDescription();
 
 AmmoType readAmmoType(std::string name);
 
 class Ammo :
     public StackItem
 {
-    int nCollisions;
+    int nCollisions=0;
     float speed;
     float range;
     AmmoType ammoType;
-    Vector2* collisions;
+    Vector2* collisions=NULL;
 protected:
     Ammo(Ammo& ammo);
 public:
@@ -34,8 +38,8 @@ public:
 
     float getRange() const { return range; }
 
-    Vector2* getCollsions()const { return collisions; }
+    Vector2* getCollsions() { return collisions; }
 
-    int getNCollisions()const { return nCollisions; }
+    int getNCollisions() { return nCollisions; }
 };
 

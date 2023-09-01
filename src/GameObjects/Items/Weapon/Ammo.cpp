@@ -8,12 +8,29 @@ AmmoType readAmmoType(std::string name)
 		return AmmoType::Bullet;
 	return AmmoType::Arrow;
 }
+std::string ammoTypeDescription()
+{
+	std::string s="";
+	s += "Arrow (" + std::to_string((int)(AmmoType::Arrow)) + ")";
+	s += "\nBullet (" + std::to_string((int)(AmmoType::Bullet)) + ")";
+	return s;
+}
 
 Ammo::Ammo(Ammo& ammo):StackItem(ammo)
 {
 	this->ammoType = ammo.ammoType;
 	this->speed = ammo.speed;
 	this->range = ammo.range;
+	this->nCollisions = ammo.nCollisions;
+	if (nCollisions > 0)
+	{
+		collisions = new Vector2[nCollisions];
+		for (int i = 0; i < nCollisions; i++)
+		{
+			collisions[i] = ammo.collisions[i];
+		}
+	}
+
 }
 Ammo::Ammo(Rectangle pos, std::string name, float speed, float range, AmmoType ammoType):StackItem(pos,name,999)
 {
@@ -34,9 +51,33 @@ Ammo::Ammo(nlohmann::json j,int ID) :StackItem(j,ID)
 	else
 		speed = 5;
 	if (j[ID].contains("AmmoType"))
-		ammoType = readAmmoType(j[ID]["AmmoType"]);
+		ammoType = (AmmoType)j[ID]["AmmoType"];
 	else
 		ammoType = AmmoType::Arrow;
+
+
+	if (j[ID].contains("LineCollsionN"))
+	{
+		nCollisions = j[ID]["LineCollsionN"];
+		collisions = new Vector2[nCollisions];
+		for (int i = 0; i < nCollisions; i++)
+		{
+			if (j[ID].contains(("Point" + std::to_string(i))))
+			{
+				Vector2 p;
+				p.x = j[ID][("Point" + std::to_string(i))][0];
+				p.y = j[ID][("Point" + std::to_string(i))][1];
+				collisions[i] = p;
+			}
+			else
+			{
+				collisions[i] = { 0,0 };
+			}
+
+		}
+	}
+
+
 }
 
 void Ammo::drawAmmo(Rectangle pos, float rotation,float chargeProcent,Vector2 orginOfset)

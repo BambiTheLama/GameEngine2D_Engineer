@@ -20,7 +20,6 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 		blocks[i] = new Block * [(int)w];
 		for (int j = 0; j < w; j++)
 		{
-			//printf("%c", (char)(factory->getSize() *noice[i][j]+'a'));
 
 			int blockID = noice[i][j] >= 0 ? 1 : 0;
 			if (blockID > 0)
@@ -50,7 +49,7 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 			if (blocks[i][j])
 				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
 		}
-		//printf("\n");
+
 	}
 	delete perlin;
 

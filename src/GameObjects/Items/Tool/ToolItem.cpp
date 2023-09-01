@@ -25,9 +25,10 @@ ToolItem::ToolItem(Rectangle pos, std::string name,ToolType destroyType,int powe
 
 }
 
-ToolItem::ToolItem(nlohmann::json j, int ID):Item(j,ID),LinesCollider(CollisionsCheckType::All)
+ToolItem::ToolItem(nlohmann::json j, int ID):Item(j,ID),LinesCollider(j,ID)
 {
-	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + name + ".png";
+
+	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + ".png";
 	sprite = new SpriteController(path.c_str());
 	useTime = 0;
 	origin = { 0,pos.width };
@@ -72,7 +73,7 @@ void ToolItem::update(float deltaTime)
 	Rectangle pos = getPos();
 	origin.x = 0;
 	rotation = 0;
-	const float rotationAngle = 120;
+	const float rotationAngle = 360;
 	///Wiliczanie obeotu narzêdzia
 	switch (faceSide)
 	{
@@ -109,7 +110,7 @@ void ToolItem::update(float deltaTime)
 	if (!isUsing)
 		return;
 
-	LinesCollider::updateRotation(rotation + 180, { pos.x,pos.y }, { pos.x,pos.y }, faceSide == FaceSide::left);
+	LinesCollider::updateRotation(rotation , { pos.x,pos.y }, { pos.x,pos.y - pos.height }, faceSide != FaceSide::left);
 	
 	LinesCollider::update(deltaTime);
 
@@ -139,7 +140,7 @@ void ToolItem::draw()
 	if(faceSide==FaceSide::left)
 		textureSize.width = -textureSize.width;
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
-	if (collidersToDraw)
+	//if (collidersToDraw)
 		LinesCollider::draw();
 	
 

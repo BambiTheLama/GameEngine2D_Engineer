@@ -85,3 +85,4 @@ void VectorEnter::draw()
 	drawText(floatVal.c_str(), pos1.x + 2, pos1.y + 2, textStandardSize, BLACK);
 	drawText(floatVal2.c_str(), pos2.x + 2, pos2.y + 2, textStandardSize, BLACK);
 }
+

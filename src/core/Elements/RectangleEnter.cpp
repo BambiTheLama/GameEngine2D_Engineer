@@ -47,7 +47,6 @@ void RectangleEnter::update()
 		return;
 	int val = 0;
 	int key=keyPressed();
-	printf("%d\n", key);
 	if (key >= '0' && key <= '9')
 		val = key - '0';
 	else if (IsKeyPressed(KEY_BACKSPACE))

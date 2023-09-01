@@ -21,6 +21,40 @@ LinesCollider::LinesCollider(CollisionsCheckType type)
 {
 	this->type = type;
 }
+LinesCollider::LinesCollider(nlohmann::json j, int ID)
+{
+	if (j[ID].contains("LineCollsionN"))
+	{
+		nPoints = j[ID]["LineCollsionN"];
+		startPoints = new Vector2[nPoints];
+		points = new Vector2[nPoints];
+		for (int i = 0; i < nPoints; i++)
+		{
+			if (j[ID].contains(("Point" + std::to_string(i))))
+			{
+				Vector2 p;
+				p.x = j[ID][("Point" + std::to_string(i))][0];
+				p.y = j[ID][("Point" + std::to_string(i))][1];
+				startPoints[i] = p;
+				points[i] = p;
+			}
+			else
+			{
+				startPoints[i] = {0,0};
+				points[i] = {0,0};
+			}
+
+		}
+	}
+	if (j[ID].contains("CollisionsCheckType"))
+	{
+		this->type = (CollisionsCheckType)j[ID]["CollisionsCheckType"];
+	}
+	else
+	{
+		this->type = CollisionsCheckType::All;
+	}
+}
 LinesCollider::~LinesCollider()
 {
 	if(startPoints)

@@ -109,3 +109,8 @@ void FloatEnter::draw()
 
 	DrawRectangleLinesEx(pos, 2, pressed ? RED : BLACK);
 }
+
+void FloatEnter::reloadData()
+{
+	floatVal = floatToString(*val);
+}

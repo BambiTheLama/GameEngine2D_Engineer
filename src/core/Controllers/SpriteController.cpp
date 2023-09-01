@@ -41,7 +41,14 @@ void SpriteController::closeSprites()
 
 	sprites.clear();
 }
-
+Rectangle SpriteController::getTextureFrame(int frame) 
+{ 
+	Rectangle pos = { 0,0,(float)texture.height,(float)texture.height };
+	int frames = getHowMuchFrames();
+	if (frames > 0)
+		pos.x = (float)texture.height * (frame % frames);
+	return pos;
+}
 void SpriteController::draw(Rectangle pos)
 {
 	DrawTexturePro(texture, getTextureSize(), pos, {0,0}, 0, WHITE);

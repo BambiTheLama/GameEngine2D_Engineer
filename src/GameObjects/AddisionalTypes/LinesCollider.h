@@ -1,11 +1,12 @@
 #pragma once
 #include "raylib.h"
+#include "../../json.hpp"
 #include <math.h>
 class HitAble;
 class DestroyAble;
 enum class CollisionsCheckType
 {
-    NON,HitAbleOnly,DestoryAbleOnly,All
+    NON,HitAbleOnly,DestoryAbleOnly,All,EnumSize
 };
 class LinesCollider
 {
@@ -18,6 +19,7 @@ protected:
     LinesCollider(LinesCollider& lines);
 public:
     LinesCollider(CollisionsCheckType type);
+    LinesCollider(nlohmann::json j, int ID);
     ~LinesCollider();
     void addLines(int n, Vector2* points);
     void draw();

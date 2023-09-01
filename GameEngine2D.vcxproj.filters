@@ -222,6 +222,13 @@
     <ClCompile Include="src\core\Elements\VectorEnter.cpp">
       <Filter>src\core\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Elements\Add.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\Remove.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\EnumEnter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -386,5 +393,12 @@
     <ClInclude Include="src\core\Elements\VectorEnter.h">
       <Filter>src\core\Elements</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Elements\Add.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\Remove.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\EnumEnter.h" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 class IntEnter :
     public Element
 {
+protected:
     int* val;
     std::string name;
     bool pressed = false;
