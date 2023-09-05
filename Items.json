@@ -79,400 +79,57 @@
     "StackSize": 0
   },
   {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+    "AmmoType": 0,
+    "Damage": 0.0,
+    "InvisibleFrame": 0.0,
+    "ItemClass": 3,
+    "LineCollsionN": 6,
+    "Name": "arrow",
+    "Point0": [
+      20.80000114440918,
+      15.626667022705078
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+    "Point1": [
+      19.46666717529297,
+      13.013333320617676
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+    "Point2": [
+      17.013334274291992,
+      11.84000015258789
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+    "Point3": [
+      20.266666412353516,
+      9.546667098999023
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+    "Point4": [
+      24.15999984741211,
+      8.266666412353516
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
+    "Point5": [
+      23.30666732788086,
+      12.053333282470703
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "bow",
     "Pos": [
       0.0,
       0.0,
       32.0,
       32.0
     ],
+    "Projectals": 0,
+    "Range": 0.0,
+    "Speed": 0.0,
     "StackSize": 0
   },
   {
     "ItemClass": 0,
-    "Name": "plank",
+    "Name": "sand",
     "Pos": [
       0.0,
       0.0,
       32.0,
       32.0
     ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
-  },
-  {
-    "ItemClass": 0,
-    "Name": "",
-    "Pos": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "StackSize": 0
+    "StackSize": 32
   },
   {
     "ItemClass": 0,

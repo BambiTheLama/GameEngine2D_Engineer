@@ -197,6 +197,12 @@ void ItemEdytor::removeItem()
 			items[i]->ID = i;
 		}
 		items.pop_back();
+		if (ID < items.size())
+			item->setDataFrom(*items[ID]);
+		else if (items.size() > 0)
+			item->setDataFrom(*items[items.size() - 1]);
+		else
+			addItem();
 	}
 }
 
@@ -406,7 +412,8 @@ void ItemEdytor::itemDrawShow()
 
 void ItemEdytor::loadNewItem(int i)
 {
-	items[item->ID]->setDataFrom(*item);
+	if (item->ID < items.size() && item->ID >= 0)
+		items[item->ID]->setDataFrom(*item);
 	item->setDataFrom(*items[i]);
 	item->update();
 	for (auto e : elements)
