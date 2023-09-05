@@ -1,16 +1,25 @@
 #include "Remove.h"
 
-Remove::Remove(Rectangle pos, int* val):Element(pos)
+Remove::Remove(Rectangle pos, int* val,int removeVal):Element(pos)
 {
 	this->val = val;
+	if (removeVal > 0)
+		this->removeVal = removeVal;
+	else
+		this->removeVal = 1;
 }
 
 bool Remove::press()
 {
 	if (CheckCollisionPointRec(GetMousePosition(), getPos()))
 	{
-		if(*val>0)
-			(*val)--;
+		if (*val > 0)
+		{
+			(*val) -= removeVal;
+			if (*val <= 0)
+				(*val) = 0;
+		}
+
 		return true;
 	}
 	return false;

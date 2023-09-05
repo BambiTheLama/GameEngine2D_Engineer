@@ -5,8 +5,9 @@ class Add :
     public Element
 {
     int* val;
+    int addValue;
 public: 
-    Add(Rectangle pos,int *val);
+    Add(Rectangle pos,int *val, int addValue=1);
 
     bool press();
     

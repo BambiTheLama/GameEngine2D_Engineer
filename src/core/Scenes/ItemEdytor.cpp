@@ -38,6 +38,7 @@ ItemEdytor::ItemEdytor()
 		ItemProperty* itemProp = new ItemProperty(j, i);
 		itemProp->reLoadTexture();
 		items.push_back(itemProp);
+		printf("LOADED ITEM %d\n", i);
 	}
 	//Dodanie wszystkich przyciskow
 
@@ -107,9 +108,9 @@ ItemEdytor::ItemEdytor()
 	buttons.y = 85;
 	buttons.width = 64;
 	buttons.height = 64;
-	elements.push_back(new Remove(buttons, &firstItem));
+	elements.push_back(new Remove(buttons, &firstItem,getHowManyElementsInTheRow()));
 	buttons.x += 80;
-	elements.push_back(new Add(buttons, &firstItem));
+	elements.push_back(new Add(buttons, &firstItem, getHowManyElementsInTheRow()));
 	buttons.x += 80;
 	elements.push_back(new AddItem(buttons, this));
 	buttons.x += 80;
