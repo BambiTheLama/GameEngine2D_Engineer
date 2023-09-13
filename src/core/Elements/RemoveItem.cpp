@@ -1,6 +1,6 @@
 #include "RemoveItem.h"
-#include "../Scenes/ItemEdytor.h"
-RemoveItem::RemoveItem(Rectangle pos, ItemEdytor* edytor) :Element(pos)
+
+RemoveItem::RemoveItem(Rectangle pos, RemoverEdytor* edytor) :Element(pos)
 {
 	this->edytor = edytor;
 }
@@ -9,7 +9,8 @@ bool RemoveItem::press()
 {
 	if (!CheckCollisionPointRec(GetMousePosition(), getPos()))
 		return false;
-	edytor->removeItem();
+	if(edytor)
+		edytor->removeItem();
 	return true;
 }
 

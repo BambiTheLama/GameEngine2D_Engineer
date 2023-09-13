@@ -88,6 +88,7 @@ ItemProperty::ItemProperty(nlohmann::json& j, int ID)
 			ammoType = 0;
 	}
 	update();
+	reLoadTexture();
 }
 
 ItemProperty::~ItemProperty()

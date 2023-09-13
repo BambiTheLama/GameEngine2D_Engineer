@@ -1,6 +1,7 @@
 #pragma once
 #include "Factory.h"
 #include "Crafting/Recipes.h"
+
 #define CraftingRecipes RecipesFactory::getFactory()
 class RecipesFactory 
 {

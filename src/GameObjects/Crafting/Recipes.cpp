@@ -1,6 +1,43 @@
 #include "Recipes.h"
 #include "../ItemFactory.h"
+std::string getCraftingStationDescription()
+{
+	std::string s;
+	s += "Dont need Station (" + std::to_string((int)(CraftingStationEnum::NON)) + ")";
+	s += "\nNeed WorkBanche (" + std::to_string((int)(CraftingStationEnum::Workbanche)) + ")";
+	s += "\nNeed Anvil (" + std::to_string((int)(CraftingStationEnum::Anvil)) + ")";
+	return s;
+}
+Recipes::Recipes(nlohmann::json& j, int ID)
+{
+	if (j[ID].contains("finalItemID"))
+		this->finalItemID = j[ID]["finalItemID"];
+	else
+		this->finalItemID = 0;
 
+	if (j[ID].contains("whereToCraft"))
+		this->whereToCraft = (CraftingStationEnum)j[ID]["whereToCraft"];
+	else
+		this->whereToCraft = CraftingStationEnum::NON;
+
+	if (!Items->isStacableItem(finalItemID))
+		howManyItems = 1;
+	else if(j[ID].contains("howManyItems"))
+		this->howManyItems = j[ID]["howManyItems"];
+	else
+		howManyItems = 1;
+	std::string s = "Item";
+	int i = 0;
+	std::string tmp = s + std::to_string(i);
+	while (j[ID].contains(tmp))
+	{
+		int Id = j[ID][tmp][0];
+		int homMany = j[ID][tmp][1];
+		addItemToRecipes(j[ID][tmp][0], j[ID][tmp][1]);
+		i++;
+		tmp = s + std::to_string(i);
+	}
+}
 
 Recipes::Recipes(int finalItemID,CraftingStationEnum whereToCraft,int howManyItems)
 {
@@ -108,4 +145,40 @@ Item* Recipes::craftItem(Item*** items,int w,int h)
 	item->setStackSize(howManyItems);
 
 	return item;
+}
+
+void Recipes::saveToJson(nlohmann::json& j, int ID)
+{
+
+	j[ID]["finalItemID"] = finalItemID;
+	j[ID]["whereToCraft"] = (int)whereToCraft;
+
+	if (Items->isStacableItem(finalItemID))
+		j[ID]["howManyItems"] = howManyItems;
+
+	std::string s = "Item";
+	std::string tmp;
+	for (int i = 0; i < itemsToBuildItem.size(); i++)
+	{
+		tmp = s + std::to_string(i);
+		j[ID][tmp][0] = itemsToBuildItem[i].itemID;
+		j[ID][tmp][1] = itemsToBuildItem[i].howMany;
+	}
+}
+
+void Recipes::copyItemData(Recipes& rec)
+{
+	finalItemID = rec.finalItemID;
+	howManyItems = rec.howManyItems;
+	whereToCraft = rec.whereToCraft;
+	itemsToBuildItem.clear();
+	for (ItemToRecipes i : rec.itemsToBuildItem)
+	{
+		ItemToRecipes item;
+		item.itemID = i.itemID;
+		item.howMany = i.howMany;
+		itemsToBuildItem.push_back(item);
+	}
+
+	std::vector<ItemToRecipes> itemsToBuildItem;
 }

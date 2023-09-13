@@ -18,28 +18,12 @@
 #include "../Elements/RemoveItem.h"
 #include <fstream>
 
-
-
 ItemEdytor::ItemEdytor()
 {
 	item = new ItemProperty();
+
 	//Odczyt danych z pliku json
-	nlohmann::json j;
-	std::ifstream reader;
-	reader.open("Items.json");
-	if (reader.is_open())
-	{
-		reader >> j;
-		
-	}
-	reader.close();
-	for(int i=0;i<j.size();i++)
-	{
-		ItemProperty* itemProp = new ItemProperty(j, i);
-		itemProp->reLoadTexture();
-		items.push_back(itemProp);
-		printf("LOADED ITEM %d\n", i);
-	}
+	
 	//Dodanie wszystkich przyciskow
 
 	elements.push_back(new TextEnter({ 0,0,300,64 },"Name", &item->name));
@@ -106,16 +90,16 @@ ItemEdytor::ItemEdytor()
 	////////////////////////////////////////////////////////////////////////////////////
 	Rectangle buttons = itemsSelect;
 	buttons.y = 85;
-	buttons.width = 64;
-	buttons.height = 64;
-	elements.push_back(new Remove(buttons, &firstItem,getHowManyElementsInTheRow()));
-	buttons.x += 80;
-	elements.push_back(new Add(buttons, &firstItem, getHowManyElementsInTheRow()));
-	buttons.x += 80;
+	buttons.width = itemsBoxSize;
+	buttons.height = itemsBoxSize;
+	elements.push_back(new Remove(buttons, &firstItem,howManyElementsInRow));
+	buttons.x += itemsBoxSpacing+ itemsBoxSize;
+	elements.push_back(new Add(buttons, &firstItem, howManyElementsInRow));
+	buttons.x += itemsBoxSpacing + itemsBoxSize;
 	elements.push_back(new AddItem(buttons, this));
-	buttons.x += 80;
+	buttons.x += itemsBoxSpacing + itemsBoxSize;
 	elements.push_back(new RemoveItem(buttons, this));
-	buttons.x += 80;
+	buttons.x += itemsBoxSpacing + itemsBoxSize;
 	elements.push_back(new EnumEnter({400,0,150,32},"ItemType:",&item->itemClass,(int)ItemClass::EnumSize, itemClassDescription()));
 	if (items.size() > 0)
 	{
@@ -127,30 +111,66 @@ ItemEdytor::ItemEdytor()
 		items.push_back(new ItemProperty());
 		item->setDataFrom(*items[0]);
 	}
+	itemsSelect.y = buttons.y + itemsBoxSize + itemsBoxSpacing;
+	itemScroll.y = itemsSelect.y;
+	itemScroll.x = itemsSelect.x+(howManyElementsInRow) * (itemsBoxSize + itemsBoxSpacing);
+	itemsSelect.height = (howManyElementsRow) * (itemsBoxSize + itemsBoxSpacing);
+	itemScroll.height = itemsSelect.height;
+	itemsSelect.width = itemScroll.x - itemsSelect.x;
 
+	loadDataFromFile();
 }
 
 ItemEdytor::~ItemEdytor()
+{
+	saveData();
+	for (auto i : items)
+		delete i;
+	items.clear();
+	for (Element* e : elements)
+		delete e;
+	elements.clear();
+	delete item;
+}
+
+void ItemEdytor::loadDataFromFile()
+{
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open("Items.json");
+	if (reader.is_open())
+	{
+		reader >> j;
+
+	}
+	reader.close();
+	for (auto i : items)
+		delete i;
+	items.clear();
+	for (int i = 0; i < j.size(); i++)
+	{
+		items.push_back(new ItemProperty(j, i));
+	}
+	if(items.size()<=0)
+		items.push_back(new ItemProperty());
+	item->ID = -1;
+	loadNewItem(0);
+}
+
+void ItemEdytor::saveData()
 {
 	loadNewItem(0);
 	nlohmann::json j;
 	for (auto i : items)
 	{
 		i->saveToJson(j);
-		delete i;
 	}
-	items.clear();
 	std::ofstream writer;
-	std::cout << j.dump(2) << std::endl;
 	writer.open("Items.json");
 	writer << j.dump(2) << std::endl;
 	writer.close();
-	for (Element* e : elements)
-		delete e;
-
-	elements.clear();
-	delete item;
 }
+
 
 void ItemEdytor::start()
 {
@@ -169,7 +189,13 @@ void ItemEdytor::update(float deltaTime)
 		item->update();
 		first->updatePos();
 	}
-
+	if (IsKeyDown(KEY_LEFT_CONTROL))
+	{
+		if (IsKeyPressed(KEY_S))
+			saveData();
+		else if (IsKeyDown(KEY_L))
+			loadDataFromFile();
+	}
 	checkPress();
 	
 }
@@ -223,18 +249,20 @@ void ItemEdytor::addItem()
 void ItemEdytor::draw()
 {
 
-
 	itemDrawShow();
 	int n = items.size() - firstItem;
-
-	const int size = 64;
-	int howManyElementsInRow = getHowManyElementsInTheRow();
-
-	if (n > howManyElementsInRow * 7)
-		n = howManyElementsInRow * 7;
+	DrawRectangleRec(itemsSelect, RED);
+	if (n > howManyElementsInRow * howManyElementsRow)
+		n = howManyElementsInRow * howManyElementsRow;
 	
 	for (int i = 0; i < n; i++)
 		items[i+firstItem]->draw(itemPos(i));
+
+	DrawRectangleRec(itemScroll, GRAY);
+	Rectangle itemScrollMovingPos = getScrollMovingPos();
+	DrawRectangleRec(itemScrollMovingPos, GREEN);
+
+
 	std::list<Element*>::iterator it = elements.end();
 	do {
 		it--;
@@ -244,11 +272,20 @@ void ItemEdytor::draw()
 }
 Rectangle ItemEdytor::itemPos(int i)
 {
-	const int size = 64;
-	int howManyElementsInRow = getHowManyElementsInTheRow();
+	int size = (itemsBoxSize + itemsBoxSpacing);
 	int x = i % howManyElementsInRow;
 	int y = i / howManyElementsInRow;
-	return { itemsSelect.x + x * size * 1.25f,itemsSelect.y + y * size * 1.25f,size,size };
+	return { itemsSelect.x + x * size,itemsSelect.y + y * size,(float)itemsBoxSize,(float)itemsBoxSize };
+}
+Rectangle ItemEdytor::getScrollMovingPos()
+{
+	Rectangle itemScrollMovingPos = itemScroll;
+	int n = items.size() - firstItem;
+	if (n > howManyElementsInRow * 7)
+		n = howManyElementsInRow * 7;
+	itemScrollMovingPos.height *= (float)n / (float)items.size();
+	itemScrollMovingPos.y = itemScroll.y + itemScroll.height * (float)firstItem / (float)items.size();
+	return itemScrollMovingPos;
 }
 
 void ItemEdytor::lastElementPressed()
@@ -280,8 +317,10 @@ void ItemEdytor::checkPress()
 		}
 		if (!lastPressed)
 		{
-			itemDrawPointsClick();
-			itemsSelectPointClick();
+			if (itemDrawPointsClick())
+				return;
+			if (itemsSelectPointClick())
+				return;
 		}
 
 	}
@@ -296,22 +335,37 @@ void ItemEdytor::checkPress()
 
 }
 
-void ItemEdytor::itemsSelectPointClick()
+bool ItemEdytor::itemsSelectPointClick()
 {
-	if (!CheckCollisionPointRec(GetMousePosition(), itemsSelect))
-		return;
+	Vector2 mouse = GetMousePosition();
+	if (!CheckCollisionPointRec(mouse, itemsSelect))
+	{
+		if(!CheckCollisionPointRec(mouse,itemScroll))
+			return false;
+		Rectangle itemScrollMoving = getScrollMovingPos();
+		float procentRoll = (mouse.y - itemScrollMoving.height / 2 - itemScroll.y) /
+			(itemScroll.height - itemScrollMoving.height);
+		firstItem = (items.size()- howManyElementsInRow)*procentRoll;
+		if (firstItem < 0)
+			firstItem = 0;
+		else if (firstItem >= items.size())
+			firstItem = items.size()-1;
+		return true;
+	}
+
 	int n = items.size() - firstItem;
 
 	for (int i = 0; i < n; i++)
-		if (CheckCollisionPointRec(GetMousePosition(), itemPos(i)))
+		if (CheckCollisionPointRec(mouse, itemPos(i)))
 		{
 			loadNewItem(i + firstItem);
 		}
+	return true;
 }
-void ItemEdytor::itemDrawPointsClick()
+bool ItemEdytor::itemDrawPointsClick()
 {
 	if (!CheckCollisionPointRec(GetMousePosition(), itemDraw))
-		return;
+		return false;
 	
 	Rectangle pos = itemDraw;
 	for (int i = 0; i < item->nPoints; i++)
@@ -327,7 +381,7 @@ void ItemEdytor::itemDrawPointsClick()
 			holdPoint = i;
 		}
 	}
-	
+	return true;
 }
 void ItemEdytor::itemDrawPointsHold()
 {
@@ -415,18 +469,14 @@ void ItemEdytor::loadNewItem(int i)
 {
 	if (item->ID < items.size() && item->ID >= 0)
 		items[item->ID]->setDataFrom(*item);
-	item->setDataFrom(*items[i]);
-	item->update();
-	for (auto e : elements)
-		e->reloadData();
-	first->updatePos();
+	if (i >= 0 && i < items.size())
+	{
+		item->setDataFrom(*items[i]);
+		item->update();
+		for (auto e : elements)
+			e->reloadData();
+		if(first)
+			first->updatePos();
+	}
 }
 
-int ItemEdytor::getHowManyElementsInTheRow()
-{
-	const int size = 64;
-	int howManyElementsInRow = itemsSelect.width / size;
-	if (howManyElementsInRow <= 0)
-		howManyElementsInRow = 1;
-	return howManyElementsInRow;
-}

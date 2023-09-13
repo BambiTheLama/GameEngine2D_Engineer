@@ -46,6 +46,22 @@ LinesCollider::LinesCollider(nlohmann::json j, int ID)
 
 		}
 	}
+	else
+	{
+		nPoints = 4;
+		startPoints = new Vector2[4];
+		points = new Vector2[4];
+		Rectangle pos = { 0,0,16,16 };
+		GameObject* obj = dynamic_cast<GameObject*>(this);
+		if (obj)
+			pos = obj->getPos();
+		points[0] = { 0,0 };
+		points[1] = { pos.width,0 };
+		points[2] = { pos.width,pos.height };
+		points[3] = { 0,pos.height };
+		for (int i = 0; i < 4; i++)
+			points[i] = startPoints[i];
+	}
 	if (j[ID].contains("CollisionsCheckType"))
 	{
 		this->type = (CollisionsCheckType)j[ID]["CollisionsCheckType"];

@@ -1,0 +1,24 @@
+[
+  {
+    "finalItemID": 1,
+    "howManyItems": 4,
+    "whereToCraft": 0
+  },
+  {
+    "finalItemID": 2,
+    "whereToCraft": 0
+  },
+  {
+    "finalItemID": 3,
+    "whereToCraft": 0
+  },
+  {
+    "finalItemID": 4,
+    "howManyItems": 1,
+    "whereToCraft": 0
+  },
+  {
+    "finalItemID": 5,
+    "whereToCraft": 0
+  }
+]

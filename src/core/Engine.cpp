@@ -8,6 +8,7 @@
 #include "Properties.h"
 #include "../GameObjects/RecipesFactory.h"
 #include "Scenes/ItemEdytor.h"
+#include "Scenes/RecipesEdytor.h"
 
 Scene* Engine::scene = NULL;
 
@@ -19,9 +20,11 @@ Engine::Engine()
 	InitAudioDevice();
 	//SetTargetFPS(60);
 
-
-	if(t==0)
+	Items->getFactory();
+	if (t == 0)
 		scene = new GameScene();
+	else if (t == 1)
+		scene = new RecipesEdytor();
 	else
 		scene = new ItemEdytor();
 	Items;

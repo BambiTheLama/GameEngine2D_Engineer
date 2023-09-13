@@ -22,6 +22,7 @@ C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\Ob
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Game\PerlinNoice.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\PerlinNoice.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\ItemEdytor.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ItemEdytor.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\ItemEdytorStruct\ItemProperty.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\ItemProperty.obj
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\RecipesEdytor.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\RecipesEdytor.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\core\Scenes\Scene.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Scene.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\Collider.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\Collider.obj
 C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\AddisionalTypes\DestroyAble.cpp;C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\x64\Debug\DestroyAble.obj

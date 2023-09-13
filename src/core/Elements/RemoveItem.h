@@ -1,12 +1,16 @@
 #pragma once
 #include "Element.h"
-class ItemEdytor;
+
+class RemoverEdytor {
+public:
+    virtual void removeItem() = 0;
+};
 class RemoveItem :
     public Element
 {
-    ItemEdytor* edytor;
+    RemoverEdytor* edytor;
 public:
-    RemoveItem(Rectangle pos, ItemEdytor* edytor);
+    RemoveItem(Rectangle pos, RemoverEdytor* edytor);
 
     bool press();
 

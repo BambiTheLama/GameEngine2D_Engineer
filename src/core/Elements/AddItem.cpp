@@ -1,6 +1,6 @@
 #include "AddItem.h"
 #include "../Scenes/ItemEdytor.h"
-AddItem::AddItem(Rectangle pos, ItemEdytor* edytor):Element(pos)
+AddItem::AddItem(Rectangle pos, AdderEdytor* edytor):Element(pos)
 {
 	this->edytor = edytor;
 }
@@ -9,7 +9,8 @@ bool AddItem::press()
 {
 	if (!CheckCollisionPointRec(GetMousePosition(), getPos()))
 		return false;
-	edytor->addItem();
+	if(edytor)
+		edytor->addItem();
 	return true;
 }
 

@@ -237,6 +237,9 @@
     <ClCompile Include="src\core\Elements\RemoveItem.cpp">
       <Filter>src\core\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Scenes\RecipesEdytor.cpp">
+      <Filter>src\core\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -415,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="src\core\Elements\RemoveItem.h">
       <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\RecipesEdytor.h">
+      <Filter>src\core\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

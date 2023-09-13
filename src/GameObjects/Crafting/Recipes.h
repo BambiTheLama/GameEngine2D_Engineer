@@ -1,16 +1,22 @@
 #pragma once
 #include <vector> 
 #include <list>
+#include "../../json.hpp"
 class Item;
 /// <summary>
 /// Definiuje w jakiej strukturze mo¿na craftowaæ przedmioty
 /// </summary>
 enum class CraftingStationEnum
 {
-	NON = 0 ,			//Dostêpne do craftowania wszêdzie
+	NON = 0,			//Dostêpne do craftowania wszêdzie
 	Workbanche = 1,		//Dostêpne do craftowania tylko w podstawowym craftingu
 	Anvil = 2,			//Dostêpne w kowadle
+
+	EnumSize
 };
+
+std::string getCraftingStationDescription();
+
 /// <summary>
 /// Definiuje czy posiadamy dany sk³adnik do scraftowania
 /// </summary>
@@ -37,6 +43,8 @@ class Recipes
 	CraftingStationEnum whereToCraft;
 	std::vector<ItemToRecipes> itemsToBuildItem;
 public:
+	Recipes(nlohmann::json& j, int ID);
+
 	Recipes(int finalItemID, CraftingStationEnum whereToCraft = CraftingStationEnum::NON, int howManyItems = 1);
 	/// <summary>
 	/// Dodaje item potrzebny by wykraftowaæ przedmiot
@@ -73,5 +81,9 @@ public:
 	/// <returns>Czy mo¿na zrobiæ przedmiot</returns>
 	bool canCraft(Item*** items, int w, int h);
 
+	void saveToJson(nlohmann::json& j, int ID);
+
+	void copyItemData(Recipes& rec);
+	friend class RecipesEdytor;
 };
 

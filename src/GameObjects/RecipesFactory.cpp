@@ -1,28 +1,25 @@
 #include "RecipesFactory.h"
+#include <fstream>
+#include "../json.hpp"
 
 RecipesFactory* RecipesFactory::recipesFactory = NULL;
 
 RecipesFactory::RecipesFactory()
 {
 	recipesFactory = this;
-	/*
-	Recipes *recepe=new Recipes(5);
-	recepe->addItemToRecipes(0, 20);
-	recepe->addItemToRecipes(1, 20);
-	recipes.push_back(recepe);
-	recepe = new Recipes(6);
-	recepe->addItemToRecipes(0, 69);
-	recipes.push_back(recepe);
-	recepe = new Recipes(7);
-	recepe->addItemToRecipes(0, 21);
-	recipes.push_back(recepe);
-	recepe = new Recipes(8);
-	recepe->addItemToRecipes(0, 37);
-	recipes.push_back(recepe);
-	recepe = new Recipes(1,CraftingStationEnum::NON,4);
-	recepe->addItemToRecipes(0, 1);
-	recipes.push_back(recepe);
-	*/
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open("Recepies.json");
+	if (reader.is_open())
+	{
+		reader >> j;
+
+	}
+	reader.close();
+	for (int i = 0; i < j.size(); i++)
+	{
+		recipes.push_back(new Recipes(j, i));
+	}
 }
 
 RecipesFactory::~RecipesFactory()
