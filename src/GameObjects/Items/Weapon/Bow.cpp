@@ -86,7 +86,7 @@ void Bow::draw()
 	if (ammo && chargeTime > 0)
 	{
 		Vector2 ammoOffset = { -numberOfProjectal / 2,-numberOfProjectal / 2 };
-		Rectangle pos2 = ammo->getPos();
+		Rectangle pos2 = getPos();
 		pos2.x = pos.x;
 		pos2.y = pos.y;
 		for (int i = 0; i < numberOfProjectal; i++)

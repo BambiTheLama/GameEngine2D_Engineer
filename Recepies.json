@@ -1,24 +1,60 @@
 [
   {
+    "Item0": [
+      0,
+      1
+    ],
     "finalItemID": 1,
     "howManyItems": 4,
     "whereToCraft": 0
   },
   {
+    "Item0": [
+      0,
+      15
+    ],
     "finalItemID": 2,
     "whereToCraft": 0
   },
   {
+    "Item0": [
+      0,
+      1
+    ],
     "finalItemID": 3,
     "whereToCraft": 0
   },
   {
+    "Item0": [
+      0,
+      1
+    ],
     "finalItemID": 4,
     "howManyItems": 1,
     "whereToCraft": 0
   },
   {
+    "Item0": [
+      0,
+      1
+    ],
     "finalItemID": 5,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      0,
+      1
+    ],
+    "finalItemID": 6,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      0,
+      1
+    ],
+    "finalItemID": 7,
     "whereToCraft": 0
   }
 ]

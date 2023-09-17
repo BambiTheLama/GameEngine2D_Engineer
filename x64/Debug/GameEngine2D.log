@@ -1,1 +1,4 @@
-﻿  GameEngine2D.vcxproj -> C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\x64\Debug\GameEngine2D.exe
+﻿  Ammo.cpp
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Ammo.cpp(89,31): warning C4244: "+=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\GameEngine2D\src\GameObjects\Items\Weapon\Ammo.cpp(90,32): warning C4244: "-=": konwersja z "double" do "float", możliwa utrata danych
+  GameEngine2D.vcxproj -> C:\Users\szyme\OneDrive\Pulpit\GameEngine2D\x64\Debug\GameEngine2D.exe

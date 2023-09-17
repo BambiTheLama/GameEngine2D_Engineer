@@ -86,8 +86,8 @@ void Ammo::drawAmmo(Rectangle pos, float rotation,float chargeProcent,Vector2 or
 	origin = { pos.width * 3.0f/ 8.0f,pos.height *5.0f/ 8.0f };
 
 
-	origin.x += pos.width / 4 * chargeProcent;
-	origin.y -= pos.height / 4 * chargeProcent;
+	origin.x += pos.width / 2.69 * chargeProcent;
+	origin.y -= pos.height / 2.69 * chargeProcent;
 	
 	origin.x += orginOfset.x;
 	origin.y += orginOfset.y;
