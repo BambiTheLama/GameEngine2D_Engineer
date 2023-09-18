@@ -1,5 +1,6 @@
 #include "StackItem.h"
 
+std::string StackItem::description="";
 
 StackItem::StackItem(StackItem& item):Item(item)
 {
@@ -66,4 +67,9 @@ bool StackItem::addToStack(Item* item)
 		stackSize = stackMaxSize;
 	}
 	return false;
+}
+
+std::string StackItem::getDesctription()
+{
+	return std::string(TextFormat(description.c_str(), getName().c_str(), stackSize));
 }

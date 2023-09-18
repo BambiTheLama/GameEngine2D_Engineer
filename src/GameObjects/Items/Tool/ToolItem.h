@@ -7,16 +7,18 @@ class ToolItem :
 {
     bool isUsing = false;
     bool inHand = false;
+    bool leftSide = false;
     int power;
-    int damage = 5;
+    float damage = 5;
     float invisibleFrame = 0.2;
     float useTime;
     float useTimeMax;
     float rotation = 0;
+    const float rotationAngle = 280;
     Vector2 origin = { 0,0 };
     ToolType destroyType;
     SpriteController* sprite;
-
+    static std::string description;
     ToolItem(ToolItem& item);
 public:
     ToolItem(Rectangle pos, std::string name,ToolType destroyType=ToolType::NON,int power=0);
@@ -27,7 +29,6 @@ public:
     bool use(float deltaTime);
     void draw();
     void drawAt(Rectangle pos);
-    virtual void setFaceSide(FaceSide side) { if(useTime<=0)faceSide = side; }
     virtual std::string getDesctription();
     void setStartPoints(Vector2 startPoints[4]);
     virtual bool canChangeItem() { return useTime<=0; }
@@ -35,5 +36,6 @@ public:
     virtual void onCollisionHitable(HitAble* hit);
     virtual void onCollisionDestroyAble(DestroyAble* dest);
     void setInHand(bool inHand) { this->inHand = inHand; }
+    friend class ItemFactory;
 };
 

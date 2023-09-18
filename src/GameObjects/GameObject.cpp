@@ -72,7 +72,7 @@ bool checkCollision(GameObject* obj)
 			
 	return false;
 }
-bool isOnLine(int p1, int p2, int x)
+bool isOnLine(float p1, float p2, float x)
 {
 	if (p1 > p2)
 	{

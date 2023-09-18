@@ -19,6 +19,7 @@ class Bow :
     SpriteController* sprite;
 private:
     Bow(Bow& b);
+    static std::string description;
 public:
     Bow(Rectangle pos, std::string name,float chargeTime,float speedMultiplier, float rangeMultiplier ,int numberOfProjectal=1);
     Bow(nlohmann::json j, int ID);
@@ -49,5 +50,9 @@ public:
     void setInHand(bool inHand) { this->inHand = inHand; }
 
     void spawnArrow();
+
+    virtual std::string getDesctription();
+
+    friend class ItemFactory;
 };
 

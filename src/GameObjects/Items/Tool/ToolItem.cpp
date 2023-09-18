@@ -1,5 +1,5 @@
 #include "ToolItem.h"
-
+std::string ToolItem::description = "";
 
 ToolItem::ToolItem(ToolItem& item) :Item(item),LinesCollider(item)
 {
@@ -70,47 +70,23 @@ void ToolItem::update(float deltaTime)
 	}
 	if (!isUsing)
 		return;
-	Rectangle pos = getPos();
-	origin.x = 0;
-	rotation = 0;
-	const float rotationAngle = 120;
-	///Wiliczanie obeotu narzêdzia
-	switch (faceSide)
-	{
-	case FaceSide::left:
-		rotation = 320;
-		if (useTime > 0)
-			rotation += (float)useTime / (float)useTimeMax * rotationAngle;
-		else
-			rotation += rotationAngle;
-		origin.x = pos.width;
-		break;
-	case FaceSide::right:
-		rotation = 30;
-		if (useTime > 0)
-			rotation -= (float)useTime / (float)useTimeMax * rotationAngle;
-		else
-			rotation -= rotationAngle;
-		break;
-	case FaceSide::up:
-		rotation = 0;
-		if (useTime > 0)
-			rotation -= (float)useTime / (float)useTimeMax * rotationAngle;
-		else
-			rotation -= rotationAngle;
-		break;
-	case FaceSide::down:
-		rotation = 200;
-		if (useTime > 0)
-			rotation -= (float)useTime / (float)useTimeMax * rotationAngle;
-		else
-			rotation -= rotationAngle;
-		break;
-	}
-	if (!isUsing)
-		return;
 
-	LinesCollider::updateRotation(rotation , { pos.x,pos.y }, { pos.x,pos.y - pos.height }, faceSide != FaceSide::left);
+	Rectangle pos = getPos();
+
+	if (leftSide)
+	{
+		origin.x = pos.width;
+		rotation -= deltaTime / useTimeMax * rotationAngle;
+
+
+	}
+	else
+	{
+		origin.x = 0;
+		rotation += deltaTime / useTimeMax * rotationAngle;
+	}
+
+	LinesCollider::updateRotation(rotation , { pos.x,pos.y }, { pos.x,pos.y - pos.height }, !leftSide);
 	
 	LinesCollider::update(deltaTime);
 
@@ -124,6 +100,13 @@ bool ToolItem::use(float deltaTime)
 		return false;
 	isUsing = true;
 	useTime = useTimeMax;
+	leftSide = !leftSide;
+	rotation = cursorTarget({ pos.x,pos.y });
+	if (leftSide)
+		rotation += 220;
+	else
+		rotation -= 220;
+	
 	return true;
 }
 void ToolItem::draw()
@@ -133,14 +116,21 @@ void ToolItem::draw()
 		sprite->draw(getPos(), 0);
 		return;
 	}
-	if (useTime<=0)
-		return;
 	Rectangle textureSize = sprite->getTextureSize();
 	Rectangle pos = getPos();
-	if(faceSide==FaceSide::left)
+	if (useTime <= 0)
+	{
+		rotation = cursorTarget({ pos.x,pos.y });
+		if (leftSide)
+			rotation -= 40;
+		else
+			rotation += 40;
+	}
+	if (leftSide)
 		textureSize.width = -textureSize.width;
+
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
-	//if (collidersToDraw)
+	if (collidersToDraw)
 		LinesCollider::draw();
 	
 
@@ -153,7 +143,7 @@ void ToolItem::drawAt(Rectangle pos)
 }
 std::string ToolItem::getDesctription()
 {
-	return getName() + "\n" + "tool power" + std::to_string(power) + "";
+	return std::string(TextFormat(description.c_str(), getName().c_str(), damage, power, useTimeMax));
 }
 void ToolItem::setStartPoints(Vector2 startPoints[4])
 {

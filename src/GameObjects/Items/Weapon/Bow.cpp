@@ -3,6 +3,9 @@
 #include "../../Player/Eq.h"
 #include "../../Projectals/Projectal.h"
 #include ",,/../../../../core/Scenes/GameScene.h"
+
+std::string Bow::description = "";
+
 Bow::Bow(Bow& b):Item(b)
 {
 	sprite = new SpriteController(*b.sprite);
@@ -211,4 +214,9 @@ void Bow::spawnArrow()
 	{
 		lookForAmmo();
 	}
+}
+
+std::string Bow::getDesctription()
+{
+	return std::string(TextFormat(description.c_str(), getName().c_str(), chargeTimeMax, speedMultiplier, rangeMultiplier, numberOfProjectalMax));
 }

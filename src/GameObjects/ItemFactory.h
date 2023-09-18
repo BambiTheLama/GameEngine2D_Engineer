@@ -55,5 +55,7 @@ public:
 	bool isStacableItem(int ID);
 
 	int getSize() { return objects.size(); }
+
+	void loadLanguage(std::string Language);
 };
 

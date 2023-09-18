@@ -15,7 +15,7 @@ std::string ammoTypeDescription()
 	s += "\nBullet (" + std::to_string((int)(AmmoType::Bullet)) + ")";
 	return s;
 }
-
+std::string Ammo::description = "";
 Ammo::Ammo(Ammo& ammo):StackItem(ammo)
 {
 	this->ammoType = ammo.ammoType;
@@ -92,4 +92,9 @@ void Ammo::drawAmmo(Rectangle pos, float rotation,float chargeProcent,Vector2 or
 	origin.x += orginOfset.x;
 	origin.y += orginOfset.y;
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, origin, rotation, WHITE);
+}
+
+std::string Ammo::getDesctription()
+{
+	return std::string(TextFormat(description.c_str(), getName().c_str(), stackSize, stackMaxSize));
 }

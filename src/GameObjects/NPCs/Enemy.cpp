@@ -33,7 +33,7 @@ void Enemy::draw()
 	HitAble::draw(pos);
 }
 
-bool Enemy::dealDamage(int damage, float invisibileFrame)
+bool Enemy::dealDamage(float damage, float invisibileFrame)
 {
 	if (!HitAble::dealDamage(damage, invisibileFrame))
 	{

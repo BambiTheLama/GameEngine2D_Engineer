@@ -21,8 +21,10 @@ class Ammo :
     float range;
     AmmoType ammoType;
     Vector2* collisions=NULL;
+    static std::string description;
 protected:
     Ammo(Ammo& ammo);
+
 public:
     Ammo(Rectangle pos, std::string name,float speed,float range, AmmoType ammoType);
 
@@ -41,5 +43,8 @@ public:
     Vector2* getCollsions() { return collisions; }
 
     int getNCollisions() { return nCollisions; }
+
+    virtual std::string getDesctription();
+    friend class ItemFactory;
 };
 

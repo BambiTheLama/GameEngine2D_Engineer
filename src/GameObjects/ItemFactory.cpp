@@ -10,6 +10,7 @@ ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
 {
+	loadLanguage("ENG");
 	nlohmann::json j;
 	std::ifstream reader;
 	reader.open("Items.json");
@@ -105,4 +106,18 @@ bool ItemFactory::isStacableItem(int ID)
 	if (objects[ID])
 		return objects[ID]->isStacable();
 	return false;
+}
+void ItemFactory::loadLanguage(std::string language)
+{
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open(language+".json");
+	if (!reader.is_open())
+		return;
+	reader >> j;
+	reader.close();
+	ToolItem::description = j["ToolItem"]["DES"];
+	StackItem::description = j["StackItem"]["DES"];
+	Bow::description = j["Bow"]["DES"];
+	Ammo::description = j["Ammo"]["DES"];
 }

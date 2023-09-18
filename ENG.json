@@ -1,0 +1,16 @@
+{
+  "StackItem": {
+    "DES": "%s(%d)"
+  },
+    "ToolItem": {
+    "DES": "%s\nDamage %0.2lf\nToolPower %0.2lf\nUse Time %0.2lf"
+  },
+    "Bow": {
+    "DES": "%s\nCharge time %0.2lf\nSpeed multiplier %0.2lf\nRange multiplayer %0.2lf\nProjectals %d"
+  }
+  ,
+    "Ammo": {
+    "DES": "%s(%d)\nSpeed %0.2lf\nRange %0.2lf"
+  }
+  
+}

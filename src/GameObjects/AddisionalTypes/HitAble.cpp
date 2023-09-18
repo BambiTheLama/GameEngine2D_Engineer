@@ -24,7 +24,7 @@ void HitAble::draw(Rectangle pos)
 	DrawRectangleRec(pos, GRAY);
 	DrawRectangle(pos.x, pos.y, pos.width * hp / maxHp, pos.height, GREEN);
 }
-bool HitAble::dealDamage(int damage, float invisibleFrame)
+bool HitAble::dealDamage(float damage, float invisibleFrame)
 {
 	if(this->invisibleFrame > 0)
 	{

@@ -3,6 +3,7 @@
 class StackItem :
     public Item
 {
+    static std::string description;
 protected:
     int stackSize;
     int stackMaxSize;
@@ -37,5 +38,9 @@ public:
     virtual StackItem* clone() { return new StackItem(*this); }
 
     SpriteController* getSprite() { return sprite; }
+
+    virtual std::string getDesctription();
+
+    friend class ItemFactory;
 };
 

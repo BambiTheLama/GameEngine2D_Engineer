@@ -181,7 +181,7 @@ void Player::updateEq(float deltaTime)
 		eq->sortItems(sortBy::NAME);
 	if (IsKeyPressed(KEY_F4))
 		eq->sortItems(sortBy::Type);
-
+	eq->update(0.0);
 }
 
 void Player::update(float deltaTime)
