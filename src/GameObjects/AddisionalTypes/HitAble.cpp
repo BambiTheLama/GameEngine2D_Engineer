@@ -35,7 +35,7 @@ bool HitAble::dealDamage(float damage, float invisibleFrame)
 	GameObject* obj = dynamic_cast<GameObject*>(this);
 	if (obj)
 	{
-		std::string text = std::to_string(damage);
+		std::string text = std::to_string((int)damage);
 		Game->addObject(new TextParticle(obj->getPos(), text));
 	}
 	return true;

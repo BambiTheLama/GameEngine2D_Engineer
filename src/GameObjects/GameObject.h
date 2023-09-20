@@ -113,7 +113,7 @@ public:
 	/// Zwraca nazwê obiektu
 	/// </summary>
 	/// <returns>Nazwa obiektu</returns>
-	std::string getName() { return name; }
+	virtual std::string getName() { return name; }
 
 	friend class Factory;
 	friend class BlockFactory;

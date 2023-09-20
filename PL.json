@@ -1,0 +1,19 @@
+{
+  "Ammo": "%s(%d)\nSzybkosc %0.2lf\nZasieg %0.2lf",
+  "Arrow": "Strzala",
+  "Axe": "Sikiera",
+  "Bow": "Luk",
+  "Dirt": "Ziemia",
+  "Hoe": "Motyka",
+  "Pickaxe": "Kilof",
+  "Plank": "Deska",
+  "Sand": "Piasek",
+  "Shovel": "Lopata",
+  "StackItem": "%s(%d)",
+  "Stick": "Patyk",
+  "Stone": "Kamien",
+  "Sword": "Miecz",
+  "ToolItem": "%s\nObrazenia %0.2lf\nMoc narzedzia %0.2lf\nCzas uzycia %0.2lf",
+  "Weeb": "Siec",
+  "Wood": "Drewno"
+}

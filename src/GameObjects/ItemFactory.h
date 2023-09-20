@@ -47,15 +47,40 @@ public:
 	/// <param name="ID">Id przedmiotu</param>
 	/// <param name="pos">Pozycja gdzie ma byæ narysowany przedmiot</param>
 	void drawObjectAt(int ID, Rectangle pos);
-
-	std::string getDescription(int ID) { return objects[ID]->getDesctription(); }
-
+	/// <summary>
+	/// Zwraca opis itemu
+	/// </summary>
+	/// <param name="ID">ID Itemu</param>
+	/// <returns>Opis przedmiotu</returns>
+	std::string getDescription(int ID);
+	/// <summary>
+	/// Rysuje opis przedmiotu od podanych kordynatów
+	/// </summary>
+	/// <param name="ID">ID Itemu</param>
+	/// <param name="x">Pozycja x</param>
+	/// <param name="y">Pozycja y</param>
 	void drawItemDescription(int ID, int x, int y);
-
+	/// <summary>
+	/// Zrwaca wilkoœæ opisu textu ile zajmuje w pixelach
+	/// </summary>
+	/// <param name="ID">ID Itemu</param>
+	/// <returns>Zwraca vektor jak du¿y jest text x szerokosc y wysokoœæ z vektora</returns>
+	Vector2 itemDescriptionSize(int ID);
+	/// <summary>
+	/// Zwraca czy item mo¿na stakowaæ
+	/// </summary>
+	/// <param name="ID"></param>
+	/// <returns></returns>
 	bool isStacableItem(int ID);
-
+	/// <summary>
+	/// Zwraca ile jest obiektów w fabryce
+	/// </summary>
+	/// <returns>Iloœæ obiektów</returns>
 	int getSize() { return objects.size(); }
-
+	/// <summary>
+	/// Wczytuje odpowiedni jêzyk dla przedmiotów
+	/// </summary>
+	/// <param name="Language">Jezyk jaki chcemy wszystaæ</param>
 	void loadLanguage(std::string Language);
 };
 

@@ -220,9 +220,10 @@ void CraftingStation::draw()
 				return;
 			itemID = recepy->getFinalItemID();
 			std::string description = Items->getDescription(itemID);
-			Vector2 descriptionSize = textSize(description.c_str(), textStandardSize);
+			Vector2 descriptionSize = Items->itemDescriptionSize(itemID);
 			starPoint.x -= descriptionSize.x / 2;
 			Items->drawItemDescription(itemID, starPoint.x, starPoint.y);
+
 
 			///Rysowanie itemów potrzebnych do stworzenia przedmiotu
 			std::vector<ItemToRecipes> getItemsToBuild = recepy->getItemsToBuild();

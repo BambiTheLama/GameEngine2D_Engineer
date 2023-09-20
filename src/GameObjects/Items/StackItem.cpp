@@ -71,5 +71,6 @@ bool StackItem::addToStack(Item* item)
 
 std::string StackItem::getDesctription()
 {
+	
 	return std::string(TextFormat(description.c_str(), getName().c_str(), stackSize));
 }

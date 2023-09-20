@@ -18,6 +18,7 @@ class Item :
 protected:
     FaceSide faceSide;
     Item(Item& obj);
+    std::string itemName;
     virtual void setStackSize(int s){}
 public:
     Item(Rectangle pos, std::string name);
@@ -69,6 +70,14 @@ public:
     virtual void setInHand(bool inHand) { }
 
     virtual void saveToJson(nlohmann::json j);
+
+    virtual void drawDescription(int x, int y);
+
+    virtual Vector2 getItemDescriptionSize();
+
+    virtual void loadLangue(nlohmann::json j);
+
+    virtual std::string getName() { return itemName; }
 
     friend class Recipes;
 };

@@ -1,7 +1,7 @@
 [
   {
     "ItemClass": 0,
-    "Name": "wood",
+    "Name": "Wood",
     "Pos": [
       0.0,
       0.0,
@@ -12,7 +12,7 @@
   },
   {
     "ItemClass": 0,
-    "Name": "plank",
+    "Name": "Plank",
     "Pos": [
       0.0,
       0.0,
@@ -23,7 +23,7 @@
   },
   {
     "ItemClass": 0,
-    "Name": "sand",
+    "Name": "Sand",
     "Pos": [
       0.0,
       0.0,
@@ -34,7 +34,7 @@
   },
   {
     "ItemClass": 0,
-    "Name": "stone",
+    "Name": "Stone",
     "Pos": [
       0.0,
       0.0,
@@ -45,7 +45,7 @@
   },
   {
     "ItemClass": 0,
-    "Name": "dirt",
+    "Name": "Dirt",
     "Pos": [
       0.0,
       0.0,
@@ -56,7 +56,7 @@
   },
   {
     "ItemClass": 0,
-    "Name": "stick",
+    "Name": "Stick",
     "Pos": [
       0.0,
       0.0,
@@ -67,7 +67,7 @@
   },
   {
     "ItemClass": 0,
-    "Name": "weeb",
+    "Name": "Weeb",
     "Pos": [
       0.0,
       0.0,
@@ -82,7 +82,7 @@
     "InvisibleFrame": 0.10000000149011612,
     "ItemClass": 1,
     "LineCollsionN": 5,
-    "Name": "sword",
+    "Name": "Sword",
     "Point0": [
       7.3066630363464355,
       19.68000030517578
@@ -118,7 +118,7 @@
     "Damage": 0.0,
     "InvisibleFrame": 0.0,
     "ItemClass": 2,
-    "Name": "bow",
+    "Name": "Bow",
     "Pos": [
       0.0,
       0.0,
@@ -136,7 +136,7 @@
     "InvisibleFrame": 0.20000000298023224,
     "ItemClass": 3,
     "LineCollsionN": 6,
-    "Name": "arrow",
+    "Name": "Arrow",
     "Point0": [
       23.946666717529297,
       8.319993019104004
@@ -178,7 +178,7 @@
     "InvisibleFrame": 0.30000001192092896,
     "ItemClass": 1,
     "LineCollsionN": 9,
-    "Name": "axe",
+    "Name": "Axe",
     "Point0": [
       19.520000457763672,
       21.386667251586914
@@ -230,7 +230,7 @@
     "InvisibleFrame": 0.30000001192092896,
     "ItemClass": 1,
     "LineCollsionN": 8,
-    "Name": "shovel",
+    "Name": "Shovel",
     "Point0": [
       15.30666732788086,
       7.573328018188477
@@ -278,7 +278,7 @@
     "InvisibleFrame": 0.30000001192092896,
     "ItemClass": 1,
     "LineCollsionN": 7,
-    "Name": "pickaxe",
+    "Name": "Pickaxe",
     "Point0": [
       3.6266660690307617,
       3.5733330249786377
@@ -322,7 +322,7 @@
     "InvisibleFrame": 0.30000001192092896,
     "ItemClass": 1,
     "LineCollsionN": 5,
-    "Name": "hoe",
+    "Name": "Hoe",
     "Point0": [
       19.893333435058594,
       1.7599990367889404

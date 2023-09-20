@@ -12,6 +12,7 @@ GameObject::GameObject(Rectangle pos,std::string name)
 {
 	this->pos = pos;
 	this->name = name;
+	this->name[0] = std::toupper(this->name[0]);
 }
 
 GameObject::GameObject(nlohmann::json j, int ID)
@@ -22,6 +23,7 @@ GameObject::GameObject(nlohmann::json j, int ID)
 	pos.width = j[ID]["Pos"][2];
 	pos.height = j[ID]["Pos"][3];
 	name = j[ID]["Name"];
+	this->name[0] = std::toupper(this->name[0]);
 }
 GameObject::~GameObject()
 {

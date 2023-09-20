@@ -47,13 +47,17 @@ ItemFactory::~ItemFactory()
 {
 	for (auto i:objects)
 		delete i;
+	factory = NULL;
 	objects.clear();
 	printf("[FactoryItem]: Usunieto fabryke itemow\n");
 }
 void ItemFactory::clearFactory()
 {
 	if (factory)
+	{
 		delete factory;
+	}
+
 }
 
 ItemFactory* ItemFactory::getFactory()
@@ -88,15 +92,25 @@ void ItemFactory::drawObjectAt(int ID, Rectangle pos)
 		objects[ID]->drawAt(pos);
 }
 
+std::string ItemFactory::getDescription(int ID)
+{ 
+	if (ID < 0 || ID >= objects.size())
+		return "";
+	return objects[ID]->getDesctription(); 
+}
+
 void ItemFactory::drawItemDescription(int ID, int x, int y)
 {
 	if (ID < 0 || ID >= objects.size())
 		return;
-	std::string description = getDescription(ID);
-	Vector2 descriptionSize = textSize(description.c_str(), textStandardSize);
-	Rectangle dest = { x, y, descriptionSize.x, descriptionSize.y };
-	DrawRectangleRec(dest, BLUE);
-	drawText(description.c_str(), x, y, textStandardSize, BLACK);
+	objects[ID]->drawDescription(x,y);
+}
+
+Vector2 ItemFactory::itemDescriptionSize(int ID)
+{
+	if (ID < 0 || ID >= objects.size())
+		return {0,0};
+	return objects[ID]->getItemDescriptionSize();
 }
 
 bool ItemFactory::isStacableItem(int ID)
@@ -107,6 +121,7 @@ bool ItemFactory::isStacableItem(int ID)
 		return objects[ID]->isStacable();
 	return false;
 }
+
 void ItemFactory::loadLanguage(std::string language)
 {
 	nlohmann::json j;
@@ -116,8 +131,21 @@ void ItemFactory::loadLanguage(std::string language)
 		return;
 	reader >> j;
 	reader.close();
-	ToolItem::description = j["ToolItem"]["DES"];
-	StackItem::description = j["StackItem"]["DES"];
-	Bow::description = j["Bow"]["DES"];
-	Ammo::description = j["Ammo"]["DES"];
+	std::cout << j.dump(2) << std::endl;
+	if(j.contains("ToolItem"))
+		ToolItem::description = j["ToolItem"];
+	if (j.contains("StackItem"))
+		StackItem::description = j["StackItem"];
+	if (j.contains("Bow"))
+		Bow::description = j["Bow"];
+	if (j.contains("Ammo"))
+		Ammo::description = j["Ammo"];
+	for (auto i : objects)
+		i->loadLangue(j);
+
+	std::ofstream writer;
+	writer.open(language + ".json");
+	writer << j.dump(2);
+	writer.close();
+
 }

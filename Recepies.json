@@ -92,5 +92,14 @@
     ],
     "finalItemID": 13,
     "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      1,
+      1
+    ],
+    "finalItemID": 5,
+    "howManyItems": 4,
+    "whereToCraft": 0
   }
 ]
