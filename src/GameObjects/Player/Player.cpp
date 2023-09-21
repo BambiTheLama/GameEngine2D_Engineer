@@ -6,7 +6,7 @@
 #include "../ItemFactory.h"
 
 
-Player::Player(Player& obj) :GameObject(obj), Collider(obj)
+Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj)
 {
 	animations = new AnimationController(*obj.animations);
 	miniMap = new MiniMap(this);
@@ -15,7 +15,7 @@ Player::Player(Player& obj) :GameObject(obj), Collider(obj)
 
 }
 
-Player::Player():GameObject({ 3000,3000,64,64 },"Player"), Collider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
+Player::Player():GameObject({ 3000,3000,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
 {
 	speed = 2;
 	int n = 6;
@@ -77,7 +77,11 @@ void Player::pickUpItemsClose(float deltaTime)
 			continue;
 		if (!haveSpace && !eq->canTakeItem(item))
 			continue;
-		Rectangle myPos = getCollisionPos(this);
+		Rectangle myPos = getPos();
+		myPos.x += myPos.width / 2;
+		myPos.y += myPos.height / 2;
+		myPos.width = 2;
+		myPos.height = 2;
 		Rectangle itemPos = item->getPos();
 		if (CheckCollisionRecs(myPos, itemPos))
 		{
@@ -258,7 +262,7 @@ void Player::move(float deltaTime)
 	posTmp.y *= speed * 64.0f * deltaTime;
 	Rectangle pos = getPos();
 	setMovePos({ posTmp.x + pos.x, pos.y + posTmp.y });
-	if (isCollidingWithSomething(this))
+	if (isCollidingWithSomething())
 	{
 		setMovePos({ pos.x, pos.y });
 	}

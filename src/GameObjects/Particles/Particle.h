@@ -26,5 +26,7 @@ public:
 
 	Particle* clone() { return new Particle(*this); }
 
+
+
 };
 

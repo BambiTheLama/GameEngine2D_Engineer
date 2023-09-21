@@ -2,11 +2,12 @@
 #include "../GameObject.h"
 #include "../AddisionalTypes/AllTypes.h"
 class Enemy :
-    public GameObject, public Collider, public HitAble
+    public GameObject, public RectangleCollider, public HitAble
 {
     Enemy(Enemy& e);
 public:
     Enemy();
+
     Enemy(Rectangle pos,Rectangle colliderBox, std::string name);
 
     virtual ~Enemy();
@@ -21,6 +22,6 @@ public:
 
     virtual Enemy* clone() { return new Enemy(*this); }
 
-    Rectangle getCollisionPos();
+    virtual bool destoryAfterRenderClear() { return true; }
 };
 

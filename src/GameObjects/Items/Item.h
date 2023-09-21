@@ -79,6 +79,8 @@ public:
 
     virtual std::string getName() { return itemName; }
 
+    virtual bool destoryAfterRenderClear() { return true; }
+
     friend class Recipes;
 };
 

@@ -33,5 +33,7 @@ public:
     ObjectType getType() { return ObjectType::Particle; }
 
     ParticleSystem* clone() { return new ParticleSystem(*this); }
+
+    virtual bool destoryAfterRenderClear() { return true; }
 };
 

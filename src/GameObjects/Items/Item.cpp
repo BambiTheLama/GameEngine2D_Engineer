@@ -44,13 +44,15 @@ void Item::saveToJson(nlohmann::json j)
 
 void Item::drawDescription(int x, int y)
 {
+	const Color black = { 0,0,0,240 };
+	const Color blue = { 0,121,241,240 };
 	std::string description = getDesctription();
 	Vector2 descriptionSize = getItemDescriptionSize();
 	Rectangle dest = { x - 10, y, descriptionSize.x + 20, descriptionSize.y };
-	DrawRectangleRounded(dest, 0.32137, 10, BLUE);
-	DrawRectangleRoundedLines(dest, 0.32137, 10, 2, BLACK);
+	DrawRectangleRounded(dest, 0.32137, 10, blue);
+	DrawRectangleRoundedLines(dest, 0.32137, 10, 2, black);
 	//DrawRectangleRec(dest, BLUE);
-	drawText(description.c_str(), x, y + 10, textStandardSize, BLACK);
+	drawText(description.c_str(), x, y + 10, textStandardSize, black);
 }
 Vector2 Item::getItemDescriptionSize()
 {

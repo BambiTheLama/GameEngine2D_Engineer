@@ -18,5 +18,7 @@ public:
     ObjectType getType() { return ObjectType::Particle; }
 
     virtual TextParticle* clone() { return new TextParticle(*this); }
+
+    virtual bool destoryAfterRenderClear() { return true; }
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Block.h"
 class CollidingBlock :
-    public Block, public Collider
+    public Block, public RectangleCollider
 {
     CollidingBlock(CollidingBlock& obj);
 public:

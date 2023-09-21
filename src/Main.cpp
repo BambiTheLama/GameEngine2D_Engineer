@@ -22,7 +22,7 @@ void test()
 	
 int main()
 {
-	test();
+	//test();
 	Engine* engine = new Engine();
 	engine->start();
 	delete engine;

@@ -14,15 +14,13 @@ Projectal::Projectal(Projectal& obj):GameObject(obj),LinesCollider(obj)
 
 Projectal::Projectal(Rectangle pos, float speed, float rotation, float range,
 	SpriteController* sprite, Vector2 *collision,int n, CollisionsCheckType collisionType)
-	:GameObject(pos,""),LinesCollider(collisionType)
+	:GameObject(pos,""),LinesCollider(collision,n,collisionType)
 {
 	this->rotation = rotation;
 	this->range = range;
 	this->speed = speed;
-
 	delta = deltaFromDegree(rotation+45,speed);
 	this->sprite = new SpriteController(*sprite);
-	addLines(n, collision);
 }
 
 Projectal::~Projectal()
@@ -46,8 +44,8 @@ void Projectal::update(float deltaTime)
 	else
 	{
 		Game->updatePos(this);
-		LinesCollider::updateRotation(rotation, { pos.x ,pos.y }, { pos.x - pos.width / 2,pos.y - pos.height / 2 });
-		LinesCollider::update(deltaTime);
+		LinesCollider::updateRotation(rotation, { 0,0 }, { -pos.width / 2,-pos.height / 2 });
+		LinesCollider::update(deltaTime,this);
 	}
 
 }
@@ -58,7 +56,7 @@ void Projectal::draw()
 	Rectangle pos = getPos();
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, origin, rotation, WHITE);
 	if (collidersToDraw)
-		LinesCollider::draw();
+		LinesCollider::draw(this);
 }
 
 void Projectal::onCollisionHitable(HitAble* hit)

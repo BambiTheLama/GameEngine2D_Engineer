@@ -10,7 +10,7 @@ ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
 {
-	loadLanguage("ENG");
+	
 	nlohmann::json j;
 	std::ifstream reader;
 	reader.open("Items.json");
@@ -39,7 +39,7 @@ ItemFactory::ItemFactory()
 			break;
 		}
 	}
-
+	loadLanguage("PL");
 	printf("[FactoryItem]: Stworzono fabryke itemow\n");
 }
 
@@ -142,10 +142,5 @@ void ItemFactory::loadLanguage(std::string language)
 		Ammo::description = j["Ammo"];
 	for (auto i : objects)
 		i->loadLangue(j);
-
-	std::ofstream writer;
-	writer.open(language + ".json");
-	writer << j.dump(2);
-	writer.close();
 
 }

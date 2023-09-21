@@ -12,19 +12,6 @@ ToolItem::ToolItem(ToolItem& item) :Item(item),LinesCollider(item)
 	this->power = item.power;
 }
 
-ToolItem::ToolItem(Rectangle pos, std::string name,ToolType destroyType,int power) :Item(pos, name),LinesCollider(CollisionsCheckType::All)
-{
-	std::string path = "Resource/Items/" + name + ".png";
-	sprite = new SpriteController(path.c_str());
-	useTimeMax = 0.5f;
-	useTime = 0;
-	damage = 5;
-	origin = { 0,pos.width };
-	this->destroyType = destroyType;
-	this->power = power;
-
-}
-
 ToolItem::ToolItem(nlohmann::json j, int ID):Item(j,ID),LinesCollider(j,ID)
 {
 
@@ -86,9 +73,9 @@ void ToolItem::update(float deltaTime)
 		rotation += deltaTime / useTimeMax * rotationAngle;
 	}
 
-	LinesCollider::updateRotation(rotation , { pos.x,pos.y }, { pos.x,pos.y - pos.height }, !leftSide);
+	LinesCollider::updateRotation(rotation , { 0,  0 },{0,-pos.height}, !leftSide);
 	
-	LinesCollider::update(deltaTime);
+	LinesCollider::update(deltaTime, this);
 
 }
 
@@ -131,7 +118,7 @@ void ToolItem::draw()
 
 	DrawTexturePro(sprite->getTexture(), textureSize, pos, origin, rotation, WHITE);
 	if (collidersToDraw)
-		LinesCollider::draw();
+		LinesCollider::draw(this);
 	
 
 }
@@ -144,10 +131,6 @@ void ToolItem::drawAt(Rectangle pos)
 std::string ToolItem::getDesctription()
 {
 	return std::string(TextFormat(description.c_str(), getName().c_str(), damage, power, useTimeMax));
-}
-void ToolItem::setStartPoints(Vector2 startPoints[4])
-{
-	addLines(4, startPoints);
 }
 
 void ToolItem::onCollisionHitable(HitAble* hit)

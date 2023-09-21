@@ -21,7 +21,7 @@ class Eq
 	Item*** items = NULL;
 	Player* player = NULL;
 	Item* itemInHand = NULL;
-
+	int cursorAtX = -1, cursorAtY = -1;
 public:
 	/// <summary>
 	/// Tworzy obiekt ekwipunku
@@ -76,6 +76,7 @@ public:
 	/// Sprawdza czy klikneliœmy na eq
 	/// </summary>
 	bool isPressedOnEq();
+	void itemCursorIsOn();
 	/// <summary>
 	/// Aktualizuje pozycjie przedmiotów jeœli klikneliœmy na eq
 	/// </summary>

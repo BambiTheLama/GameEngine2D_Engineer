@@ -282,11 +282,13 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 	{
 		j[ID]["Damage"] = damage;
 		j[ID]["InvisibleFrame"] = invisibleFrame;
+		j[ID]["CollisionsCheckType"] = CollisionsCheckType::All;
 	}
 	if (isDestoryAble)
 	{
 		j[ID]["Power"] = power;
 		j[ID]["DestoryType"] = destroyType;
+		j[ID]["CollisionsCheckType"] = CollisionsCheckType::All;
 	}
 	if (isRangeWeapon)
 	{
@@ -294,7 +296,9 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 		j[ID]["Projectals"] = numberOfProjectal;
 		j[ID]["Speed"] = projectalSpeed;
 		j[ID]["AmmoType"] = ammoType;
+		j[ID]["CollisionsCheckType"] = CollisionsCheckType::All;
 	}
+	
 }
 
 void ItemProperty::setDataFrom(ItemProperty& item)

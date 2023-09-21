@@ -2,7 +2,7 @@
 #include "Plant.h"
 
 class Tree :
-    public Plant, public Collider
+    public Plant, public RectangleCollider
 {
     int age = 0;
     int maxAge = 0;
@@ -28,8 +28,6 @@ public:
     virtual void damageObject(int power, ToolType type);
 
     bool isColliding() { return true; }
-
-    virtual Rectangle getCollisionPos() { return Collider::getCollisionPos(this); }
 
     virtual bool isToolGoBack() { return true; }
 };

@@ -11,7 +11,7 @@ enum class playerAnimationState {
 /// Obiekt gracza nad któr¹ ma kontrolê u¿ytkownik
 /// </summary>
 class Player :
-    public GameObject, public Collider , public UserUI
+    public GameObject, public RectangleCollider, public UserUI
 {
     bool canMove = true;
     int pickUpRange = 100;
@@ -82,5 +82,6 @@ public:
     virtual void setCanMoveObject(bool canMove) { this->canMove = canMove; }
 
     bool isColliding() { return true; }
+
 };
 

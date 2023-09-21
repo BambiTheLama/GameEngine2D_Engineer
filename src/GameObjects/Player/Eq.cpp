@@ -157,6 +157,17 @@ void Eq::update(float deltaTime)
 			items[usingItemY][usingItemX]->setFaceSide(faceSide);
 		}
 	}
+	if (fullEq)
+	{
+		itemCursorIsOn();
+	}
+	else
+	{
+		if (cursorAtX >= 0)
+			cursorAtX = -1;
+		if (cursorAtY >= 0)
+			cursorAtY = -1;	
+	}
 }
 
 void Eq::mouseWeel()
@@ -196,6 +207,36 @@ bool Eq::isPressedOnEq()
 
 	}
 	return false;
+}
+
+void Eq::itemCursorIsOn()
+{
+	Vector2 cursor = GetMousePosition();
+	cursor.x -= EqStartX - EqSpacing;
+	int endX = EqSize * EqWight + EqSpacing * (EqWight - 1);
+	cursor.y -= EqStartY - EqSpacing;
+	int endY = EqSize * EqHeight + EqSpacing * (EqHeight - 1);
+	if ((cursor.x >= 0 && cursor.x <= endX) && (cursor.y >= 0 && cursor.y <= endY))
+	{
+		if (((int)cursor.x % (EqSize + EqSpacing) > EqSize) ||
+			((int)cursor.y % (EqSize + EqSpacing) > EqSize))
+		{
+			cursorAtX = -1;
+			cursorAtY = -1;
+		}
+		else
+		{
+			cursorAtX = (int)cursor.x / (EqSize + EqSpacing);
+			cursorAtY = (int)cursor.y / (EqSize + EqSpacing);
+		}
+
+	}
+	else
+	{
+		cursorAtX = -1;
+		cursorAtY = -1;
+	}
+
 }
 
 void Eq::updateEqPressed()
@@ -262,6 +303,26 @@ void Eq::draw()
 			const char* text = TextFormat("%d", itemInHand->getStackSize());
 			Vector2 textS = textSize(text, textStandardSize);
 			DrawTextWithOutline(text, pos.x + pos.height - textS.x, pos.y + pos.width - textS.y, textStandardSize, WHITE, BLACK);
+		}
+	}
+	else
+	{
+		if (fullEq)
+		{
+			if (cursorAtX < 0 || cursorAtY < 0 || cursorAtY >= EqHeight && cursorAtX >= EqWight)
+				return;
+			Item* item = items[cursorAtY][cursorAtX];
+			if (!item)
+				return;
+			Rectangle posToDraw = { EqStartX + (EqSpacing + EqSize) * cursorAtX - EqSpacing,
+	EqStartY + (EqSpacing + EqSize) * cursorAtY - EqSpacing, EqSize, EqSize };
+
+			Vector2 size = item->getItemDescriptionSize();
+			int x = posToDraw.x - (-posToDraw.width + size.x) / 2;
+			int y = posToDraw.y + posToDraw.height;
+
+			item->drawDescription(x,y);
+			
 		}
 	}
 }

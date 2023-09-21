@@ -3,6 +3,7 @@
 /// <summary>
 /// Interfejs od zadawania obra¿eñ Obiekt¹
 /// </summary>
+
 class HitAble
 {
 protected:
@@ -22,6 +23,5 @@ public:
 
 	bool isObjectDead() { return hp <= 0; }
 
-	virtual Rectangle getCollisionPos() = 0;
 };
 

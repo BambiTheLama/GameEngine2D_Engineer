@@ -7,7 +7,7 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
-	handler = new ObjectHandler({0,0,8000.0f,8000.0f});
+	handler = new ObjectHandler({0,0,3200.0f,3200.0f});
 	handler->addObject(cameraTarget=new Player());
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
@@ -87,6 +87,7 @@ void GameScene::draw()
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 	for (UserUI* i : userUI)
 		i->drawInterface();
+	DrawFPS(0, 0);
 }
 
 void GameScene::removeBlocks(Rectangle pos)

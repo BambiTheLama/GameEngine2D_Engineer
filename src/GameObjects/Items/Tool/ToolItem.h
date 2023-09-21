@@ -21,7 +21,6 @@ class ToolItem :
     static std::string description;
     ToolItem(ToolItem& item);
 public:
-    ToolItem(Rectangle pos, std::string name,ToolType destroyType=ToolType::NON,int power=0);
     ToolItem(nlohmann::json j, int ID);
     virtual ~ToolItem();
     virtual ToolItem* clone() { return new ToolItem(*this); }
@@ -30,7 +29,6 @@ public:
     void draw();
     void drawAt(Rectangle pos);
     virtual std::string getDesctription();
-    void setStartPoints(Vector2 startPoints[4]);
     virtual bool canChangeItem() { return useTime<=0; }
     virtual ItemType getItemType() { return ItemType::Weapon; }
     virtual void onCollisionHitable(HitAble* hit);

@@ -5,3 +5,5 @@
 #include "ItemsDrop.h"
 #include "LinesCollider.h"
 #include "UserUI.h"
+#include "CircleCollider.h"
+#include "RectangleCollider.h"

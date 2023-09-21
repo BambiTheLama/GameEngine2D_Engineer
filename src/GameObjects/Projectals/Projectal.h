@@ -36,5 +36,7 @@ public:
     void onCollisionHitable(HitAble* hit);
 
     void onCollisionDestroyAble(DestroyAble* dest);
+
+    virtual bool destoryAfterRenderClear() { return true; }
 };
 

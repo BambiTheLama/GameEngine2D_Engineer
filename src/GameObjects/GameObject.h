@@ -58,7 +58,7 @@ public:
 	/// </summary>
 	virtual ~GameObject();
 	/// <summary>
-	/// Metoda aktywowana przy starcie sceny gdy wszystkie obiekty siê wygeneruj¹
+	/// Metoda aktywowana przy starcie sceny gdy wszystkie obiekty siê wygeneruj¹ lub po dodaniu obieku do sceny
 	/// </summary>
 	virtual void start(){}
 	/// <summary>
@@ -115,12 +115,11 @@ public:
 	/// <returns>Nazwa obiektu</returns>
 	virtual std::string getName() { return name; }
 
+	virtual bool destoryAfterRenderClear() { return false; }
+
 	friend class Factory;
 	friend class BlockFactory;
 	friend class ItemFactory;
 	friend class PlantsFactory;
 };
 
-bool checkCollision(GameObject* obj);
-bool checkCollision(Vector2 points[4], Rectangle pos);
-bool checkCollision(Vector2 points[4], Vector2 points2[4]);

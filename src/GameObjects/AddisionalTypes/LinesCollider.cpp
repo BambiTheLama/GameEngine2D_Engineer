@@ -3,9 +3,8 @@
 #include "DestroyAble.h"
 #include "HitAble.h"
 
-LinesCollider::LinesCollider(LinesCollider& lines)
+LinesCollider::LinesCollider(LinesCollider& lines):Collider(lines)
 {
-	type = lines.type;
 	nPoints = lines.nPoints;
 	startPoints = new Vector2[nPoints];
 	points = new Vector2[nPoints];
@@ -16,12 +15,26 @@ LinesCollider::LinesCollider(LinesCollider& lines)
 	}
 	rotation = lines.rotation;
 }
-
-LinesCollider::LinesCollider(CollisionsCheckType type)
+LinesCollider::LinesCollider(Vector2* collision, int n, CollisionsCheckType collisionType):Collider(collisionType)
 {
-	this->type = type;
+	if (startPoints)
+		delete startPoints;
+	if (this->points)
+		delete this->points;
+	nPoints = n;
+	if (n <= 0 || !collision)
+		return;
+	startPoints = new Vector2[nPoints];
+	this->points = new Vector2[nPoints];
+	for (int i = 0; i < nPoints; i++)
+	{
+		startPoints[i] = collision[i];
+		this->points[i] = collision[i];
+	}
+
 }
-LinesCollider::LinesCollider(nlohmann::json j, int ID)
+
+LinesCollider::LinesCollider(nlohmann::json j, int ID):Collider(j,ID)
 {
 	if (j[ID].contains("LineCollsionN"))
 	{
@@ -62,14 +75,7 @@ LinesCollider::LinesCollider(nlohmann::json j, int ID)
 		for (int i = 0; i < 4; i++)
 			points[i] = startPoints[i];
 	}
-	if (j[ID].contains("CollisionsCheckType"))
-	{
-		this->type = (CollisionsCheckType)j[ID]["CollisionsCheckType"];
-	}
-	else
-	{
-		this->type = CollisionsCheckType::All;
-	}
+
 }
 LinesCollider::~LinesCollider()
 {
@@ -78,44 +84,44 @@ LinesCollider::~LinesCollider()
 	if (points)
 		delete this->points;
 }
-void LinesCollider::addLines(int n, Vector2* points)
+Vector2 origin;
+void LinesCollider::draw(GameObject* obj)
 {
-	if (startPoints)
-		delete startPoints;
-	if (points)
-		delete this->points;
-	nPoints = n;
-	startPoints = new Vector2[nPoints];
-	this->points = new Vector2[nPoints];
-	for (int i = 0; i < nPoints; i++)
-		startPoints[i] = points[i];
-}
-void LinesCollider::draw()
-{
-	for (int i = 0; i < nPoints; i++)
-		DrawLineV(points[i], points[(i + 1) % nPoints], BLACK);
+	if (!points)
+		return;
+	Rectangle pos = obj->getPos();
 	for (int i = 0; i < nPoints; i++)
 	{
-		DrawCircleV(points[i], 1, BLUE);
+		Vector2 p1 = { points[i].x + pos.x,points[i].y + pos.y };
+		Vector2 p2 = { points[(i + 1) % nPoints].x + pos.x,points[(i + 1) % nPoints].y + pos.y };
+		DrawLineV(p1, p2, BLACK);
 	}
+
+	for (int i = 0; i < nPoints; i++)
+	{
+		Vector2 p1 = { points[i].x + pos.x,points[i].y + pos.y };
+		DrawCircleV(p1, 1, BLUE);
+	}
+	DrawCircleV({pos.x+ origin.x,pos.y+ origin.y }, 2, RED);
 }
-void LinesCollider::updateRotation(float rotation, Vector2 origin, Vector2 pos, bool leftSide)
+void LinesCollider::updateRotation(float rotation, Vector2 origin,Vector2 moveBy, bool leftSide)
 {
+	this->origin = origin;
 	rotation = ((rotation) * (PI / 180.0f));
 	if (leftSide)
 	{
 		for (int i = 0; i < nPoints; i++)
 		{
-			points[i].x = pos.x + startPoints[i].x;
-			points[i].y = pos.y + startPoints[i].y;
+			points[i].x = moveBy.x + startPoints[i].x;
+			points[i].y = moveBy.y + startPoints[i].y;
 		}
 	}
 	else
 	{
 		for (int i = 0; i < nPoints; i++)
 		{
-			points[i].x = pos.x - startPoints[i].x;
-			points[i].y = pos.y + startPoints[i].y;
+			points[i].x = moveBy.x - startPoints[i].x;
+			points[i].y = moveBy.y + startPoints[i].y;
 		}
 	}
 	for (int i = 0; i < nPoints; i++)
@@ -128,7 +134,7 @@ void LinesCollider::updateRotation(float rotation, Vector2 origin, Vector2 pos, 
 
 }
 
-void LinesCollider::update(float deltaTime)
+Rectangle LinesCollider::getMaxRectangle()
 {
 	float minx = points[0].x;
 	float maxx = points[0].x;
@@ -145,71 +151,53 @@ void LinesCollider::update(float deltaTime)
 		if (maxy < points[i].y)
 			maxy = points[i].y;
 	}
-	Rectangle getObj = { minx,miny,maxx - minx,maxy - miny };
-	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);
-	GameObject* thisObj = dynamic_cast<GameObject*>(this);
-	if (thisObj)
-		objs.remove(thisObj);
-	if (type == CollisionsCheckType::All)
-	{
-		for (auto* o : objs)
-		{
-			HitAble* hit = dynamic_cast<HitAble*>(o);
-			if (hit)
-			{
-				if (checkCollision(points, hit->getCollisionPos()))
-				{
-					onCollisionHitable(hit);
-				}
-			}
-			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
-			if (toDestory)
-			{
-				Rectangle rec = toDestory->getCollisionPos();
-				if (checkCollision(points, rec))
-				{
-					onCollisionDestroyAble(toDestory);
-				}
-			}
-		}
-	}
-	else if (type == CollisionsCheckType::HitAbleOnly)
-	{
-		for (auto* o : objs)
-		{
-			HitAble* hit = dynamic_cast<HitAble*>(o);
-			if (hit)
-			{
-				if (checkCollision(points, hit->getCollisionPos()))
-				{
-					onCollisionHitable(hit);
-				}
-			}
-		}
-	}
-	else if (type == CollisionsCheckType::DestoryAbleOnly)
-	{
-		for (auto* o : objs)
-		{
-			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
-			if (toDestory)
-			{
-				Rectangle rec = toDestory->getCollisionPos();
-				if (checkCollision(points, rec))
-				{
-					onCollisionDestroyAble(toDestory);
-				}
-			}
-		}
-	}
-	
+	return { minx,miny,maxx - minx,maxy - miny };
 }
 
-void LinesCollider::onCollisionHitable(HitAble* hit)
+bool LinesCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos)
 {
+	Vector2* points = getLines();
+	if (!points)
+		return false;
+	int n = getHomManyLines();
+	if (n <= 0)
+		return false;
+	Vector2* points2 = new Vector2[n];
+	for (int i = 0; i < n; i++)
+		points2[i] = { points[i].x + thisPos.x,points[i].y + thisPos.y };
+	bool res = false;
+	CollisionType type = c->getCollisionType();
 
-}
-void LinesCollider::onCollisionDestroyAble(DestroyAble* dest)
-{
+	if (type == CollisionType::Rec)
+	{
+		Rectangle pos = c->getCollisionPos();
+		pos.x += otherPos.x;
+		pos.y += otherPos.y;
+		res = checkCollision(points2, n, pos);
+	}
+	else if (type == CollisionType::Lines)
+	{
+		Vector2* points3 = c->getLines();
+		int n2 = c->getHomManyLines();
+		if (points3 && n2 > 0)
+		{
+			Vector2* points4 = new Vector2[n2];
+			for (int i = 0; i < n; i++)
+				points4[i] = { points3[i].x + otherPos.x,points3[i].y + otherPos.y };
+			res = checkCollision(points2, n, points4,n2);
+			delete points4;
+		}
 
+
+	}
+	else if (type == CollisionType::Circle)
+	{
+		Vector2 circle = c->getCirlcePoint();
+		float r = c->getRadius();
+		circle.x += otherPos.x;
+		circle.y += otherPos.y;
+		res = collideLinesCircle(circle, r, points2, n);
+	}
+	delete points2;
+	return res;
 }

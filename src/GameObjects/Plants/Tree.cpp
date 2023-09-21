@@ -1,14 +1,14 @@
 #include "Tree.h"
 #include "../../core/Scenes/GameScene.h"
 #include "../Particles/ParticleSystem.h"
-Tree::Tree(Tree& tree) :Plant(tree), Collider(tree)
+Tree::Tree(Tree& tree) :Plant(tree), RectangleCollider(tree)
 {
 	age = tree.age;
 	maxAge = tree.maxAge;
 }
 
 Tree::Tree(Rectangle pos, std::string name) :Plant(pos, name,ToolType::Axe,10,10),
-Collider({ 24.0f / 64 * pos.width,48.0f / 64 * pos.height,16.0f / 64 * pos.width,15.0f / 64 * pos.height })
+RectangleCollider({ 24.0f / 64 * pos.width,48.0f / 64 * pos.height,16.0f / 64 * pos.width,15.0f / 64 * pos.height })
 {
 	maxAge = sprite->getHowMuchFrames()-1;
 	addItemToDrop(0, 100, 1, 2);
@@ -55,16 +55,15 @@ void Tree::draw()
 	sprite->draw(getPos(), age);
 	if (collidersToDraw)
 	{
-		Collider::draw(this);
+		RectangleCollider::draw(this);
 	}
 
 
 }
 void Tree::setMovePos(Vector2 movePos)
 { 
-	Rectangle collider = getCollisionPos();
+	Rectangle collider = RectangleCollider::getCollisionPos();
 	GameObject::setMovePos({ movePos.x + collider.x,movePos.y + collider.y });
-
 }
 
 void Tree::damageObject(int power, ToolType type)
@@ -73,7 +72,7 @@ void Tree::damageObject(int power, ToolType type)
 	DestroyAble::damageObject(power, type);
 	if (h != hp)
 	{
-		Rectangle pos = getCollisionPos();
+		Rectangle pos = RectangleCollider::getCollisionPos();
 		Particle* particle=new Particle({0,0,5,5},1,{2,4},{77,26,1,255},{255,170,30,0});
 		ParticleSystem* particleSystem = new ParticleSystem(pos, "", particle, 10);
 		particleSystem->setTime(0.5f, 1.0f);
@@ -85,7 +84,7 @@ void Tree::damageObject(int power, ToolType type)
 		return;
 	}
 
-	Rectangle pos = getCollisionPos();
+	Rectangle pos = RectangleCollider::getCollisionPos();
 	std::vector<Item*> items = getDrop();
 	for (Item* i : items)
 	{
