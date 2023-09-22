@@ -2,11 +2,13 @@
 #include "raylib.h"
 #include "../../GameObjects/Player/Player.h"
 #include "../../GameObjects/NPCs/Enemy.h"
-
+#include "../Engine.h"
+#include "Menu.h"
 GameScene* GameScene::game = NULL;
 
 GameScene::GameScene()
 {
+	SetExitKey(0);
 	handler = new ObjectHandler({0,0,3200.0f,3200.0f});
 	handler->addObject(cameraTarget=new Player());
 	game = this;
@@ -15,6 +17,8 @@ GameScene::GameScene()
 	camera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f;
+
+
 }
 
 GameScene::~GameScene()
@@ -33,6 +37,11 @@ void GameScene::start()
 }
 void GameScene::update(float deltaTime)
 {
+	if (IsKeyReleased(KEY_ESCAPE))
+	{
+		Engine::setScene(new Menu());
+		return;
+	}
 	Rectangle pos = cameraTarget->getPos();
 	camera.target = { pos.x + pos.width/2, pos.y + pos.height/2 };
 	if (IsKeyDown(KEY_UP))

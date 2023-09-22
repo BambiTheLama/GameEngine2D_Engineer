@@ -16,8 +16,12 @@
 #include "../Elements/AddItem.h"
 #include "../Elements/RemoveItem.h"
 #include <iostream>
+#include "Menu.h"
+#include "../Engine.h"
+
 RecipesEdytor::RecipesEdytor():Scene()
 {
+	SetExitKey(0);
 	usingRecepies = new Recipes(0);
 
 	Rectangle buttons = recepiesStartPos;
@@ -171,6 +175,12 @@ void RecipesEdytor::draw()
 }
 void RecipesEdytor::update(float deltaTime)
 {
+	if (IsKeyReleased(KEY_ESCAPE))
+	{
+		Engine::setScene(new Menu());
+		return;
+	}
+
 	for (Element* e : elements)
 		e->update();
 	if (IsKeyDown(KEY_LEFT_CONTROL))

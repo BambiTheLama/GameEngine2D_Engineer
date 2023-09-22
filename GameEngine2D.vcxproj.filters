@@ -64,6 +64,9 @@
     <Filter Include="src\GameObjects\AddisionalTypes\Colliders">
       <UniqueIdentifier>{a4ab8d40-9191-4585-a89d-d069efcd8bbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameObjects\AddisionalTypes\Combat">
+      <UniqueIdentifier>{1ff24322-1c0f-42fa-b19b-7037eaf57884}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -116,9 +119,6 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\BlockFactory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp">
-      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp">
       <Filter>src\GameObjects\Blocks</Filter>
@@ -173,9 +173,6 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\NPCs\Enemy.cpp">
       <Filter>src\GameObjects\NPCs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\AddisionalTypes\HitAble.cpp">
-      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp">
       <Filter>src\GameObjects\Particles</Filter>
@@ -249,6 +246,18 @@
     <ClCompile Include="src\GameObjects\AddisionalTypes\RectangleCollider.cpp">
       <Filter>src\GameObjects\AddisionalTypes\Colliders</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp">
+      <Filter>src\GameObjects\AddisionalTypes\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\HitAble.cpp">
+      <Filter>src\GameObjects\AddisionalTypes\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Elements\Button.cpp">
+      <Filter>src\core\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\Menu.cpp">
+      <Filter>src\core\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -301,9 +310,6 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Factory.h">
       <Filter>src\GameObjects\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h">
-      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h">
       <Filter>src\GameObjects\AddisionalTypes</Filter>
@@ -359,9 +365,6 @@
     <ClInclude Include="src\GameObjects\NPCs\Enemy.h">
       <Filter>src\GameObjects\NPCs</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\AddisionalTypes\HitAble.h">
-      <Filter>src\GameObjects\AddisionalTypes</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjects\Particles\TextParticle.h">
       <Filter>src\GameObjects\Particles</Filter>
     </ClInclude>
@@ -370,9 +373,6 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h">
       <Filter>src\GameObjects\Items\Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\Scenes\ItemEdytor.h">
-      <Filter>src\core\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\json.hpp">
       <Filter>src</Filter>
@@ -436,6 +436,21 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\AddisionalTypes\RectangleCollider.h">
       <Filter>src\GameObjects\AddisionalTypes\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h">
+      <Filter>src\GameObjects\AddisionalTypes\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\HitAble.h">
+      <Filter>src\GameObjects\AddisionalTypes\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Elements\Button.h">
+      <Filter>src\core\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\Menu.h">
+      <Filter>src\core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\ItemEdytor.h">
+      <Filter>src\core\Scenes\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

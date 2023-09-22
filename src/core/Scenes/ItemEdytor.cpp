@@ -17,9 +17,12 @@
 #include "../Elements/AddItem.h"
 #include "../Elements/RemoveItem.h"
 #include <fstream>
+#include "Menu.h"
+#include "../Engine.h"
 
 ItemEdytor::ItemEdytor()
 {
+	SetExitKey(0);
 	item = new ItemProperty();
 
 	//Odczyt danych z pliku json
@@ -181,6 +184,11 @@ void ItemEdytor::start()
 
 void ItemEdytor::update(float deltaTime)
 {
+	if (IsKeyReleased(KEY_ESCAPE))
+	{
+		Engine::setScene(new Menu());
+		return;
+	}
 	int itemClass = item->itemClass;
 	for (Element* e : elements)
 		e->update();

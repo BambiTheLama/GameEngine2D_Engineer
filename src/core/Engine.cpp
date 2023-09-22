@@ -9,24 +9,20 @@
 #include "../GameObjects/RecipesFactory.h"
 #include "Scenes/ItemEdytor.h"
 #include "Scenes/RecipesEdytor.h"
+#include "Scenes/Menu.h"
 
 Scene* Engine::scene = NULL;
 
 Engine::Engine()
 {
-	int t = 0;
-	std::cin >> t;
 	InitWindow(1600, 900, "MyGame");
 	InitAudioDevice();
 	//SetTargetFPS(60);
 
 	Items->getFactory();
-	if (t == 0)
-		scene = new GameScene();
-	else if (t == 1)
-		scene = new RecipesEdytor();
-	else
-		scene = new ItemEdytor();
+
+	scene = new Menu();
+
 	Items;
 
 }
