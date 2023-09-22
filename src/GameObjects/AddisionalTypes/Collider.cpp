@@ -64,7 +64,6 @@ void Collider::update(float deltaTime, GameObject* obj)
 		objs.remove(thisObj);
 	else
 		return;
-	printf("KOLIDER TYPE %d\n", (int)type);
 	if (type == CollisionsCheckType::All)
 	{
 		for (auto* o : objs)
@@ -77,7 +76,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 				{
 					Rectangle pos = thisObj->getPos();
 					Rectangle pos2 = o->getPos();
-					if (col->checkCollisionToObj(this, {pos.x,pos.y},{pos2.x,pos2.y}))
+					if (checkCollisionToObj(col, {pos.x,pos.y},{pos2.x,pos2.y}))
 						onCollisionHitable(hit);
 
 				}
@@ -89,7 +88,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 				{
 					Rectangle pos = thisObj->getPos();
 					Rectangle pos2 = o->getPos();
-					if (col->checkCollisionToObj(this, { pos.x,pos.y }, { pos2.x,pos2.y }))
+					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
 						onCollisionDestroyAble(toDestory);
 				}
 			}
@@ -108,7 +107,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 				{
 					Rectangle pos = thisObj->getPos();
 					Rectangle pos2 = o->getPos();
-					if (col->checkCollisionToObj(this, { pos.x,pos.y }, { pos2.x,pos2.y }))
+					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
 						onCollisionHitable(hit);
 
 				}
@@ -128,7 +127,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 				{
 					Rectangle pos = thisObj->getPos();
 					Rectangle pos2 = o->getPos();
-					if (col->checkCollisionToObj(this, { pos.x,pos.y }, { pos2.x,pos2.y }))
+					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
 						onCollisionDestroyAble(toDestory);
 				}
 			}

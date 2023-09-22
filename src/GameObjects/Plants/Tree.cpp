@@ -63,6 +63,9 @@ void Tree::draw()
 void Tree::setMovePos(Vector2 movePos)
 { 
 	Rectangle collider = RectangleCollider::getCollisionPos();
+	Rectangle pos = getPos();
+	collider.x += pos.x;
+	collider.y += pos.y;
 	GameObject::setMovePos({ movePos.x + collider.x,movePos.y + collider.y });
 }
 
@@ -72,9 +75,12 @@ void Tree::damageObject(int power, ToolType type)
 	DestroyAble::damageObject(power, type);
 	if (h != hp)
 	{
-		Rectangle pos = RectangleCollider::getCollisionPos();
+		Rectangle collider = RectangleCollider::getCollisionPos();
+		Rectangle pos = getPos();
+		collider.x += pos.x;
+		collider.y += pos.y;
 		Particle* particle=new Particle({0,0,5,5},1,{2,4},{77,26,1,255},{255,170,30,0});
-		ParticleSystem* particleSystem = new ParticleSystem(pos, "", particle, 10);
+		ParticleSystem* particleSystem = new ParticleSystem(collider, "", particle, 10);
 		particleSystem->setTime(0.5f, 1.0f);
 		particleSystem->setVelosity({ -1,-1 }, { 1,1 });
 		Game->addObject(particleSystem);
@@ -84,11 +90,14 @@ void Tree::damageObject(int power, ToolType type)
 		return;
 	}
 
-	Rectangle pos = RectangleCollider::getCollisionPos();
+	Rectangle collider = RectangleCollider::getCollisionPos();
+	Rectangle pos = getPos();
+	collider.x += pos.x;
+	collider.y += pos.y;
 	std::vector<Item*> items = getDrop();
 	for (Item* i : items)
 	{
-		i->addToPos({ pos.x, pos.y });
+		i->addToPos({ collider.x, collider.y });
 		Game->addObject(i);
 	}
 	Game->deleteObject(this);
