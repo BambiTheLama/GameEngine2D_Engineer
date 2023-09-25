@@ -144,3 +144,18 @@ std::list<GameObject*> FourTree::getObjectsAt(Rectangle pos)
 	return objs;
 
 }
+
+void FourTree::draw()
+{
+	if (tree)
+		for (int i = 0; i < 4; i++)
+			tree[i]->draw();
+	else
+	{
+		DrawRectangleLinesEx(pos, 2, BLUE);
+		DrawText(TextFormat("%d", objects.size()), pos.x, pos.y, 32, RED);
+		for (auto o : objects)
+			DrawRectangleRec(o->getPos(), {255,212,0,169});
+	}
+
+}

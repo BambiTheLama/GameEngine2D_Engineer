@@ -15,7 +15,7 @@ Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj)
 
 }
 
-Player::Player():GameObject({ 3000,3000,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
+Player::Player():GameObject({ -200,1000,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
 {
 	speed = 2;
 	int n = 6;
@@ -280,8 +280,8 @@ void Player::draw()
 		posPickUpRange.y -= pickUpRange;
 		posPickUpRange.width += pickUpRange * 2;
 		posPickUpRange.height += pickUpRange * 2;
-		Collider::draw(this);
 		DrawRectangleRec(posPickUpRange, { 0,0,255,126 });
+		RectangleCollider::draw(this);
 	}
 
 	eq->drawItem();
@@ -289,7 +289,7 @@ void Player::draw()
 
 void Player::drawInterface()
 {
-	miniMap->draw();
+	//miniMap->draw();
 	crafting->draw();
 	eq->draw();
 }

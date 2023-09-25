@@ -11,17 +11,9 @@ MiniMap::~MiniMap()
 }
 void MiniMap::generateMiniMap()
 {
-	h = Game->getBlocksSize().x;
-	w = Game->getBlocksSize().y;
-	minimapBuffor = LoadRenderTexture(w, h);
-	Block*** blocks = Game->getAllBlocks();
+
 	BeginTextureMode(minimapBuffor);
-	for (int y = 0; y < h; y++)
-		for (int x = 0; x < w; x++)
-		{
-			if(blocks[y][x])
-				blocks[y][x]->drawInMiniMap(x, y);
-		}
+	ClearBackground(WHITE);
 	EndTextureMode();
 }
 

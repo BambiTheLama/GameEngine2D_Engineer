@@ -1,14 +1,16 @@
 #include "Tree.h"
 #include "../../core/Scenes/GameScene.h"
 #include "../Particles/ParticleSystem.h"
-Tree::Tree(Tree& tree) :Plant(tree), RectangleCollider(tree)
+Tree::Tree(Tree& tree) :Plant(tree)
 {
 	age = tree.age;
 	maxAge = tree.maxAge;
 }
 
-Tree::Tree(Rectangle pos, std::string name) :Plant(pos, name,ToolType::Axe,10,10),
-RectangleCollider({ 24.0f / 64 * pos.width,48.0f / 64 * pos.height,16.0f / 64 * pos.width,15.0f / 64 * pos.height })
+Tree::Tree(Rectangle pos, std::string name) :
+	Plant(pos, name,ToolType::Axe,10,10, { 24.0f / 64 * pos.width,48.0f / 64 * pos.height,
+		16.0f / 64 * pos.width,15.0f / 64 * pos.height })
+
 {
 	maxAge = sprite->getHowMuchFrames()-1;
 	addItemToDrop(0, 100, 1, 2);

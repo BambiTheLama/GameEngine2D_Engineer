@@ -2,33 +2,43 @@
 #include "../../../GameObjects/BlockFactory.h"
 #include "PerlinNoice.h"
 #include "../../../GameObjects/PlantsFactory.h"
-ObjectHandler::ObjectHandler(Rectangle pos)
+#include <fstream>
+
+ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 {
-	this->pos = pos;
-	tree = new FourTree(pos);
-	w = pos.width / tileSize;
-	h = pos.height / tileSize;
-	blocks = new Block** [(int)(h)];
+	this->x = chunkX * tileSize * (w - 1);
+	this->y = chunkY * tileSize * (h - 1);
+	this->chunkX = chunkX;
+	this->chunkY = chunkY;
+}
+
+ObjectHandler::ObjectHandler(int chunkX, int chunkY)
+{
+	this->x = chunkX * tileSize * (w - 1);
+	this->y = chunkY * tileSize * (h - 1);
+	this->chunkX = chunkX;
+	this->chunkY = chunkY;
+	tree = new FourTree({ (float)x,(float)y,w * tileSize,h * tileSize });
 
 	PerlinNoice* perlin = new PerlinNoice(w, h);
-	perlin->generateNoise2D(10, 1.69, 369);
+	perlin->generateNoise2D(10, 1.69, 169*(69*x+2137*y));
 	float** noice = perlin->getNoice();
 	BlockFactory* factory = Blocks;
 
 	for (int i = 0; i < h; i++)
 	{
-		blocks[i] = new Block * [(int)w];
 		for (int j = 0; j < w; j++)
 		{
 
 			int blockID = noice[i][j] >= 0 ? 1 : 0;
+			Vector2 pos = { x + (float)j * tileSize,y + (float)i * tileSize };
 			if (blockID > 0)
 			{
 				blockID = noice[i][j] * factory->getSize()+1;
 				if ((int)(noice[i][j] * 10000) % 100 < 1)
 				{
 					Plant* plant = Plants->getObject(0);
-					plant->setMovePos({ (float)j * tileSize,(float)i * tileSize });
+					plant->setMovePos(pos);
 					objectsToAdd.push_back(plant);
 				}
 				if (blockID == 2)
@@ -37,7 +47,7 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 					if (val < 6 && val < 69)
 					{
 						Plant* plant = Plants->getObject(1);
-						plant->setMovePos({ (float)j * tileSize,(float)i * tileSize });
+						plant->setMovePos(pos);
 						objectsToAdd.push_back(plant);
 					}
 				}
@@ -46,14 +56,13 @@ ObjectHandler::ObjectHandler(Rectangle pos)
 			}
 
 			blocks[i][j] = factory->getObject(blockID);
+
 			if (blocks[i][j])
-				blocks[i][j]->setMovePos({ (float)j * tileSize,(float)i * tileSize });
+				blocks[i][j]->setMovePos(pos);
 		}
 
 	}
 	delete perlin;
-
-
 }
 
 
@@ -68,9 +77,7 @@ ObjectHandler::~ObjectHandler()
 			{
 				delete blocks[i][j];
 			}
-		delete blocks[i];
 	}
-	delete blocks;
 }
 void ObjectHandler::clearLists()
 {
@@ -83,10 +90,7 @@ void ObjectHandler::start()
 {
 	for (GameObject* obj : objects)
 		obj->start();
-	for (int i = 0; i < h; i++)
-		for (int j = 0; j < w; j++)
-			if(blocks[i][j])
-				blocks[i][j]->start();
+	reloadBlock();
 }
 std::list<GameObject*> ObjectHandler::getObjects()
 { 
@@ -111,8 +115,8 @@ std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos, ObjectToGet type
 	}
 	if (type != ObjectToGet::getNoBlocks)
 	{
-		int startX = pos.x / tileSize - 1;
-		int startY = pos.y / tileSize - 1;
+		int startX = (pos.x - x) / tileSize - 1;
+		int startY = (pos.y - y) / tileSize - 1;
 		if (startX < 0)
 			startX = 0;
 		if (startY < 0)
@@ -130,6 +134,38 @@ std::list<GameObject*> ObjectHandler::getObjects(Rectangle pos, ObjectToGet type
 	}
 	
 	return objs;
+}
+void ObjectHandler::updatePos(GameObject* obj) 
+{ 
+	if (isObjAtThisChunk(obj))
+	{
+		if (tree->hasObj(obj))
+		{
+			tree->updatePos(obj);
+		}
+		else
+		{
+			tree->addObj(obj);
+			for (auto o : objects)
+				if (o == obj)
+				{
+					return;
+				}
+			objects.push_back(obj);
+		}
+		
+	}
+	else
+	{
+		if (tree->hasObj(obj))
+		{
+			tree->removeObj(obj);
+			objects.remove(obj);
+		}
+			
+	}
+
+	
 }
 
 std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
@@ -178,8 +214,8 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 
 
 
-	int startX = pos.x / tileSize - 1;
-	int startY = pos.y / tileSize - 1;
+	int startX = (pos.x - this->x) / tileSize - 1;
+	int startY = (pos.y - this->y) / tileSize - 1;
 	if (startX < 0)
 		startX = 0;
 	if (startY < 0)
@@ -202,22 +238,12 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 	return objs;
 }
 
-void ObjectHandler::deleteObject(GameObject* obj) 
-{
-	for (auto* o : objectsToDelete)
-		if (o == obj)
-			return;
-	objectsToDelete.push_back(obj); 
-}
-
 void ObjectHandler::addObject(GameObject* obj) 
 { 
-	if (objects.size() < 69000 - objectsToAdd.size())
+	if (CheckCollisionRecs(obj->getPos(), { (float)x,(float)y,tileSize * w,tileSize * h }))
 	{
 		objectsToAdd.push_back(obj);
 	}
-	else
-		delete obj;
 }
 
 void ObjectHandler::removeObject(GameObject* obj) 
@@ -263,8 +289,15 @@ void ObjectHandler::update(float deltaTime)
 
 
 
-bool ObjectHandler::addBlock(Block* block,int x,int y)
+bool ObjectHandler::addBlock(Block* block)
 {
+	Rectangle pos=block->getPos();
+	int x = pos.x - this->x;
+	if (x >= w * tileSize)
+		return false;
+	int y = pos.y - this->y;
+	if (y >= h * tileSize)
+		return false;
 	if (blocks[y][x] == NULL)
 	{
 		blocks[y][x] = block;
@@ -307,30 +340,18 @@ void ObjectHandler::deleteBlocks(int x, int y, int w, int h)
 
 std::list<Block*> ObjectHandler::getBlocks(int x, int y, int w, int h)
 {
-	if (x + w >= this->w)
-	{
-		w = this->w - x;
-	}
-	if (y + h >= this->h)
-	{
-		h = this->h - y;
-	}
+	int sx = x - this->x;
+	int sy = y - this->y;
+	int ex = w / tileSize;
+	int ey = h / tileSize;
 	std::list<Block*> blockToReturn;
-	for (int i = 0; i < w; i++)
-		for (int j = 0; j < h; j++)
+	for (int i = 0; i < ex; i++)
+		for (int j = 0; j < ey; j++)
 		{
-			Block* thisBlock = blocks[y + j][x + i];
+			Block* thisBlock = blocks[sy + j][sx + i];
 			if (thisBlock)
 			{
-				bool breaked = false;
-				for (Block* b : blockToReturn)
-					if (b == thisBlock)
-					{
-						breaked = true;
-						break;
-					}
-				if(!breaked)
-					blockToReturn.push_back(thisBlock);
+				blockToReturn.push_back(thisBlock);
 			}
 				
 		}
@@ -339,5 +360,43 @@ std::list<Block*> ObjectHandler::getBlocks(int x, int y, int w, int h)
 
 Block* ObjectHandler::getBlock(int x, int y)
 {
-	return blocks[y][x];
+	int ix = 0;
+	int iy = 0;
+	if (x >= this->x && x < this->x + w * tileSize)
+		ix = (x - this->x) / tileSize;
+	else
+		return NULL;
+	if (y >= this->y && y < this->y + h * tileSize)
+		iy = (y - this->y) / tileSize;
+	else
+		return NULL;
+	return blocks[iy][ix];
+}
+
+void ObjectHandler::reloadBlock()
+{
+	for (int i = 0; i < h; i++)
+		for (int j = 0; j < w; j++)
+			if (blocks[i][j])
+				blocks[i][j]->start();
+}
+
+void ObjectHandler::saveGame(nlohmann::json &j)
+{
+
+	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
+	for (int x = 0; x < w; x++)
+		for (int y = 0; y < h; y++)
+			if (blocks[y][x])
+				j[name]["BLockArray"][y][x] = blocks[y][x]->getID();
+}
+
+bool ObjectHandler::isObjAtThisChunk(GameObject *obj)
+{
+	return CheckCollisionRecs(obj->getPos(), { (float)x,(float)y,tileSize * w,tileSize * h });
+}
+
+bool ObjectHandler::isObjAtThisChunk(Rectangle pos)
+{
+	return CheckCollisionRecs(pos, { (float)x,(float)y,tileSize * w,tileSize * h });
 }

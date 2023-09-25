@@ -1,14 +1,21 @@
 #include "Plant.h"
 #include "../../core/Scenes/GameScene.h"
 
-Plant::Plant(Plant& plant):GameObject(plant),ItemsDrop(plant),DestroyAble(plant)
+Plant::Plant(Plant& plant):GameObject(plant),ItemsDrop(plant),DestroyAble(plant),RectangleCollider(plant)
 {
 	sprite = new SpriteController(*plant.sprite);
 }
 
 
 Plant::Plant(Rectangle pos,std::string name,ToolType tool,int hp,int power):
-	GameObject(pos,name),DestroyAble(tool,hp,power)
+	Plant(pos,name,tool,hp,power,{0,0,pos.width,pos.height})
+{
+	std::string path = "Resource/Plants/" + name + ".png";
+	sprite = new SpriteController(path.c_str());
+}
+
+Plant::Plant(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision) :
+	GameObject(pos,name),ItemsDrop(),DestroyAble(tool,hp,power),RectangleCollider(collision)
 {
 	std::string path = "Resource/Plants/" + name + ".png";
 	sprite = new SpriteController(path.c_str());

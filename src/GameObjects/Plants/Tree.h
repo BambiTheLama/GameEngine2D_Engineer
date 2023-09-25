@@ -2,7 +2,7 @@
 #include "Plant.h"
 
 class Tree :
-    public Plant, public RectangleCollider
+    public Plant
 {
     int age = 0;
     int maxAge = 0;
@@ -27,7 +27,7 @@ public:
 
     virtual void damageObject(int power, ToolType type);
 
-    bool isColliding() { return true; }
+    virtual bool isColliding() { return true; }
 
     virtual bool isToolGoBack() { return true; }
 };

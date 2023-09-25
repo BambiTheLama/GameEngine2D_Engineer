@@ -4,7 +4,7 @@ Enemy::Enemy(Enemy& e):GameObject(e), RectangleCollider(e),HitAble(e)
 {
 
 }
-Enemy::Enemy():Enemy({3200,3200,64,64},{0,16,64,48},"DUMY")
+Enemy::Enemy():Enemy({1000,1000,64,64},{0,16,64,48},"DUMY")
 {
 
 }

@@ -33,7 +33,9 @@ void Menu::update(float deltaTime)
 		return;
 	if (buttons[0]->press())
 	{
-		Engine::setScene(new GameScene());
+		Scene* s = new GameScene();
+		s->start();
+		Engine::setScene(s);
 		return;
 	}
 	else if (buttons[1]->press())

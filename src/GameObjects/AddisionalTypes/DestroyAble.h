@@ -33,8 +33,6 @@ public:
 
     virtual void damageObject(int power, ToolType type);
 
-    virtual Rectangle getCollisionPos() = 0;
-
     virtual bool isToolGoBack() { return false; }
 };
 

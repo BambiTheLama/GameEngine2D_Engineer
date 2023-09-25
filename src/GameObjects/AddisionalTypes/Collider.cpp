@@ -35,10 +35,19 @@ bool Collider::isCollidingWithSomething()
 	if (!obj)
 		return false;
 	std::list<GameObject*> objects = Game->getObjects(obj->getPos());
-
 	objects.remove(obj);
+	{
+		Rectangle pos = obj->getPos();
+		printf("%s %lf %lf %lf %lf\n",obj->getName().c_str(), pos.x, pos.y, pos.width, pos.height);
+	}
+	
 	for (GameObject* o : objects)
 	{
+		if (o->getType() != ObjectType::Block)
+		{
+			Rectangle pos = o->getPos();
+			printf("%lf %lf %lf %lf %d\n", pos.x, pos.y, pos.width, pos.height, o->isColliding());
+		}
 		if (!o->isColliding())
 			continue;
 		Collider* collider = dynamic_cast<Collider*>(o);

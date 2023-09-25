@@ -5,6 +5,8 @@
 #include "../../../GameObjects/AddisionalTypes/UserUI.h"
 #include "../../../GameObjects/Blocks/Block.h"
 #include "FourTree.h"
+#include "../../../json.hpp"
+
 #define tileSize 32
 enum class ObjectToGet
 {
@@ -16,16 +18,20 @@ enum class ObjectToGet
 /// </summary>
 class ObjectHandler
 {
+
+    static const int h = 25, w = 50;
+    int x, y;
+    int chunkX;
+    int chunkY;
     std::list<GameObject*> objects=std::list<GameObject*>();
     std::list<GameObject*> objectsToAdd = std::list<GameObject*>();
     std::list<GameObject*> objectsToDelete = std::list<GameObject*>();
     std::list<GameObject*> objectsToRemove = std::list<GameObject*>();
     FourTree* tree = NULL;
-    Block*** blocks = NULL;
-    Rectangle pos;
-    int h, w;
+    Block* blocks[h][w];
 public:
-    ObjectHandler(Rectangle pos);
+    ObjectHandler(int chunkX, int chunkY, nlohmann::json j);
+    ObjectHandler(int chunkX, int chunkY);
     /// <summary>
     /// Usuwa wszystkie obiekty co zosta³y w kolekcjach
     /// </summary>
@@ -76,7 +82,7 @@ public:
     /// Aktualizujê pozycjê obiektu
     /// </summary>
     /// <param name="obj">Obiek którego pozycja ma byc zaktualizowana</param>
-    void updatePos(GameObject* obj) { tree->updatePos(obj); }
+    void updatePos(GameObject* obj);
     /// <summary>
     /// Rusje drzewo drzewo
     /// </summary>
@@ -85,10 +91,8 @@ public:
     /// Dodaje blok do struktury w podanej pozycji 
     /// </summary>
     /// <param name="block">Block do dodania</param>
-    /// <param name="x">pozycja x w której jest blok</param>
-    /// <param name="y">pozcyja y w której jest blok</param>
     /// <returns>czy uda³o siê postawiæ blok</returns>
-    bool addBlock(Block* block, int x, int y);
+    bool addBlock(Block* block);
     /// <summary>
     /// Usuwa blok z pamieci w podanej pozycji
     /// </summary>
@@ -125,20 +129,17 @@ public:
     /// <param name="y">pozcyja y</param>
     /// <returns>block do zwrócenia</returns>
     Block* getBlock(int x, int y);
-    /// <summary>
-    /// Szerokoœæ na której s¹ bloki
-    /// </summary>
-    /// <returns></returns>
-    int getBlockW() { return w; }
-    /// <summary>
-    /// Wysokoœæ na której s¹ bloki
-    /// </summary>
-    /// <returns></returns>
-    int getBlockH() { return h; }
-    /// <summary>
-    /// Zwraca wszystkei bloki
-    /// </summary>
-    /// <returns></returns>
-    Block*** getAllBlock() { return blocks; }
+
+    void reloadBlock();
+
+    bool isObjAtThisChunk(GameObject* obj);
+
+    bool isObjAtThisChunk(Rectangle pos);
+
+    void saveGame(nlohmann::json &j);
+
+    int getChunkX() { return chunkX; }
+
+    int getChunkY() { return chunkY; }
 };
 

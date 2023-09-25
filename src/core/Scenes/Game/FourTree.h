@@ -22,17 +22,6 @@ public:
 	void updatePos(GameObject* obj);
 	bool hasObj(GameObject* obj);
 	std::list<GameObject*> getObjectsAt(Rectangle pos);
-	void draw()
-	{
-		if (tree)
-			for (int i = 0; i < 4; i++)
-				tree[i]->draw();
-		else
-		{
-			DrawRectangleLinesEx(pos, 2, BLUE);
-			DrawText(TextFormat("%d", objects.size()), pos.x, pos.y, 32, RED);
-		}
-			
-	}
+	void draw();
 };
 

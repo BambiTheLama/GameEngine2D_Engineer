@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Game/ObjectHandler.h"
+#include "../../json.hpp"
 
 #define Game GameScene::getGameScene()
 
@@ -14,7 +15,8 @@ class GameScene :
     Camera2D camera;
     Vector2 cursorPos;
     Rectangle cameraPos;
-    ObjectHandler* handler;
+    std::list<ObjectHandler*> handler;
+    std::list<GameObject*> toDelete;
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
@@ -23,6 +25,10 @@ public:
     /// Konstruktor od sceny gry
     /// </summary>
     GameScene();
+    /// <summary>
+    /// Konstruktor od sceny gry
+    /// </summary>
+    GameScene(nlohmann::json j);
     /// <summary>
     /// Destruktor od sceny gry
     /// </summary>
@@ -60,12 +66,12 @@ public:
     /// <param name="pos">Pozycja z której interesuj¹ nas obiekty</param>
     /// <param name="type">Typy obiektów które maj¹ zostac zwrócone</param>
     /// <returns>Lista obiektów w danym obszarze</returns>
-    std::list<GameObject*> getObjects(Rectangle pos, ObjectToGet type = ObjectToGet::getAll) { return handler->getObjects(pos, type); }
+    std::list<GameObject*> getObjects(Rectangle pos, ObjectToGet type = ObjectToGet::getAll);
     /// <summary>
     /// Aktualizujê pozycjê obiektu
     /// </summary>
     /// <param name="obj">Obiekt do aktualizowania pozycji</param>
-    void updatePos(GameObject* obj) { handler->updatePos(obj); }
+    void updatePos(GameObject* obj);
     /// <summary>
     /// Zwraca pozycjê kursora na ekranie uwzglêdniej¹c w to przesuniêcie Camery oraz skalowanie jej
     /// </summary>
@@ -114,15 +120,10 @@ public:
     /// </summary>
     /// <param name="ui">Interfejs do usuniêcia</param>
     void removeUserUI(UserUI* ui) { userUI.remove(ui); }
-    /// <summary>
-    /// Zwraca wszystkie bloki na mapie
-    /// </summary>
-    /// <returns></returns>
-    Block*** getAllBlocks() { return handler->getAllBlock(); }
-    /// <summary>
-    /// Zwraca ile jest bloków w wysokosci i szerokoœci
-    /// </summary>
-    /// <returns></returns>
-    Vector2 getBlocksSize() { return { (float)handler->getBlockW(),(float)handler->getBlockH() }; }
+
+    std::list<GameObject*> getObjToDraw();
+
+    void printfChunk(GameObject* obj);
+
 };
 
