@@ -207,7 +207,7 @@ bool GameScene::addBlock(Block* block)
 Block* GameScene::getBlock(Rectangle pos)
 {
 	for (auto h : handler)
-		if (h->isObjAtThisChunk(cameraPos))
+		if (h->isObjAtThisChunk(pos))
 			return h->getBlock(pos.x, pos.y);
 	return NULL;
 }
