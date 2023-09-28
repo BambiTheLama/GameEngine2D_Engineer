@@ -3,7 +3,7 @@
 #include "PerlinNoice.h"
 #include "../../../GameObjects/PlantsFactory.h"
 #include <fstream>
-
+#include "../GameScene.h"
 ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 {
 	this->x = chunkX * tileSize * (w - 1);
@@ -78,12 +78,17 @@ ObjectHandler::~ObjectHandler()
 				delete blocks[i][j];
 			}
 	}
+	delete tree;
 }
 void ObjectHandler::clearLists()
 {
 	update(0);
 	for (GameObject* obj : objects)
+	{
+		tree->removeObj(obj);
 		delete obj;
+	}
+
 	objects.clear();
 }
 void ObjectHandler::start()

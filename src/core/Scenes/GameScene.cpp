@@ -54,6 +54,9 @@ GameScene::~GameScene()
 	game = NULL;
 	for (auto h : handler)
 		delete h;
+	for (auto o : toDelete)
+		delete o;
+	game = NULL;
 	userUI.clear();
 
 }
