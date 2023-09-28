@@ -65,10 +65,7 @@ void Tree::draw()
 void Tree::setMovePos(Vector2 movePos)
 { 
 	Rectangle collider = RectangleCollider::getCollisionPos();
-	Rectangle pos = getPos();
-	collider.x += pos.x;
-	collider.y += pos.y;
-	GameObject::setMovePos({ movePos.x + collider.x,movePos.y + collider.y });
+	GameObject::setMovePos({ movePos.x - collider.x,movePos.y - collider.y });
 }
 
 void Tree::damageObject(int power, ToolType type)

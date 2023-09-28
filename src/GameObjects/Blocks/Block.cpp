@@ -91,10 +91,10 @@ void Block::generateTexturePos()
 {
 	Rectangle pos = getPos();
 	unsigned int ID = getID();
-	right = isTheSameBlock({ pos.x + tileSize,pos.y,pos.width,pos.height },ID);
-	left = isTheSameBlock({ pos.x - tileSize,pos.y,pos.width,pos.height }, ID);
-	down = isTheSameBlock({ pos.x,pos.y + tileSize,pos.width,pos.height }, ID);
-	up = isTheSameBlock({ pos.x,pos.y - tileSize,pos.width,pos.height }, ID);
+	right = isTheSameBlock({ pos.x + tileSize + pos.width / 2,pos.y,1,1 }, ID);
+	left = isTheSameBlock({ pos.x - tileSize + pos.width / 2,pos.y,1,1 }, ID);
+	down = isTheSameBlock({ pos.x,pos.y + tileSize + pos.height / 2,1,1 }, ID);
+	up = isTheSameBlock({ pos.x,pos.y - tileSize + pos.height / 2,1,1 }, ID);
 
 	float size = sprite->getTexture().width / 4;
 

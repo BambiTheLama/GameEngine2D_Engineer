@@ -18,7 +18,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 	this->y = chunkY * tileSize * (h - 1);
 	this->chunkX = chunkX;
 	this->chunkY = chunkY;
-	tree = new FourTree({ (float)x,(float)y,w * tileSize,h * tileSize });
+	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
 
 	PerlinNoice* perlin = new PerlinNoice(w, h);
 	perlin->generateNoise2D(10, 1.69, 169*(69*x+2137*y));
@@ -393,10 +393,10 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 
 bool ObjectHandler::isObjAtThisChunk(GameObject *obj)
 {
-	return CheckCollisionRecs(obj->getPos(), { (float)x,(float)y,tileSize * w,tileSize * h });
+	return CheckCollisionRecs(obj->getPos(), { (float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1) });
 }
 
 bool ObjectHandler::isObjAtThisChunk(Rectangle pos)
 {
-	return CheckCollisionRecs(pos, { (float)x,(float)y,tileSize * w,tileSize * h });
+	return CheckCollisionRecs(pos, { (float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1) });
 }
