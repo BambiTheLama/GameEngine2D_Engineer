@@ -19,11 +19,15 @@ struct DropItem
 	}
 
 };
+enum class ObjectType;
 
 class ItemsDrop {
 	std::vector<DropItem> items;
+	void copyDataFrom(ItemsDrop& drops);
 public:
 	ItemsDrop();
+
+	ItemsDrop(ObjectType type,int ID);
 
 	ItemsDrop(ItemsDrop& drops);
 

@@ -4,6 +4,8 @@
 #include "../core/Controllers/AnimationController.h"
 #include "../core/Properties.h"
 #include "../json.hpp"
+
+
 /// <summary>
 /// Zwraca kat od obiektu do pozycji kursora
 /// </summary>
@@ -37,6 +39,7 @@ enum class ObjectType
 {
 	NPC, Item, Block, Particle, Player, NON, Projectal, Plant
 };
+
 class Factory;
 class BlockFactory;
 /// <summary>
@@ -52,7 +55,9 @@ protected:
 	GameObject(GameObject& obj);
 public:
 	GameObject(Rectangle pos,std::string name);
-	GameObject(nlohmann::json j, int ID);
+	GameObject(nlohmann::json &j, int ID);
+	GameObject(nlohmann::json& j);
+	GameObject(std::string chunk, std::string objDataPlace,nlohmann::json &j);
 	/// <summary>
 	/// Wiztualny destruktor by by³ wywo³any odpowiedni z klas dziedzicz¹cych
 	/// </summary>
@@ -117,9 +122,14 @@ public:
 
 	virtual bool destoryAfterRenderClear() { return false; }
 
+	virtual void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json &j);
+
+	virtual void saveToJson(nlohmann::json &j);
+
 	friend class Factory;
 	friend class BlockFactory;
 	friend class ItemFactory;
 	friend class PlantsFactory;
 };
 
+GameObject* getObjFromFactory(ObjectType type, int ID);

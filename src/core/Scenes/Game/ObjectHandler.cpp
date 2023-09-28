@@ -389,6 +389,13 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 		for (int y = 0; y < h; y++)
 			if (blocks[y][x])
 				j[name]["BLockArray"][y][x] = blocks[y][x]->getID();
+	std::list<GameObject*> obj = tree->getObjectsAt({ (float)x,(float)y,w * tileSize,h * tileSize });
+	int i = 0;
+	for (auto o : obj)
+	{
+		o->saveToJson(name, "OBJ" + std::to_string(i), j);
+		i++;
+	}
 }
 
 bool ObjectHandler::isObjAtThisChunk(GameObject *obj)

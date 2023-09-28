@@ -11,6 +11,8 @@ class Tree :
 public:
     Tree(Rectangle pos,std::string name);
 
+    Tree(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+
     ~Tree();
 
     void start();
@@ -30,5 +32,7 @@ public:
     virtual bool isColliding() { return true; }
 
     virtual bool isToolGoBack() { return true; }
+
+    void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
 };
 

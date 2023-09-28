@@ -1,4 +1,8 @@
 #include "DestroyAble.h"
+#include "../GameObject.h"
+#include "../ItemFactory.h"
+#include "../PlantsFactory.h"
+#include "../BlockFactory.h"
 
 std::string toolTypeDescription()
 {
@@ -54,7 +58,12 @@ bool isThisToolType(ToolType tool, ToolType requestTool)
 		return true;
 	return false;
 }
-
+void DestroyAble::copyDataFrom(DestroyAble& dest)
+{
+	itemToolRequest = dest.itemToolRequest;
+	hp = dest.hp;
+	power = dest.power;
+}
 DestroyAble::DestroyAble(ToolType request,int hp,int power)
 {
 	itemToolRequest = request;
@@ -62,11 +71,24 @@ DestroyAble::DestroyAble(ToolType request,int hp,int power)
 	this->hp = hp;
 
 }
+DestroyAble::DestroyAble(ObjectType type, int ID)
+{
+	DestroyAble* dest = NULL;
+	GameObject* obj = getObjFromFactory(type, ID);
+
+	if (obj)
+	{
+		dest = dynamic_cast<DestroyAble*>(obj);
+		if (dest)
+			copyDataFrom(*dest);
+
+		delete obj;
+	}
+
+}
 DestroyAble::DestroyAble(DestroyAble& dest)
 {
-	itemToolRequest = dest.itemToolRequest;
-	hp = dest.hp;
-	power = dest.power;
+	copyDataFrom(dest);
 }
 
 void DestroyAble::damageObject(int power, ToolType type)

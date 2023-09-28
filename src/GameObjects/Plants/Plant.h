@@ -12,6 +12,8 @@ public:
 
     Plant(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision);
 
+    Plant(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+
     virtual ~Plant();
 
     virtual void update(float deltaTime);
@@ -23,5 +25,7 @@ public:
     virtual Plant* clone() { return new Plant(*this); }
 
     virtual void damageObject(int power, ToolType type);
+
+    virtual void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
 };
 

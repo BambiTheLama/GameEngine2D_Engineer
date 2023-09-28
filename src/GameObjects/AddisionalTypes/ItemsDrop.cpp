@@ -1,14 +1,13 @@
 #include "ItemsDrop.h"
+#include "../GameObject.h"
+#include "../ItemFactory.h"
+#include "../PlantsFactory.h"
+#include "../BlockFactory.h"
 
-
-ItemsDrop::ItemsDrop()
+void ItemsDrop::copyDataFrom(ItemsDrop& drops)
 {
 
-}
-
-ItemsDrop::ItemsDrop(ItemsDrop& itemsDrop)
-{
-	for (auto i : itemsDrop.items)
+	for (auto i : drops.items)
 	{
 		DropItem drop;
 		drop.ID = i.ID;
@@ -17,6 +16,30 @@ ItemsDrop::ItemsDrop(ItemsDrop& itemsDrop)
 		drop.min = i.min;
 		items.push_back(drop);
 	}
+}
+
+ItemsDrop::ItemsDrop()
+{
+
+}
+
+ItemsDrop::ItemsDrop(ItemsDrop& itemsDrop)
+{
+	copyDataFrom(itemsDrop);
+}
+
+ItemsDrop::ItemsDrop(ObjectType type, int ID)
+{
+	ItemsDrop* drop = NULL;
+	GameObject* obj = getObjFromFactory(type, ID);
+	if (obj)
+	{
+		drop = dynamic_cast<ItemsDrop*>(obj);
+		if (drop)
+			copyDataFrom(*drop);
+		delete obj;
+	}
+
 }
 
 void ItemsDrop::addItemToDrop(int ID, float chanse, int max, int min)

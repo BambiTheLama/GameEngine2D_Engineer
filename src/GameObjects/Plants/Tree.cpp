@@ -17,6 +17,13 @@ Tree::Tree(Rectangle pos, std::string name) :
 	itemToolRequest = ToolType::Axe;
 
 }
+Tree::Tree(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+	:Plant(chunk,objDataPlace,j)
+{
+	age = j[chunk][objDataPlace]["Age"];
+	maxAge = j[chunk][objDataPlace]["Maxage"];
+	timer = j[chunk][objDataPlace]["Timer"];
+}
 
 Tree::~Tree() 
 {
@@ -76,12 +83,13 @@ void Tree::damageObject(int power, ToolType type)
 	{
 		Rectangle collider = RectangleCollider::getCollisionPos();
 		Rectangle pos = getPos();
+		float velosity = 1.69;
 		collider.x += pos.x;
 		collider.y += pos.y;
 		Particle* particle=new Particle({0,0,5,5},1,{2,4},{77,26,1,255},{255,170,30,0});
 		ParticleSystem* particleSystem = new ParticleSystem(collider, "", particle, 10);
-		particleSystem->setTime(0.5f, 1.0f);
-		particleSystem->setVelosity({ -1,-1 }, { 1,1 });
+		particleSystem->setTime(0.25f, 0.75f);
+		particleSystem->setVelosity({ -velosity,-velosity }, { velosity,velosity });
 		Game->addObject(particleSystem);
 	}
 	if (hp > 0)
@@ -100,4 +108,12 @@ void Tree::damageObject(int power, ToolType type)
 		Game->addObject(i);
 	}
 	Game->deleteObject(this);
+}
+
+void Tree::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+{
+	Plant::saveToJson(chunk, objDataPlace, j);
+	j[chunk][objDataPlace]["Age"] = age;
+	j[chunk][objDataPlace]["Maxage"] = maxAge;
+	j[chunk][objDataPlace]["Timer"] = timer;
 }

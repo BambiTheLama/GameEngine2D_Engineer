@@ -6,8 +6,11 @@ class RectangleCollider :
 	Rectangle collision;
 protected:
 	RectangleCollider(RectangleCollider& col);
+	void copyDataFrom(RectangleCollider& col);
 public:
 	RectangleCollider(Rectangle collision);
+
+	RectangleCollider(ObjectType type, int ID);
 
 	virtual void draw(GameObject* obj);
 

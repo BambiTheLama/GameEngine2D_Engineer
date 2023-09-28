@@ -1,6 +1,37 @@
 #include "GameObject.h"
 #include "../core/Scenes/GameScene.h"
+#include "ItemFactory.h"
+#include "PlantsFactory.h"
+#include "BlockFactory.h"
 
+GameObject* getObjFromFactory(ObjectType type, int ID)
+{
+	switch (type)
+	{
+	case ObjectType::NPC:
+		break;
+	case ObjectType::Item:
+		return Items->getObject(ID);
+		break;
+	case ObjectType::Block:
+		return Blocks->getObject(ID);
+		break;
+	case ObjectType::Particle:
+		break;
+	case ObjectType::Player:
+		break;
+	case ObjectType::NON:
+		break;
+	case ObjectType::Projectal:
+		break;
+	case ObjectType::Plant:
+		return Plants->getObject(ID);
+		break;
+	default:
+		break;
+	}
+	return NULL;
+}
 float cursorTarget(Vector2 objPos)
 {
 	Vector2 mouse = Game->getCursorPos();
@@ -44,8 +75,16 @@ GameObject::GameObject(Rectangle pos,std::string name)
 	this->name = name;
 	this->name[0] = std::toupper(this->name[0]);
 }
+GameObject::GameObject(nlohmann::json& j)
+{
+	pos.x = j["Pos"][0];
+	pos.y = j["Pos"][1];
+	pos.width = j["Pos"][2];
+	pos.height = j["Pos"][3];
+	name = j["Name"];	
+}
 
-GameObject::GameObject(nlohmann::json j, int ID)
+GameObject::GameObject(nlohmann::json &j, int ID)
 {
 	this->ID = ID;
 	pos.x = j[ID]["Pos"][0];
@@ -55,10 +94,38 @@ GameObject::GameObject(nlohmann::json j, int ID)
 	name = j[ID]["Name"];
 	this->name[0] = std::toupper(this->name[0]);
 }
+
+GameObject::GameObject(std::string chunk, std::string objDataPlace, nlohmann::json &j)
+{
+	pos.x = j[chunk][objDataPlace]["Pos"][0];
+	pos.y = j[chunk][objDataPlace]["Pos"][1];
+	pos.width = j[chunk][objDataPlace]["Pos"][2];
+	pos.height = j[chunk][objDataPlace]["Pos"][3];
+	name = j[chunk][objDataPlace]["Name"];
+	ID = j[chunk][objDataPlace]["ID"];
+}
 GameObject::~GameObject()
 {
 
 }
 
+void GameObject::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json &j)
+{
+	j[chunk][objDataPlace]["Pos"][0] = pos.x;
+	j[chunk][objDataPlace]["Pos"][1] = pos.y;
+	j[chunk][objDataPlace]["Pos"][2] = pos.width;
+	j[chunk][objDataPlace]["Pos"][3] = pos.height;
+	j[chunk][objDataPlace]["Name"] = name;
+	j[chunk][objDataPlace]["ID"] = ID;
+	j[chunk][objDataPlace]["ObjType"] = getType();
+	j[chunk][objDataPlace]["ObjClass"] = getType();
+}
 
-
+void GameObject::saveToJson(nlohmann::json &j)
+{
+	j["Pos"][0] = pos.x;
+	j["Pos"][1] = pos.y;
+	j["Pos"][2] = pos.width;
+	j["Pos"][3] = pos.height;
+	j["Name"] = name;
+}

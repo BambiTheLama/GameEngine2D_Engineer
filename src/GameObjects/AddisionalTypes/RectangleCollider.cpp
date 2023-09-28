@@ -1,13 +1,30 @@
 #include "RectangleCollider.h"
+#include "../GameObject.h"
 
 RectangleCollider::RectangleCollider(Rectangle collision)
 {
 	this->collision = collision;
 }
-
-RectangleCollider::RectangleCollider(RectangleCollider& col):Collider(col)
+void RectangleCollider::copyDataFrom(RectangleCollider& col)
 {
 	this->collision = col.collision;
+}
+RectangleCollider::RectangleCollider(RectangleCollider& col):Collider(col)
+{
+	copyDataFrom(col);
+}
+
+RectangleCollider::RectangleCollider(ObjectType type, int ID)
+{
+	RectangleCollider* dest = NULL;
+	GameObject* obj = getObjFromFactory(type,ID);
+	if (obj)
+	{
+		dest = dynamic_cast<RectangleCollider*>(obj);
+		if (dest)
+			copyDataFrom(*dest);
+		delete obj;
+	}
 }
 
 void RectangleCollider::draw(GameObject* obj)
