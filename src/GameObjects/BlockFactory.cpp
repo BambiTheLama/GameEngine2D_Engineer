@@ -23,6 +23,7 @@ BlockFactory::~BlockFactory()
 {
 	for (Block* b : objects)
 		delete b;
+	factory = NULL;
 	objects.clear();
 	printf("[FactoryBlock]: Usuniêto fabryke blokow\n");
 }
@@ -38,7 +39,6 @@ void BlockFactory::clearFactory()
 {
 	if (factory)
 		delete factory;
-	factory = NULL;
 }
 
 Block* BlockFactory::getObject(int i)

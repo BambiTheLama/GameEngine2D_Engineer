@@ -23,5 +23,6 @@ public:
 	/// <returns>Zwra kopiê itemu</returns>
 	virtual GameObject* getObject(int ID)=0;
 	friend class Engine;
+	friend class GameScene;
 };
 

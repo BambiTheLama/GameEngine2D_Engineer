@@ -9,9 +9,8 @@
 class PerlinNoice
 {
 	int h, w;
-	float** noiceTab2D=NULL;
+	float** noiceTab2D = NULL;
 	float** seed2D = NULL;
-	RenderTexture2D buffor;
 public:
 	PerlinNoice(int w, int h);
 
@@ -26,7 +25,5 @@ public:
 	int getW() { return w; }
 
 	int getH() { return h; }
-
-	void drawNoice2D(Rectangle rec);
 };
 

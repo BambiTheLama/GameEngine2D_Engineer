@@ -32,10 +32,6 @@ PerlinNoice::PerlinNoice(int w, int h)
 		noiceTab2D[i] = new float[w];
 	}
 		
-	buffor = LoadRenderTexture(w, h);
-	BeginTextureMode(buffor);
-	ClearBackground(WHITE);
-	EndTextureMode();
 }
 PerlinNoice::~PerlinNoice()
 {
@@ -96,21 +92,5 @@ void PerlinNoice::generateNoise2D(int octavies, float scaling, unsigned int seed
 			noiceTab2D[y][x] = noiseValue / scaleAccumulation;
 		}
 	}
-	BeginTextureMode(buffor);
-	ClearBackground(WHITE);
-	for (int x = 0; x < w; x++)
-		for (int y = 0; y < h; y++)
-		{
-			unsigned char v = 255 * noiceTab2D[y][x];
-			unsigned char v2 = (int)(255 * 255 * noiceTab2D[y][x])%255;
-			unsigned char v3 = (int)(255 * 255 * 255 * noiceTab2D[y][x])%255;
-			DrawRectangle(x, y, 1, 1, { v,v2,v3,255 });
-		}
-	EndTextureMode();
 }
 
-
-void PerlinNoice::drawNoice2D(Rectangle pos)
-{
-	DrawTexturePro(buffor.texture, { 0,0,(float)w,(float)h }, pos, { 0,0 }, 0, WHITE);
-}

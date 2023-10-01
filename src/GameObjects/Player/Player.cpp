@@ -48,6 +48,7 @@ Player::~Player()
 	delete animations;
 	delete miniMap;
 	delete crafting;
+	delete eq;
 }
 
 void Player::start()

@@ -10,8 +10,8 @@ GameScene* GameScene::game = NULL;
 GameScene::GameScene()
 {
 	SetExitKey(0);
-	for(int i=-1;i<2;i++)
-		for(int j=-1;j<2;j++)
+	for(int i=-3;i<4;i++)
+		for(int j=-3;j<4;j++)
 			handler.push_back(new ObjectHandler(i, j));
 
 	GameObject *p = new Player();
@@ -56,9 +56,9 @@ GameScene::~GameScene()
 		delete h;
 	for (auto o : toDelete)
 		delete o;
-	game = NULL;
-	userUI.clear();
 
+	game = NULL;
+	userUI.clear();	
 }
 void GameScene::start()
 {
@@ -102,6 +102,7 @@ void GameScene::update(float deltaTime)
 
 void GameScene::addObject(GameObject* obj)
 {
+	allObj.push_back(obj);
 	for (auto h : handler)
 		if(h->isObjAtThisChunk(obj))
 			h->addObject(obj);
@@ -114,6 +115,7 @@ void GameScene::deleteObject(GameObject* obj)
 	for (auto o : toDelete)
 		if (o == obj)
 			return;
+	allObj.remove(obj);
 	toDelete.push_back(obj);
 }
 

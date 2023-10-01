@@ -26,7 +26,6 @@ SpriteController::SpriteController(SpriteController& controller)
 
 SpriteController::~SpriteController()
 {
-
 	
 }
 

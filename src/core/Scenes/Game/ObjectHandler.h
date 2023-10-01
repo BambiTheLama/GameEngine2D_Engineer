@@ -64,11 +64,6 @@ public:
     /// </summary>
     void update(float deltaTime);
     /// <summary>
-    /// Usuwa obiekt z kolekcji oraz czysci go z pamiêci
-    /// </summary>
-    /// <param name="obj">Obiekt do usuniecia</param>
-    void deleteObject(GameObject* obj);
-    /// <summary>
     /// Dodaje obiekt do kolekcji
     /// </summary>
     /// <param name="obj">Obiekt do dodania</param>

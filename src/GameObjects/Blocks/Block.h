@@ -24,9 +24,6 @@ protected:
     SpriteController* sprite;
     Block(Block& obj);
 
-
-
-    
 public:
     Block(Rectangle pos, ToolType requestType, int power, std::string name);
 

@@ -17,6 +17,7 @@ class GameScene :
     Rectangle cameraPos;
     std::list<ObjectHandler*> handler;
     std::list<GameObject*> toDelete;
+    std::list<GameObject*> allObj;
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;

@@ -32,28 +32,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 
 			int blockID = noice[i][j] >= 0 ? 1 : 0;
 			Vector2 pos = { x + (float)j * tileSize,y + (float)i * tileSize };
-			if (blockID > 0)
-			{
-				blockID = noice[i][j] * factory->getSize()+1;
-				if ((int)(noice[i][j] * 10000) % 100 < 1)
-				{
-					Plant* plant = Plants->getObject(0);
-					plant->setMovePos(pos);
-					objectsToAdd.push_back(plant);
-				}
-				if (blockID == 2)
-				{
-					int val = (int)(noice[i][j] * 10000) % 100;
-					if (val < 6 && val < 69)
-					{
-						Plant* plant = Plants->getObject(1);
-						plant->setMovePos(pos);
-						objectsToAdd.push_back(plant);
-					}
-				}
-					
 
-			}
 
 			blocks[i][j] = factory->getObject(blockID);
 
@@ -70,27 +49,28 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 ObjectHandler::~ObjectHandler()
 {
 	clearLists();
-	for (int i = 0; i < h; i++)
+	for (int y = 0; y < h; y++)
 	{
-		for (int j = 0; j < w; j++)
-			if (blocks[i][j])
+		for (int x = 0; x < w; x++)
+			if (blocks[y][x])
 			{
-				delete blocks[i][j];
+				delete blocks[y][x];
 			}
 	}
 	delete tree;
 }
 void ObjectHandler::clearLists()
 {
-	update(0);
 	for (GameObject* obj : objects)
 	{
-		tree->removeObj(obj);
 		delete obj;
 	}
-
+	objectsToDelete.clear();
+	objectsToRemove.clear();
+	objectsToAdd.clear();
 	objects.clear();
 }
+
 void ObjectHandler::start()
 {
 	for (GameObject* obj : objects)

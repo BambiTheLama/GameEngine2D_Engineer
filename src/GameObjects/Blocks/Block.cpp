@@ -5,7 +5,7 @@ Block::Block(Block& obj):GameObject(obj),DestroyAble(obj),ItemsDrop(obj)
 {
 	hp = obj.hp;
 	power = obj.power;
-	sprite = obj.sprite;
+	sprite = new SpriteController(*obj.sprite);
 	texturePos = obj.texturePos;
 }
 
@@ -21,22 +21,12 @@ Block::Block(Rectangle pos, ToolType requestType, int power, std::string name) :
 Block::~Block()
 {
 	Rectangle pos = getPos();
+	if(sprite)
+		delete sprite;
 	GameScene* game = Game;
+
 	if (game == NULL)
 		return;
-	Block* b=Game->getBlock({ pos.x + tileSize,pos.y,pos.width,pos.height });
-	if (b)
-		b->generateTexturePos();
-	b=Game->getBlock({ pos.x - tileSize,pos.y,pos.width,pos.height });
-	if (b)
-		b->generateTexturePos();
-	b=Game->getBlock({ pos.x,pos.y + tileSize,pos.width,pos.height });
-	if (b)
-		b->generateTexturePos();
-	b=Game->getBlock({ pos.x,pos.y - tileSize,pos.width,pos.height });
-	if (b)
-		b->generateTexturePos();
-
 }
 void Block::start()
 {
