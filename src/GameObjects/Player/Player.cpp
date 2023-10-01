@@ -283,6 +283,7 @@ void Player::draw()
 		posPickUpRange.height += pickUpRange * 2;
 		DrawRectangleRec(posPickUpRange, { 0,0,255,126 });
 		RectangleCollider::draw(this);
+		DrawTextWithOutline(TextFormat("(%d:%d)", getChunkX(), getChunkY()), pos.x, pos.y, textStandardSize, WHITE, BLACK);
 	}
 
 	eq->drawItem();

@@ -18,8 +18,9 @@ enum class ObjectToGet
 /// </summary>
 class ObjectHandler
 {
-
+public:
     static const int h = 25, w = 50;
+private:
     int x, y;
     int chunkX;
     int chunkY;

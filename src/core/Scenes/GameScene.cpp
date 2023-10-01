@@ -10,8 +10,8 @@ GameScene* GameScene::game = NULL;
 GameScene::GameScene()
 {
 	SetExitKey(0);
-	for(int i=-3;i<4;i++)
-		for(int j=-3;j<4;j++)
+	for(int i=-1;i<2;i++)
+		for(int j=-1;j<2;j++)
 			handler.push_back(new ObjectHandler(i, j));
 
 	GameObject *p = new Player();
@@ -83,7 +83,8 @@ void GameScene::update(float deltaTime)
 	float cameraW = (float)GetScreenWidth()/(zoom);
 	float cameraH = (float)GetScreenHeight()/(zoom);
 	cameraPos = { camera.target.x - cameraW / 2,camera.target.y - cameraH / 2,cameraW,cameraH };
-	
+	int chunkX = cameraTarget->getChunkX();
+	int chunkY = cameraTarget->getChunkY();
 
 	Rectangle updatePos = { camera.target.x - cameraW ,camera.target.y - cameraH ,cameraW*2,cameraH*2 };
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
@@ -96,7 +97,14 @@ void GameScene::update(float deltaTime)
 	for (auto o : toDelete)
 		delete o;
 	toDelete.clear();
-
+	if (cameraTarget->getChunkX() != chunkX || cameraTarget->getChunkY() != chunkY)
+	{
+		deleteChunksNotCloseToTarget();
+		loadChunksCloseToTarget();
+		for (auto h : handler)
+			h->reloadBlock();
+		toReload.clear();
+	}
 
 }
 
@@ -234,6 +242,60 @@ std::list<Block*> GameScene::getBlocks(Rectangle pos)
 			}
 		}
 	return blocks;
+
+}
+
+void GameScene::deleteChunksNotCloseToTarget()
+{
+	if (!cameraTarget)
+		return;
+	int x = cameraTarget->getChunkX();
+	int y = cameraTarget->getChunkY();
+	int minX = x - renderDystance;
+	int maxX = x + renderDystance;
+	int minY = y - renderDystance;
+	int maxY = y + renderDystance;
+	std::list<ObjectHandler*> handlers;
+	for (auto h : handler)
+	{
+		if (h->getChunkX() < minX || h->getChunkX() > maxX || h->getChunkY() < minY || h->getChunkY() > maxY)
+			handlers.push_back(h);
+	}
+	for (auto h : handlers)
+	{
+		handler.remove(h);
+		delete h;
+	}
+}
+
+void GameScene::loadChunksCloseToTarget()
+{
+	if (!cameraTarget)
+		return;
+	int x = cameraTarget->getChunkX();
+	int y = cameraTarget->getChunkY();
+	int minX = x - renderDystance;
+	int maxX = x + renderDystance;
+	int minY = y - renderDystance;
+	int maxY = y + renderDystance;
+
+	for (int x = minX; x <= maxX; x++)
+		for (int y = minY; y <= maxY; y++)
+		{
+			bool breaked = false;
+			for (auto h : handler)
+				if (h->getChunkX() == x && h->getChunkY() == y)
+				{
+					breaked = true;
+					break;
+				}
+			if (!breaked)
+			{
+				ObjectHandler* objH = new ObjectHandler(x, y);
+				handler.push_back(objH);
+				toReload.push_back(objH);
+			}
+		}
 
 }
 

@@ -21,7 +21,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
 
 	PerlinNoice* perlin = new PerlinNoice(w, h);
-	perlin->generateNoise2D(10, 1.69, 169*(69*x+2137*y));
+	perlin->generateNoise2D(10, 1.69, 692137);
 	float** noice = perlin->getNoice();
 	BlockFactory* factory = Blocks;
 
@@ -30,7 +30,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 		for (int j = 0; j < w; j++)
 		{
 
-			int blockID = noice[i][j] >= 0 ? 1 : 0;
+			int blockID = noice[i][j] >= 0 ? 1 : 1;
 			Vector2 pos = { x + (float)j * tileSize,y + (float)i * tileSize };
 
 
@@ -48,6 +48,26 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 
 ObjectHandler::~ObjectHandler()
 {
+	GameScene* game = Game;
+	if (game)
+	{
+		for (GameObject* o : objects)
+		{
+			if (chunkX != o->getChunkX() || chunkY != o->getChunkY())
+				continue;
+
+			game->deleteObject(o);
+		}
+	}
+	else
+	{
+		for (GameObject* o : objects)
+		{
+			if (chunkX != o->getChunkX() || chunkY != o->getChunkY())
+				continue;
+			delete o;
+		}
+	}
 	clearLists();
 	for (int y = 0; y < h; y++)
 	{
@@ -61,10 +81,6 @@ ObjectHandler::~ObjectHandler()
 }
 void ObjectHandler::clearLists()
 {
-	for (GameObject* obj : objects)
-	{
-		delete obj;
-	}
 	objectsToDelete.clear();
 	objectsToRemove.clear();
 	objectsToAdd.clear();
@@ -378,6 +394,10 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 	int i = 0;
 	for (auto o : obj)
 	{
+		if (o->destoryAfterRenderClear())
+			continue;
+		if (chunkX != o->getChunkX() || chunkY != o->getChunkY())
+			continue;
 		o->saveToJson(name, "OBJ" + std::to_string(i), j);
 		i++;
 	}

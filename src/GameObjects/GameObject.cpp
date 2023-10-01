@@ -12,10 +12,8 @@ GameObject* getObjFromFactory(ObjectType type, int ID)
 		break;
 	case ObjectType::Item:
 		return Items->getObject(ID);
-		break;
 	case ObjectType::Block:
 		return Blocks->getObject(ID);
-		break;
 	case ObjectType::Particle:
 		break;
 	case ObjectType::Player:
@@ -26,7 +24,6 @@ GameObject* getObjFromFactory(ObjectType type, int ID)
 		break;
 	case ObjectType::Plant:
 		return Plants->getObject(ID);
-		break;
 	default:
 		break;
 	}
@@ -128,4 +125,21 @@ void GameObject::saveToJson(nlohmann::json &j)
 	j["Pos"][2] = pos.width;
 	j["Pos"][3] = pos.height;
 	j["Name"] = name;
+}
+
+void GameObject::generateChunk()
+{
+	Rectangle pos = getPos();
+	int x = pos.x + pos.width / 2;
+	int w = tileSize * ObjectHandler::w;
+	if (x >= 0)
+		chunkX = x / w;
+	else
+		chunkX = (x - w) / w;
+	int y = pos.y + pos.height / 2;
+	int h = tileSize * ObjectHandler::h;
+	if (y >= 0)
+		chunkY = y / h;
+	else
+		chunkY = (y - h) / h;
 }

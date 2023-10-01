@@ -52,6 +52,7 @@ class GameObject
 protected:
 	Rectangle pos;
 	std::string name;
+	int chunkX, chunkY;
 	GameObject(GameObject& obj);
 public:
 	GameObject(Rectangle pos,std::string name);
@@ -83,12 +84,12 @@ public:
 	/// Ustawienie nowego punktu x i y obiektu
 	/// </summary>
 	/// <param name="movePos"></param>
-	virtual void setMovePos(Vector2 movePos) { pos.x = movePos.x; pos.y = movePos.y; }
+	virtual void setMovePos(Vector2 movePos) { pos.x = movePos.x; pos.y = movePos.y; generateChunk(); }
 	/// <summary>
 	/// Dodaje do pozycji wartosc przemieszczenia
 	/// </summary>
 	/// <param name="toAdd">Przemieszczenie</param>
-	virtual void addToPos(Vector2 toAdd) { pos.x += toAdd.x, pos.y += toAdd.y; }
+	virtual void addToPos(Vector2 toAdd) { pos.x += toAdd.x, pos.y += toAdd.y; generateChunk(); }
 	/// <summary>
 	/// Metoda zwraca pozycje obiektu
 	/// </summary>
@@ -126,6 +127,11 @@ public:
 
 	virtual void saveToJson(nlohmann::json &j);
 
+	int getChunkX()const { return chunkX; }
+
+	int getChunkY()const { return chunkY; }
+
+	void generateChunk();
 	friend class Factory;
 	friend class BlockFactory;
 	friend class ItemFactory;

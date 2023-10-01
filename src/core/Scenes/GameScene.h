@@ -16,11 +16,13 @@ class GameScene :
     Vector2 cursorPos;
     Rectangle cameraPos;
     std::list<ObjectHandler*> handler;
+    std::list<ObjectHandler*> toReload;
     std::list<GameObject*> toDelete;
     std::list<GameObject*> allObj;
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
+    const int renderDystance = 1;
 public:
     /// <summary>
     /// Konstruktor od sceny gry
@@ -121,6 +123,10 @@ public:
     /// </summary>
     /// <param name="ui">Interfejs do usuniêcia</param>
     void removeUserUI(UserUI* ui) { userUI.remove(ui); }
+
+    void deleteChunksNotCloseToTarget();
+
+    void loadChunksCloseToTarget();
 
     std::list<GameObject*> getObjToDraw();
 
