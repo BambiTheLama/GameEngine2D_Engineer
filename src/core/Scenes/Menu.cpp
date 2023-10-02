@@ -3,6 +3,7 @@
 #include "RecipesEdytor.h"
 #include "ItemEdytor.h"
 #include "GameScene.h"
+#include "TestScene.h"
 Menu::Menu()
 {
 	const int w = 300,h=64;
@@ -40,7 +41,10 @@ void Menu::update(float deltaTime)
 	}
 	else if (buttons[1]->press())
 	{
-
+		Scene* s = new TestScene();
+		s->start();
+		Engine::setScene(s);
+		return;
 	}
 	else if (buttons[2]->press())
 	{

@@ -157,6 +157,7 @@
     <ClCompile Include="src\core\Scenes\Menu.cpp" />
     <ClCompile Include="src\core\Scenes\RecipesEdytor.cpp" />
     <ClCompile Include="src\core\Scenes\Scene.cpp" />
+    <ClCompile Include="src\core\Scenes\TestScene.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\CircleCollider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="src\GameObjects\Items\Weapon\Ammo.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\Bow.cpp" />
     <ClCompile Include="src\GameObjects\NPCs\Enemy.cpp" />
+    <ClCompile Include="src\GameObjects\NPCs\Enemy_1.cpp" />
     <ClCompile Include="src\GameObjects\Particles\Particle.cpp" />
     <ClCompile Include="src\GameObjects\Particles\ParticleSystem.cpp" />
     <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp" />
@@ -222,6 +224,7 @@
     <ClInclude Include="src\core\Scenes\Menu.h" />
     <ClInclude Include="src\core\Scenes\RecipesEdytor.h" />
     <ClInclude Include="src\core\Scenes\Scene.h" />
+    <ClInclude Include="src\core\Scenes\TestScene.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\CircleCollider.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h" />
@@ -245,6 +248,7 @@
     <ClInclude Include="src\GameObjects\Items\Weapon\Ammo.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h" />
     <ClInclude Include="src\GameObjects\NPCs\Enemy.h" />
+    <ClInclude Include="src\GameObjects\NPCs\Enemy_1.h" />
     <ClInclude Include="src\GameObjects\Particles\Particle.h" />
     <ClInclude Include="src\GameObjects\Particles\ParticleSystem.h" />
     <ClInclude Include="src\GameObjects\Particles\TextParticle.h" />

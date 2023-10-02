@@ -34,5 +34,7 @@ public:
     virtual bool isToolGoBack() { return true; }
 
     void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+
+    virtual void readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
 };
 

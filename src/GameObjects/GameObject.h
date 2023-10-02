@@ -127,6 +127,8 @@ public:
 
 	virtual void saveToJson(nlohmann::json &j);
 
+	virtual void readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+
 	int getChunkX()const { return chunkX; }
 
 	int getChunkY()const { return chunkY; }

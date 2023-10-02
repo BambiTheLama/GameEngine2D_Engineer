@@ -11,8 +11,10 @@ class PerlinNoice
 	int h, w;
 	float** noiceTab2D = NULL;
 	float** seed2D = NULL;
+	int scale;
+	int startX, startY;
 public:
-	PerlinNoice(int w, int h);
+	PerlinNoice(int w, int h,int scale=1);
 
 	~PerlinNoice();
 
@@ -25,5 +27,7 @@ public:
 	int getW() { return w; }
 
 	int getH() { return h; }
+
+	float getValue(int x, int y);
 };
 

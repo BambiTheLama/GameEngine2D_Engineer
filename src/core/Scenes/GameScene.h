@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Game/ObjectHandler.h"
 #include "../../json.hpp"
-
+#include "Game/PerlinNoice.h"
 #define Game GameScene::getGameScene()
 
 /// <summary>
@@ -23,15 +23,16 @@ class GameScene :
     std::list<UserUI*> userUI;
     static GameScene* game;
     const int renderDystance = 1;
+    nlohmann::json j;
+    PerlinNoice *terain;
+    PerlinNoice *water;
+    PerlinNoice *bioms;
+    std::string worldName;
 public:
     /// <summary>
     /// Konstruktor od sceny gry
     /// </summary>
-    GameScene();
-    /// <summary>
-    /// Konstruktor od sceny gry
-    /// </summary>
-    GameScene(nlohmann::json j);
+    GameScene(std::string worldName="World");
     /// <summary>
     /// Destruktor od sceny gry
     /// </summary>
@@ -131,6 +132,12 @@ public:
     std::list<GameObject*> getObjToDraw();
 
     void printfChunk(GameObject* obj);
+
+    PerlinNoice* getWater() { return water; }
+
+    PerlinNoice* getBioms() { return bioms; }
+
+    PerlinNoice* getTerain() { return terain; }
 
 };
 

@@ -10,6 +10,78 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	this->y = chunkY * tileSize * (h - 1);
 	this->chunkX = chunkX;
 	this->chunkY = chunkY;
+	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
+	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
+	BlockFactory* factory = Blocks;
+	if (j.contains(name))
+	{
+		for (int x = 0; x < w; x++)
+			for (int y = 0; y < h; y++)
+			{
+				blocks[y][x] = factory->getObject(j[name]["BLockArray"][y][x]);
+				Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
+				blocks[y][x]->setMovePos(pos);
+			}
+		int i = 0;
+		std::string objName = "OBJ" + std::to_string(i);
+		while (j[name].contains((objName)))
+		{
+			ObjectType type = (ObjectType)j[name][objName]["ObjClass"];
+			int ID= j[name][objName]["ID"];
+			GameObject *obj=getObjFromFactory(type, ID);
+			if (obj)
+			{
+				obj->readFromJson(name, objName, j);
+				obj->generateChunk();
+				objects.push_back(obj);
+			}
+
+			i++;
+			objName = "OBJ" + std::to_string(i);
+		}
+	}
+	else
+	{
+		PerlinNoice* water = Game->getWater();
+		PerlinNoice* terain = Game->getTerain();
+		PerlinNoice* bioms = Game->getBioms();
+		for (int x = 0; x < w; x++)
+			for (int y = 0; y < h; y++)
+			{
+				int id = 0;
+				Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
+				float waterV = water->getValue(pos.x, pos.y);
+				float terainV = terain->getValue(pos.x, pos.y);
+				float biomsV = bioms->getValue(pos.x, pos.y);
+				if (waterV > 0)
+					id = 0;
+				else if (terainV < 0)
+					id = 1;
+				else
+					id = 2;
+				blocks[y][x] = factory->getObject(id);
+				blocks[y][x]->setMovePos(pos);
+				if (id == 2)
+				{
+					GameObject* o=NULL;
+					if ((int)(biomsV * 10000) % 100==0)
+					{
+						o = Plants->getObject(0);
+					}
+					else if((int)(biomsV * 10000) % 400==2)
+					{
+						o = Plants->getObject(1);
+					}
+					if (o != NULL)
+					{
+						o->setMovePos({ pos });
+						objects.push_back(o);
+						o->generateChunk();
+					}
+				}
+			}
+	}
+
 }
 
 ObjectHandler::ObjectHandler(int chunkX, int chunkY)
@@ -90,7 +162,11 @@ void ObjectHandler::clearLists()
 void ObjectHandler::start()
 {
 	for (GameObject* obj : objects)
+	{
 		obj->start();
+		Game->addObject(obj);
+	}
+
 	reloadBlock();
 }
 std::list<GameObject*> ObjectHandler::getObjects()
@@ -379,7 +455,7 @@ void ObjectHandler::reloadBlock()
 	for (int i = 0; i < h; i++)
 		for (int j = 0; j < w; j++)
 			if (blocks[i][j])
-				blocks[i][j]->start();
+				blocks[i][j]->generateTexturePos();
 }
 
 void ObjectHandler::saveGame(nlohmann::json &j)

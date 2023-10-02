@@ -4,7 +4,7 @@
 float randomValue(int seed)
 {
 	seed = (seed << 13) ^ seed;
-	return 1.0f - ((seed * (seed * seed * 15731 + 789221) + 1376312589) & 0x7FFFFFFF) / 1073741824.0f;
+	return 1.0f - ((seed * (seed * seed * 2137 + 769221) + 2137612569) & 0x7FFFFFFF) / 1073741824.0f;
 }
 
 float lerp(float a, float b, float t)
@@ -20,7 +20,7 @@ float smoothInterpolation(float a, float b, float t)
 }
 
 
-PerlinNoice::PerlinNoice(int w, int h)
+PerlinNoice::PerlinNoice(int w, int h, int scale)
 {
 	this->w = w;
 	this->h = h;
@@ -31,18 +31,23 @@ PerlinNoice::PerlinNoice(int w, int h)
 		seed2D[i] = new float[w];
 		noiceTab2D[i] = new float[w];
 	}
-		
+	if (scale <= 0)
+		scale = 1;
+	this->scale = scale;
+	startX = -(w) / 2;
+	startY = -(h) / 2;
+
 }
 PerlinNoice::~PerlinNoice()
 {
-	for (int i = 0; i < h; i++)
-		delete noiceTab2D[i];
-	delete noiceTab2D;
+
 	for (int i = 0; i < h; i++)
 	{
 		delete seed2D[i];
+		delete noiceTab2D[i];
 	}
 	delete seed2D;
+	delete noiceTab2D;
 }
 void PerlinNoice::generateSeed2D(unsigned int seed, int startX, int startY)
 {
@@ -94,3 +99,22 @@ void PerlinNoice::generateNoise2D(int octavies, float scaling, unsigned int seed
 	}
 }
 
+float PerlinNoice::getValue(int x, int y)
+{
+	x += (scale*w) / 2;
+	y += (scale*h) / 2;
+	if (x < 0 || y < 0 || x >= w * scale || y >= scale * h)
+		return 0;
+	int rx = x % scale;
+	int x1 = x / scale;
+	int x2 = x1 + ((rx > 0) ? 1 : 0);
+	if (x2 >= w)
+		x2 = w - 1;
+	
+	int ry = y % scale;
+	int y1 = y / scale;
+	int y2 = y1 + ((ry > 0) ? 1 : 0);
+	if (y2 >= h)
+		y2 = h - 1;
+	return noiceTab2D[y1][x1] * (scale - rx + scale - ry) / (scale + scale) + noiceTab2D[y2][x2] * (rx + ry) / (scale + scale);
+}

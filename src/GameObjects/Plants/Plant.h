@@ -27,5 +27,7 @@ public:
     virtual void damageObject(int power, ToolType type);
 
     virtual void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+
+    virtual void readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
 };
 

@@ -61,3 +61,8 @@ void Plant::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::js
 {
 	GameObject::saveToJson(chunk, objDataPlace, j);
 }
+
+void Plant::readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+{
+	GameObject::readFromJson(chunk, objDataPlace, j);
+}

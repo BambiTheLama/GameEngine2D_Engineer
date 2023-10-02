@@ -258,6 +258,12 @@
     <ClCompile Include="src\core\Scenes\Menu.cpp">
       <Filter>src\core\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\NPCs\Enemy_1.cpp">
+      <Filter>src\GameObjects\NPCs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scenes\TestScene.cpp">
+      <Filter>src\core\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -451,6 +457,12 @@
     </ClInclude>
     <ClInclude Include="src\core\Scenes\ItemEdytor.h">
       <Filter>src\core\Scenes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\NPCs\Enemy_1.h">
+      <Filter>src\GameObjects\NPCs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\TestScene.h">
+      <Filter>src\core\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

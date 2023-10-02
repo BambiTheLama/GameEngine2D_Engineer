@@ -26,6 +26,7 @@ C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\ItemEdyto
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Menu.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Menu.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\RecipesEdytor.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\RecipesEdytor.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Scene.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Scene.obj
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\TestScene.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\TestScene.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\CircleCollider.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Collider.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Collider.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\DestroyAble.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\DestroyAble.obj
@@ -48,6 +49,7 @@ C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\Items\Too
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\Items\Weapon\Ammo.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Ammo.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\Items\Weapon\Bow.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Bow.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\NPCs\Enemy.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Enemy.obj
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\NPCs\Enemy_1.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Enemy_1.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\Particles\Particle.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\Particle.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\Particles\ParticleSystem.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\ParticleSystem.obj
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\Particles\TextParticle.cpp;C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\TextParticle.obj

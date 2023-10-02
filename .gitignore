@@ -34,9 +34,13 @@
 *.out
 *.app
 
-x64/*
+x64/Debug/
+x64/Debug/GameEngine2D.tlog/
+x64/Relise/
+x64/Relise/GameEngine2D.tlog/
 Debug/*
 Relise/*
-.vs/*
-.git/*
+.vs/GameEngine2D/
+.vs/GameEngine2D/v17/
+.vs/GameEngine2D/FileContentIndex/
 

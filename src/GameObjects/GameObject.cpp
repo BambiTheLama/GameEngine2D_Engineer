@@ -29,6 +29,7 @@ GameObject* getObjFromFactory(ObjectType type, int ID)
 	}
 	return NULL;
 }
+
 float cursorTarget(Vector2 objPos)
 {
 	Vector2 mouse = Game->getCursorPos();
@@ -126,7 +127,15 @@ void GameObject::saveToJson(nlohmann::json &j)
 	j["Pos"][3] = pos.height;
 	j["Name"] = name;
 }
-
+void GameObject::readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+{
+	pos.x = j[chunk][objDataPlace]["Pos"][0];
+	pos.y = j[chunk][objDataPlace]["Pos"][1];
+	pos.width = j[chunk][objDataPlace]["Pos"][2];
+	pos.height = j[chunk][objDataPlace]["Pos"][3];
+	name = j[chunk][objDataPlace]["Name"];
+	ID = j[chunk][objDataPlace]["ID"];
+}
 void GameObject::generateChunk()
 {
 	Rectangle pos = getPos();

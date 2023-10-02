@@ -47,3 +47,5 @@ Block* BlockFactory::getObject(int i)
 		return objects[i]->clone();
 	return NULL;
 }
+
+

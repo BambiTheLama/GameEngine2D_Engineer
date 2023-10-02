@@ -7,12 +7,11 @@
 #include <fstream>
 GameScene* GameScene::game = NULL;
 
-GameScene::GameScene()
+GameScene::GameScene(std::string worldName)
 {
 	SetExitKey(0);
-	for(int i=-1;i<2;i++)
-		for(int j=-1;j<2;j++)
-			handler.push_back(new ObjectHandler(i, j));
+
+	handler.push_back(new ObjectHandler(0, 0));
 
 	GameObject *p = new Player();
 	addObject(p);
@@ -24,31 +23,38 @@ GameScene::GameScene()
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f; 
 	start();
+	water = new PerlinNoice(3200, 1800,  10);
+	bioms = new PerlinNoice(3200, 1800,  10);
+	terain = new PerlinNoice(3200, 1800, 10);
+	this->worldName = worldName;
+	std::ifstream reader;
+	reader.open(this->worldName + ".json");
+	if (reader.is_open())
+	{
+		reader >> j;
+	}
+	reader.close();
+	water->generateNoise2D(7, 2.6, 69);
+	bioms->generateNoise2D(2, 1, 2137);
+	terain->generateNoise2D(7, 2,69, 666);
+	if (cameraTarget)
+	{
+		loadChunksCloseToTarget();
+		deleteChunksNotCloseToTarget();
+		updatePos(cameraTarget);
+	}
+
+
 }
 
-GameScene::GameScene(nlohmann::json j)
-{
-	SetExitKey(0);
-	//handler = new ObjectHandler(j);
-	GameObject* p = new Player();
-	addObject(p);
-	cameraTarget = p;
-	game = this;
-	Rectangle pos = cameraTarget->getPos();
-	camera.target = { pos.x + 20.0f, pos.y + 20.0f };
-	camera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
-	camera.rotation = 0.0f;
-	camera.zoom = 1.0f;
-	start();
-}
+
 
 GameScene::~GameScene()
 {
-	nlohmann::json j;
 	std::ofstream writer;
 	for(auto h:handler)
 		h->saveGame(j);
-	writer.open("World.json");
+	writer.open(worldName + ".json");
 	writer << j;
 	writer.close();
 	game = NULL;
@@ -59,6 +65,9 @@ GameScene::~GameScene()
 
 	game = NULL;
 	userUI.clear();	
+	delete water;
+	delete bioms;
+	delete terain;
 }
 void GameScene::start()
 {
@@ -263,6 +272,7 @@ void GameScene::deleteChunksNotCloseToTarget()
 	}
 	for (auto h : handlers)
 	{
+		h->saveGame(j);
 		handler.remove(h);
 		delete h;
 	}
@@ -291,11 +301,14 @@ void GameScene::loadChunksCloseToTarget()
 				}
 			if (!breaked)
 			{
-				ObjectHandler* objH = new ObjectHandler(x, y);
+				ObjectHandler* objH = new ObjectHandler(x, y, j);
 				handler.push_back(objH);
 				toReload.push_back(objH);
+				objH->start();
 			}
 		}
+	for (auto h : handler)
+		h->reloadBlock();
 
 }
 

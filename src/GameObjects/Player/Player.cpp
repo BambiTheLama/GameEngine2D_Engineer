@@ -15,7 +15,7 @@ Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj)
 
 }
 
-Player::Player():GameObject({ -200,1000,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
+Player::Player():GameObject({ 100,100,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
 {
 	speed = 2;
 	int n = 6;
@@ -40,6 +40,7 @@ Player::Player():GameObject({ -200,1000,64,64 },"Player"), RectangleCollider({po
 		
 
 }
+
 
 Player::~Player()
 {
