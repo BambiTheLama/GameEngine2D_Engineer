@@ -31,8 +31,8 @@
 *.out
 *.app
 
-x64
-Debug
-Relise
-.vs
-.git
+x64/
+Debug/
+Relise/
+.vs/
+.git/
