@@ -19,7 +19,7 @@ enum class ObjectToGet
 class ObjectHandler
 {
 public:
-    static const int h = 25, w = 50;
+    static const int h = 18, w = 32;
 private:
     int x, y;
     int chunkX;
@@ -127,6 +127,14 @@ public:
     Block* getBlock(int x, int y);
 
     void reloadBlock();
+
+    void reloadBlockUp();
+
+    void reloadBlockDown();
+
+    void reloadBlockLeft();
+
+    void reloadBlockRight();
 
     bool isObjAtThisChunk(GameObject* obj);
 

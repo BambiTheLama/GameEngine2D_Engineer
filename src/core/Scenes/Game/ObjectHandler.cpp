@@ -4,6 +4,7 @@
 #include "../../../GameObjects/PlantsFactory.h"
 #include <fstream>
 #include "../GameScene.h"
+
 ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 {
 	this->x = chunkX * tileSize * (w - 1);
@@ -53,12 +54,16 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 				float waterV = water->getValue(pos.x, pos.y);
 				float terainV = terain->getValue(pos.x, pos.y);
 				float biomsV = bioms->getValue(pos.x, pos.y);
-				if (waterV > 0)
+				if (waterV < -0.213769)
 					id = 0;
-				else if (terainV < 0)
-					id = 1;
 				else
-					id = 2;
+				{
+					if (waterV < -0.069)
+						id = 1;
+					else
+						id = 2;
+				}
+
 				blocks[y][x] = factory->getObject(id);
 				blocks[y][x]->setMovePos(pos);
 				if (id == 2)
@@ -458,6 +463,32 @@ void ObjectHandler::reloadBlock()
 				blocks[i][j]->generateTexturePos();
 }
 
+void ObjectHandler::reloadBlockUp()
+{
+	for (int j = 0; j < w; j++)
+		if (blocks[0][j])
+			blocks[0][j]->generateTexturePos();
+}
+void ObjectHandler::reloadBlockDown()
+{
+	int y = h - 1;
+	for (int j = 0; j < w; j++)
+		if (blocks[y][j])
+			blocks[y][j]->generateTexturePos();
+}
+void ObjectHandler::reloadBlockLeft()
+{
+	for (int i = 0; i < h; i++)
+		if (blocks[i][0])
+			blocks[i][0]->generateTexturePos();
+}
+void ObjectHandler::reloadBlockRight()
+{
+	int x = w - 1;
+	for (int i = 0; i < h; i++)
+		if (blocks[i][x])
+			blocks[i][x]->generateTexturePos();
+}
 void ObjectHandler::saveGame(nlohmann::json &j)
 {
 

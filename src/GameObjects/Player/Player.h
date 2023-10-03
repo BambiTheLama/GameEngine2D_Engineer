@@ -11,7 +11,7 @@ enum class playerAnimationState {
 /// Obiekt gracza nad któr¹ ma kontrolê u¿ytkownik
 /// </summary>
 class Player :
-    public GameObject, public RectangleCollider, public UserUI
+    public GameObject, public RectangleCollider, public UserUI,public HitAble
 {
     bool canMove = true;
     int pickUpRange = 100;

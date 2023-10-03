@@ -1,33 +1,25 @@
-﻿  ObjectHandler.cpp
+﻿  GameScene.cpp
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
 C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\GameObjects\BlockFactory.h(21,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(22,29): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(22,29): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(22,52): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(22,52): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(52,29): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(52,29): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(52,52): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(52,52): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(53,46): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(53,39): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(54,48): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(54,41): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(55,46): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(55,39): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(96,30): warning C4305: "argument": obcięcie z "double" do "float"
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(195,14): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(196,14): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(201,9): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(202,9): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(275,17): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(294,13): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(295,13): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(300,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(301,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(372,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(375,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(392,9): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\Game\ObjectHandler.cpp(393,9): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(37,28): warning C4305: "argument": obcięcie z "double" do "float"
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(96,15): warning C4305: "+=": obcięcie z "double" do "float"
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(98,15): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(214,16): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(215,17): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(219,30): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(219,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(225,16): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(226,17): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(230,30): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(230,23): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(245,33): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(245,26): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(256,55): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(256,44): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(256,37): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(256,30): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(259,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(259,57): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(259,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(259,43): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
   GameEngine2D.vcxproj -> C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\GameEngine2D.exe

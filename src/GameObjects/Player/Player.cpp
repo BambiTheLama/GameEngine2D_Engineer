@@ -6,7 +6,7 @@
 #include "../ItemFactory.h"
 
 
-Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj)
+Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj),HitAble(obj)
 {
 	animations = new AnimationController(*obj.animations);
 	miniMap = new MiniMap(this);
@@ -15,9 +15,9 @@ Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj)
 
 }
 
-Player::Player():GameObject({ 100,100,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2})
+Player::Player():GameObject({ 100,100,64,64 },"Player"), RectangleCollider({pos.width / 3,pos.height / 4,pos.width / 3,pos.width / 2}),HitAble(69)
 {
-	speed = 2;
+	speed = 8;
 	int n = 6;
 	std::string names[6] = { "IDE","MoveUp","MoveDown","MoveLeft","Doge","Die" };
 	std::vector<SpriteController*> sprites;
@@ -197,6 +197,7 @@ void Player::update(float deltaTime)
 	updateEq(deltaTime);
 	pickUpItemsClose(deltaTime);
 	updateCrafting();
+	HitAble::update(deltaTime);
 }
 
 void Player::move(float deltaTime)
@@ -286,7 +287,7 @@ void Player::draw()
 		RectangleCollider::draw(this);
 		DrawTextWithOutline(TextFormat("(%d:%d)", getChunkX(), getChunkY()), pos.x, pos.y, textStandardSize, WHITE, BLACK);
 	}
-
+	HitAble::draw({pos.x,pos.y+pos.height,pos.width,20});
 	eq->drawItem();
 }
 

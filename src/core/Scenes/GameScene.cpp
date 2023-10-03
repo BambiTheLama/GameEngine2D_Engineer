@@ -11,7 +11,7 @@ GameScene::GameScene(std::string worldName)
 {
 	SetExitKey(0);
 
-	handler.push_back(new ObjectHandler(0, 0));
+	//handler.push_back(new ObjectHandler(0, 0));
 
 	GameObject *p = new Player();
 	addObject(p);
@@ -51,15 +51,23 @@ GameScene::GameScene(std::string worldName)
 
 GameScene::~GameScene()
 {
-	std::ofstream writer;
-	for(auto h:handler)
+
+	game = NULL;
+	for (auto h : handler)
+	{
 		h->saveGame(j);
+		h->clearLists();
+		delete h;
+	}
+	handler.clear();
+
+	std::ofstream writer;
 	writer.open(worldName + ".json");
 	writer << j;
 	writer.close();
-	game = NULL;
-	for (auto h : handler)
-		delete h;
+
+	for (auto o : allObj)
+		delete o;
 	for (auto o : toDelete)
 		delete o;
 
@@ -119,10 +127,14 @@ void GameScene::update(float deltaTime)
 
 void GameScene::addObject(GameObject* obj)
 {
-	allObj.push_back(obj);
+
 	for (auto h : handler)
 		if(h->isObjAtThisChunk(obj))
 			h->addObject(obj);
+	for (auto o : allObj)
+		if (o == obj)
+			return;
+	allObj.push_back(obj);
 }
 
 void GameScene::deleteObject(GameObject* obj)
@@ -288,7 +300,7 @@ void GameScene::loadChunksCloseToTarget()
 	int maxX = x + renderDystance;
 	int minY = y - renderDystance;
 	int maxY = y + renderDystance;
-
+	std::list<ObjectHandler*> handlers;
 	for (int x = minX; x <= maxX; x++)
 		for (int y = minY; y <= maxY; y++)
 		{
@@ -302,15 +314,84 @@ void GameScene::loadChunksCloseToTarget()
 			if (!breaked)
 			{
 				ObjectHandler* objH = new ObjectHandler(x, y, j);
+				handlers.push_back(objH);
 				handler.push_back(objH);
 				toReload.push_back(objH);
 				objH->start();
 			}
 		}
-	for (auto h : handler)
+	x = INT32_MAX;
+	y = INT32_MAX;
+	bool repeatX = false;
+	bool repeatY = false;
+	for (auto h : handlers)
+	{
+		if (x != h->getChunkX())
+		{
+			x = h->getChunkX();
+		}
+		else
+		{
+			repeatX = true;
+			break;
+		}
+	}
+	for (auto h : handlers)
+	{
+		if (y != h->getChunkY())
+		{
+			y = h->getChunkY();
+		}
+		else
+		{
+			repeatY = true;
+			break;
+		}
+	}
+	for (auto h : handlers)
 		h->reloadBlock();
+	if (repeatX)
+	{
+		if (x == minX)
+		{
+			for (auto h : handler)
+				if (h->getChunkX() == x+1)
+				{
+					h->reloadBlockLeft();
+				}
+		}
+		else
+		{
+			for (auto h : handler)
+				if (h->getChunkX() == x-1)
+				{
+					h->reloadBlockRight();
+				}
+		}
+
+	}
+	if (repeatY)
+	{
+		if (y == minY)
+		{
+			for (auto h : handler)
+				if (h->getChunkX() == y + 1)
+				{
+					h->reloadBlockDown();
+				}
+		}
+		else
+		{
+			for (auto h : handler)
+				if (h->getChunkX() == y - 1)
+				{
+					h->reloadBlockUp();
+				}
+		}
+	}
 
 }
+
 
 std::list<GameObject*> GameScene::getObjToDraw()
 {
