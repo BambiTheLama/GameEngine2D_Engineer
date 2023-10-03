@@ -17,6 +17,7 @@ class DestroyAble;
 
 class Collider
 {
+	std::list<GameObject*> objectsToIgnore;
 	CollisionsCheckType type;
 protected:
 	Collider(Collider& col);
@@ -50,6 +51,12 @@ public:
 	virtual void onCollisionDestroyAble(DestroyAble* dest){}
 
 	virtual Rectangle getMaxRectangle() { return { 0,0,0,0 }; }
+
+	void addObjToIgnore(GameObject* ignore);
+
+	void removeObjectToIgnore(GameObject* ignore);
+
+	void clearListToIgnore();
 };
 
 bool checkCollision(GameObject* obj);

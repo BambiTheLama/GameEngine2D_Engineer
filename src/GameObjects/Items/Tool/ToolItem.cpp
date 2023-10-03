@@ -64,8 +64,6 @@ void ToolItem::update(float deltaTime)
 	{
 		origin.x = pos.width;
 		rotation -= deltaTime / useTimeMax * rotationAngle;
-
-
 	}
 	else
 	{

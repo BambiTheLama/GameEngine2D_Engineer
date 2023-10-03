@@ -60,11 +60,10 @@ void Collider::update(float deltaTime, GameObject* obj)
 	getObj.x += pos.x;
 	getObj.y += pos.y;
 	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);
-	GameObject* thisObj = dynamic_cast<GameObject*>(this);
-	if (thisObj)
-		objs.remove(thisObj);
-	else
-		return;
+	objs.remove(obj);
+	for (auto i : objectsToIgnore)
+		objs.remove(i);
+
 	if (type == CollisionsCheckType::All)
 	{
 		for (auto* o : objs)
@@ -75,7 +74,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 			{
 				if (col)
 				{
-					Rectangle pos = thisObj->getPos();
+					Rectangle pos = obj->getPos();
 					Rectangle pos2 = o->getPos();
 					if (checkCollisionToObj(col, {pos.x,pos.y},{pos2.x,pos2.y}))
 						onCollisionHitable(hit);
@@ -87,7 +86,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 			{
 				if (col)
 				{
-					Rectangle pos = thisObj->getPos();
+					Rectangle pos = obj->getPos();
 					Rectangle pos2 = o->getPos();
 					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
 						onCollisionDestroyAble(toDestory);
@@ -106,7 +105,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 				Collider* col = dynamic_cast<Collider*>(o);
 				if (col)
 				{
-					Rectangle pos = thisObj->getPos();
+					Rectangle pos = obj->getPos();
 					Rectangle pos2 = o->getPos();
 					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
 						onCollisionHitable(hit);
@@ -126,7 +125,7 @@ void Collider::update(float deltaTime, GameObject* obj)
 				Collider* col = dynamic_cast<Collider*>(o);
 				if (col)
 				{
-					Rectangle pos = thisObj->getPos();
+					Rectangle pos = obj->getPos();
 					Rectangle pos2 = o->getPos();
 					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
 						onCollisionDestroyAble(toDestory);
@@ -134,6 +133,21 @@ void Collider::update(float deltaTime, GameObject* obj)
 			}
 		}
 	}
+}
+
+void Collider::addObjToIgnore(GameObject* ignore)
+{
+	objectsToIgnore.push_back(ignore);
+}
+
+void Collider::removeObjectToIgnore(GameObject* ignore)
+{
+	objectsToIgnore.remove(ignore);
+}
+
+void Collider::clearListToIgnore()
+{
+	objectsToIgnore.clear();
 }
 
 bool checkCollision(GameObject* obj)

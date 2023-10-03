@@ -111,6 +111,9 @@ bool Eq::addItem(Item* item)
 				items[i][j] = item->clone();
 				items[i][j]->setEq(this);
 				items[i][j]->setInHand(true);
+				Collider* c=dynamic_cast<Collider*>(items[i][j]);
+				if (c)
+					c->addObjToIgnore(player);
 				player->updateRecepies();
 				return true;
 			}
@@ -366,8 +369,11 @@ void Eq::addItemToHand(Item* item)
 	{
 		itemInHand = item;
 		itemInHand->setEq(this);
-		itemInHand->setInHand(false);
+		itemInHand->setInHand(true);
 		player->updateRecepies();
+		Collider* c = dynamic_cast<Collider*>(itemInHand);
+		if (c)
+			c->addObjToIgnore(player);
 		return;
 	}
 	if(itemInHand->addToStack(item))
@@ -410,6 +416,9 @@ void Eq::dropItemFromHand()
 	itemInHand->setInHand(false);
 	itemInHand->setMovePos(cursor);
 	itemInHand->setEq(NULL);
+	Collider* c = dynamic_cast<Collider*>(itemInHand);
+	if (c)
+		c->removeObjectToIgnore(player);
 	itemInHand = NULL;
 }
 

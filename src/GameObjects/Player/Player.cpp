@@ -124,7 +124,6 @@ void Player::updateCrafting()
 			Item* item = crafting->craftItem(eq->getAllItems(), EqWight, EqHeight);
 			if (item)
 			{
-
 				eq->addItemToHand(item);
 
 			}
