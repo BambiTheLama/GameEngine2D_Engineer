@@ -86,20 +86,20 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 				}
 			}
 	}
-	Rectangle pos = { (float)x,(float)y,(w-1) * tileSize,1.0f };
+	Rectangle pos = { (float)x,(float)y-1,(w-1) * tileSize,1.0f };
 	std::list<GameObject*> obj = Game->getObjects(pos, ObjectToGet::getNoBlocks);
 	for (auto o : obj)
 		addObject(o);
-	pos.y += tileSize * (h - 1);
+	pos.y += tileSize * (h - 1)+2;
 	obj = Game->getObjects(pos, ObjectToGet::getNoBlocks);
 	for (auto o : obj)
 		addObject(o);
 
-	pos = { (float)x,(float)y,1.0f,(h-1)*tileSize };
+	pos = { (float)x-1,(float)y,1.0f,(h-1)*tileSize };
 	obj = Game->getObjects(pos, ObjectToGet::getNoBlocks);
 	for (auto o : obj)
 		addObject(o);
-	pos.x += tileSize * (w - 1);
+	pos.x += tileSize * (w - 1)+2;
 	obj = Game->getObjects(pos, ObjectToGet::getNoBlocks);
 	for (auto o : obj)
 		addObject(o);
