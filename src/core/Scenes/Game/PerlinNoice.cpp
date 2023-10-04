@@ -104,7 +104,7 @@ float PerlinNoice::getValue(int x, int y)
 	x += (scale*w) / 2;
 	y += (scale*h) / 2;
 	if (x < 0 || y < 0 || x >= w * scale || y >= scale * h)
-		return 0;
+		return -1;
 	int rx = x % scale;
 	int x1 = x / scale;
 	int x2 = x1 + ((rx > 0) ? 1 : 0);

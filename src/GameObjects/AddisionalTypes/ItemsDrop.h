@@ -15,6 +15,8 @@ struct DropItem
 		return (rand() % 1000000 / 10000) < dropChanse;
 	}
 	int howMuch() {
+		if (min >= max)
+			return min;
 		return rand() % (max - min) + min;
 	}
 
@@ -32,6 +34,8 @@ public:
 	ItemsDrop(ItemsDrop& drops);
 
 	void addItemToDrop(int ID, float chanse, int min, int max);
+
+	void clearItemsDrop() { items.clear(); }
 
 	std::vector<Item*> getDrop();
 };

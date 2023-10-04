@@ -140,13 +140,13 @@ void GameObject::generateChunk()
 {
 	Rectangle pos = getPos();
 	int x = pos.x + pos.width / 2;
-	int w = tileSize * ObjectHandler::w;
+	int w = tileSize * (ObjectHandler::w - 1);
 	if (x >= 0)
 		chunkX = x / w;
 	else
 		chunkX = (x - w) / w;
 	int y = pos.y + pos.height / 2;
-	int h = tileSize * ObjectHandler::h;
+	int h = tileSize * (ObjectHandler::h - 1);
 	if (y >= 0)
 		chunkY = y / h;
 	else

@@ -6,6 +6,7 @@ class Tree :
 {
     int age = 0;
     int maxAge = 0;
+    int woodID = 0;
     float timer = 60;
     Tree(Tree& tree);
 public:
@@ -22,6 +23,8 @@ public:
     void update(float deltaTime);
 
     void draw();
+
+    void updateDropFromAge();
 
     virtual void setMovePos(Vector2 movePos);
 

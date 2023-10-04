@@ -23,9 +23,10 @@ GameScene::GameScene(std::string worldName)
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f; 
 	start();
-	water = new PerlinNoice(3200, 1800,  10);
-	bioms = new PerlinNoice(3200, 1800,  10);
-	terain = new PerlinNoice(3200, 1800, 10);
+	int perlinW = 9600, perlinH = 5400;
+	water = new PerlinNoice(3200, 1800,  16);
+	bioms = new PerlinNoice(3200, 1800,  16);
+	terain = new PerlinNoice(3200, 1800, 16);
 	this->worldName = worldName;
 	std::ifstream reader;
 	reader.open(this->worldName + ".json");
