@@ -1,3 +1,0 @@
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\GameEngine2D.vcxproj.CopyComplete
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\GameEngine2D.exe
-C:\Users\szymek\Desktop\Enginire\GameEngine2D_Engineer\x64\Debug\raylib.dll
