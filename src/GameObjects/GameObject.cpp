@@ -109,10 +109,10 @@ GameObject::~GameObject()
 
 void GameObject::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json &j)
 {
-	j[chunk][objDataPlace]["Pos"][0] = pos.x;
-	j[chunk][objDataPlace]["Pos"][1] = pos.y;
-	j[chunk][objDataPlace]["Pos"][2] = pos.width;
-	j[chunk][objDataPlace]["Pos"][3] = pos.height;
+	j[chunk][objDataPlace]["Pos"][0] = (int)pos.x;
+	j[chunk][objDataPlace]["Pos"][1] = (int)pos.y;
+	j[chunk][objDataPlace]["Pos"][2] = (int)pos.width;
+	j[chunk][objDataPlace]["Pos"][3] = (int)pos.height;
 	j[chunk][objDataPlace]["Name"] = name;
 	j[chunk][objDataPlace]["ID"] = ID;
 	j[chunk][objDataPlace]["ObjType"] = getType();
@@ -121,10 +121,10 @@ void GameObject::saveToJson(std::string chunk, std::string objDataPlace, nlohman
 
 void GameObject::saveToJson(nlohmann::json &j)
 {
-	j["Pos"][0] = pos.x;
-	j["Pos"][1] = pos.y;
-	j["Pos"][2] = pos.width;
-	j["Pos"][3] = pos.height;
+	j["Pos"][0] = (int)pos.x;
+	j["Pos"][1] = (int)pos.y;
+	j["Pos"][2] = (int)pos.width;
+	j["Pos"][3] = (int)pos.height;
 	j["Name"] = name;
 }
 void GameObject::readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)

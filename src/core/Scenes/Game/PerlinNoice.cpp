@@ -103,8 +103,98 @@ float PerlinNoice::getValue(int x, int y)
 {
 	x += (scale*w) / 2;
 	y += (scale*h) / 2;
-	if (x < 0 || y < 0 || x >= w * scale || y >= scale * h)
+	if (x < 0)
+	{
+		if (x > -scale)
+		{
+			int rx = (-x) % scale;
+			int x1 = (-x) / scale;
+			if (y>0 && y< scale * h)
+			{
+				int y1 = y / scale;
+				return noiceTab2D[y1][0] * (scale - rx) / (scale) - 1 * (rx) / (scale);
+			}
+			else if (y < 0)
+			{
+				return noiceTab2D[0][0] * (scale - rx) / (scale)-1 * (rx) / (scale);
+			}
+			else
+			{
+				return noiceTab2D[h-1][0] * (scale - rx) / (scale)-1 * (rx) / (scale);
+			}
+		}
+
 		return -1;
+	}
+	else if (y < 0)
+	{
+		if (y > -scale)
+		{
+			int ry = (-y) % scale;
+			int y1 = (-y) / scale;
+			if (x > 0 && x < scale * w)
+			{
+				int x1 = x / scale;
+				return noiceTab2D[0][x1] * (scale - ry) / (scale)-1 * (ry) / (scale);
+			}
+			else if (x < 0)
+			{
+				return noiceTab2D[0][0] * (scale - ry) / (scale)-1 * (ry) / (scale);
+			}
+			else
+			{
+				return noiceTab2D[0][w-1] * (scale - ry) / (scale)-1 * (ry) / (scale);
+			}
+		}
+
+		return -1;
+	}
+	else if (x >= w * scale)
+	{
+		if (x <= scale * (w + 1))
+		{
+			int rx = (x) % scale;
+			int x1 = (x) / scale;
+			if (y > 0 && y < scale * h)
+			{
+				int y1 = y / scale;
+				return noiceTab2D[y1][w-1] * (scale - rx) / (scale)-1 * (rx) / (scale);
+			}
+			else if (y < 0)
+			{
+				return noiceTab2D[0][w-1] * (scale - rx) / (scale)-1 * (rx) / (scale);
+			}
+			else
+			{
+				return noiceTab2D[h - 1][w-1] * (scale - rx) / (scale)-1 * (rx) / (scale);
+			}
+		}
+
+		return -1;
+	}
+	else if (y >= scale * h)
+	{
+		if (y <= scale * (h+1))
+		{
+			int ry = (y) % scale;
+			int y1 = (y) / scale;
+			if (x > 0 && x < scale * w)
+			{
+				int x1 = x / scale;
+				return noiceTab2D[h-1][x1] * (scale - ry) / (scale)-1 * (ry) / (scale);
+			}
+			else if (x < 0)
+			{
+				return noiceTab2D[h-1][0] * (scale - ry) / (scale)-1 * (ry) / (scale);
+			}
+			else
+			{
+				return noiceTab2D[h-1][w - 1] * (scale - ry) / (scale)-1 * (ry) / (scale);
+			}
+		}
+		return -1;
+	}
+
 	int rx = x % scale;
 	int x1 = x / scale;
 	int x2 = x1 + ((rx > 0) ? 1 : 0);

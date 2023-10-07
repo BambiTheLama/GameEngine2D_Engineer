@@ -4,6 +4,7 @@
 #include "../../GameObjects/NPCs/Enemy.h"
 #include "../Engine.h"
 #include "Menu.h"
+#include <iostream>
 #include <fstream>
 GameScene* GameScene::game = NULL;
 
@@ -23,13 +24,14 @@ GameScene::GameScene(std::string worldName)
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f; 
 	start();
-	int perlinW = 9600, perlinH = 5400;
-	water = new PerlinNoice(3200, 1800,  16);
-	bioms = new PerlinNoice(3200, 1800,  16);
-	terain = new PerlinNoice(3200, 1800, 16);
+	int perlinW = 6400, perlinH = 1800;
+	int perlinSize = 16;
+	water  = new PerlinNoice(perlinW, perlinH, perlinSize);
+	bioms  = new PerlinNoice(perlinW, perlinH, perlinSize);
+	terain = new PerlinNoice(perlinW, perlinH, perlinSize);
 	this->worldName = worldName;
 	std::ifstream reader;
-	reader.open(this->worldName + ".json");
+	reader.open(this->worldName, std::ios::out | std::ios::binary);
 	if (reader.is_open())
 	{
 		reader >> j;
@@ -44,7 +46,7 @@ GameScene::GameScene(std::string worldName)
 		deleteChunksNotCloseToTarget();
 		updatePos(cameraTarget);
 	}
-
+	
 
 }
 
@@ -52,7 +54,7 @@ GameScene::GameScene(std::string worldName)
 
 GameScene::~GameScene()
 {
-
+	mapLoader.join();
 	game = NULL;
 	for (auto h : handler)
 	{
@@ -63,7 +65,7 @@ GameScene::~GameScene()
 	handler.clear();
 
 	std::ofstream writer;
-	writer.open(worldName + ".json");
+	writer.open(worldName, std::ios::out | std::ios::binary);
 	writer << j;
 	writer.close();
 
@@ -115,14 +117,22 @@ void GameScene::update(float deltaTime)
 	for (auto o : toDelete)
 		delete o;
 	toDelete.clear();
-	if (cameraTarget->getChunkX() != chunkX || cameraTarget->getChunkY() != chunkY)
+	for (auto h : handlersToDelete)
+		delete h;
+	handlersToDelete.clear();
+	if (!loadingMap)
 	{
-		deleteChunksNotCloseToTarget();
-		loadChunksCloseToTarget();
-		for (auto h : handler)
-			h->reloadBlock();
-		toReload.clear();
+		if (this->chunkX != chunkX || this->chunkY != chunkY)
+		{
+			this->chunkX = chunkX;
+			this->chunkY = chunkY;
+			deleteChunksNotCloseToTarget();
+			if (mapLoader.joinable())
+				mapLoader.join();
+			mapLoader = std::thread(&GameScene::mapLoaderFun, this);
+		}
 	}
+
 
 }
 
@@ -271,23 +281,22 @@ void GameScene::deleteChunksNotCloseToTarget()
 {
 	if (!cameraTarget)
 		return;
-	int x = cameraTarget->getChunkX();
-	int y = cameraTarget->getChunkY();
+	int x = chunkX;
+	int y = chunkY;
 	int minX = x - renderDystance;
 	int maxX = x + renderDystance;
 	int minY = y - renderDystance;
 	int maxY = y + renderDystance;
-	std::list<ObjectHandler*> handlers;
+	
 	for (auto h : handler)
 	{
 		if (h->getChunkX() < minX || h->getChunkX() > maxX || h->getChunkY() < minY || h->getChunkY() > maxY)
-			handlers.push_back(h);
+			handlersToDelete.push_back(h);
 	}
-	for (auto h : handlers)
+	for (auto h : handlersToDelete)
 	{
 		h->saveGame(j);
 		handler.remove(h);
-		delete h;
 	}
 }
 
@@ -295,13 +304,13 @@ void GameScene::loadChunksCloseToTarget()
 {
 	if (!cameraTarget)
 		return;
-	int x = cameraTarget->getChunkX();
-	int y = cameraTarget->getChunkY();
+	int x = chunkX;
+	int y = chunkY;
 	int minX = x - renderDystance;
 	int maxX = x + renderDystance;
 	int minY = y - renderDystance;
 	int maxY = y + renderDystance;
-	std::list<ObjectHandler*> handlers;
+
 	for (int x = minX; x <= maxX; x++)
 		for (int y = minY; y <= maxY; y++)
 		{
@@ -315,81 +324,14 @@ void GameScene::loadChunksCloseToTarget()
 			if (!breaked)
 			{
 				ObjectHandler* objH = new ObjectHandler(x, y, j);
-				handlers.push_back(objH);
 				handler.push_back(objH);
-				toReload.push_back(objH);
 				objH->start();
 			}
 		}
-	x = INT32_MAX;
-	y = INT32_MAX;
-	bool repeatX = false;
-	bool repeatY = false;
-	for (auto h : handlers)
-	{
-		if (x != h->getChunkX())
-		{
-			x = h->getChunkX();
-		}
-		else
-		{
-			repeatX = true;
-			break;
-		}
-	}
-	for (auto h : handlers)
-	{
-		if (y != h->getChunkY())
-		{
-			y = h->getChunkY();
-		}
-		else
-		{
-			repeatY = true;
-			break;
-		}
-	}
-	for (auto h : handlers)
-		h->reloadBlock();
-	if (repeatX)
-	{
-		if (x == minX)
-		{
-			for (auto h : handler)
-				if (h->getChunkX() == x+1)
-				{
-					h->reloadBlockLeft();
-				}
-		}
-		else
-		{
-			for (auto h : handler)
-				if (h->getChunkX() == x-1)
-				{
-					h->reloadBlockRight();
-				}
-		}
 
-	}
-	if (repeatY)
-	{
-		if (y == minY)
-		{
-			for (auto h : handler)
-				if (h->getChunkX() == y + 1)
-				{
-					h->reloadBlockDown();
-				}
-		}
-		else
-		{
-			for (auto h : handler)
-				if (h->getChunkX() == y - 1)
-				{
-					h->reloadBlockUp();
-				}
-		}
-	}
+	for (auto h : handler)
+		h->reloadBlock();
+
 
 }
 
@@ -423,4 +365,10 @@ void GameScene::printfChunk(GameObject* obj)
 		{
 			printf("Chunk %d %d\n", h->getChunkY(), h->getChunkX());
 		}
+}
+void GameScene::mapLoaderFun()
+{
+	loadingMap = true;
+	loadChunksCloseToTarget();
+	loadingMap = false;
 }

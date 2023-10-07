@@ -16,13 +16,31 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	BlockFactory* factory = Blocks;
 	if (j.contains(name))
 	{
-		for (int x = 0; x < w; x++)
-			for (int y = 0; y < h; y++)
+		int k = 0;
+		int ID = j[name]["BLockArray"][k]["ID"];
+		int times = j[name]["BLockArray"][k]["t"];
+		for (int y = 0; y < h; y++)
+		{
+			for (int x = 0; x < w; x++)
 			{
-				blocks[y][x] = factory->getObject(j[name]["BLockArray"][y][x]);
+				if (times <= 0)
+				{
+					k++;
+					ID = j[name]["BLockArray"][k]["ID"];
+					times = j[name]["BLockArray"][k]["t"];
+				}
+
+				blocks[y][x] = factory->getObject(ID);
 				Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
 				blocks[y][x]->setMovePos(pos);
+				times--;
+
 			}
+		}
+
+
+
+
 		int i = 0;
 		std::string objName = "OBJ" + std::to_string(i);
 		while (j[name].contains((objName)))
@@ -509,10 +527,38 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 {
 
 	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
-	for (int x = 0; x < w; x++)
-		for (int y = 0; y < h; y++)
+	int ID = 0;
+	int times = 0;
+	int k = 0;
+	for (int y = 0; y < h; y++)
+	{
+		for (int x = 0; x < w; x++)
+		{
 			if (blocks[y][x])
-				j[name]["BLockArray"][y][x] = blocks[y][x]->getID();
+			{
+				if (blocks[y][x]->getID() != ID)
+				{
+					if (times > 0)
+					{
+						j[name]["BLockArray"][k]["ID"] = ID;
+						j[name]["BLockArray"][k]["t"] = times;
+						k++;
+					}
+					ID = blocks[y][x]->getID();
+					times = 1;
+				}
+				else
+				{
+					times++;
+				}
+			}
+				
+		}
+
+	}
+	j[name]["BLockArray"][k]["ID"] = ID;
+	j[name]["BLockArray"][k]["t"] = times;
+
 	std::list<GameObject*> obj = tree->getObjectsAt({ (float)x,(float)y,w * tileSize,h * tileSize });
 	int i = 0;
 	for (auto o : obj)

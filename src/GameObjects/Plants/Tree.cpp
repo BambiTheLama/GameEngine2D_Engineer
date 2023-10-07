@@ -124,7 +124,7 @@ void Tree::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::jso
 	Plant::saveToJson(chunk, objDataPlace, j);
 	j[chunk][objDataPlace]["Age"][0] = age;
 	j[chunk][objDataPlace]["Age"][1] = maxAge;
-	j[chunk][objDataPlace]["Timer"] = timer;
+	j[chunk][objDataPlace]["Timer"] = (int)timer;
 }
 
 void Tree::readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)

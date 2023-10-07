@@ -3,6 +3,8 @@
 #include "Game/ObjectHandler.h"
 #include "../../json.hpp"
 #include "Game/PerlinNoice.h"
+#include <thread>
+#include <mutex>
 #define Game GameScene::getGameScene()
 
 /// <summary>
@@ -16,18 +18,23 @@ class GameScene :
     Vector2 cursorPos;
     Rectangle cameraPos;
     std::list<ObjectHandler*> handler;
-    std::list<ObjectHandler*> toReload;
+    std::list<ObjectHandler*> handlersToDelete;
     std::list<GameObject*> toDelete;
     std::list<GameObject*> allObj;
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
-    const int renderDystance = 1;
+    const int renderDystance = 2;
     nlohmann::json j;
     PerlinNoice *terain;
     PerlinNoice *water;
     PerlinNoice *bioms;
     std::string worldName;
+    std::thread mapLoader;
+    bool endMapLoaderWork = false;
+    bool loadingMap = false;
+    int chunkX;
+    int chunkY;
 public:
     /// <summary>
     /// Konstruktor od sceny gry
@@ -132,6 +139,8 @@ public:
     std::list<GameObject*> getObjToDraw();
 
     void printfChunk(GameObject* obj);
+
+    void mapLoaderFun();
 
     PerlinNoice* getWater() { return water; }
 
