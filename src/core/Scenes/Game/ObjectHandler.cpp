@@ -11,14 +11,21 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	this->y = chunkY * tileSize * (h - 1);
 	this->chunkX = chunkX;
 	this->chunkY = chunkY;
-	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
-	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
 	BlockFactory* factory = Blocks;
+	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
+	nlohmann::json toRead;
+	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
 	if (j.contains(name))
 	{
+		toRead = j[name];
+	}
+
+	if (toRead.contains("BLockArray"))
+	{
+		nlohmann::json toReadBlock=toRead["BLockArray"];
 		int k = 0;
-		int ID = j[name]["BLockArray"][k]["ID"];
-		int times = j[name]["BLockArray"][k]["t"];
+		int ID = toReadBlock[k]["ID"];
+		int times = toReadBlock[k]["t"];
 		for (int y = 0; y < h; y++)
 		{
 			for (int x = 0; x < w; x++)
@@ -26,8 +33,8 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 				if (times <= 0)
 				{
 					k++;
-					ID = j[name]["BLockArray"][k]["ID"];
-					times = j[name]["BLockArray"][k]["t"];
+					ID = toReadBlock[k]["ID"];
+					times = toReadBlock[k]["t"];
 				}
 
 				blocks[y][x] = factory->getObject(ID);
@@ -39,69 +46,34 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 		}
 
 
-
-
-		int i = 0;
-		std::string objName = "OBJ" + std::to_string(i);
-		while (j[name].contains((objName)))
+		if (toRead.contains("OBJS"))
 		{
-			ObjectType type = (ObjectType)j[name][objName]["ObjClass"];
-			int ID= j[name][objName]["ID"];
-			GameObject *obj=getObjFromFactory(type, ID);
-			if (obj)
+			nlohmann::json toReadObjs = toRead["OBJS"];
+			for (int i = 0; i < toReadObjs.size(); i++)
 			{
-				obj->readFromJson(name, objName, j);
-				obj->generateChunk();
-				objects.push_back(obj);
+				ObjectType type = (ObjectType)toReadObjs[i]["ObjClass"];
+				int ID = toReadObjs[i]["ID"];
+				GameObject* obj = getObjFromFactory(type, ID);
+				if (obj)
+				{
+					obj->readFromJson(toReadObjs[i]);
+					obj->generateChunk();
+					objects.push_back(obj);
+				}
 			}
-
-			i++;
-			objName = "OBJ" + std::to_string(i);
 		}
+
+		
 	}
 	else
 	{
-		PerlinNoice* water = Game->getWater();
-		PerlinNoice* terain = Game->getTerain();
-		PerlinNoice* bioms = Game->getBioms();
 		for (int x = 0; x < w; x++)
 			for (int y = 0; y < h; y++)
 			{
-				int id = 0;
 				Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
-				float waterV = water->getValue(pos.x, pos.y);
-				float terainV = terain->getValue(pos.x, pos.y);
-				float biomsV = bioms->getValue(pos.x, pos.y);
-				if (waterV < -0.213769)
-					id = 0;
-				else
-				{
-					if (waterV < -0.069)
-						id = 1;
-					else
-						id = 2;
-				}
-
-				blocks[y][x] = factory->getObject(id);
+				blocks[y][x] = factory->getObject(0);
 				blocks[y][x]->setMovePos(pos);
-				if (id == 2)
-				{
-					GameObject* o=NULL;
-					if ((int)(biomsV * 10000) % 100==0)
-					{
-						o = Plants->getObject(0);
-					}
-					else if((int)(biomsV * 10000) % 400==2)
-					{
-						o = Plants->getObject(1);
-					}
-					if (o != NULL)
-					{
-						o->setMovePos({ pos });
-						objects.push_back(o);
-						o->generateChunk();
-					}
-				}
+
 			}
 	}
 	Rectangle pos = { (float)x,(float)y-1,(w-1) * tileSize,1.0f };
@@ -122,7 +94,54 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	for (auto o : obj)
 		addObject(o);
 }
+ObjectHandler::ObjectHandler(int chunkX, int chunkY, PerlinNoice* terain, PerlinNoice* water, PerlinNoice* bioms)
+{
+	this->x = chunkX * tileSize * (w - 1);
+	this->y = chunkY * tileSize * (h - 1);
+	this->chunkX = chunkX;
+	this->chunkY = chunkY;
+	BlockFactory* factory = Blocks;
+	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
+	for (int x = 0; x < w; x++)
+		for (int y = 0; y < h; y++)
+		{
+			int id = 0;
+			Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
+			float waterV = water->getValue(pos.x, pos.y);
+			float terainV = terain->getValue(pos.x, pos.y);
+			float biomsV = bioms->getValue(pos.x, pos.y);
+			if (waterV < 0.0213769)
+				id = 0;
+			else
+			{
+				if (waterV < 0.069)
+					id = 1;
+				else
+					id = 2;
+			}
 
+			blocks[y][x] = factory->getObject(id);
+			blocks[y][x]->setMovePos(pos);
+			if (id == 2)
+			{
+				GameObject* o = NULL;
+				if ((int)(biomsV * 10000) % 100 == 0)
+				{
+					o = Plants->getObject(0);
+				}
+				else if ((int)(biomsV * 10000) % 400 == 2)
+				{
+					o = Plants->getObject(1);
+				}
+				if (o != NULL)
+				{
+					o->setMovePos({ pos });
+					objects.push_back(o);
+					o->generateChunk();
+				}
+			}
+		}
+}
 ObjectHandler::ObjectHandler(int chunkX, int chunkY)
 {
 	this->x = chunkX * tileSize * (w - 1);
@@ -188,7 +207,8 @@ ObjectHandler::~ObjectHandler()
 				delete blocks[y][x];
 			}
 	}
-	delete tree;
+	if(tree)
+		delete tree;
 }
 void ObjectHandler::clearLists()
 {
@@ -525,8 +545,7 @@ void ObjectHandler::reloadBlockRight()
 }
 void ObjectHandler::saveGame(nlohmann::json &j)
 {
-
-	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
+	nlohmann::json toSave;
 	int ID = 0;
 	int times = 0;
 	int k = 0;
@@ -540,8 +559,8 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 				{
 					if (times > 0)
 					{
-						j[name]["BLockArray"][k]["ID"] = ID;
-						j[name]["BLockArray"][k]["t"] = times;
+						toSave["BLockArray"][k]["ID"] = ID;
+						toSave["BLockArray"][k]["t"] = times;
 						k++;
 					}
 					ID = blocks[y][x]->getID();
@@ -556,20 +575,21 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 		}
 
 	}
-	j[name]["BLockArray"][k]["ID"] = ID;
-	j[name]["BLockArray"][k]["t"] = times;
+	toSave["BLockArray"][k]["ID"] = ID;
+	toSave["BLockArray"][k]["t"] = times;
 
-	std::list<GameObject*> obj = tree->getObjectsAt({ (float)x,(float)y,w * tileSize,h * tileSize });
 	int i = 0;
-	for (auto o : obj)
+	for (auto o : objects)
 	{
 		if (o->destoryAfterRenderClear())
 			continue;
 		if (chunkX != o->getChunkX() || chunkY != o->getChunkY())
 			continue;
-		o->saveToJson(name, "OBJ" + std::to_string(i), j);
+		o->saveToJson(toSave["OBJS"][i]);
 		i++;
 	}
+	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
+	j[name] = toSave;
 }
 
 bool ObjectHandler::isObjAtThisChunk(GameObject *obj)

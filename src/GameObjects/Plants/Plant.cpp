@@ -21,8 +21,8 @@ Plant::Plant(Rectangle pos, std::string name, ToolType tool, int hp, int power,R
 	sprite = new SpriteController(path.c_str());
 }
 
-Plant::Plant(std::string chunk, std::string objDataPlace, nlohmann::json& j)
-	:GameObject(chunk,objDataPlace,j), ItemsDrop(getType(), getID()), DestroyAble(getType(), getID()), RectangleCollider(getType(), getID())
+Plant::Plant(nlohmann::json& j)
+	:GameObject(j), ItemsDrop(getType(), getID()), DestroyAble(getType(), getID()), RectangleCollider(getType(), getID())
 {
 
 }
@@ -57,12 +57,12 @@ void Plant::damageObject(int power, ToolType type)
 	Game->deleteObject(this);
 }
 
-void Plant::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+void Plant::saveToJson(nlohmann::json& j)
 {
-	GameObject::saveToJson(chunk, objDataPlace, j);
+	GameObject::saveToJson(j);
 }
 
-void Plant::readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+void Plant::readFromJson(nlohmann::json& j)
 {
-	GameObject::readFromJson(chunk, objDataPlace, j);
+	GameObject::readFromJson(j);
 }

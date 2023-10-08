@@ -40,33 +40,43 @@ Ammo::Ammo(Rectangle pos, std::string name, float speed, float range, AmmoType a
 	setStackSize(100);
 }
 
-Ammo::Ammo(nlohmann::json j,int ID) :StackItem(j,ID)
+Ammo::Ammo(nlohmann::json j) :StackItem(j)
 {
-	if (j[ID].contains("Range"))
-		range = j[ID]["Range"];
+	if (j.contains("Range"))
+		range = j["Range"];
 	else
 		range = 400;
-	if (j[ID].contains("Speed"))
-		speed = j[ID]["Speed"];
+	if (j.contains("Speed"))
+		speed = j["Speed"];
 	else
 		speed = 5;
-	if (j[ID].contains("AmmoType"))
-		ammoType = (AmmoType)j[ID]["AmmoType"];
+	if (j.contains("AmmoType"))
+		ammoType = (AmmoType)j["AmmoType"];
 	else
 		ammoType = AmmoType::Arrow;
 
 
-	if (j[ID].contains("LineCollsionN"))
+	if (j.contains("LineCollsionN"))
 	{
-		nCollisions = j[ID]["LineCollsionN"];
+		nCollisions = j["LineCollsionN"];
 		collisions = new Vector2[nCollisions];
+		if (j.contains("Points"))
+		{
+			for (int i = 0; i < j["Points"].size(); i++)
+			{
+				collisions[i].x = j["Points"][i][0];
+				collisions[i].y = j["Points"][i][1];
+			}
+		}
+
+
 		for (int i = 0; i < nCollisions; i++)
 		{
-			if (j[ID].contains(("Point" + std::to_string(i))))
+			if (j.contains(("Point" + std::to_string(i))))
 			{
 				Vector2 p;
-				p.x = j[ID][("Point" + std::to_string(i))][0];
-				p.y = j[ID][("Point" + std::to_string(i))][1];
+				p.x = j[("Point" + std::to_string(i))][0];
+				p.y = j[("Point" + std::to_string(i))][1];
 				collisions[i] = p;
 			}
 			else

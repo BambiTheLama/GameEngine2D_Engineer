@@ -19,20 +19,21 @@ ItemFactory::ItemFactory()
 	reader.close();
 	for (int i = 0; i < j.size(); i++)
 	{
-		ItemClass type = (ItemClass)j[i]["ItemClass"];
+		nlohmann::json itemRead = j[i];
+		ItemClass type = (ItemClass)itemRead["ItemClass"];
 		switch (type)
 		{
 		case ItemClass::StackItem:
-			objects.push_back(new StackItem(j, i));
+			objects.push_back(new StackItem(itemRead));
 			break;
 		case ItemClass::ToolItem:
-			objects.push_back(new ToolItem(j, i));
+			objects.push_back(new ToolItem(itemRead));
 			break;
 		case ItemClass::Bow:
-			objects.push_back(new Bow(j, i));
+			objects.push_back(new Bow(itemRead));
 			break;
 		case ItemClass::Ammo:
-			objects.push_back(new Ammo(j, i));
+			objects.push_back(new Ammo(itemRead));
 			break;
 		default:
 			objects.push_back(NULL);

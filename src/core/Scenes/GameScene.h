@@ -26,9 +26,6 @@ class GameScene :
     static GameScene* game;
     const int renderDystance = 2;
     nlohmann::json j;
-    PerlinNoice *terain;
-    PerlinNoice *water;
-    PerlinNoice *bioms;
     std::string worldName;
     std::thread mapLoader;
     bool endMapLoaderWork = false;
@@ -141,12 +138,6 @@ public:
     void printfChunk(GameObject* obj);
 
     void mapLoaderFun();
-
-    PerlinNoice* getWater() { return water; }
-
-    PerlinNoice* getBioms() { return bioms; }
-
-    PerlinNoice* getTerain() { return terain; }
 
 };
 

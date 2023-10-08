@@ -19,7 +19,7 @@ protected:
 public:
     LinesCollider(Vector2* collision, int n, CollisionsCheckType collisionType=CollisionsCheckType::All);
 
-    LinesCollider(nlohmann::json j, int ID);
+    LinesCollider(nlohmann::json j);
 
     ~LinesCollider();
 

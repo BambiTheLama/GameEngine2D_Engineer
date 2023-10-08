@@ -152,7 +152,7 @@ void ItemEdytor::loadDataFromFile()
 	items.clear();
 	for (int i = 0; i < j.size(); i++)
 	{
-		items.push_back(new ItemProperty(j, i));
+		items.push_back(new ItemProperty(j[i],i));
 	}
 	if(items.size()<=0)
 		items.push_back(new ItemProperty());
@@ -164,9 +164,11 @@ void ItemEdytor::saveData()
 {
 	loadNewItem(0);
 	nlohmann::json j;
+	int ID = 0;
 	for (auto i : items)
 	{
-		i->saveToJson(j);
+		i->saveToJson(j[ID]);
+		ID++;
 	}
 	std::ofstream writer;
 	writer.open("Items.json");

@@ -17,73 +17,78 @@ ItemProperty::ItemProperty()
 	update();
 }
 
-ItemProperty::ItemProperty(nlohmann::json& j, int ID)
+ItemProperty::ItemProperty(nlohmann::json& j,int ID)
 {
 	clearData();
-	if (!j[ID].contains("Name"))
+	if (!j.contains("Name"))
 	{
 		printf("NIE MA DANYCH DLA ITEMU O ID %d\n", ID);
 		return;
 	}
 	this->ID = ID;
-	name=j[ID]["Name"];
-	itemClass = j[ID]["ItemClass"];;
-	pos.x = j[ID]["Pos"][0];
-	pos.y = j[ID]["Pos"][1];
-	pos.width = j[ID]["Pos"][2];
-	pos.height = j[ID]["Pos"][3];
-	if (j[ID].contains("Animated"))
-		animated = j[ID]["Animated"];
+	name=j["Name"];
+	itemClass = j["ItemClass"];;
+	pos.x = j["Pos"][0];
+	pos.y = j["Pos"][1];
+	pos.width = j["Pos"][2];
+	pos.height = j["Pos"][3];
+	if (j.contains("Animated"))
+		animated = j["Animated"];
 	else
 		animated = false;
-	if (j[ID].contains("LineCollsionN"))
+	if (j.contains("LineCollsionN"))
 	{
 		hasLinesCollider = true;
-		nPoints = j[ID]["LineCollsionN"];
+		nPoints = j["LineCollsionN"];
 		sizePointsBefore = nPoints;
 		points = new Vector2[nPoints];
-		std::string s= "Point0";
-		for(int i=0;i<nPoints;i++)
+		for (int i = 0; i < nPoints; i++)
 		{
-			s = "Point" + std::to_string(i);
-			if (j[ID].contains(s))
+			points[i] = { 0,0 };
+		}
+		if (j.contains("Points"))
+		{
+			for (int i = 0; i < j["Points"].size(); i++)
 			{
-				points[i].x = j[ID][s][0];
-				points[i].y = j[ID][s][1];
+
+				points[i].x= j["Points"][i][0];
+				points[i].y= j["Points"][i][1];
+
 			}
 		}
+
 	}
-	if (j[ID].contains("StackSize"))
+	if (j.contains("StackSize"))
 	{
 		isStacable = true;
-		stackSize = j[ID]["StackSize"];
+		stackSize = j["StackSize"];
 	}
-	if (j[ID].contains("UseTime"))
+	if (j.contains("UseTime"))
 	{
 		isUsingItem = true;
-		useTime = j[ID]["UseTime"];
+		useTime = j["UseTime"];
 	}
-	if (j[ID].contains("Damage") && j[ID].contains("InvisibleFrame"))
+	if (j.contains("Damage") && j.contains("InvisibleFrame"))
 	{
 		isDealingDamage = true;
-		damage = j[ID]["Damage"];
-		invisibleFrame = j[ID]["InvisibleFrame"];
+		damage = j["Damage"];
+		invisibleFrame = j["InvisibleFrame"];
 	}
-	if (j[ID].contains("Power") && j[ID].contains("DestoryType"))
+	if (j.contains("Power") && j.contains("DestoryType"))
 	{
 		isDestoryAble = true;
-		power = j[ID]["Power"];
-		destroyType = j[ID]["DestoryType"];
+		power = j["Power"];
+		destroyType = j["DestoryType"];
 	}
-	if (j[ID].contains("Range") && j[ID].contains("Projectals") && j[ID].contains("Speed"))
+	if (j.contains("Range") && j.contains("Projectals") && j.contains("Speed"))
 	{
 		isRangeWeapon = true;
 
-		projectalRange = j[ID]["Range"];
-		numberOfProjectal = j[ID]["Projectals"];
-		projectalSpeed = j[ID]["Speed"];
-		if (j[ID].contains("AmmoType"))
-			ammoType = j[ID]["AmmoType"];
+		projectalRange = j["Range"];
+		numberOfProjectal = j["Projectals"];
+		projectalSpeed = j["Speed"];
+		if (j.contains("AmmoType"))
+			ammoType = j["AmmoType"];
 		else
 			ammoType = 0;
 	}
@@ -258,45 +263,49 @@ void ItemProperty::removePointToCollisions()
 void ItemProperty::saveToJson(nlohmann::json& j)
 {
 
-	j[ID]["Name"] = name;
-	j[ID]["ItemClass"] = itemClass;
-	j[ID]["Pos"] = { pos.x,pos.y,pos.width,pos.height };
+	j["Name"] = name;
+	j["ItemClass"] = itemClass;
+	j["Pos"] = { pos.x,pos.y,pos.width,pos.height };
 	if (animated)
-		j[ID]["Animated"] = true;
+		j["Animated"] = true;
 
 	if (hasLinesCollider)
 	{
-		j[ID]["LineCollsionN"] = nPoints;
+		j["LineCollsionN"] = nPoints;
+
 		for (int i = 0; i < nPoints; i++)
-			j[ID]["Point" + std::to_string(i)] = { points[i].x,points[i].y };
+		{
+			j["Points"][i][0] = (float)((int)(points[i].x*100))/100.0f;
+			j["Points"][i][1] = (float)((int)(points[i].y*100))/100.0f;
+		}
 	}
 	if (isStacable)
 	{
-		j[ID]["StackSize"] = stackSize;
+		j["StackSize"] = stackSize;
 	}
 	if (isUsingItem)
 	{
-		j[ID]["UseTime"] = useTime;
+		j["UseTime"] = useTime;
 	}
 	if (isDealingDamage)
 	{
-		j[ID]["Damage"] = damage;
-		j[ID]["InvisibleFrame"] = invisibleFrame;
-		j[ID]["CollisionsCheckType"] = CollisionsCheckType::All;
+		j["Damage"] = damage;
+		j["InvisibleFrame"] = invisibleFrame;
+		j["CollisionsCheckType"] = CollisionsCheckType::All;
 	}
 	if (isDestoryAble)
 	{
-		j[ID]["Power"] = power;
-		j[ID]["DestoryType"] = destroyType;
-		j[ID]["CollisionsCheckType"] = CollisionsCheckType::All;
+		j["Power"] = power;
+		j["DestoryType"] = destroyType;
+		j["CollisionsCheckType"] = CollisionsCheckType::All;
 	}
 	if (isRangeWeapon)
 	{
-		j[ID]["Range"] = projectalRange;
-		j[ID]["Projectals"] = numberOfProjectal;
-		j[ID]["Speed"] = projectalSpeed;
-		j[ID]["AmmoType"] = ammoType;
-		j[ID]["CollisionsCheckType"] = CollisionsCheckType::All;
+		j["Range"] = projectalRange;
+		j["Projectals"] = numberOfProjectal;
+		j["Speed"] = projectalSpeed;
+		j["AmmoType"] = ammoType;
+		j["CollisionsCheckType"] = CollisionsCheckType::All;
 	}
 	
 }

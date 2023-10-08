@@ -18,13 +18,7 @@ Engine::Engine()
 	InitWindow(1600, 900, "MyGame");
 	InitAudioDevice();
 	//SetTargetFPS(60);
-
-	Items->getFactory();
-
 	scene = new Menu();
-
-	Items;
-
 }
 Engine::~Engine()
 {

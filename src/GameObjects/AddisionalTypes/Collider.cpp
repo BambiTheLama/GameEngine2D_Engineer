@@ -12,11 +12,11 @@ Collider::Collider(CollisionsCheckType type)
 	this->type = type;
 }
 
-Collider::Collider(nlohmann::json j, int ID)
+Collider::Collider(nlohmann::json j)
 {
-	if (j[ID].contains("CollisionsCheckType"))
+	if (j.contains("CollisionsCheckType"))
 	{
-		this->type = (CollisionsCheckType)j[ID]["CollisionsCheckType"];
+		this->type = (CollisionsCheckType)j["CollisionsCheckType"];
 	}
 	else
 	{

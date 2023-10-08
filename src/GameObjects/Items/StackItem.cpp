@@ -16,14 +16,14 @@ StackItem::StackItem(Rectangle pos, std::string name, int stackSize) :Item(pos, 
 	std::string path = "Resource/Items/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 }
-StackItem::StackItem(nlohmann::json j, int ID) :Item(j, ID)
+StackItem::StackItem(nlohmann::json j) :Item(j)
 {
 	this->stackSize = 1;
-	if (j[ID].contains("StackSize"))
-		stackMaxSize = j[ID]["StackSize"];
+	if (j.contains("StackSize"))
+		stackMaxSize = j["StackSize"];
 	else
 		stackMaxSize = 100;
-	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + ".png";
+	std::string path = "Resource/Items/" + std::string(j["Name"]) + ".png";
 	sprite = new SpriteController(path.c_str());
 
 }

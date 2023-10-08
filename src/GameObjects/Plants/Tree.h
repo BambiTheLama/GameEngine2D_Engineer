@@ -12,7 +12,7 @@ class Tree :
 public:
     Tree(Rectangle pos,std::string name);
 
-    Tree(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+    Tree(nlohmann::json& j);
 
     ~Tree();
 
@@ -36,8 +36,8 @@ public:
 
     virtual bool isToolGoBack() { return true; }
 
-    void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+    void saveToJson(nlohmann::json& j);
 
-    virtual void readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+    virtual void readFromJson(nlohmann::json& j);
 };
 

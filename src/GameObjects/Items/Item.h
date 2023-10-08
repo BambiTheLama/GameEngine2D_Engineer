@@ -23,7 +23,7 @@ protected:
 public:
     Item(Rectangle pos, std::string name);
 
-    Item(nlohmann::json j, int ID);
+    Item(nlohmann::json j);
 
     virtual ~Item();
 

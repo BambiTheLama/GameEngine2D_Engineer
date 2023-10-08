@@ -24,22 +24,54 @@ GameScene::GameScene(std::string worldName)
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f; 
 	start();
-	int perlinW = 6400, perlinH = 1800;
-	int perlinSize = 16;
-	water  = new PerlinNoice(perlinW, perlinH, perlinSize);
-	bioms  = new PerlinNoice(perlinW, perlinH, perlinSize);
-	terain = new PerlinNoice(perlinW, perlinH, perlinSize);
+
 	this->worldName = worldName;
 	std::ifstream reader;
-	reader.open(this->worldName, std::ios::out | std::ios::binary);
+	reader.open(this->worldName, std::ios::binary);
 	if (reader.is_open())
 	{
 		reader >> j;
 	}
+	else
+	{
+		int perlinW = 6400, perlinH = 1800;
+		int perlinSize = 16;
+		PerlinNoice* water = new PerlinNoice(perlinW, perlinH, perlinSize);
+		PerlinNoice* bioms = new PerlinNoice(perlinW, perlinH, perlinSize);
+		PerlinNoice* terain = new PerlinNoice(perlinW, perlinH, perlinSize);
+		int chunkSizeX = ObjectHandler::h;
+		int startX = -(perlinW * perlinSize) / ((ObjectHandler::w - 1) * tileSize * 2);
+		if ((perlinW * perlinSize) % ((ObjectHandler::w - 1) * tileSize * 2))
+			startX--;
+		int startY = -(perlinH * perlinSize) / ((ObjectHandler::h - 1) * tileSize * 2);
+		if ((perlinH * perlinSize) % ((ObjectHandler::h - 1) * tileSize * 2))
+			startY--;
+		int endX = -startX;
+		int endY = -startY;
+		water->generateNoise2D(7, 2.6, 69);
+		bioms->generateNoise2D(2, 1, 2137);
+		terain->generateNoise2D(7, 2, 69, 666);
+		
+		for (int y = startY; y < endY; y++)
+		{
+			for (int x = startX; x < endX; x++)
+			{
+				ObjectHandler* handler = new ObjectHandler(x, y, terain, water, bioms);
+				handler->saveGame(j);
+				delete handler;
+			}
+			printf("GENERETED FULL ROW %d\n", y);
+		}
+		delete water;
+		delete bioms;
+		delete terain;
+		std::ofstream writer;
+		writer.open(worldName, std::ios::out | std::ios::binary);
+		writer << j;
+		writer.close();
+	}
 	reader.close();
-	water->generateNoise2D(7, 2.6, 69);
-	bioms->generateNoise2D(2, 1, 2137);
-	terain->generateNoise2D(7, 2,69, 666);
+
 	if (cameraTarget)
 	{
 		loadChunksCloseToTarget();
@@ -54,7 +86,8 @@ GameScene::GameScene(std::string worldName)
 
 GameScene::~GameScene()
 {
-	mapLoader.join();
+	if (mapLoader.joinable())
+		mapLoader.join();
 	game = NULL;
 	for (auto h : handler)
 	{
@@ -65,7 +98,7 @@ GameScene::~GameScene()
 	handler.clear();
 
 	std::ofstream writer;
-	writer.open(worldName, std::ios::out | std::ios::binary);
+	writer.open(worldName, std::ios::binary);
 	writer << j;
 	writer.close();
 
@@ -76,9 +109,7 @@ GameScene::~GameScene()
 
 	game = NULL;
 	userUI.clear();	
-	delete water;
-	delete bioms;
-	delete terain;
+
 }
 void GameScene::start()
 {

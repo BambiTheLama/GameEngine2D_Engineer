@@ -8,9 +8,9 @@ Item::Item(Rectangle pos, std::string name):GameObject(pos,name)
 	itemName = name;
 }
 
-Item::Item(nlohmann::json j, int ID):GameObject(j,ID)
+Item::Item(nlohmann::json j):GameObject(j)
 {
-	itemName = j[ID]["Name"];
+	itemName = j["Name"];
 }
 
 Item::~Item()

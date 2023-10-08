@@ -34,30 +34,30 @@ LinesCollider::LinesCollider(Vector2* collision, int n, CollisionsCheckType coll
 
 }
 
-LinesCollider::LinesCollider(nlohmann::json j, int ID):Collider(j,ID)
+LinesCollider::LinesCollider(nlohmann::json j):Collider(j)
 {
-	if (j[ID].contains("LineCollsionN"))
+	if (j.contains("LineCollsionN"))
 	{
-		nPoints = j[ID]["LineCollsionN"];
+		nPoints = j["LineCollsionN"];
 		startPoints = new Vector2[nPoints];
 		points = new Vector2[nPoints];
 		for (int i = 0; i < nPoints; i++)
 		{
-			if (j[ID].contains(("Point" + std::to_string(i))))
+			startPoints[i] = { 0,0 };
+			points[i] = { 0,0 };
+		}
+		if (j.contains("Points"))
+		{
+			for (int i = 0; i < j["Points"].size(); i++)
 			{
 				Vector2 p;
-				p.x = j[ID][("Point" + std::to_string(i))][0];
-				p.y = j[ID][("Point" + std::to_string(i))][1];
+				p.x = j["Points"][i][0];
+				p.y = j["Points"][i][1];
 				startPoints[i] = p;
 				points[i] = p;
 			}
-			else
-			{
-				startPoints[i] = {0,0};
-				points[i] = {0,0};
-			}
-
 		}
+
 	}
 	else
 	{

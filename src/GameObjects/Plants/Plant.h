@@ -12,7 +12,7 @@ public:
 
     Plant(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision);
 
-    Plant(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+    Plant(nlohmann::json& j);
 
     virtual ~Plant();
 
@@ -26,8 +26,8 @@ public:
 
     virtual void damageObject(int power, ToolType type);
 
-    virtual void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+    virtual void saveToJson(nlohmann::json& j);
 
-    virtual void readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+    virtual void readFromJson(nlohmann::json& j);
 };
 

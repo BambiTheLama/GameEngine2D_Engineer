@@ -13,7 +13,7 @@ protected:
 public:
     StackItem(Rectangle pos, std::string name, int stackSize);
 
-    StackItem(nlohmann::json j, int ID);
+    StackItem(nlohmann::json j);
 
     virtual ~StackItem();
 

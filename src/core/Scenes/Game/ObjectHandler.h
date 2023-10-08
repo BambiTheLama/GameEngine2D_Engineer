@@ -6,6 +6,7 @@
 #include "../../../GameObjects/Blocks/Block.h"
 #include "FourTree.h"
 #include "../../../json.hpp"
+#include "PerlinNoice.h"
 
 #define tileSize 32
 enum class ObjectToGet
@@ -32,6 +33,7 @@ private:
     Block* blocks[h][w];
 public:
     ObjectHandler(int chunkX, int chunkY, nlohmann::json j);
+    ObjectHandler(int chunkX, int chunkY, PerlinNoice* tarain, PerlinNoice* water, PerlinNoice* bioms);
     ObjectHandler(int chunkX, int chunkY);
     /// <summary>
     /// Usuwa wszystkie obiekty co zosta³y w kolekcjach

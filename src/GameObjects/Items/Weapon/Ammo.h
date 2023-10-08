@@ -28,7 +28,7 @@ protected:
 public:
     Ammo(Rectangle pos, std::string name,float speed,float range, AmmoType ammoType);
 
-    Ammo(nlohmann::json j, int ID);
+    Ammo(nlohmann::json j);
 
     virtual Ammo* clone() { return new Ammo(*this); }
 

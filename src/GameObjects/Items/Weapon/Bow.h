@@ -22,7 +22,7 @@ private:
     static std::string description;
 public:
     Bow(Rectangle pos, std::string name,float chargeTime,float speedMultiplier, float rangeMultiplier ,int numberOfProjectal=1);
-    Bow(nlohmann::json j, int ID);
+    Bow(nlohmann::json j);
     ~Bow();
 
     virtual void update(float deltaTime);

@@ -24,7 +24,7 @@ protected:
 public:
 	Collider(CollisionsCheckType type=CollisionsCheckType::NON);
 
-	Collider(nlohmann::json j, int ID);
+	Collider(nlohmann::json j);
 
 	virtual bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
 

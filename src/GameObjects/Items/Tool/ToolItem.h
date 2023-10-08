@@ -21,7 +21,7 @@ class ToolItem :
     static std::string description;
     ToolItem(ToolItem& item);
 public:
-    ToolItem(nlohmann::json j, int ID);
+    ToolItem(nlohmann::json j);
     virtual ~ToolItem();
     virtual ToolItem* clone() { return new ToolItem(*this); }
     void update(float deltaTime);

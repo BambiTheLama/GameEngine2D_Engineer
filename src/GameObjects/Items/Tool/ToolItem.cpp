@@ -12,28 +12,28 @@ ToolItem::ToolItem(ToolItem& item) :Item(item),LinesCollider(item)
 	this->power = item.power;
 }
 
-ToolItem::ToolItem(nlohmann::json j, int ID):Item(j,ID),LinesCollider(j,ID)
+ToolItem::ToolItem(nlohmann::json j):Item(j),LinesCollider(j)
 {
 
-	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + ".png";
+	std::string path = "Resource/Items/" + std::string(j["Name"]) + ".png";
 	sprite = new SpriteController(path.c_str());
 	useTime = 0;
 	origin = { 0,pos.width };
-	if (j[ID].contains("UseTime"))
-		useTimeMax = j[ID]["UseTime"];
+	if (j.contains("UseTime"))
+		useTimeMax = j["UseTime"];
 	else
 		useTimeMax = 0.5;
-	if (j[ID].contains("Damage"))
-		damage = j[ID]["Damage"];
+	if (j.contains("Damage"))
+		damage = j["Damage"];
 	else
 		damage = 1;
 
-	if (j[ID].contains("Power"))
-		power = j[ID]["Power"];
+	if (j.contains("Power"))
+		power = j["Power"];
 	else
 		power = 30;
-	if (j[ID].contains("DestoryType"))
-		destroyType = (ToolType)j[ID]["DestoryType"];
+	if (j.contains("DestoryType"))
+		destroyType = (ToolType)j["DestoryType"];
 	else
 		destroyType = ToolType::NON;
 

@@ -40,27 +40,27 @@ Bow::Bow(Rectangle pos, std::string name, float chargeTime, float speedMultiplie
 	this->speedMultiplier = speedMultiplier;
 	this->rangeMultiplier = rangeMultiplier;
 }
-Bow::Bow(nlohmann::json j, int ID):Item(j,ID)
+Bow::Bow(nlohmann::json j):Item(j)
 {
 	origin = { 43.0f / 64.0f * pos.width, 21.0f / 64.0f * pos.height };
 	chargeTime = 0;
 	rotation = 0;
-	std::string path = "Resource/Items/" + std::string(j[ID]["Name"]) + ".png";
+	std::string path = "Resource/Items/" + std::string(j["Name"]) + ".png";
 	sprite = new SpriteController(path.c_str());
-	if (j[ID].contains("Projectals"))
-		numberOfProjectalMax = j[ID].contains("Projectals");
+	if (j.contains("Projectals"))
+		numberOfProjectalMax = j.contains("Projectals");
 	else
 		numberOfProjectalMax = 1;
-	if (j[ID].contains("Range"))
-		rangeMultiplier = j[ID]["Range"];
+	if (j.contains("Range"))
+		rangeMultiplier = j["Range"];
 	else
 		rangeMultiplier = 1;
-	if (j[ID].contains("Speed"))
-		speedMultiplier = j[ID]["Speed"];
+	if (j.contains("Speed"))
+		speedMultiplier = j["Speed"];
 	else
 		speedMultiplier = 1;
-	if (j[ID].contains("UseTime"))
-		chargeTimeMax = j[ID]["UseTime"];
+	if (j.contains("UseTime"))
+		chargeTimeMax = j["UseTime"];
 	else
 		chargeTimeMax = 1;
 }

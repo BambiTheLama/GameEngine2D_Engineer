@@ -19,12 +19,12 @@ Tree::Tree(Rectangle pos, std::string name) :
 	updateDropFromAge();
 
 }
-Tree::Tree(std::string chunk, std::string objDataPlace, nlohmann::json& j)
-	:Plant(chunk,objDataPlace,j)
+Tree::Tree(nlohmann::json& j)
+	:Plant(j)
 {
-	age = j[chunk][objDataPlace]["Age"][0];
-	maxAge = j[chunk][objDataPlace]["Age"][1];
-	timer = j[chunk][objDataPlace]["Timer"];
+	age = j["Age"][0];
+	maxAge = j["Age"][1];
+	timer = j["Timer"];
 	updateDropFromAge();
 }
 
@@ -119,18 +119,18 @@ void Tree::damageObject(int power, ToolType type)
 	Game->deleteObject(this);
 }
 
-void Tree::saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+void Tree::saveToJson(nlohmann::json& j)
 {
-	Plant::saveToJson(chunk, objDataPlace, j);
-	j[chunk][objDataPlace]["Age"][0] = age;
-	j[chunk][objDataPlace]["Age"][1] = maxAge;
-	j[chunk][objDataPlace]["Timer"] = (int)timer;
+	Plant::saveToJson(j);
+	j["Age"][0] = age;
+	j["Age"][1] = maxAge;
+	j["Timer"] = (int)timer;
 }
 
-void Tree::readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j)
+void Tree::readFromJson(nlohmann::json& j)
 {
-	Plant::readFromJson(chunk, objDataPlace, j);
-	age = j[chunk][objDataPlace]["Age"][0];
-	maxAge = j[chunk][objDataPlace]["Age"][1];
-	timer = j[chunk][objDataPlace]["Timer"];
+	Plant::readFromJson(j);
+	age = j["Age"][0];
+	maxAge = j["Age"][1];
+	timer = j["Timer"];
 }

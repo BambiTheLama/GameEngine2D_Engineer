@@ -56,9 +56,7 @@ protected:
 	GameObject(GameObject& obj);
 public:
 	GameObject(Rectangle pos,std::string name);
-	GameObject(nlohmann::json &j, int ID);
 	GameObject(nlohmann::json& j);
-	GameObject(std::string chunk, std::string objDataPlace,nlohmann::json &j);
 	/// <summary>
 	/// Wiztualny destruktor by by³ wywo³any odpowiedni z klas dziedzicz¹cych
 	/// </summary>
@@ -123,11 +121,9 @@ public:
 
 	virtual bool destoryAfterRenderClear() { return false; }
 
-	virtual void saveToJson(std::string chunk, std::string objDataPlace, nlohmann::json &j);
-
 	virtual void saveToJson(nlohmann::json &j);
 
-	virtual void readFromJson(std::string chunk, std::string objDataPlace, nlohmann::json& j);
+	virtual void readFromJson(nlohmann::json& j);
 
 	int getChunkX()const { return chunkX; }
 
