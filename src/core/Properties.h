@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
 #define textStandardSize 26
-#define textStandardSize2 16
+#define textStandardSize2 30
 #define collidersToDraw Properties::getProperties()->getShowColliders()
 
 void drawText(const char* text, int x, int y, int size, Color color);

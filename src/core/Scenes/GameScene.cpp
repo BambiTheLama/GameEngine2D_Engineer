@@ -34,8 +34,8 @@ GameScene::GameScene(std::string worldName)
 	}
 	else
 	{
-		int perlinW = 6400, perlinH = 1800;
-		int perlinSize = 16;
+		int perlinW = 3200, perlinH = 1800;
+		int perlinSize = 8;
 		PerlinNoice* water = new PerlinNoice(perlinW, perlinH, perlinSize);
 		PerlinNoice* bioms = new PerlinNoice(perlinW, perlinH, perlinSize);
 		PerlinNoice* terain = new PerlinNoice(perlinW, perlinH, perlinSize);
@@ -48,7 +48,7 @@ GameScene::GameScene(std::string worldName)
 			startY--;
 		int endX = -startX;
 		int endY = -startY;
-		water->generateNoise2D(7, 2.6, 69);
+		water->generateNoise2D(7, 2.6, 657);
 		bioms->generateNoise2D(2, 1, 2137);
 		terain->generateNoise2D(7, 2, 69, 666);
 		

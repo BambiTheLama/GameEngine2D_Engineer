@@ -24,7 +24,7 @@ class GameScene :
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
-    const int renderDystance = 2;
+    const int renderDystance = 1;
     nlohmann::json j;
     std::string worldName;
     std::thread mapLoader;

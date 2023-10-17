@@ -140,6 +140,8 @@ public:
 
     bool isObjAtThisChunk(GameObject* obj);
 
+    bool hasObjectAtList(GameObject* obj);
+
     bool isObjAtThisChunk(Rectangle pos);
 
     void saveGame(nlohmann::json &j);

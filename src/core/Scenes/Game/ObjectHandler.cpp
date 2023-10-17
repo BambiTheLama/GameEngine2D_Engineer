@@ -58,7 +58,7 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 				{
 					obj->readFromJson(toReadObjs[i]);
 					obj->generateChunk();
-					objects.push_back(obj);
+					addObject(obj);
 				}
 			}
 		}
@@ -136,7 +136,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, PerlinNoice* terain, Perlin
 				if (o != NULL)
 				{
 					o->setMovePos({ pos });
-					objects.push_back(o);
+					addObject(o);
 					o->generateChunk();
 				}
 			}
@@ -376,7 +376,7 @@ std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
 
 void ObjectHandler::addObject(GameObject* obj) 
 { 
-	if (CheckCollisionRecs(obj->getPos(), { (float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1) }))
+	if (!hasObjectAtList(obj) && CheckCollisionRecs(obj->getPos(), {(float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1)}))
 	{
 		objectsToAdd.push_back(obj);
 	}
@@ -596,7 +596,16 @@ bool ObjectHandler::isObjAtThisChunk(GameObject *obj)
 {
 	return CheckCollisionRecs(obj->getPos(), { (float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1) });
 }
-
+bool ObjectHandler::hasObjectAtList(GameObject* obj)
+{
+	for (auto o : objects)
+		if (o == obj)
+			return true;
+	for (auto o : objectsToAdd)
+		if (o == obj)
+			return true;
+	return false;
+}
 bool ObjectHandler::isObjAtThisChunk(Rectangle pos)
 {
 	return CheckCollisionRecs(pos, { (float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1) });
