@@ -40,6 +40,8 @@ ItemFactory::ItemFactory()
 			break;
 		}
 	}
+	for (int i = 0; i < objects.size(); i++)
+		objects[i]->ID = i;
 	loadLanguage("PL");
 	printf("[FactoryItem]: Stworzono fabryke itemow\n");
 }
