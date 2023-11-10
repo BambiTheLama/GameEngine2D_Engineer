@@ -36,7 +36,7 @@ public:
     /// <summary>
     /// Konstruktor od sceny gry
     /// </summary>
-    GameScene(std::string worldName="World");
+    GameScene(std::string worldName="World1");
     /// <summary>
     /// Destruktor od sceny gry
     /// </summary>

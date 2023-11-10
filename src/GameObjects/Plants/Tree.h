@@ -39,5 +39,7 @@ public:
     void saveToJson(nlohmann::json& j);
 
     virtual void readFromJson(nlohmann::json& j);
+
+    virtual bool destoryAfterRenderClear() { return false; }
 };
 

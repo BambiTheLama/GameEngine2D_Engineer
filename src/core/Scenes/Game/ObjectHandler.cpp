@@ -133,7 +133,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, PerlinNoice* terain, Perlin
 				{
 					o = Plants->getObject(1);
 				}
-				if (o != NULL)
+				if (o)
 				{
 					o->setMovePos({ pos });
 					addObject(o);
@@ -583,6 +583,7 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 	{
 		if (o->destoryAfterRenderClear())
 			continue;
+		o->generateChunk();
 		if (chunkX != o->getChunkX() || chunkY != o->getChunkY())
 			continue;
 		o->saveToJson(toSave["OBJS"][i]);

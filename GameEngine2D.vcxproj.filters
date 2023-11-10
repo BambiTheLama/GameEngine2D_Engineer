@@ -464,6 +464,9 @@
     <ClInclude Include="src\core\Scenes\TestScene.h">
       <Filter>src\core\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Scenes\Game\FastNoiseLite.h">
+      <Filter>src\core\Scenes\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

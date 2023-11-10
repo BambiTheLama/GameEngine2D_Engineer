@@ -55,7 +55,7 @@ void PerlinNoice::generateSeed2D(unsigned int seed, int startX, int startY)
 	{
 		for (int j = 0; j < w; j++)
 		{
-			seed2D[i][j] = randomValue(((i + startY) * w + (j + startX)) * seed);
+			seed2D[i][j] = randomValue((i + startY + seed) * w + (j + startX + seed));
 		}
 	}
 }

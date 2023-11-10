@@ -6,10 +6,27 @@
 #include "Menu.h"
 #include <iostream>
 #include <fstream>
+#include <direct.h>
 GameScene* GameScene::game = NULL;
 
 GameScene::GameScene(std::string worldName)
 {
+
+	{
+		struct stat sb;
+
+		const char* savePath = "Saves";
+		std::string worldFile = savePath + (std::string)"/" + worldName;
+		std::string chunksFile = savePath + (std::string)"/" + worldName + (std::string)"/chunks";
+		if (stat(savePath, &sb) != 0)
+			_mkdir(savePath);
+		if (stat(worldFile.c_str(), &sb) != 0)
+			_mkdir(worldFile.c_str());
+		if (stat(chunksFile.c_str(), &sb) != 0)
+			_mkdir(chunksFile.c_str());
+	}
+
+
 	SetExitKey(0);
 
 	//handler.push_back(new ObjectHandler(0, 0));
@@ -34,8 +51,8 @@ GameScene::GameScene(std::string worldName)
 	}
 	else
 	{
-		int perlinW = 3200, perlinH = 1800;
-		int perlinSize = 8;
+		int perlinW = 6400, perlinH = 3000;
+		int perlinSize = 1;
 		PerlinNoice* water = new PerlinNoice(perlinW, perlinH, perlinSize);
 		PerlinNoice* bioms = new PerlinNoice(perlinW, perlinH, perlinSize);
 		PerlinNoice* terain = new PerlinNoice(perlinW, perlinH, perlinSize);
@@ -57,6 +74,7 @@ GameScene::GameScene(std::string worldName)
 			for (int x = startX; x < endX; x++)
 			{
 				ObjectHandler* handler = new ObjectHandler(x, y, terain, water, bioms);
+				handler->update(0.0f);
 				handler->saveGame(j);
 				delete handler;
 			}

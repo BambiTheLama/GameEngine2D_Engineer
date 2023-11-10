@@ -5,7 +5,8 @@ BlockFactory* BlockFactory::factory=NULL;
 
 BlockFactory::BlockFactory()
 {
-	objects.push_back(new CollidingBlock({ 0,0,tileSize,tileSize }, ToolType::NON, 0 ,"Water"));
+	//objects.push_back(new CollidingBlock({ 0,0,tileSize,tileSize }, ToolType::NON, 0 ,"Water"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::NON, 0, "Water"));
 	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 10 ,"Sand"));
 	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 20 ,"Grass"));
 	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 30 ,"Dirt"));
