@@ -7,24 +7,26 @@
 #include <iostream>
 #include <fstream>
 #include <direct.h>
+#include <iostream>
+#include <filesystem>
 GameScene* GameScene::game = NULL;
 
 GameScene::GameScene(std::string worldName)
 {
 
-	{
-		struct stat sb;
+	
+	struct stat sb;
 
-		const char* savePath = "Saves";
-		std::string worldFile = savePath + (std::string)"/" + worldName;
-		std::string chunksFile = savePath + (std::string)"/" + worldName + (std::string)"/chunks";
-		if (stat(savePath, &sb) != 0)
-			_mkdir(savePath);
-		if (stat(worldFile.c_str(), &sb) != 0)
-			_mkdir(worldFile.c_str());
-		if (stat(chunksFile.c_str(), &sb) != 0)
-			_mkdir(chunksFile.c_str());
-	}
+	const char* savePath = "Saves";
+	std::string worldFile = savePath + (std::string)"/" + worldName;
+	chunksFile = savePath + (std::string)"/" + worldName + (std::string)"/chunks";
+	if (stat(savePath, &sb) != 0)
+		_mkdir(savePath);
+	if (stat(worldFile.c_str(), &sb) != 0)
+		_mkdir(worldFile.c_str());
+	if (stat(chunksFile.c_str(), &sb) != 0)
+		_mkdir(chunksFile.c_str());
+
 
 
 	SetExitKey(0);
@@ -43,52 +45,19 @@ GameScene::GameScene(std::string worldName)
 	start();
 
 	this->worldName = worldName;
-	std::ifstream reader;
-	reader.open(this->worldName, std::ios::binary);
-	if (reader.is_open())
+
 	{
-		reader >> j;
-	}
-	else
-	{
-		int perlinW = 6400, perlinH = 3000;
-		int perlinSize = 1;
-		PerlinNoice* water = new PerlinNoice(perlinW, perlinH, perlinSize);
-		PerlinNoice* bioms = new PerlinNoice(perlinW, perlinH, perlinSize);
-		PerlinNoice* terain = new PerlinNoice(perlinW, perlinH, perlinSize);
-		int chunkSizeX = ObjectHandler::h;
-		int startX = -(perlinW * perlinSize) / ((ObjectHandler::w - 1) * tileSize * 2);
-		if ((perlinW * perlinSize) % ((ObjectHandler::w - 1) * tileSize * 2))
-			startX--;
-		int startY = -(perlinH * perlinSize) / ((ObjectHandler::h - 1) * tileSize * 2);
-		if ((perlinH * perlinSize) % ((ObjectHandler::h - 1) * tileSize * 2))
-			startY--;
-		int endX = -startX;
-		int endY = -startY;
-		water->generateNoise2D(7, 2.6, 657);
-		bioms->generateNoise2D(2, 1, 2137);
-		terain->generateNoise2D(7, 2, 69, 666);
-		
-		for (int y = startY; y < endY; y++)
+
+		for (int y = -3; y < 3; y++)
 		{
-			for (int x = startX; x < endX; x++)
+			for (int x = -3; x < 3; x++)
 			{
-				ObjectHandler* handler = new ObjectHandler(x, y, terain, water, bioms);
-				handler->update(0.0f);
-				handler->saveGame(j);
-				delete handler;
+				generateChunk(x, y);
 			}
-			printf("GENERETED FULL ROW %d\n", y);
 		}
-		delete water;
-		delete bioms;
-		delete terain;
-		std::ofstream writer;
-		writer.open(worldName, std::ios::out | std::ios::binary);
-		writer << j;
-		writer.close();
+
+
 	}
-	reader.close();
 
 	if (cameraTarget)
 	{
@@ -104,29 +73,24 @@ GameScene::GameScene(std::string worldName)
 
 GameScene::~GameScene()
 {
+	game = NULL;
 	if (mapLoader.joinable())
 		mapLoader.join();
-	game = NULL;
 	for (auto h : handler)
 	{
-		h->saveGame(j);
+		saveChunk(h);
 		h->clearLists();
 		delete h;
 	}
 	handler.clear();
-
-	std::ofstream writer;
-	writer.open(worldName, std::ios::binary);
-	writer << j;
-	writer.close();
-
+	userUI.clear();
 	for (auto o : allObj)
 		delete o;
 	for (auto o : toDelete)
 		delete o;
 
 	game = NULL;
-	userUI.clear();	
+
 
 }
 void GameScene::start()
@@ -167,7 +131,11 @@ void GameScene::update(float deltaTime)
 		delete o;
 	toDelete.clear();
 	for (auto h : handlersToDelete)
+	{
+		handler.remove(h);
 		delete h;
+	}
+
 	handlersToDelete.clear();
 	if (!loadingMap)
 	{
@@ -175,7 +143,7 @@ void GameScene::update(float deltaTime)
 		{
 			this->chunkX = chunkX;
 			this->chunkY = chunkY;
-			deleteChunksNotCloseToTarget();
+
 			if (mapLoader.joinable())
 				mapLoader.join();
 			mapLoader = std::thread(&GameScene::mapLoaderFun, this);
@@ -251,10 +219,7 @@ void GameScene::updatePos(GameObject* obj)
 
 void GameScene::draw()
 {
-
 	std::list<GameObject*> objects = getObjToDraw();
-
-
 	BeginMode2D(camera);
 	for (GameObject* obj : objects)
 		obj->draw();
@@ -336,16 +301,18 @@ void GameScene::deleteChunksNotCloseToTarget()
 	int maxX = x + renderDystance;
 	int minY = y - renderDystance;
 	int maxY = y + renderDystance;
-	
+	std::list<ObjectHandler*>handlersToDelete;
 	for (auto h : handler)
 	{
 		if (h->getChunkX() < minX || h->getChunkX() > maxX || h->getChunkY() < minY || h->getChunkY() > maxY)
+		{
 			handlersToDelete.push_back(h);
+		}
 	}
 	for (auto h : handlersToDelete)
 	{
-		h->saveGame(j);
-		handler.remove(h);
+		saveChunk(h);
+		this->handlersToDelete.push_back(h);
 	}
 }
 
@@ -363,24 +330,11 @@ void GameScene::loadChunksCloseToTarget()
 	for (int x = minX; x <= maxX; x++)
 		for (int y = minY; y <= maxY; y++)
 		{
-			bool breaked = false;
-			for (auto h : handler)
-				if (h->getChunkX() == x && h->getChunkY() == y)
-				{
-					breaked = true;
-					break;
-				}
-			if (!breaked)
-			{
-				ObjectHandler* objH = new ObjectHandler(x, y, j);
-				handler.push_back(objH);
-				objH->start();
-			}
+			loadChunk(x, y);
 		}
 
 	for (auto h : handler)
 		h->reloadBlock();
-
 
 }
 
@@ -415,9 +369,111 @@ void GameScene::printfChunk(GameObject* obj)
 			printf("Chunk %d %d\n", h->getChunkY(), h->getChunkX());
 		}
 }
+
+void GameScene::generateChunk(int x, int y)
+{
+	FastNoiseLite terain;
+	FastNoiseLite water;
+	FastNoiseLite bioms;
+	terain.SetSeed(666);
+	water.SetSeed(2137);
+	bioms.SetSeed(69);
+	std::string name = "/" + chunkName(x, y);
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open(chunksFile + name);
+	if (reader.is_open())
+		reader >> j;
+	reader.close();
+	ObjectHandler* h = NULL;
+	if (j.contains("CHUNK " + std::to_string(x) + " " + std::to_string(y)))
+	{
+		h = new ObjectHandler(x, y, j);
+	}
+	else
+	{
+		h = new ObjectHandler(x, y, terain, water, bioms);
+	}
+	if(h)
+		handler.push_back(h);
+}
+void GameScene::loadChunk(int x, int y)
+{
+	for (auto hand : handler)
+		if (hand->getChunkX() == x && hand->getChunkY() == y)
+			return;
+	std::string name = "/" + chunkName(x, y);
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open(chunksFile + name);
+	if (reader.is_open())
+		reader >> j;
+	reader.close();
+	ObjectHandler* h = NULL;
+	if (j.contains("CHUNK " + std::to_string(x) + " " + std::to_string(y)))
+	{
+		h = new ObjectHandler(x, y, j);
+	}
+	else
+	{
+		generateChunk(x, y);
+	}
+	if (h)
+		handler.push_back(h);
+
+}
+void GameScene::deleteChunk(ObjectHandler* h)
+{
+	for (auto h2 : handler)
+		if (h == h2)
+		{
+			saveChunk(h);
+			break;
+		}
+	handler.remove(h);
+
+	handlersToDelete.remove(h);
+	handlersToDelete.push_back(h);
+}
+void GameScene::saveChunk(ObjectHandler* h)
+{
+	std::string name = "/" + chunkName(h->getChunkX(), h->getChunkY());
+
+	nlohmann::json j;
+	std::ifstream reader;
+	reader.open(chunksFile + name);
+	if (reader.is_open())
+	{
+		reader >> j;
+	}
+	reader.close();
+	h->update(0.0f);
+	h->saveGame(j);
+	std::ofstream writer;
+	writer.open(chunksFile + name);
+	writer << j;
+	writer.close();
+}
+
+std::string GameScene::chunkName(int x, int y)
+{
+	std::string name = "c ";
+	if (y >= 0)
+		name += std::to_string((int)(y / chunkYPerFile)) + " ";
+	else
+		name += std::to_string((int)((y - chunkYPerFile) / chunkYPerFile)) + " ";
+	if (x >= 0)
+		name += std::to_string((int)(x / chunkXPerFile));
+	else
+		name += std::to_string((int)((x - chunkXPerFile) / chunkXPerFile));
+	name += ".json";
+	return name;
+}
+
 void GameScene::mapLoaderFun()
 {
 	loadingMap = true;
 	loadChunksCloseToTarget();
+	deleteChunksNotCloseToTarget();
 	loadingMap = false;
 }

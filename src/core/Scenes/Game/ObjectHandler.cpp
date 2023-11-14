@@ -94,7 +94,7 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	for (auto o : obj)
 		addObject(o);
 }
-ObjectHandler::ObjectHandler(int chunkX, int chunkY, PerlinNoice* terain, PerlinNoice* water, PerlinNoice* bioms)
+ObjectHandler::ObjectHandler(int chunkX, int chunkY, FastNoiseLite& tarain, FastNoiseLite& water, FastNoiseLite& bioms)
 {
 	this->x = chunkX * tileSize * (w - 1);
 	this->y = chunkY * tileSize * (h - 1);
@@ -107,9 +107,9 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, PerlinNoice* terain, Perlin
 		{
 			int id = 0;
 			Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
-			float waterV = water->getValue(pos.x, pos.y);
-			float terainV = terain->getValue(pos.x, pos.y);
-			float biomsV = bioms->getValue(pos.x, pos.y);
+			float waterV = water.GetNoise(pos.x, pos.y);
+			float terainV = tarain.GetNoise(pos.x, pos.y);
+			float biomsV = bioms.GetNoise(pos.x, pos.y);
 			if (waterV < 0.0213769)
 				id = 0;
 			else

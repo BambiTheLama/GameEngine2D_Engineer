@@ -24,9 +24,9 @@ class GameScene :
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
-    const int renderDystance = 1;
-    nlohmann::json j;
+    const int renderDystance = 2;
     std::string worldName;
+    std::string chunksFile;
     std::thread mapLoader;
     bool endMapLoaderWork = false;
     bool loadingMap = false;
@@ -136,7 +136,11 @@ public:
     std::list<GameObject*> getObjToDraw();
 
     void printfChunk(GameObject* obj);
-
+    void loadChunk(int x, int y);
+    void generateChunk(int x, int y);
+    void deleteChunk(ObjectHandler* h);
+    void saveChunk(ObjectHandler* h);
+    std::string chunkName(int x, int y);
     void mapLoaderFun();
 
 };
