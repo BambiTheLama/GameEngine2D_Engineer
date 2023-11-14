@@ -377,6 +377,10 @@ void GameScene::generateChunk(int x, int y)
 	FastNoiseLite bioms;
 	terain.SetSeed(666);
 	water.SetSeed(2137);
+	water.SetFrequency(0.0001f);
+	water.SetFractalType(FastNoiseLite::FractalType_FBm);
+	water.SetFractalOctaves(8);
+	water.SetFractalGain(0.5f);
 	bioms.SetSeed(69);
 	std::string name = "/" + chunkName(x, y);
 	nlohmann::json j;

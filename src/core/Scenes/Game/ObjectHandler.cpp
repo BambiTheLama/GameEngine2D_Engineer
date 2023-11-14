@@ -110,7 +110,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, FastNoiseLite& tarain, Fast
 			float waterV = water.GetNoise(pos.x, pos.y);
 			float terainV = tarain.GetNoise(pos.x, pos.y);
 			float biomsV = bioms.GetNoise(pos.x, pos.y);
-			if (waterV < 0.0213769)
+			if (waterV < 0)
 				id = 0;
 			else
 			{
