@@ -1,7 +1,7 @@
 #pragma once
 #include <vector> 
 #include <list>
-#include "../../json.hpp"
+#include "json.hpp"
 class Item;
 /// <summary>
 /// Definiuje w jakiej strukturze mo¿na craftowaæ przedmioty

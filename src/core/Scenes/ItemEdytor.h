@@ -3,7 +3,7 @@
 #include "../../GameObjects/Items/Item.h"
 #include "../../GameObjects/Items/Tool/ToolItem.h"
 #include "../Elements/Element.h"
-#include "../../json.hpp"
+#include "json.hpp"
 #include "ItemEdytorStruct/ItemProperty.h"
 #include <list>
 #include <vector>

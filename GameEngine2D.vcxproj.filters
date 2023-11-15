@@ -380,9 +380,6 @@
     <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h">
       <Filter>src\GameObjects\Items\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="src\json.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\Elements\Element.h">
       <Filter>src\core\Elements</Filter>
     </ClInclude>
@@ -463,9 +460,6 @@
     </ClInclude>
     <ClInclude Include="src\core\Scenes\TestScene.h">
       <Filter>src\core\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\Scenes\Game\FastNoiseLite.h">
-      <Filter>src\core\Scenes\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

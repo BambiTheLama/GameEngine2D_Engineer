@@ -3,8 +3,7 @@
 #include <math.h>
 #include "../core/Controllers/AnimationController.h"
 #include "../core/Properties.h"
-#include "../json.hpp"
-
+#include "json.hpp"
 
 /// <summary>
 /// Zwraca kat od obiektu do pozycji kursora

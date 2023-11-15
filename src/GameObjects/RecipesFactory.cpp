@@ -1,6 +1,6 @@
 #include "RecipesFactory.h"
 #include <fstream>
-#include "../json.hpp"
+#include "json.hpp"
 
 RecipesFactory* RecipesFactory::recipesFactory = NULL;
 

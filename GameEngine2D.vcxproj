@@ -106,6 +106,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>Default</LanguageStandard>
+      <AdditionalIncludeDirectories>packages/lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -217,7 +218,6 @@
     <ClInclude Include="src\core\Engine.h" />
     <ClInclude Include="src\core\Properties.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
-    <ClInclude Include="src\core\Scenes\Game\FastNoiseLite.h" />
     <ClInclude Include="src\core\Scenes\Game\FourTree.h" />
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />
     <ClInclude Include="src\core\Scenes\Game\PerlinNoice.h" />
@@ -263,7 +263,6 @@
     <ClInclude Include="src\GameObjects\Projectals\Projectal.h" />
     <ClInclude Include="src\GameObjects\ItemFactory.h" />
     <ClInclude Include="src\GameObjects\RecipesFactory.h" />
-    <ClInclude Include="src\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

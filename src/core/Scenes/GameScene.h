@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Game/ObjectHandler.h"
-#include "../../json.hpp"
+#include "json.hpp"
 #include "Game/PerlinNoice.h"
 #include <thread>
 #include <mutex>

@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "../../json.hpp"
+#include "json.hpp"
 #include "Collider.h"
 #include <math.h>
 class HitAble;

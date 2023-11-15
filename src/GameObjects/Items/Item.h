@@ -1,6 +1,6 @@
 #pragma once
 #include "../GameObject.h"
-#include "../../json.hpp"
+#include "json.hpp"
 
 enum class FaceSide {
     left,right,up,down

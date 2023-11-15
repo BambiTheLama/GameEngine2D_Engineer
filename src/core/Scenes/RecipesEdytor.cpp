@@ -1,5 +1,5 @@
 #include "RecipesEdytor.h"
-#include "../../json.hpp"
+#include "json.hpp"
 #include <fstream>
 #include "../../GameObjects/ItemFactory.h"
 #include "../Elements/LineColliderCheckBox.h"

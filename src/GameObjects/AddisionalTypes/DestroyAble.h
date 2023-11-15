@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include <string>
-#include "../../json.hpp"
+#include "json.hpp"
 /// <summary>
 /// Enum odpowiadajacy ¿e to jakie narzêdzie mo¿e zniszczyæ jaki blok
 /// </summary>

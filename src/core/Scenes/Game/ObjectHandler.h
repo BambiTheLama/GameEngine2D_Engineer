@@ -5,7 +5,7 @@
 #include "../../../GameObjects/AddisionalTypes/UserUI.h"
 #include "../../../GameObjects/Blocks/Block.h"
 #include "FourTree.h"
-#include "../../../json.hpp"
+#include "json.hpp"
 #include "PerlinNoice.h"
 #include "FastNoiseLite.h"
 #define chunkXPerFile 3

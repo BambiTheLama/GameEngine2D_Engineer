@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Game/PerlinNoice.h"
-#include "Game/FastNoiseLite.h"
+#include "FastNoiseLite.h"
 class TestScene :
     public Scene
 {

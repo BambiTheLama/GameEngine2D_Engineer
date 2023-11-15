@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "../../Controllers/SpriteController.h"
 #include "../../../GameObjects/Items/Tool/ToolItem.h"
-#include "../../../json.hpp"
+#include "json.hpp"
 #include "../../../GameObjects/Items/Weapon/Ammo.h"
 #include <list>
 #include <vector>
