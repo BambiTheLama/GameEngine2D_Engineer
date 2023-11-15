@@ -19,12 +19,13 @@ class GameScene :
     Rectangle cameraPos;
     std::list<ObjectHandler*> handler;
     std::list<ObjectHandler*> handlersToDelete;
+    std::list<ObjectHandler*> handlersToAdd;
     std::list<GameObject*> toDelete;
     std::list<GameObject*> allObj;
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
-    const int renderDystance = 2;
+    const int renderDystance = 1;
     std::string worldName;
     std::string chunksFile;
     std::thread mapLoader;

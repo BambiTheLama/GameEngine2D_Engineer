@@ -35,7 +35,7 @@ private:
     Block* blocks[h][w];
 public:
     ObjectHandler(int chunkX, int chunkY, nlohmann::json j);
-    ObjectHandler(int chunkX, int chunkY, FastNoiseLite& tarain, FastNoiseLite& water, FastNoiseLite& bioms);
+    ObjectHandler(int chunkX, int chunkY, float seed);
     ObjectHandler(int chunkX, int chunkY);
     /// <summary>
     /// Usuwa wszystkie obiekty co zosta³y w kolekcjach
@@ -151,5 +151,10 @@ public:
     int getChunkX() { return chunkX; }
 
     int getChunkY() { return chunkY; }
+
+    void generateForestBiom(BlockFactory* factory, Vector2 pos, float waterV, float terrainV,int x,int y);
+    void generateSnowBiom(BlockFactory* factory  , Vector2 pos, float waterV, float terrainV,int x,int y);
+    void generateStoneBiom(BlockFactory* factory , Vector2 pos, float waterV, float terrainV,int x,int y);
+    void generateDesertBiom(BlockFactory* factory, Vector2 pos, float waterV, float terrainV,int x,int y);
 };
 

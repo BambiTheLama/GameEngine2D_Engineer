@@ -79,14 +79,21 @@ bool isTheSameBlock(Rectangle pos, unsigned int ID)
 
 void Block::generateTexturePos()
 {
+	if (sprite->getTexture().width <= 32)
+	{
+		texturePos = { 0,0,(float)sprite->getTexture().width,(float)sprite->getTexture().height };
+		return;
+	}
 	Rectangle pos = getPos();
 	unsigned int ID = getID();
+	float size = sprite->getTexture().width / 4;
+
 	right = isTheSameBlock({ pos.x + tileSize + pos.width / 2,pos.y,1,1 }, ID);
 	left = isTheSameBlock({ pos.x - tileSize + pos.width / 2,pos.y,1,1 }, ID);
 	down = isTheSameBlock({ pos.x,pos.y + tileSize + pos.height / 2,1,1 }, ID);
 	up = isTheSameBlock({ pos.x,pos.y - tileSize + pos.height / 2,1,1 }, ID);
 
-	float size = sprite->getTexture().width / 4;
+
 
 
 	if (up) 

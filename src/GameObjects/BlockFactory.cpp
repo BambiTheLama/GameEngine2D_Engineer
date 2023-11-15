@@ -11,7 +11,8 @@ BlockFactory::BlockFactory()
 	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 20 ,"Grass"));
 	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 30 ,"Dirt"));
 	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Pickaxe, 10 ,"Stone"));
-
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Shovel, 10, "Snow"));
+	objects.push_back(new Block({ 0,0,tileSize,tileSize }, ToolType::Pickaxe, 10, "Ice"));
 
 	for (int i = 0; i < objects.size(); i++)
 	{

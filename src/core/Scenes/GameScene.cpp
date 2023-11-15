@@ -13,8 +13,6 @@ GameScene* GameScene::game = NULL;
 
 GameScene::GameScene(std::string worldName)
 {
-
-	
 	struct stat sb;
 
 	const char* savePath = "Saves";
@@ -34,7 +32,7 @@ GameScene::GameScene(std::string worldName)
 	//handler.push_back(new ObjectHandler(0, 0));
 
 	GameObject *p = new Player();
-	addObject(p);
+
 	cameraTarget = p;
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
@@ -42,7 +40,7 @@ GameScene::GameScene(std::string worldName)
 	camera.offset = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f; 
-	start();
+
 
 	this->worldName = worldName;
 
@@ -66,7 +64,14 @@ GameScene::GameScene(std::string worldName)
 		updatePos(cameraTarget);
 	}
 	
+	for (auto h : handlersToAdd)
+	{
+		handler.push_back(h);
 
+	}
+	handlersToAdd.clear();
+	start();
+	addObject(p);
 }
 
 
@@ -135,15 +140,30 @@ void GameScene::update(float deltaTime)
 		handler.remove(h);
 		delete h;
 	}
-
 	handlersToDelete.clear();
+
+	if (handlersToAdd.size() > 0)
+	{
+		for (auto h : handlersToAdd)
+		{
+			h->start();
+			handler.push_back(h);
+		}
+		handlersToAdd.clear();
+		for (auto h : handler)
+			h->reloadBlock();
+	}
+
+	
+
+
 	if (!loadingMap)
 	{
 		if (this->chunkX != chunkX || this->chunkY != chunkY)
 		{
 			this->chunkX = chunkX;
 			this->chunkY = chunkY;
-
+			deleteChunksNotCloseToTarget();
 			if (mapLoader.joinable())
 				mapLoader.join();
 			mapLoader = std::thread(&GameScene::mapLoaderFun, this);
@@ -312,6 +332,7 @@ void GameScene::deleteChunksNotCloseToTarget()
 	for (auto h : handlersToDelete)
 	{
 		saveChunk(h);
+		this->handlersToDelete.remove(h);
 		this->handlersToDelete.push_back(h);
 	}
 }
@@ -332,10 +353,6 @@ void GameScene::loadChunksCloseToTarget()
 		{
 			loadChunk(x, y);
 		}
-
-	for (auto h : handler)
-		h->reloadBlock();
-
 }
 
 
@@ -372,16 +389,7 @@ void GameScene::printfChunk(GameObject* obj)
 
 void GameScene::generateChunk(int x, int y)
 {
-	FastNoiseLite terain;
-	FastNoiseLite water;
-	FastNoiseLite bioms;
-	terain.SetSeed(666);
-	water.SetSeed(2137);
-	water.SetFrequency(0.0001f);
-	water.SetFractalType(FastNoiseLite::FractalType_FBm);
-	water.SetFractalOctaves(8);
-	water.SetFractalGain(0.5f);
-	bioms.SetSeed(69);
+
 	std::string name = "/" + chunkName(x, y);
 	nlohmann::json j;
 	std::ifstream reader;
@@ -396,10 +404,13 @@ void GameScene::generateChunk(int x, int y)
 	}
 	else
 	{
-		h = new ObjectHandler(x, y, terain, water, bioms);
+		h = new ObjectHandler(x, y, 666);
 	}
-	if(h)
-		handler.push_back(h);
+	if (h)
+	{
+		handlersToAdd.push_back(h);
+	}
+
 }
 void GameScene::loadChunk(int x, int y)
 {
@@ -423,7 +434,10 @@ void GameScene::loadChunk(int x, int y)
 		generateChunk(x, y);
 	}
 	if (h)
-		handler.push_back(h);
+	{
+		handlersToAdd.push_back(h);
+	}
+
 
 }
 void GameScene::deleteChunk(ObjectHandler* h)
@@ -478,6 +492,5 @@ void GameScene::mapLoaderFun()
 {
 	loadingMap = true;
 	loadChunksCloseToTarget();
-	deleteChunksNotCloseToTarget();
 	loadingMap = false;
 }

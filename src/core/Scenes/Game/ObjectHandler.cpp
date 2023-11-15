@@ -94,8 +94,33 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	for (auto o : obj)
 		addObject(o);
 }
-ObjectHandler::ObjectHandler(int chunkX, int chunkY, FastNoiseLite& tarain, FastNoiseLite& water, FastNoiseLite& bioms)
+ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 {
+	FastNoiseLite terrain;
+	terrain.SetSeed(seed);
+
+	FastNoiseLite water;
+	water.SetSeed(seed + 1);
+	water.SetFrequency(0.0002f);
+	water.SetFractalType(FastNoiseLite::FractalType_FBm);
+	water.SetFractalOctaves(7);
+	water.SetFractalGain(0.5f);
+
+	FastNoiseLite bioms;
+	bioms.SetSeed(seed + 2);
+	bioms.SetFrequency(0.000069f);
+	bioms.SetFractalType(FastNoiseLite::FractalType_FBm);
+	bioms.SetFractalOctaves(7);
+	bioms.SetFractalGain(0.47f);
+	bioms.SetFractalLacunarity(1.75f);
+
+	FastNoiseLite temperature;
+	temperature.SetSeed(seed + 1);
+	temperature.SetFractalType(FastNoiseLite::FractalType_FBm);
+	temperature.SetFractalOctaves(4);
+	temperature.SetFrequency(0.0002137f);
+	temperature.SetFractalWeightedStrength(0.1237f);
+
 	this->x = chunkX * tileSize * (w - 1);
 	this->y = chunkY * tileSize * (h - 1);
 	this->chunkX = chunkX;
@@ -105,40 +130,30 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, FastNoiseLite& tarain, Fast
 	for (int x = 0; x < w; x++)
 		for (int y = 0; y < h; y++)
 		{
-			int id = 0;
+
 			Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
 			float waterV = water.GetNoise(pos.x, pos.y);
-			float terainV = tarain.GetNoise(pos.x, pos.y);
+			float terainV = terrain.GetNoise(pos.x, pos.y);
 			float biomsV = bioms.GetNoise(pos.x, pos.y);
-			if (waterV < 0)
-				id = 0;
-			else
+			float temperatureV = temperature.GetNoise(pos.x, pos.y);
+			int nbioms = 4;
+
+			if ((biomsV > 0.5 && temperatureV > 0.8) || (biomsV > 0.3 && temperatureV > 0.9))
 			{
-				if (waterV < 0.069)
-					id = 1;
-				else
-					id = 2;
+				generateDesertBiom(factory, pos, waterV, terainV, x, y);
 			}
 
-			blocks[y][x] = factory->getObject(id);
-			blocks[y][x]->setMovePos(pos);
-			if (id == 2)
+			else if ((biomsV < -0.5 && temperatureV < -0.4) || (biomsV < -0.3 && temperatureV < -0.6))
 			{
-				GameObject* o = NULL;
-				if ((int)(biomsV * 10000) % 100 == 0)
-				{
-					o = Plants->getObject(0);
-				}
-				else if ((int)(biomsV * 10000) % 400 == 2)
-				{
-					o = Plants->getObject(1);
-				}
-				if (o)
-				{
-					o->setMovePos({ pos });
-					addObject(o);
-					o->generateChunk();
-				}
+				generateSnowBiom(factory, pos, waterV, terainV, x, y);
+			}
+			else if (biomsV < 0.5 && biomsV > -0.5 && temperatureV < 0.6 && temperatureV > -0.2)
+			{
+				generateForestBiom(factory, pos, waterV, terainV, x, y);
+			}
+			else 
+			{
+				generateStoneBiom(factory, pos, waterV, terainV, x, y);
 			}
 		}
 }
@@ -610,4 +625,74 @@ bool ObjectHandler::hasObjectAtList(GameObject* obj)
 bool ObjectHandler::isObjAtThisChunk(Rectangle pos)
 {
 	return CheckCollisionRecs(pos, { (float)x,(float)y,tileSize * (w - 1),tileSize * (h - 1) });
+}
+void ObjectHandler::generateForestBiom(BlockFactory *factory,Vector2 pos,float waterV,float terrainV, int x, int y)
+{
+
+	int id = 0;
+	if (waterV < 0)
+		id = 0;
+	else
+	{
+		if (waterV < 0.069)
+			id = 1;
+		else
+			id = 2;
+	}
+
+	blocks[y][x] = factory->getObject(id);
+	blocks[y][x]->setMovePos(pos);
+	if (id == 2)
+	{
+		GameObject* o = NULL;
+		if ((int)(terrainV * 10000) % 100 == 0)
+		{
+			o = Plants->getObject(0);
+		}
+		else if ((int)(terrainV * 10000) % 400 == 2)
+		{
+			o = Plants->getObject(1);
+		}
+		if (o)
+		{
+			o->setMovePos({ pos });
+			addObject(o);
+			o->generateChunk();
+		}
+	}
+}
+void ObjectHandler::generateSnowBiom(BlockFactory* factory, Vector2 pos, float waterV, float terrainV, int x, int y)
+{
+	int id = 0;
+	if (waterV < -0.09)
+		id = 0;
+	else if (waterV < 0)
+		id = 6;
+	else
+		id = 5;
+
+	blocks[y][x] = factory->getObject(id);
+	blocks[y][x]->setMovePos(pos);
+}
+void ObjectHandler::generateStoneBiom(BlockFactory* factory, Vector2 pos, float waterV, float terrainV, int x, int y)
+{
+	int id = 0;
+	if (waterV < 0)
+		id = 0;
+	else
+		id = 4;
+
+	blocks[y][x] = factory->getObject(id);
+	blocks[y][x]->setMovePos(pos);
+}
+void ObjectHandler::generateDesertBiom(BlockFactory* factory, Vector2 pos, float waterV, float terrainV,int x, int y)
+{
+	int id = 0;
+	if (waterV < 0)
+		id = 0;
+	else
+		id = 1;
+
+	blocks[y][x] = factory->getObject(id);
+	blocks[y][x]->setMovePos(pos);
 }
