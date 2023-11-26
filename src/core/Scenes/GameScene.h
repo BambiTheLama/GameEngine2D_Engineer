@@ -25,7 +25,7 @@ class GameScene :
     GameObject* cameraTarget;
     std::list<UserUI*> userUI;
     static GameScene* game;
-    const int renderDystance = 1;
+    const int renderDystance = 2;
     std::string worldName;
     std::string chunksFile;
     std::thread mapLoader;

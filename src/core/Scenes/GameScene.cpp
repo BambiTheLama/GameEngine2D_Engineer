@@ -146,12 +146,18 @@ void GameScene::update(float deltaTime)
 	{
 		for (auto h : handlersToAdd)
 		{
-			h->start();
 			handler.push_back(h);
+			for (auto h2 : handler)
+			{
+				if (((h2->getChunkX() - 1 == h->getChunkX() || h2->getChunkX() + 1 == h->getChunkX()) && h2->getChunkY() == h->getChunkY())
+					|| ((h2->getChunkY() - 1 == h->getChunkY() || h2->getChunkY() + 1 == h->getChunkY()) && h2->getChunkX() == h->getChunkX()))
+					h2->reloadBlock();
+			}
+			h->start();
 		}
+
 		handlersToAdd.clear();
-		for (auto h : handler)
-			h->reloadBlock();
+
 	}
 
 	
@@ -492,5 +498,6 @@ void GameScene::mapLoaderFun()
 {
 	loadingMap = true;
 	loadChunksCloseToTarget();
+	//deleteChunksNotCloseToTarget();
 	loadingMap = false;
 }

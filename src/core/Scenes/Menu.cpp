@@ -4,6 +4,7 @@
 #include "ItemEdytor.h"
 #include "GameScene.h"
 #include "TestScene.h"
+
 Menu::Menu()
 {
 	const int w = 300,h=64;
@@ -12,6 +13,7 @@ Menu::Menu()
 	buttons.push_back(new Button({ 500,400,w,h }, "ITEMS CREATOR"));
 	buttons.push_back(new Button({ 500,500,w,h }, "RECEPIES CREATOR"));
 	SetExitKey(KEY_ESCAPE);
+
 }
 
 Menu::~Menu()
@@ -64,4 +66,5 @@ void Menu::draw()
 {
 	for (auto b : buttons)
 		b->draw();
+	
 }

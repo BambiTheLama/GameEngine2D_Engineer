@@ -5,6 +5,7 @@
 #include <fstream>
 #include "../GameScene.h"
 
+
 ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 {
 	this->x = chunkX * tileSize * (w - 1);
@@ -96,30 +97,47 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 }
 ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 {
-	FastNoiseLite terrain;
-	terrain.SetSeed(seed);
+	FastNoiseLite terrain(seed);
+	terrain.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2S);
+	terrain.SetFrequency(0.0102f);
+	terrain.SetFractalType(FastNoiseLite::FractalType_FBm);
+	terrain.SetFractalOctaves(3);
+	terrain.SetFractalGain(1.48f);
+	terrain.SetFractalLacunarity(10.29f);
+	terrain.SetFractalWeightedStrength(0.0f);
 
-	FastNoiseLite water;
-	water.SetSeed(seed + 1);
-	water.SetFrequency(0.0002f);
+
+	FastNoiseLite water(seed+1);
+	water.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
+	water.SetFrequency(0.000302f);
 	water.SetFractalType(FastNoiseLite::FractalType_FBm);
-	water.SetFractalOctaves(7);
-	water.SetFractalGain(0.5f);
+	water.SetFractalOctaves(6);
+	water.SetFractalGain(0.542f);
+	water.SetFractalLacunarity(0.463f);
+	water.SetFractalWeightedStrength(0.53f);
 
-	FastNoiseLite bioms;
-	bioms.SetSeed(seed + 2);
-	bioms.SetFrequency(0.000069f);
-	bioms.SetFractalType(FastNoiseLite::FractalType_FBm);
-	bioms.SetFractalOctaves(7);
-	bioms.SetFractalGain(0.47f);
-	bioms.SetFractalLacunarity(1.75f);
 
-	FastNoiseLite temperature;
-	temperature.SetSeed(seed + 1);
+
+
+
+
+	FastNoiseLite friendly;
+	friendly.SetSeed(seed + 2);
+	friendly.SetFrequency(0.0000269f);
+	friendly.SetFractalType(FastNoiseLite::FractalType_FBm);
+	friendly.SetFractalOctaves(7);
+	friendly.SetFractalGain(0.47f);
+	friendly.SetFractalLacunarity(1.75f);
+
+	FastNoiseLite temperature(seed + 3);
+	temperature.SetNoiseType(FastNoiseLite::NoiseType_ValueCubic);
 	temperature.SetFractalType(FastNoiseLite::FractalType_FBm);
-	temperature.SetFractalOctaves(4);
-	temperature.SetFrequency(0.0002137f);
-	temperature.SetFractalWeightedStrength(0.1237f);
+	temperature.SetFractalOctaves(3);
+	temperature.SetFrequency(0.0005123f);
+	temperature.SetFractalLacunarity(0.45f);
+	temperature.SetFractalGain(3.18f);
+	temperature.SetFractalWeightedStrength(4.490f);
+
 
 	this->x = chunkX * tileSize * (w - 1);
 	this->y = chunkY * tileSize * (h - 1);
@@ -134,20 +152,19 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 			Vector2 pos = { this->x + x * tileSize,this->y + y * tileSize };
 			float waterV = water.GetNoise(pos.x, pos.y);
 			float terainV = terrain.GetNoise(pos.x, pos.y);
-			float biomsV = bioms.GetNoise(pos.x, pos.y);
+			float friendlyV = friendly.GetNoise(pos.x, pos.y);
 			float temperatureV = temperature.GetNoise(pos.x, pos.y);
 			int nbioms = 4;
 
-			if ((biomsV > 0.5 && temperatureV > 0.8) || (biomsV > 0.3 && temperatureV > 0.9))
+			if ((friendlyV < -0.3 && temperatureV > 0.6) || (friendlyV < -0.1 && temperatureV > 0.8))
 			{
 				generateDesertBiom(factory, pos, waterV, terainV, x, y);
 			}
-
-			else if ((biomsV < -0.5 && temperatureV < -0.4) || (biomsV < -0.3 && temperatureV < -0.6))
+			else if ((friendlyV < -0.3 && temperatureV < -0.4) || (friendlyV < -0.1 && temperatureV < -0.6))
 			{
 				generateSnowBiom(factory, pos, waterV, terainV, x, y);
 			}
-			else if (biomsV < 0.5 && biomsV > -0.5 && temperatureV < 0.6 && temperatureV > -0.2)
+			else if ((friendlyV > 0.0 && temperatureV > -0.3f) || friendlyV > 0.8f)
 			{
 				generateForestBiom(factory, pos, waterV, terainV, x, y);
 			}

@@ -9,7 +9,7 @@
 #include "PerlinNoice.h"
 #include "FastNoiseLite.h"
 #define chunkXPerFile 3
-#define chunkYPerFile 3
+#define chunkYPerFile 2
 #define tileSize 32
 enum class ObjectToGet
 {

@@ -23,15 +23,17 @@ void TestScene::start()
 }
 void TestScene::reloadNoice()
 {
-	FastNoiseLite noise(2137);
-	
-	//noise.SetFractalType(FastNoiseLite::FractalType_Ridged);
-	noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
-	noise.SetFrequency(0.01f);
+	FastNoiseLite noise;
+	int seed = 666;
+
+	noise.SetSeed(seed + 1);
+	noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2S);
+	noise.SetFrequency(0.0010102f);
 	noise.SetFractalType(FastNoiseLite::FractalType_FBm);
-	noise.SetFractalOctaves(octet);
-	noise.SetFractalLacunarity(2.012f);
-	noise.SetFractalGain(scale);
+	noise.SetFractalOctaves(4);
+	noise.SetFractalGain(6.315f);
+	noise.SetFractalLacunarity(0.46f);
+	noise.SetFractalWeightedStrength(-0.34f);
 
 	printf("RELOAD\n");
 	BeginTextureMode(buffor);
@@ -39,7 +41,14 @@ void TestScene::reloadNoice()
 	for (int x = 0; x < 1600; x++)
 		for (int y = 0; y < 900; y++)
 		{
-			float v = 255*(noise.GetNoise(this->x+(float)x, this->y+(float)y)+1)/2;
+			float v = noise.GetNoise(this->x+(float)x, this->y+(float)y);
+			if (v > 1)
+				v = 1;
+			else if (v < -1)
+				v = -1;
+			v += 1;
+			v /= 2;
+			v *= 255;
 			DrawRectangle(x, y, 1, 1, { (unsigned char)v,(unsigned char)v,(unsigned char)v,255 });
 		}
 	EndTextureMode();

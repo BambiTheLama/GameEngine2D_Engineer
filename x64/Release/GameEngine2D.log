@@ -1,0 +1,10 @@
+﻿  TestScene.cpp
+C:\Users\szymek\Desktop\GameEngine2D_Engineer\src\core\Scenes\TestScene.h(11,19): warning C4305: "inicjowanie": obcięcie z "double" do "float"
+C:\Users\szymek\Desktop\GameEngine2D_Engineer\src\core\Scenes\TestScene.cpp(69,15): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\szymek\Desktop\GameEngine2D_Engineer\src\core\Scenes\TestScene.cpp(71,15): warning C4305: "+=": obcięcie z "double" do "float"
+  Trwa generowanie kodu
+  4 of 3453 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    14 functions had inline decision re-evaluated but remain unchanged
+  Zakończono generowanie kodu
+  GameEngine2D.vcxproj -> C:\Users\szymek\Desktop\GameEngine2D_Engineer\x64\Release\GameEngine2D.exe
