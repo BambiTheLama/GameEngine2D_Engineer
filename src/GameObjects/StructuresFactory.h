@@ -1,8 +1,8 @@
 #pragma once
 #include "Factory.h"
-#include "Plants/Plant.h"
+#include "Structures/Structure.h"
 
-#define Plants StructuresFactory::getFactory()
+#define Structures StructuresFactory::getFactory()
 
 class StructuresFactory :
     public Factory

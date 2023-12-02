@@ -22,8 +22,8 @@ GameObject* getObjFromFactory(ObjectType type, int ID)
 		break;
 	case ObjectType::Projectal:
 		break;
-	case ObjectType::Plant:
-		return Plants->getObject(ID);
+	case ObjectType::Structure:
+		return Structures->getObject(ID);
 	default:
 		break;
 	}

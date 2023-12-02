@@ -1,8 +1,8 @@
 #pragma once
-#include "Plant.h"
+#include "Structure.h"
 
 class Tree :
-    public Plant
+    public Structure
 {
     int age = 0;
     int maxAge = 0;

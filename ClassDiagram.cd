@@ -35,18 +35,18 @@
       <FileName>src\GameObjects\Player\Eq.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Plant" Collapsed="true">
+  <Class Name="Structure" Collapsed="true">
     <Position X="16.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAQAAAAAAAAAAAAAgIAAAAQARAAAAAAAAAAEAAEAAA=</HashCode>
-      <FileName>src\GameObjects\Plants\Plant.h</FileName>
+      <FileName>src\GameObjects\Structures\Structure.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Tree" Collapsed="true">
     <Position X="16.25" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AkQAAAAAAACAQAAhAAIAIAAQAAEAQAAAAAAAUAAEAAA=</HashCode>
-      <FileName>src\GameObjects\Plants\Tree.h</FileName>
+      <FileName>src\GameObjects\Structures\Tree.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TextParticle" Collapsed="true">

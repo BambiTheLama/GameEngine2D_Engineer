@@ -1,16 +1,16 @@
 #include "StructuresFactory.h"
-#include "Plants/Tree.h"
+#include "Structures/Tree.h"
 StructuresFactory* StructuresFactory::structuresFactory = NULL;
 
 StructuresFactory::StructuresFactory()
 {
 	objects.push_back(new Tree({ 0, 0, 128, 128 }, "Tree"));
-	objects.push_back(new Plant({ 0, 0, 32, 32 }, "Clover"));
+	objects.push_back(new Structure({ 0, 0, 32, 32 }, "Clover"));
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->ID = i;
 	}
-	printf("[FactoryPlant]: Dodano fabryke roslin\n");
+	printf("[StructuresFactory]: Dodano fabryke struktor\n");
 }
 
 StructuresFactory::~StructuresFactory()
@@ -18,7 +18,7 @@ StructuresFactory::~StructuresFactory()
 	for (auto* o : objects)
 		delete o;
 	objects.clear();
-	printf("[FactoryPlant]: Usunieto fabryke roslin\n");
+	printf("[StructuresFactory]: Usunieto fabryke struktor\n");
 }
 
 StructuresFactory* StructuresFactory::getFactory()

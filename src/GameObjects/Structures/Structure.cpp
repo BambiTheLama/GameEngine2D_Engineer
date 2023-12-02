@@ -1,48 +1,48 @@
-#include "Plant.h"
+#include "Structure.h"
 #include "../../core/Scenes/GameScene.h"
 
-Plant::Plant(Plant& plant):GameObject(plant),ItemsDrop(plant),DestroyAble(plant),RectangleCollider(plant)
+Structure::Structure(Structure& plant):GameObject(plant),ItemsDrop(plant),DestroyAble(plant),RectangleCollider(plant)
 {
 	sprite = new SpriteController(*plant.sprite);
 }
 
 
-Plant::Plant(Rectangle pos,std::string name,ToolType tool,int hp,int power):
-	Plant(pos,name,tool,hp,power,{0,0,pos.width,pos.height})
+Structure::Structure(Rectangle pos,std::string name,ToolType tool,int hp,int power):
+	Structure(pos,name,tool,hp,power,{0,0,pos.width,pos.height})
 {
 	std::string path = "Resource/Structure/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 }
 
-Plant::Plant(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision) :
+Structure::Structure(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision) :
 	GameObject(pos,name),ItemsDrop(),DestroyAble(tool,hp,power),RectangleCollider(collision)
 {
 	std::string path = "Resource/Structure/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 }
 
-Plant::Plant(nlohmann::json& j)
+Structure::Structure(nlohmann::json& j)
 	:GameObject(j), ItemsDrop(getType(), getID()), DestroyAble(getType(), getID()), RectangleCollider(getType(), getID())
 {
 
 }
 
-Plant::~Plant()
+Structure::~Structure()
 {
 	delete sprite;
 }
 
-void Plant::update(float deltaTime)
+void Structure::update(float deltaTime)
 {
 
 }
 
-void Plant::draw()
+void Structure::draw()
 {
 	sprite->draw(getPos());
 }
 
-void Plant::damageObject(int power, ToolType type)
+void Structure::damageObject(int power, ToolType type)
 {
 	DestroyAble::damageObject(power, type);
 	if (hp > 0)
@@ -57,12 +57,12 @@ void Plant::damageObject(int power, ToolType type)
 	Game->deleteObject(this);
 }
 
-void Plant::saveToJson(nlohmann::json& j)
+void Structure::saveToJson(nlohmann::json& j)
 {
 	GameObject::saveToJson(j);
 }
 
-void Plant::readFromJson(nlohmann::json& j)
+void Structure::readFromJson(nlohmann::json& j)
 {
 	GameObject::readFromJson(j);
 }

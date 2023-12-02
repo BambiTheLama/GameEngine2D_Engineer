@@ -19,5 +19,7 @@ public:
 	virtual CollisionType getCollisionType() { return CollisionType::Rec; }
 
 	bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
+
+	void setCollision(Rectangle pos) { collision = pos; }
 };
 

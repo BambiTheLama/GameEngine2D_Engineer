@@ -11,25 +11,13 @@
   {
     "Item0": [
       5,
-      4
-    ],
-    "Item1": [
-      1,
-      10
-    ],
-    "finalItemID": 7,
-    "whereToCraft": 0
-  },
-  {
-    "Item0": [
-      5,
-      10
+      16
     ],
     "Item1": [
       6,
-      5
+      6
     ],
-    "finalItemID": 8,
+    "finalItemID": 7,
     "whereToCraft": 0
   },
   {
@@ -41,8 +29,20 @@
       3,
       8
     ],
+    "finalItemID": 8,
+    "howManyItems": 16,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      5,
+      8
+    ],
+    "Item1": [
+      1,
+      10
+    ],
     "finalItemID": 9,
-    "howManyItems": 20,
     "whereToCraft": 0
   },
   {
@@ -83,8 +83,8 @@
   },
   {
     "Item0": [
-      0,
-      1
+      5,
+      4
     ],
     "Item1": [
       1,

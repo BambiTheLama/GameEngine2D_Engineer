@@ -1,7 +1,7 @@
 #include "Tree.h"
 #include "../../core/Scenes/GameScene.h"
 #include "../Particles/ParticleSystem.h"
-Tree::Tree(Tree& tree) :Plant(tree)
+Tree::Tree(Tree& tree) :Structure(tree)
 {
 	age = tree.age;
 	maxAge = tree.maxAge;
@@ -11,20 +11,19 @@ Tree::Tree(Tree& tree) :Plant(tree)
 }
 
 Tree::Tree(Rectangle pos, std::string name, int woodID, int saplingID) :
-	Plant(pos, name,ToolType::Axe,10,10, { 24.0f / 64 * pos.width,48.0f / 64 * pos.height,
+	Structure(pos, name,ToolType::Axe,10,10, { 24.0f / 64 * pos.width,48.0f / 64 * pos.height,
 		16.0f / 64 * pos.width,15.0f / 64 * pos.height })
 
 {
 	maxAge = sprite->getHowMuchFrames()-1;
 	addItemToDrop(0, 100, 1, 2);
-	itemToolRequest = ToolType::Axe;
 	updateDropFromAge();
 	this->woodID = woodID;
 	this->saplingID = saplingID;
 
 }
 Tree::Tree(nlohmann::json& j)
-	:Plant(j)
+	:Structure(j)
 {
 	age = j["Age"][0];
 	maxAge = j["Age"][1];
@@ -136,7 +135,7 @@ void Tree::damageObject(int power, ToolType type)
 
 void Tree::saveToJson(nlohmann::json& j)
 {
-	Plant::saveToJson(j);
+	Structure::saveToJson(j);
 	j["Age"][0] = age;
 	j["Age"][1] = maxAge;
 	j["Timer"] = (int)timer;
@@ -144,7 +143,7 @@ void Tree::saveToJson(nlohmann::json& j)
 
 void Tree::readFromJson(nlohmann::json& j)
 {
-	Plant::readFromJson(j);
+	Structure::readFromJson(j);
 	age = j["Age"][0];
 	maxAge = j["Age"][1];
 	timer = j["Timer"];

@@ -664,11 +664,11 @@ void ObjectHandler::generateForestBiom(BlockFactory *factory,Vector2 pos,float w
 		GameObject* o = NULL;
 		if ((int)(terrainV * 10000) % 100 == 0)
 		{
-			o = Plants->getObject(0);
+			o = Structures->getObject(0);
 		}
 		else if ((int)(terrainV * 10000) % 400 == 2)
 		{
-			o = Plants->getObject(1);
+			o = Structures->getObject(1);
 		}
 		if (o)
 		{

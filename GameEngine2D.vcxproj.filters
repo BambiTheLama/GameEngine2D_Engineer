@@ -46,9 +46,6 @@
     <Filter Include="src\GameObjects\Factories">
       <UniqueIdentifier>{3b5aa74a-1960-465a-a7db-6da15e54d03c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameObjects\Plants">
-      <UniqueIdentifier>{0a805371-c0ea-4618-89cc-b7452ae1b7e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\GameObjects\Items\Tool">
       <UniqueIdentifier>{2b990fa1-2400-4726-92ed-5a783329e06b}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,9 @@
     </Filter>
     <Filter Include="src\GameObjects\AddisionalTypes\Combat">
       <UniqueIdentifier>{1ff24322-1c0f-42fa-b19b-7037eaf57884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Structures">
+      <UniqueIdentifier>{0a805371-c0ea-4618-89cc-b7452ae1b7e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +126,6 @@
     <ClCompile Include="src\GameObjects\Player\Eq.cpp">
       <Filter>src\GameObjects\Player</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\Plants\Plant.cpp">
-      <Filter>src\GameObjects\Plants</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjects\Player\MiniMap.cpp">
       <Filter>src\GameObjects\Player</Filter>
     </ClCompile>
@@ -143,9 +140,6 @@
     </ClCompile>
     <ClCompile Include="src\core\Properties.cpp">
       <Filter>src\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjects\Plants\Tree.cpp">
-      <Filter>src\GameObjects\Plants</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\StructuresFactory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
@@ -264,6 +258,12 @@
     <ClCompile Include="src\core\Scenes\TestScene.cpp">
       <Filter>src\core\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\Structures\Structure.cpp">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Structures\Tree.cpp">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -326,9 +326,6 @@
     <ClInclude Include="src\GameObjects\Player\Eq.h">
       <Filter>src\GameObjects\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\Plants\Plant.h">
-      <Filter>src\GameObjects\Plants</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjects\Player\MiniMap.h">
       <Filter>src\GameObjects\Player</Filter>
     </ClInclude>
@@ -343,9 +340,6 @@
     </ClInclude>
     <ClInclude Include="src\core\Properties.h">
       <Filter>src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjects\Plants\Tree.h">
-      <Filter>src\GameObjects\Plants</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\StructuresFactory.h">
       <Filter>src\GameObjects\Factories</Filter>
@@ -460,6 +454,12 @@
     </ClInclude>
     <ClInclude Include="src\core\Scenes\TestScene.h">
       <Filter>src\core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Structures\Structure.h">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Structures\Tree.h">
+      <Filter>src\GameObjects\Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

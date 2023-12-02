@@ -190,14 +190,14 @@
     <ClCompile Include="src\GameObjects\Particles\ParticleSystem.cpp" />
     <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp" />
     <ClCompile Include="src\GameObjects\StructuresFactory.cpp" />
-    <ClCompile Include="src\GameObjects\Plants\Plant.cpp" />
-    <ClCompile Include="src\GameObjects\Plants\Tree.cpp" />
     <ClCompile Include="src\GameObjects\Player\Eq.cpp" />
     <ClCompile Include="src\GameObjects\Player\MiniMap.cpp" />
     <ClCompile Include="src\GameObjects\Player\Player.cpp" />
     <ClCompile Include="src\GameObjects\Projectals\Projectal.cpp" />
     <ClCompile Include="src\GameObjects\ItemFactory.cpp" />
     <ClCompile Include="src\GameObjects\RecipesFactory.cpp" />
+    <ClCompile Include="src\GameObjects\Structures\Structure.cpp" />
+    <ClCompile Include="src\GameObjects\Structures\Tree.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -258,14 +258,14 @@
     <ClInclude Include="src\GameObjects\Particles\ParticleSystem.h" />
     <ClInclude Include="src\GameObjects\Particles\TextParticle.h" />
     <ClInclude Include="src\GameObjects\StructuresFactory.h" />
-    <ClInclude Include="src\GameObjects\Plants\Plant.h" />
-    <ClInclude Include="src\GameObjects\Plants\Tree.h" />
     <ClInclude Include="src\GameObjects\Player\Eq.h" />
     <ClInclude Include="src\GameObjects\Player\MiniMap.h" />
     <ClInclude Include="src\GameObjects\Player\Player.h" />
     <ClInclude Include="src\GameObjects\Projectals\Projectal.h" />
     <ClInclude Include="src\GameObjects\ItemFactory.h" />
     <ClInclude Include="src\GameObjects\RecipesFactory.h" />
+    <ClInclude Include="src\GameObjects\Structures\Structure.h" />
+    <ClInclude Include="src\GameObjects\Structures\Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

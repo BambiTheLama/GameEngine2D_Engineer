@@ -123,8 +123,10 @@ void GameScene::update(float deltaTime)
 	cameraPos = { camera.target.x - cameraW / 2,camera.target.y - cameraH / 2,cameraW,cameraH };
 	int chunkX = cameraTarget->getChunkX();
 	int chunkY = cameraTarget->getChunkY();
+	Rectangle updatePos = { camera.target.x ,camera.target.y ,(renderDystance * 2 + 2) * ObjectHandler::w * tileSize,(renderDystance * 2 + 2) * ObjectHandler::h * tileSize };
+	updatePos.x -= updatePos.width / 2;
+	updatePos.y -= updatePos.height / 2;
 
-	Rectangle updatePos = { camera.target.x - cameraW ,camera.target.y - cameraH ,cameraW*2,cameraH*2 };
 	cursorPos = GetScreenToWorld2D(GetMousePosition(), camera);
 	std::list<GameObject*> objects = getObjects(updatePos,ObjectToGet::getNoBlocks);
 	for (GameObject* obj : objects)
