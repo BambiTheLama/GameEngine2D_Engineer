@@ -196,6 +196,7 @@
     <ClCompile Include="src\GameObjects\Projectals\Projectal.cpp" />
     <ClCompile Include="src\GameObjects\ItemFactory.cpp" />
     <ClCompile Include="src\GameObjects\RecipesFactory.cpp" />
+    <ClCompile Include="src\GameObjects\Structures\Rock.cpp" />
     <ClCompile Include="src\GameObjects\Structures\Structure.cpp" />
     <ClCompile Include="src\GameObjects\Structures\Tree.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="src\GameObjects\Projectals\Projectal.h" />
     <ClInclude Include="src\GameObjects\ItemFactory.h" />
     <ClInclude Include="src\GameObjects\RecipesFactory.h" />
+    <ClInclude Include="src\GameObjects\Structures\Rock.h" />
     <ClInclude Include="src\GameObjects\Structures\Structure.h" />
     <ClInclude Include="src\GameObjects\Structures\Tree.h" />
   </ItemGroup>

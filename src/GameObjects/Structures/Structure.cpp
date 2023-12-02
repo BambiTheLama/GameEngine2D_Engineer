@@ -21,12 +21,6 @@ Structure::Structure(Rectangle pos, std::string name, ToolType tool, int hp, int
 	sprite = new SpriteController(path.c_str());
 }
 
-Structure::Structure(nlohmann::json& j)
-	:GameObject(j), ItemsDrop(getType(), getID()), DestroyAble(getType(), getID()), RectangleCollider(getType(), getID())
-{
-
-}
-
 Structure::~Structure()
 {
 	delete sprite;

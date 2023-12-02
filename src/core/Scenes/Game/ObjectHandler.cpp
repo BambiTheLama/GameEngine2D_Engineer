@@ -701,6 +701,20 @@ void ObjectHandler::generateStoneBiom(BlockFactory* factory, Vector2 pos, float 
 
 	blocks[y][x] = factory->getObject(id);
 	blocks[y][x]->setMovePos(pos);
+	if (id == 4)
+	{
+		GameObject* o = NULL;
+		if ((int)(terrainV * 10000) % 100 == 0)
+		{
+			o = Structures->getObject(2);
+		}
+		if (o)
+		{
+			o->setMovePos({ pos });
+			addObject(o);
+			o->generateChunk();
+		}
+	}
 }
 void ObjectHandler::generateDesertBiom(BlockFactory* factory, Vector2 pos, float waterV, float terrainV,int x, int y)
 {

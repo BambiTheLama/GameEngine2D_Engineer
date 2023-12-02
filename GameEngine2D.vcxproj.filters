@@ -264,6 +264,9 @@
     <ClCompile Include="src\GameObjects\Structures\Tree.cpp">
       <Filter>src\GameObjects\Structures</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\Structures\Rock.cpp">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -459,6 +462,9 @@
       <Filter>src\GameObjects\Structures</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\Structures\Tree.h">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Structures\Rock.h">
       <Filter>src\GameObjects\Structures</Filter>
     </ClInclude>
   </ItemGroup>

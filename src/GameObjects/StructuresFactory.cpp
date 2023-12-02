@@ -1,11 +1,13 @@
 #include "StructuresFactory.h"
 #include "Structures/Tree.h"
+#include "Structures/Rock.h"
 StructuresFactory* StructuresFactory::structuresFactory = NULL;
 
 StructuresFactory::StructuresFactory()
 {
-	objects.push_back(new Tree({ 0, 0, 128, 128 }, "Tree"));
+	objects.push_back(new Tree({ 0, 0, 128, 128 }, "Tree", 0, 0));
 	objects.push_back(new Structure({ 0, 0, 32, 32 }, "Clover"));
+	objects.push_back(new Rock({ 0, 0, 64, 64 }, "Rock", 3));
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->ID = i;

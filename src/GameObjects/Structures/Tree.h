@@ -13,8 +13,6 @@ class Tree :
 public:
     Tree(Rectangle pos,std::string name,int woodID=0,int saplingID=0);
 
-    Tree(nlohmann::json& j);
-
     ~Tree();
 
     void start();

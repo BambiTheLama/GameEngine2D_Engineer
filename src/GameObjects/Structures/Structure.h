@@ -12,8 +12,6 @@ public:
 
     Structure(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision);
 
-    Structure(nlohmann::json& j);
-
     virtual ~Structure();
 
     virtual void update(float deltaTime);

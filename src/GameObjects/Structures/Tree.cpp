@@ -5,9 +5,9 @@ Tree::Tree(Tree& tree) :Structure(tree)
 {
 	age = tree.age;
 	maxAge = tree.maxAge;
-	updateDropFromAge();
 	woodID = tree.woodID;
 	saplingID = tree.saplingID;
+	updateDropFromAge();
 }
 
 Tree::Tree(Rectangle pos, std::string name, int woodID, int saplingID) :
@@ -16,19 +16,10 @@ Tree::Tree(Rectangle pos, std::string name, int woodID, int saplingID) :
 
 {
 	maxAge = sprite->getHowMuchFrames()-1;
-	addItemToDrop(0, 100, 1, 2);
-	updateDropFromAge();
 	this->woodID = woodID;
 	this->saplingID = saplingID;
-
-}
-Tree::Tree(nlohmann::json& j)
-	:Structure(j)
-{
-	age = j["Age"][0];
-	maxAge = j["Age"][1];
-	timer = j["Timer"];
 	updateDropFromAge();
+
 }
 
 Tree::~Tree() 
@@ -82,6 +73,12 @@ void Tree::updateDropFromAge()
 	{
 		addItemToDrop(woodID, 100, 5, 8);
 		addItemToDrop(saplingID, 100, 1, 1);
+		addItemToDrop(saplingID, 50, 1, 1);
+	}
+	else
+	{
+		addItemToDrop(woodID, 100, 8, 16);
+		addItemToDrop(saplingID, 100, 1, 3);
 		addItemToDrop(saplingID, 50, 1, 1);
 	}
 
