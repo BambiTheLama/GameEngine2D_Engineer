@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "../core/Scenes/GameScene.h"
 #include "ItemFactory.h"
-#include "PlantsFactory.h"
+#include "StructuresFactory.h"
 #include "BlockFactory.h"
 
 GameObject* getObjFromFactory(ObjectType type, int ID)

@@ -1,8 +1,8 @@
-#include "PlantsFactory.h"
+#include "StructuresFactory.h"
 #include "Plants/Tree.h"
-PlantsFactory* PlantsFactory::plantFactory = NULL;
+StructuresFactory* StructuresFactory::structuresFactory = NULL;
 
-PlantsFactory::PlantsFactory()
+StructuresFactory::StructuresFactory()
 {
 	objects.push_back(new Tree({ 0, 0, 128, 128 }, "Tree"));
 	objects.push_back(new Plant({ 0, 0, 32, 32 }, "Clover"));
@@ -13,7 +13,7 @@ PlantsFactory::PlantsFactory()
 	printf("[FactoryPlant]: Dodano fabryke roslin\n");
 }
 
-PlantsFactory::~PlantsFactory()
+StructuresFactory::~StructuresFactory()
 {
 	for (auto* o : objects)
 		delete o;
@@ -21,21 +21,21 @@ PlantsFactory::~PlantsFactory()
 	printf("[FactoryPlant]: Usunieto fabryke roslin\n");
 }
 
-PlantsFactory* PlantsFactory::getFactory()
+StructuresFactory* StructuresFactory::getFactory()
 {
-	if (plantFactory == NULL)
-		plantFactory = new PlantsFactory();
-	return plantFactory;
+	if (structuresFactory == NULL)
+		structuresFactory = new StructuresFactory();
+	return structuresFactory;
 }
 
-void PlantsFactory::clearFactory()
+void StructuresFactory::clearFactory()
 {
-	if (plantFactory)
-		delete plantFactory;
+	if (structuresFactory)
+		delete structuresFactory;
 
 }
 
-Plant* PlantsFactory::getObject(int ID)
+GameObject* StructuresFactory::getObject(int ID)
 {
 	if (ID < 0 || ID >= objects.size())
 		return NULL;

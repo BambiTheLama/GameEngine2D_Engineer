@@ -10,14 +10,14 @@ Plant::Plant(Plant& plant):GameObject(plant),ItemsDrop(plant),DestroyAble(plant)
 Plant::Plant(Rectangle pos,std::string name,ToolType tool,int hp,int power):
 	Plant(pos,name,tool,hp,power,{0,0,pos.width,pos.height})
 {
-	std::string path = "Resource/Plants/" + name + ".png";
+	std::string path = "Resource/Structure/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 }
 
 Plant::Plant(Rectangle pos, std::string name, ToolType tool, int hp, int power,Rectangle collision) :
 	GameObject(pos,name),ItemsDrop(),DestroyAble(tool,hp,power),RectangleCollider(collision)
 {
-	std::string path = "Resource/Plants/" + name + ".png";
+	std::string path = "Resource/Structure/" + name + ".png";
 	sprite = new SpriteController(path.c_str());
 }
 

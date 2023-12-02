@@ -189,7 +189,7 @@
     <ClCompile Include="src\GameObjects\Particles\Particle.cpp" />
     <ClCompile Include="src\GameObjects\Particles\ParticleSystem.cpp" />
     <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp" />
-    <ClCompile Include="src\GameObjects\PlantsFactory.cpp" />
+    <ClCompile Include="src\GameObjects\StructuresFactory.cpp" />
     <ClCompile Include="src\GameObjects\Plants\Plant.cpp" />
     <ClCompile Include="src\GameObjects\Plants\Tree.cpp" />
     <ClCompile Include="src\GameObjects\Player\Eq.cpp" />
@@ -257,7 +257,7 @@
     <ClInclude Include="src\GameObjects\Particles\Particle.h" />
     <ClInclude Include="src\GameObjects\Particles\ParticleSystem.h" />
     <ClInclude Include="src\GameObjects\Particles\TextParticle.h" />
-    <ClInclude Include="src\GameObjects\PlantsFactory.h" />
+    <ClInclude Include="src\GameObjects\StructuresFactory.h" />
     <ClInclude Include="src\GameObjects\Plants\Plant.h" />
     <ClInclude Include="src\GameObjects\Plants\Tree.h" />
     <ClInclude Include="src\GameObjects\Player\Eq.h" />

@@ -7,10 +7,11 @@ class Tree :
     int age = 0;
     int maxAge = 0;
     int woodID = 0;
+    int saplingID = 0;
     float timer = 60;
     Tree(Tree& tree);
 public:
-    Tree(Rectangle pos,std::string name);
+    Tree(Rectangle pos,std::string name,int woodID=0,int saplingID=0);
 
     Tree(nlohmann::json& j);
 

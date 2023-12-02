@@ -147,7 +147,7 @@
     <ClCompile Include="src\GameObjects\Plants\Tree.cpp">
       <Filter>src\GameObjects\Plants</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjects\PlantsFactory.cpp">
+    <ClCompile Include="src\GameObjects\StructuresFactory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Factory.cpp">
@@ -347,7 +347,7 @@
     <ClInclude Include="src\GameObjects\Plants\Tree.h">
       <Filter>src\GameObjects\Plants</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjects\PlantsFactory.h">
+    <ClInclude Include="src\GameObjects\StructuresFactory.h">
       <Filter>src\GameObjects\Factories</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\AddisionalTypes\DestroyAble.h">

@@ -1,7 +1,7 @@
 #include "ItemsDrop.h"
 #include "../GameObject.h"
 #include "../ItemFactory.h"
-#include "../PlantsFactory.h"
+#include "../StructuresFactory.h"
 #include "../BlockFactory.h"
 
 void ItemsDrop::copyDataFrom(ItemsDrop& drops)

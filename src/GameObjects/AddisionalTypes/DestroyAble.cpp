@@ -1,7 +1,7 @@
 #include "DestroyAble.h"
 #include "../GameObject.h"
 #include "../ItemFactory.h"
-#include "../PlantsFactory.h"
+#include "../StructuresFactory.h"
 #include "../BlockFactory.h"
 
 std::string toolTypeDescription()

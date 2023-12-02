@@ -6,9 +6,11 @@ Tree::Tree(Tree& tree) :Plant(tree)
 	age = tree.age;
 	maxAge = tree.maxAge;
 	updateDropFromAge();
+	woodID = tree.woodID;
+	saplingID = tree.saplingID;
 }
 
-Tree::Tree(Rectangle pos, std::string name) :
+Tree::Tree(Rectangle pos, std::string name, int woodID, int saplingID) :
 	Plant(pos, name,ToolType::Axe,10,10, { 24.0f / 64 * pos.width,48.0f / 64 * pos.height,
 		16.0f / 64 * pos.width,15.0f / 64 * pos.height })
 
@@ -17,6 +19,8 @@ Tree::Tree(Rectangle pos, std::string name) :
 	addItemToDrop(0, 100, 1, 2);
 	itemToolRequest = ToolType::Axe;
 	updateDropFromAge();
+	this->woodID = woodID;
+	this->saplingID = saplingID;
 
 }
 Tree::Tree(nlohmann::json& j)
@@ -66,11 +70,22 @@ void Tree::updateDropFromAge()
 {
 	clearItemsDrop();
 	if (age == 0)
+	{
 		addItemToDrop(woodID, 100, 1, 1);
+		addItemToDrop(saplingID, 5, 0, 1);
+	}
 	else if (age == 1)
+	{
 		addItemToDrop(woodID, 100, 2, 4);
+		addItemToDrop(saplingID, 80, 1, 1);
+	}
 	else if (age == 2)
+	{
 		addItemToDrop(woodID, 100, 5, 8);
+		addItemToDrop(saplingID, 100, 1, 1);
+		addItemToDrop(saplingID, 50, 1, 1);
+	}
+
 }
 
 void Tree::draw()
@@ -133,4 +148,5 @@ void Tree::readFromJson(nlohmann::json& j)
 	age = j["Age"][0];
 	maxAge = j["Age"][1];
 	timer = j["Timer"];
+	updateDropFromAge();
 }

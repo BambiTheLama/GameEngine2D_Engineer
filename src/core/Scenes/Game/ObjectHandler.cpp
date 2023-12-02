@@ -1,7 +1,7 @@
 #include "ObjectHandler.h"
 #include "../../../GameObjects/BlockFactory.h"
 #include "PerlinNoice.h"
-#include "../../../GameObjects/PlantsFactory.h"
+#include "../../../GameObjects/StructuresFactory.h"
 #include <fstream>
 #include "../GameScene.h"
 

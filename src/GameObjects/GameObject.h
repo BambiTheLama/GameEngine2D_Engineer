@@ -132,7 +132,7 @@ public:
 	friend class Factory;
 	friend class BlockFactory;
 	friend class ItemFactory;
-	friend class PlantsFactory;
+	friend class StructuresFactory;
 };
 
 GameObject* getObjFromFactory(ObjectType type, int ID);
