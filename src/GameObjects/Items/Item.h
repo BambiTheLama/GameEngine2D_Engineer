@@ -41,7 +41,7 @@ public:
 
     virtual bool addToStack(Item* i) { return false; }
 
-    virtual void addToStack(int i) {}
+    virtual int addToStack(int i) { return i; }
 
     virtual void removeFromStack(int i){}
 

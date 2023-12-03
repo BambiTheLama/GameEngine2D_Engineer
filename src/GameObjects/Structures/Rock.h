@@ -20,6 +20,8 @@ public:
 
     virtual void damageObject(int power, ToolType type);
 
+    void spawnItem(Vector2 pos);
+
     void saveToJson(nlohmann::json& j);
 
     virtual void readFromJson(nlohmann::json& j);

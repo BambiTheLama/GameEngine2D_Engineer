@@ -10,14 +10,14 @@ struct DropItem
 	int ID;				//ID itemu którego mo¿emy dostaæ
 	int min;			//Minimalna iloœæ itemów
 	int max;			//Maksymalna iloœæ itemów 
-	float dropChanse;	//Pomiêdzy <0;100> wyra¿ona w % dok³adkoœæ do 0.0001
+	float dropChanse;	//Pomiêdzy <0;100> wyra¿ona w % dok³adkoœæ do 0.001
 	bool wasDroped() {
-		return (rand() % 1000000 / 10000) < dropChanse;
+		return ((float)(rand() % 100) + (float)(rand() % 1000) / 1000.f) < dropChanse;
 	}
 	int howMuch() {
 		if (min >= max)
 			return min;
-		return rand() % (max - min) + min;
+		return rand() % (max - min + 1) + min;
 	}
 
 };

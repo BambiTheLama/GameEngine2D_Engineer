@@ -25,7 +25,7 @@ public:
 
     virtual bool addToStack(Item* i);
 
-    virtual void addToStack(int i) { stackSize += i; }
+    virtual int addToStack(int i);
 
     virtual void removeFromStack(int i) { stackSize -= i; }
 

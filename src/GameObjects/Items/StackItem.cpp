@@ -68,6 +68,17 @@ bool StackItem::addToStack(Item* item)
 	}
 	return false;
 }
+int StackItem::addToStack(int i)
+{ 
+	if (stackSize + i <= stackMaxSize)
+	{
+		stackSize += i;
+		return 0;
+	}
+	i = stackSize + i - stackMaxSize;
+	stackSize = stackMaxSize;
+	return i;
+}
 
 std::string StackItem::getDesctription()
 {

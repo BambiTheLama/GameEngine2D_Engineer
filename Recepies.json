@@ -101,5 +101,65 @@
     "finalItemID": 5,
     "howManyItems": 4,
     "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      5,
+      8
+    ],
+    "Item1": [
+      3,
+      10
+    ],
+    "finalItemID": 14,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      5,
+      8
+    ],
+    "Item1": [
+      3,
+      10
+    ],
+    "finalItemID": 15,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      5,
+      8
+    ],
+    "Item1": [
+      3,
+      10
+    ],
+    "finalItemID": 16,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      5,
+      8
+    ],
+    "Item1": [
+      3,
+      10
+    ],
+    "finalItemID": 17,
+    "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      5,
+      8
+    ],
+    "Item1": [
+      3,
+      10
+    ],
+    "finalItemID": 18,
+    "whereToCraft": 0
   }
 ]

@@ -42,7 +42,7 @@ ItemsDrop::ItemsDrop(ObjectType type, int ID)
 
 }
 
-void ItemsDrop::addItemToDrop(int ID, float chanse, int max, int min)
+void ItemsDrop::addItemToDrop(int ID, float chanse, int min, int max)
 {
 	DropItem drop;
 	drop.ID = ID;
@@ -67,15 +67,15 @@ std::vector<Item*> ItemsDrop::getDrop()
 		{
 			while (n > 0)
 			{
-				item->addToStack(n);
-				if (item->getStackMaxSize() > n)
+				int left = item->addToStack(n);
+				if (left > 0)
 				{
-					n -= item->getStackMaxSize();
+					if (left == n)
+						break;
 					item = Items->getObject(i.ID);
 					itemsToReturn.push_back(item);
 				}
-				else
-					n = 0;
+				n = left;
 			}
 
 		}

@@ -38,8 +38,6 @@ void FourTree::addObj(GameObject* obj)
 }
 void FourTree::removeObj(GameObject* obj)
 {
-	if (!hasObj(obj)) return;
-	
 	objects.remove(obj);
 
 	if (tree == NULL) return;
@@ -155,7 +153,7 @@ void FourTree::draw()
 		DrawRectangleLinesEx(pos, 2, BLUE);
 		DrawText(TextFormat("%d", objects.size()), pos.x, pos.y, 32, RED);
 		for (auto o : objects)
-			DrawRectangleRec(o->getPos(), {255,212,0,169});
+			DrawRectangleRec(o->getPos(), {255,212,0,12});
 	}
 
 }

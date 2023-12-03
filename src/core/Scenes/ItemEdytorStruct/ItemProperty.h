@@ -14,6 +14,8 @@ enum class ItemClass
 	ToolItem,
 	Bow,
 	Ammo,
+	Sapling,
+	Wall,
 
 
 	EnumSize

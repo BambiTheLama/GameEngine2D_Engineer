@@ -31,6 +31,7 @@ void Rock::draw()
 	if (collidersToDraw)
 	{
 		RectangleCollider::draw(this);
+		DrawText(TextFormat("%d %d", chunkX, chunkY), getPos().x, getPos().y, 20, BLACK);
 	}
 }
 
@@ -42,6 +43,7 @@ void Rock::setMovePos(Vector2 movePos)
 
 void Rock::damageObject(int power, ToolType type)
 {
+
 	int h = hp;
 	DestroyAble::damageObject(power, type);
 	Rectangle collider = RectangleCollider::getCollisionPos();
@@ -51,23 +53,32 @@ void Rock::damageObject(int power, ToolType type)
 	if (h != hp)
 	{
 		float velosity = 1.69;
-		Particle* particle = new Particle({ 0,0,5,5 }, 1, { 2,4 }, { 77,26,1,255 }, { 255,170,30,0 });
+		Particle* particle = new Particle({ 0,0,5,5 }, 1, { 2,4 }, { 20,20,20,255 }, { 69,69,69,0 });
 		ParticleSystem* particleSystem = new ParticleSystem(collider, "", particle, 10);
 		particleSystem->setTime(0.25f, 0.75f);
 		particleSystem->setVelosity({ -velosity,-velosity }, { velosity,velosity });
 		Game->addObject(particleSystem);
+		clearItemsDrop();
+		addItemToDrop(rockID, 5, h - hp, h - hp);
+		spawnItem({ collider.x+collider.width/2,collider.y + collider.width / 2 });
 	}
 	if (hp > 0)
 	{
 		return;
 	}
+	clearItemsDrop();
+	addItemToDrop(rockID, 100, 2, 3);
+	spawnItem({ collider.x + collider.width / 2,collider.y + collider.width / 2 });
+	Game->deleteObject(this);
+}
+void Rock::spawnItem(Vector2 pos)
+{
 	std::vector<Item*> items = getDrop();
 	for (Item* i : items)
 	{
-		i->addToPos({ collider.x, collider.y });
+		i->addToPos({ pos.x, pos.y });
 		Game->addObject(i);
 	}
-	Game->deleteObject(this);
 }
 
 void Rock::saveToJson(nlohmann::json& j)

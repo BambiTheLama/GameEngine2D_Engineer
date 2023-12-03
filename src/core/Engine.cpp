@@ -15,6 +15,7 @@ Scene* Engine::scene = NULL;
 
 Engine::Engine()
 {
+	srand(time(NULL));
 	InitWindow(1600, 900, "MyGame");
 	InitAudioDevice();
 	//SetTargetFPS(60);

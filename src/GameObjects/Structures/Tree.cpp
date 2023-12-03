@@ -71,13 +71,13 @@ void Tree::updateDropFromAge()
 	}
 	else if (age == 2)
 	{
-		addItemToDrop(woodID, 100, 5, 8);
+		addItemToDrop(woodID, 100, 4, 7);
 		addItemToDrop(saplingID, 100, 1, 1);
 		addItemToDrop(saplingID, 50, 1, 1);
 	}
 	else
 	{
-		addItemToDrop(woodID, 100, 8, 16);
+		addItemToDrop(woodID, 100, 4, 8);
 		addItemToDrop(saplingID, 100, 1, 3);
 		addItemToDrop(saplingID, 50, 1, 1);
 	}

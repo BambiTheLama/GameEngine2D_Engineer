@@ -201,6 +201,7 @@ void GameScene::deleteObject(GameObject* obj)
 		if (o == obj)
 			return;
 	allObj.remove(obj);
+	toDelete.remove(obj);
 	toDelete.push_back(obj);
 }
 

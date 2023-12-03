@@ -106,5 +106,5 @@ void Ammo::drawAmmo(Rectangle pos, float rotation,float chargeProcent,Vector2 or
 
 std::string Ammo::getDesctription()
 {
-	return std::string(TextFormat(description.c_str(), getName().c_str(), stackSize, stackMaxSize));
+	return std::string(TextFormat(description.c_str(), getName().c_str(), stackSize, speed, range));
 }
