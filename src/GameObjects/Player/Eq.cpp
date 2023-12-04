@@ -148,7 +148,6 @@ void Eq::update(float deltaTime)
 	if (itemInHand)
 	{
 		itemInHand->update(deltaTime);
-		itemInHand->setFaceSide(faceSide);
 	}
 	else
 	{
@@ -157,7 +156,6 @@ void Eq::update(float deltaTime)
 		if (items[usingItemY][usingItemX])
 		{
 			items[usingItemY][usingItemX]->update(deltaTime);
-			items[usingItemY][usingItemX]->setFaceSide(faceSide);
 		}
 	}
 	if (fullEq)
@@ -411,11 +409,11 @@ void Eq::dropItemFromHand()
 		return;
 	if (!itemInHand->canChangeItem())
 		return;
-	Game->addObject(itemInHand);
 	Vector2 cursor = Game->getCursorPos();
 	itemInHand->setInHand(false);
 	itemInHand->setMovePos(cursor);
 	itemInHand->setEq(NULL);
+	Game->addObject(itemInHand);
 	Collider* c = dynamic_cast<Collider*>(itemInHand);
 	if (c)
 		c->removeObjectToIgnore(player);

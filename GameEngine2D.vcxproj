@@ -179,6 +179,7 @@
     <ClCompile Include="src\GameObjects\Crafting\Recipes.cpp" />
     <ClCompile Include="src\GameObjects\Factory.cpp" />
     <ClCompile Include="src\GameObjects\GameObject.cpp" />
+    <ClCompile Include="src\GameObjects\Items\PlaceItem.cpp" />
     <ClCompile Include="src\GameObjects\Items\StackItem.cpp" />
     <ClCompile Include="src\GameObjects\Items\Item.cpp" />
     <ClCompile Include="src\GameObjects\Items\Tool\ToolItem.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="src\GameObjects\Structures\Rock.cpp" />
     <ClCompile Include="src\GameObjects\Structures\Structure.cpp" />
     <ClCompile Include="src\GameObjects\Structures\Tree.cpp" />
+    <ClCompile Include="src\GameObjects\Structures\Wall.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +250,7 @@
     <ClInclude Include="src\GameObjects\Crafting\Recipes.h" />
     <ClInclude Include="src\GameObjects\Factory.h" />
     <ClInclude Include="src\GameObjects\GameObject.h" />
+    <ClInclude Include="src\GameObjects\Items\PlaceItem.h" />
     <ClInclude Include="src\GameObjects\Items\StackItem.h" />
     <ClInclude Include="src\GameObjects\Items\Item.h" />
     <ClInclude Include="src\GameObjects\Items\Tool\ToolItem.h" />
@@ -268,6 +271,7 @@
     <ClInclude Include="src\GameObjects\Structures\Rock.h" />
     <ClInclude Include="src\GameObjects\Structures\Structure.h" />
     <ClInclude Include="src\GameObjects\Structures\Tree.h" />
+    <ClInclude Include="src\GameObjects\Structures\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

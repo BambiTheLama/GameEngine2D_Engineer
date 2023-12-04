@@ -18,10 +18,9 @@
 class Block :
     public GameObject, public DestroyAble, public ItemsDrop
 {
-protected:
-    bool right = true, left = true, down = true, up = true;
     Rectangle texturePos;
     SpriteController* sprite;
+protected:
     Block(Block& obj);
 
 public:

@@ -6,6 +6,7 @@
 #include "Items/Weapon/Bow.h"
 #include "../core/Scenes/ItemEdytorStruct/ItemProperty.h"
 #include <fstream>
+#include "Items/PlaceItem.h"
 ItemFactory* ItemFactory::factory = NULL;
 
 ItemFactory::ItemFactory()
@@ -35,8 +36,11 @@ ItemFactory::ItemFactory()
 		case ItemClass::Ammo:
 			objects.push_back(new Ammo(itemRead));
 			break;
+		case ItemClass::PlaceItems:
+			objects.push_back(new PlaceItem(itemRead));
+			break;
 		default:
-			objects.push_back(NULL);
+			objects.push_back(new Item(itemRead));
 			break;
 		}
 	}

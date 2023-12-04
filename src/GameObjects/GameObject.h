@@ -36,7 +36,7 @@ Vector2 deltaFromDegree(float degree,float speed=1);
 /// </summary>
 enum class ObjectType
 {
-	NPC, Item, Block, Particle, Player, NON, Projectal, Structure
+	NPC, Item, Block, Particle, Structure, Player, Projectal, NON,
 };
 
 class Factory;

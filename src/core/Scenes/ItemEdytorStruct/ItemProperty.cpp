@@ -7,7 +7,7 @@ std::string itemClassDescription()
 	s += "\n" + std::to_string((int)ItemClass::ToolItem) + " - ToolItem";
 	s += "\n" + std::to_string((int)ItemClass::Bow) + " - Bow";
 	s += "\n" + std::to_string((int)ItemClass::Ammo) + " - Ammo";
-
+	s += "\n" + std::to_string((int)ItemClass::PlaceItems) + " - PlaceItems";
 	return s;
 }
 
@@ -92,6 +92,11 @@ ItemProperty::ItemProperty(nlohmann::json& j,int ID)
 		else
 			ammoType = 0;
 	}
+	if (j.contains("spawnObjectID"))
+	{
+		isSpawnObject = true;
+		spawnObjectID = j["spawnObjectID"];
+	}
 	update();
 	reLoadTexture();
 }
@@ -110,6 +115,7 @@ void ItemProperty::update()
 	isDealingDamage = false;
 	isDestoryAble = false;
 	isRangeWeapon = false;
+	isSpawnObject = false;
 	switch (item)
 	{
 	case ItemClass::StackItem:
@@ -132,7 +138,9 @@ void ItemProperty::update()
 		isDealingDamage = true;
 		isRangeWeapon = true;
 		break;
-	case ItemClass::EnumSize:
+	case ItemClass::PlaceItems:
+		isStacable = true;
+		isSpawnObject = true;
 		break;
 	default:
 		break;
@@ -170,6 +178,9 @@ void ItemProperty::clearData()
 	projectalRange = 0;
 	numberOfProjectal = 0;
 	projectalSpeed = 0;
+	///Czy pojawia obeikt
+	isSpawnObject = false;
+	spawnObjectID = 0;
 }
 void ItemProperty::updatePointsToCollisions()
 {
@@ -306,6 +317,10 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 		j["Speed"] = projectalSpeed;
 		j["AmmoType"] = ammoType;
 		j["CollisionsCheckType"] = CollisionsCheckType::All;
+	}
+	if (isSpawnObject)
+	{
+		j["spawnObjectID"] = spawnObjectID;
 	}
 	
 }

@@ -2,10 +2,6 @@
 #include "../GameObject.h"
 #include "json.hpp"
 
-enum class FaceSide {
-    left,right,up,down
-};
-
 enum class ItemType {
     Normal,
     Weapon,
@@ -16,7 +12,6 @@ class Item :
     public GameObject
 {
 protected:
-    FaceSide faceSide;
     Item(Item& obj);
     std::string itemName;
     virtual void setStackSize(int s){}
@@ -57,8 +52,6 @@ public:
 
     virtual Item* clone() { return new Item(*this); }
 
-    virtual void setFaceSide(FaceSide side) { faceSide = side; }
-
     void addToPos(Vector2 move) { pos.x += move.x; pos.y += move.y; }
 
     virtual std::string getDesctription() { return ""; }
@@ -79,7 +72,7 @@ public:
 
     virtual std::string getName() { return itemName; }
 
-    virtual bool destoryAfterRenderClear() { return true; }
+    virtual bool destoryAfterRenderClear() { return false; }
 
     friend class Recipes;
 };

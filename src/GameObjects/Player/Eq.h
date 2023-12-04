@@ -17,7 +17,6 @@ class Eq
 {
 	bool fullEq = false;
 	int usingItem = 0, usingItemX = 0, usingItemY = 0;
-	FaceSide faceSide;
 	Item*** items = NULL;
 	Player* player = NULL;
 	Item* itemInHand = NULL;
@@ -93,11 +92,6 @@ public:
 	/// Zmienia wstan eq na przeciwny
 	/// </summary>
 	void swapEqLook() { fullEq = !fullEq; }
-	/// <summary>
-	/// Ustawia w jak¹ strone jesteœmy zwróceni
-	/// </summary>
-	/// <param name="side">strona w któr¹ jesteœmy zwróceni</param>
-	void setFaceSide(FaceSide side) { faceSide = side; }
 	/// <summary>
 	/// Zwraca wszystkie itemy jakie mamy w EQ
 	/// </summary>

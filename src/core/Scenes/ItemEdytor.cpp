@@ -28,36 +28,38 @@ ItemEdytor::ItemEdytor()
 	//Odczyt danych z pliku json
 	
 	//Dodanie wszystkich przyciskow
-
+	const int n = 8;
 	elements.push_back(new TextEnter({ 0,0,300,64 },"Name", &item->name));
 	Rectangle pos = { 5,100,200,32 };
-	std::string names[7] = { "has lines collider", "Is stacable" ,"is using item",
-		"is dealing damage","is destory able","Is range weapon","IsAnimated"};
-	bool* bPointers[7] = { &item->hasLinesCollider ,&item->isStacable, &item->isUsingItem,
-		&item->isDealingDamage, &item->isDestoryAble,&item->isRangeWeapon,&item->animated };
-	CheckBoxOpenElements* checkBoxs[7];
-	checkBoxs[0] = new LineColliderCheckBox(pos, names[0], bPointers[0],item);
+	std::string names[n] = { "has lines collider", "Is stacable" ,"is using item",
+		"is dealing damage","is destory able","Is range weapon","Spawn Object","IsAnimated"};
+	bool* bPointers[n] = { &item->hasLinesCollider ,&item->isStacable, &item->isUsingItem,
+		&item->isDealingDamage, &item->isDestoryAble,&item->isRangeWeapon,&item->isSpawnObject,&item->animated };
 	pos.y += 48;
-	for (int i = 1; i < 6; i++)
+
+	CheckBoxOpenElements* checkBoxs[n];
+	checkBoxs[0] = new LineColliderCheckBox(pos, names[0], bPointers[0], item);
+	for (int i = 1; i < n; i++)
 	{
 		checkBoxs[i] = new CheckBoxOpenElements(pos, names[i], bPointers[i]);
 		pos.y += 48;
 	}
-	checkBoxs[6] = new CheckBoxOpenElements(pos, names[6], bPointers[6],false);
+
+	checkBoxs[n - 1] = new CheckBoxOpenElements(pos, names[n - 1], bPointers[n - 1], false);
 	RectangleEnter* recEnter = new RectangleEnter({ 0,100,400,64 }, "Pos:", &item->pos);
 	elements.push_back(recEnter);
 	elements.push_back(checkBoxs[0]);
 	checkBoxs[0]->setElementAbrow(recEnter);
 	checkBoxs[0]->setElementBellow(checkBoxs[1]);
 	first = checkBoxs[0];
-	for (int i = 1; i < 6; i++)
+	for (int i = 1; i < n-1; i++)
 	{
 		checkBoxs[i]->setElementAbrow(checkBoxs[i - 1]);
 		checkBoxs[i]->setElementBellow(checkBoxs[i + 1]);
 		elements.push_back(checkBoxs[i]);
 	}
-	checkBoxs[6]->setElementAbrow(checkBoxs[5]);
-	elements.push_back(checkBoxs[6]);
+	checkBoxs[n - 1]->setElementAbrow(checkBoxs[n - 2]);
+	elements.push_back(checkBoxs[n - 1]);
 	float h = 32;
 	////////////////////////////////////////////////////////////////////////////////////
 	Element* e = new IntEnter({ 0,0,200,h }, "How Many Points: ", &item->nPoints);
@@ -88,8 +90,11 @@ ItemEdytor::ItemEdytor()
 	e = new EnumEnter({ 0,0,200,h }, "AmmoType: ", &item->ammoType, (int)AmmoType::EnumSize, ammoTypeDescription());
 	checkBoxs[5]->addElement(e);
 	//////////////////////////////////////////////////////////////////////////////////////
-	e = new IntEnter({ 0,0,200,h }, "Frame: ", &item->frame);
+	e = new IntEnter({ 0,0,200,h }, "Object Spawn ID: ", &item->spawnObjectID);
 	checkBoxs[6]->addElement(e);
+	//////////////////////////////////////////////////////////////////////////////////////
+	e = new IntEnter({ 0,0,200,h }, "Frame: ", &item->frame);
+	checkBoxs[7]->addElement(e);
 	////////////////////////////////////////////////////////////////////////////////////
 	Rectangle buttons = itemsSelect;
 	buttons.y = 85;

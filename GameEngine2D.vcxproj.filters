@@ -267,6 +267,12 @@
     <ClCompile Include="src\GameObjects\Structures\Rock.cpp">
       <Filter>src\GameObjects\Structures</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\Structures\Wall.cpp">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Items\PlaceItem.cpp">
+      <Filter>src\GameObjects\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -466,6 +472,12 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Structures\Rock.h">
       <Filter>src\GameObjects\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Structures\Wall.h">
+      <Filter>src\GameObjects\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Items\PlaceItem.h">
+      <Filter>src\GameObjects\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

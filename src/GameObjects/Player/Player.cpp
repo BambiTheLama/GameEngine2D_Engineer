@@ -229,12 +229,10 @@ void Player::move(float deltaTime)
 				if (posTmp.x > 0)
 				{
 					state = playerAnimationState::MoveRight;
-					eq->setFaceSide(FaceSide::right);
 				}
 				else
 				{
 					state = playerAnimationState::MoveLeft;
-					eq->setFaceSide(FaceSide::left);
 				}
 
 			}
@@ -244,12 +242,10 @@ void Player::move(float deltaTime)
 				if (posTmp.y > 0)
 				{
 					state = playerAnimationState::MoveDown;
-					eq->setFaceSide(FaceSide::down);
 				}
 				else
 				{
 					state = playerAnimationState::MoveUp;
-					eq->setFaceSide(FaceSide::up);
 				}
 
 			}

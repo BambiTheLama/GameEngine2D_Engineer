@@ -601,5 +601,29 @@
     ],
     "Power": 20,
     "UseTime": 0.6000000238418579
+  },
+  {
+    "ItemClass": 4,
+    "Name": "Sapling",
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "StackSize": 0,
+    "spawnObjectID": 3
+  },
+  {
+    "ItemClass": 4,
+    "Name": "WoodWall",
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "StackSize": 0,
+    "spawnObjectID": 3
   }
 ]

@@ -14,8 +14,7 @@ enum class ItemClass
 	ToolItem,
 	Bow,
 	Ammo,
-	Sapling,
-	Wall,
+	PlaceItems,
 
 
 	EnumSize
@@ -58,7 +57,9 @@ struct ItemProperty
 	float projectalRange;
 	int numberOfProjectal;
 	float projectalSpeed;
-
+	///Czy powoduje pojawienie siê obiektów na scenie
+	bool isSpawnObject;
+	int spawnObjectID;
 	ItemProperty();
 
 	ItemProperty(nlohmann::json& j,int ID);
