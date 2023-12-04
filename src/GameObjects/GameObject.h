@@ -64,6 +64,8 @@ public:
 	/// Metoda aktywowana przy starcie sceny gdy wszystkie obiekty siê wygeneruj¹ lub po dodaniu obieku do sceny
 	/// </summary>
 	virtual void start(){}
+
+	virtual void onDestory(){}
 	/// <summary>
 	/// Metoda aktualizuj¹ca obiekt
 	/// </summary>

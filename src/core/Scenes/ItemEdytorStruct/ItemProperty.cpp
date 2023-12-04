@@ -370,6 +370,9 @@ void ItemProperty::setDataFrom(ItemProperty& item)
 	projectalRange = item.projectalRange;
 	numberOfProjectal = item.numberOfProjectal;
 	projectalSpeed = item.projectalSpeed;
+	///Czy pojawia obiekt
+	isSpawnObject = item.isSpawnObject;
+	spawnObjectID = item.spawnObjectID;
 }
 
 void ItemProperty::reLoadTexture()

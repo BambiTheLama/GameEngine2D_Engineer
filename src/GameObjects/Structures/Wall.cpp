@@ -17,6 +17,22 @@ Wall::~Wall()
 void Wall::start()
 {
 	generateTexturePos();
+	std::list<GameObject*> objects = Game->getObjects({ pos.x - pos.width,pos.y - pos.height,pos.width*3,pos.height*3 }, ObjectToGet::getNoBlocks);
+	for (auto o : objects)
+	{
+		if (o->getType() != ObjectType::Structure)
+			continue;
+		Structure* s = dynamic_cast<Structure*>(o);
+		if (!s)
+			continue;
+		s->generateTexturePos();
+	}
+}
+
+void Wall::onDestory()
+{
+	Rectangle pos = getPos();
+	updateWallAt({ pos.x - pos.width,pos.y - pos.height,pos.width * 3,pos.height * 3 });
 }
 
 void Wall::update(float deltaTime)
@@ -35,11 +51,6 @@ void Wall::draw()
 void Wall::damageObject(int power, ToolType type)
 {
 	Structure::damageObject(power, type);
-	if (hp <= 0)
-	{
-		Rectangle pos = getPos();
-		updateWallAt({ pos.x - pos.width,pos.y - pos.height,pos.width * 3,pos.height * 3 });
-	}
 }
 
 void Wall::saveToJson(nlohmann::json& j)
@@ -65,17 +76,21 @@ void Wall::readFromJson(nlohmann::json& j)
 }
 bool Wall::isWallAt(Vector2 pos)
 {
-	std::list<GameObject*> objs=Game->getObjects({ pos.x,pos.y,1,1 }, ObjectToGet::getNoBlocks);
-	for (auto o : objs)
+	std::list<GameObject*> objects =Game->getObjects({ pos.x,pos.y,1,1 }, ObjectToGet::getNoBlocks);
+	objects.remove(this);
+	for (auto o : objects)
 		if (o->getType() == ObjectType::Structure)
 		{
-			return true;
+			Wall* w = dynamic_cast<Wall*>(o);
+			if(w)
+				return true;
 		}
 	return false;
 }
 void Wall::updateWallAt(Rectangle updatePos)
 {
 	std::list<GameObject*> objects = Game->getObjects(updatePos, ObjectToGet::getNoBlocks);
+	objects.remove(this);
 	for (auto o : objects)
 	{
 		if (o->getType() != ObjectType::Structure)
@@ -89,10 +104,10 @@ void Wall::updateWallAt(Rectangle updatePos)
 void Wall::generateTexturePos()
 {
 	Rectangle pos = getPos();
-	right = isWallAt({ pos.x + pos.width + 1,pos.y + 1 });
-	left = isWallAt({ pos.x -   pos.width + 1,pos.y + 1 });
-	up = isWallAt({ pos.x + 1 ,pos.y + 1 - pos.height });
-	down = isWallAt({ pos.x + 1,pos.y + 1 + pos.height });
+	right = isWallAt({ pos.x + pos.width * 3.0f / 2.0f,pos.y + pos.height / 2.0f });
+	left = isWallAt({ pos.x - pos.width / 2.0f,pos.y + pos.height / 2.0f });
+	up = isWallAt({ pos.x + pos.width / 2 ,pos.y - pos.height / 2 });
+	down = isWallAt({ pos.x + pos.width / 2,pos.y + pos.height * 3.0f / 2.0f });
 
 	texturePosUp.x = 0;
 	texturePosUp.y = 0;
@@ -111,13 +126,45 @@ void Wall::generateTexturePos()
 					texturePosUp.y = size;
 					texturePosDown.x = size * 11;
 					texturePosDown.y = size;
+					right = isWallAt({ pos.x + pos.width * 3.0f / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					left = isWallAt({ pos.x - pos.width / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					if (right && left)
+					{
+						texturePosDown.x = size * 11;
+						texturePosDown.y = size;
+					}
+					else if (left)
+					{
+						texturePosDown.x = size * 12;
+						texturePosDown.y = size;
+					}
+					else if (right)
+					{
+						texturePosDown.x = size * 10;
+						texturePosDown.y = size;
+					}
+					else
+					{
+						texturePosDown.x = size * 8;
+						texturePosDown.y = size;
+					}
 				}
 				else //  LEWO G�RA Dӣ
 				{
 					texturePosUp.x = size * 12;
 					texturePosUp.y = size;
-					texturePosDown.x = size * 12;
-					texturePosDown.y = size;
+
+					left = isWallAt({ pos.x - pos.width / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					if (left)
+					{
+						texturePosDown.x = size * 12;
+						texturePosDown.y = size;
+					}
+					else
+					{
+						texturePosDown.x = size * 8;
+						texturePosDown.y = size;
+					}
 				}
 			}
 			else
@@ -126,8 +173,18 @@ void Wall::generateTexturePos()
 				{
 					texturePosUp.x = size * 10;
 					texturePosUp.y = size;
-					texturePosDown.x = size * 10;
-					texturePosDown.y = size;
+					right = isWallAt({ pos.x + pos.width * 3.0f / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					if (right)
+					{
+						texturePosDown.x = size * 10;
+						texturePosDown.y = size;
+					}
+					else
+					{
+						texturePosDown.x = size * 8;
+						texturePosDown.y = size;
+					}
+
 				}
 				else //  G�RA Dӣ
 				{
@@ -170,7 +227,7 @@ void Wall::generateTexturePos()
 				{
 					texturePosUp.x = size * 8;
 					texturePosUp.y = size * 2;
-					texturePosDown.x = size * 0;
+					texturePosDown.x = 0;
 					texturePosDown.y = size;
 				}
 			}
@@ -188,13 +245,46 @@ void Wall::generateTexturePos()
 					texturePosUp.y = 0;
 					texturePosDown.x = size * 11;
 					texturePosDown.y = size;
+					right = isWallAt({ pos.x + pos.width * 3.0f / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					left = isWallAt({ pos.x - pos.width / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					if (right && left)
+					{
+						texturePosDown.x = size * 11;
+						texturePosDown.y = size;
+					}
+					else if (left)
+					{
+						texturePosDown.x = size * 12;
+						texturePosDown.y = size;
+					}
+					else if (right)
+					{
+						texturePosDown.x = size * 10;
+						texturePosDown.y = size;
+					}
+					else
+					{
+						texturePosDown.x = size * 8;
+						texturePosDown.y = size;
+					}
+
+
 				}
 				else // LEWO Dӣ
 				{
 					texturePosUp.x = size * 12;
 					texturePosUp.y = 0;
-					texturePosDown.x = size * 12;
-					texturePosDown.y = size;
+					left = isWallAt({ pos.x - pos.width / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					if (left)
+					{
+						texturePosDown.x = size * 12;
+						texturePosDown.y = size;
+					}
+					else
+					{
+						texturePosDown.x = size * 8;
+						texturePosDown.y = size;
+					}
 				}
 			}
 			else
@@ -203,8 +293,17 @@ void Wall::generateTexturePos()
 				{
 					texturePosUp.x = size * 10;
 					texturePosUp.y = 0;
-					texturePosDown.x = size * 10;
-					texturePosDown.y = size;
+					right = isWallAt({ pos.x + pos.width * 3.0f / 2.0f,pos.y + pos.height * 3.0f / 2.0f });
+					if (right)
+					{
+						texturePosDown.x = size * 10;
+						texturePosDown.y = size;
+					}
+					else
+					{
+						texturePosDown.x = size * 8;
+						texturePosDown.y = size;
+					}
 				}
 				else // Dӣ
 				{

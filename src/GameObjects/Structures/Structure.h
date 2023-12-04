@@ -29,5 +29,7 @@ public:
     virtual void readFromJson(nlohmann::json& j);
 
     virtual bool destoryAfterRenderClear() { return false; }
+
+    virtual void generateTexturePos(){}
 };
 

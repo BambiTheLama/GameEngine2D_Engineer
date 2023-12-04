@@ -21,5 +21,7 @@ public:
 	bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
 
 	void setCollision(Rectangle pos) { collision = pos; }
+
+	virtual Rectangle getMaxRectangle() { return collision; }
 };
 

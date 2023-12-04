@@ -135,7 +135,11 @@ void GameScene::update(float deltaTime)
 		h->update(deltaTime);
 
 	for (auto o : toDelete)
+	{
+		o->onDestory();
 		delete o;
+	}
+
 	toDelete.clear();
 	for (auto h : handlersToDelete)
 	{

@@ -31,8 +31,8 @@ bool PlaceItem::use(float deltaTime)
 	GameObject* o = Structures->getObject(structID);
 	if (!o)
 		return false;
-
-	std::list<GameObject*> objects = Game->getObjects({ cursorPos.x,cursorPos.y,(float)size,(float)size }, ObjectToGet::getAll);
+	Rectangle objectPos = { cursorPos.x,cursorPos.y,(float)size,(float)size };
+	std::list<GameObject*> objects = Game->getObjects(objectPos, ObjectToGet::getAll);
 	if (objects.size() <= 0)
 	{
 		delete o;
@@ -48,8 +48,19 @@ bool PlaceItem::use(float deltaTime)
 		}
 		else
 		{
-			hasFloor = false;
-			break;
+			Collider* col = dynamic_cast<Collider*>(o);
+			if (!col)
+				continue;
+			Rectangle rec = col->getMaxRectangle();
+			Rectangle objPos = o->getPos();
+			rec.x += objPos.x;
+			rec.y += objPos.y;
+			if (CheckCollisionRecs(rec, objectPos))
+			{
+				hasFloor = false;
+				break;
+			}
+
 		}
 	}
 	if (!hasFloor)
@@ -63,16 +74,7 @@ bool PlaceItem::use(float deltaTime)
 	o->setMovePos(cursorPos);
 	Game->addObject(o);
 
-	objects = Game->getObjects({ cursorPos.x - size * 1,cursorPos.y - size * 1,(float)size*3,(float)size*3 }, ObjectToGet::getNoBlocks);
-	for (auto o : objects)
-	{
-		if (o->getType() != ObjectType::Structure)
-			continue;
-		Wall* w = dynamic_cast<Wall*>(o);
-		if (!w)
-			continue;
-		w->generateTexturePos();
-	}
+
 	return true;
 
 }

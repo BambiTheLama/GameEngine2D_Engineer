@@ -17,6 +17,8 @@ public:
 
     virtual void start();
 
+    virtual void onDestory();
+
     virtual void update(float deltaTime);
 
     virtual void draw();
@@ -27,7 +29,7 @@ public:
 
     virtual void readFromJson(nlohmann::json& j);
 
-    void generateTexturePos();
+    virtual void generateTexturePos();
 
     void updateWallAt(Rectangle updatePos);
 
