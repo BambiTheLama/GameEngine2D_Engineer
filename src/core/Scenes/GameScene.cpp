@@ -120,7 +120,7 @@ void GameScene::update(float deltaTime)
 	camera.zoom = zoom;
 	float cameraW = (float)GetScreenWidth()/(zoom);
 	float cameraH = (float)GetScreenHeight()/(zoom);
-	cameraPos = { camera.target.x - cameraW / 2,camera.target.y - cameraH / 2,cameraW,cameraH };
+	cameraPos = { camera.target.x - cameraW / 2 - 200,camera.target.y - cameraH / 2 - 100,cameraW + 400,cameraH + 200 };
 	int chunkX = cameraTarget->getChunkX();
 	int chunkY = cameraTarget->getChunkY();
 	Rectangle updatePos = { camera.target.x ,camera.target.y ,(renderDystance * 2 + 2) * ObjectHandler::w * tileSize,(renderDystance * 2 + 2) * ObjectHandler::h * tileSize };

@@ -625,5 +625,17 @@
     ],
     "StackSize": 0,
     "spawnObjectID": 3
+  },
+  {
+    "ItemClass": 4,
+    "Name": "StoneWall",
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "StackSize": 0,
+    "spawnObjectID": 4
   }
 ]

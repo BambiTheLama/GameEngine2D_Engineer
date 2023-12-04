@@ -170,5 +170,13 @@
     "finalItemID": 20,
     "howManyItems": 8,
     "whereToCraft": 0
+  },
+  {
+    "Item0": [
+      3,
+      16
+    ],
+    "finalItemID": 21,
+    "whereToCraft": 0
   }
 ]

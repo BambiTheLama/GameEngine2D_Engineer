@@ -1,10 +1,10 @@
 {
-  "Ammo": "%s(%d)\nSzybkosc %.1lf\nZasieg %.1lf",
+  "Ammo": "%s(%d)\n\nSzybkosc %.1lf\n\nZasieg %.1lf\n\n",
   "Arrow": "Strzala",
 
   "Axe": "Siekiera",
-
-  "Bow": "Luk",
+  "Bow": "%s\n\nCzas ladowania %0.2lf\n\nMnoznik szybkosci %0.2lf\n\nMnoznik zasiegu %0.2lf\n\nIlosc pociskow %d\n\n",
+  "WoodBow": "Drewninay Luk",
   "Dirt": "Ziemia",
 
   "Hoe": "Motyka",
@@ -32,7 +32,7 @@
   "Stone": "Kamien",
   "Sword": "Miecz",
 
-  "ToolItem": "%s\nObrazenia %0.2lf\nMoc narzedzia %d\nCzas uzycia %0.2lf",
+  "ToolItem": "%s\n\nObrazenia %0.2lf\n\nMoc narzedzia %d\n\nCzas uzycia %0.2lf\n\n",
   "Weeb": "Siec",
   "Wood": "Drewno"
 }
