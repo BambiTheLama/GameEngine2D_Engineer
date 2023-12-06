@@ -50,11 +50,16 @@ void TextEnter::draw()
 {
 	Element::draw();
 	Rectangle pos=getPos();
-	if (isOn)
+	std::string textEnter = *text;
+	if (isOn || pressed)
 	{
-		DrawRectangleLinesEx(pos, 4, BLACK);
+		if ((int)(Element::timer * 2) % 2)
+			textEnter += '_';
+		if(isOn)
+			DrawRectangleLinesEx(pos, 4, BLACK);
+
 	}
 	drawText(name.c_str(), pos.x, pos.y, textStandardSize, BLACK);
 	int textY = textSize(name.c_str(), textStandardSize).y;
-	drawText(text->c_str(), pos.x, pos.y+textY, textStandardSize, BLACK);
+	drawText(textEnter.c_str(), pos.x, pos.y+textY, textStandardSize, BLACK);
 }

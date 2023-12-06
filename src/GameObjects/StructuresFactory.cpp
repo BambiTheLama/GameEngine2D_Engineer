@@ -11,6 +11,7 @@ StructuresFactory::StructuresFactory()
 	objects.push_back(new Rock({ 0, 0, 64, 64 }, "Rock", 3));
 	objects.push_back(new Wall({ 0,0,64,64 }, "WoodWall", ToolType::Axe, 5, 10));
 	objects.push_back(new Wall({ 0,0,64,64 }, "StoneWall", ToolType::Pickaxe, 5, 10));
+	objects.push_back(new Wall({ 0,0,64,64 }, "LightWoodWall", ToolType::Axe, 5, 10));
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->ID = i;

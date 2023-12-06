@@ -4,6 +4,8 @@
 #include <string>
 class Element {
 	Rectangle pos;
+protected:
+	static float timer;
 public:
 	Element(Rectangle pos);
 
@@ -26,4 +28,8 @@ public:
 	void setPos(Rectangle pos) { this->pos = pos; }
 
 	virtual void reloadData(){}
+
+	static void addDeltaTime(float deltaTime) { timer += deltaTime; }
+
+	static void resetTimer() { timer = 0; }
 };

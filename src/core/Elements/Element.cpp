@@ -1,5 +1,5 @@
 #include "Element.h"
-
+float Element::timer = 0;
 Element::Element(Rectangle pos)
 {
 	this->pos = pos;

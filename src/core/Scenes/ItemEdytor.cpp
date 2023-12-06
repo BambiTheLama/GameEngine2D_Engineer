@@ -187,10 +187,12 @@ void ItemEdytor::start()
 	for (auto* e : elements)
 		e->updatePos();
 	item->reLoadTexture();
+	Element::resetTimer();
 }
 
 void ItemEdytor::update(float deltaTime)
 {
+	Element::addDeltaTime(deltaTime);
 	if (IsKeyReleased(KEY_ESCAPE))
 	{
 		Engine::setScene(new Menu());

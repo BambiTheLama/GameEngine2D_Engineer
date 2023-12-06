@@ -122,6 +122,7 @@ void RecipesEdytor::start()
 {
 	for (auto* e : elements)
 		e->updatePos();
+	Element::resetTimer();
 }
 void RecipesEdytor::draw()
 {
@@ -175,6 +176,7 @@ void RecipesEdytor::draw()
 }
 void RecipesEdytor::update(float deltaTime)
 {
+	Element::addDeltaTime(deltaTime);
 	if (IsKeyReleased(KEY_ESCAPE))
 	{
 		Engine::setScene(new Menu());

@@ -526,7 +526,7 @@
     "Name": "StonePickaxe",
     "Points": [
       [
-        3.5399999618530273,
+        3.5199999809265137,
         3.5
       ],
       [
@@ -637,5 +637,17 @@
     ],
     "StackSize": 0,
     "spawnObjectID": 4
+  },
+  {
+    "ItemClass": 4,
+    "Name": "LightWoodWall",
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "StackSize": 0,
+    "spawnObjectID": 5
   }
 ]
