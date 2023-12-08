@@ -24,14 +24,16 @@ PlaceItem::~PlaceItem()
 
 bool PlaceItem::use(float deltaTime)
 {
-	Vector2 cursorPos = Game->getCursorPos();
-	int size = tileSize * 2;
-	cursorPos.x = ((int)cursorPos.x) - (int)cursorPos.x % (size)-tileSize;
-	cursorPos.y = ((int)cursorPos.y) - (int)cursorPos.y % (size);
+	Vector2 destPos = getWordMousePos();
 	GameObject* o = Structures->getObject(structID);
 	if (!o)
 		return false;
-	Rectangle objectPos = { cursorPos.x,cursorPos.y,(float)size,(float)size };
+	Collider* c = dynamic_cast<Collider*>(o);
+	Rectangle objectPos = { destPos.x,destPos.y,(float)tileSize * 2,(float)tileSize * 2 };
+	if (c)
+		objectPos = { destPos.x,destPos.y,c->getCollisionPos().width,c->getCollisionPos().height };
+
+
 	std::list<GameObject*> objects = Game->getObjects(objectPos, ObjectToGet::getAll);
 	if (objects.size() <= 0)
 	{
@@ -51,7 +53,7 @@ bool PlaceItem::use(float deltaTime)
 			Collider* col = dynamic_cast<Collider*>(o);
 			if (!col)
 				continue;
-			Rectangle rec = col->getMaxRectangle();
+			Rectangle rec = col->getCollisionPos();
 			Rectangle objPos = o->getPos();
 			rec.x += objPos.x;
 			rec.y += objPos.y;
@@ -71,10 +73,29 @@ bool PlaceItem::use(float deltaTime)
 
 
 	stackSize--;
-	o->setMovePos(cursorPos);
+	o->setMovePos(destPos);
 	Game->addObject(o);
 
 
 	return true;
 
+}
+void PlaceItem::drawInterface()
+{
+	Structures->drawInterface(structID, Game->worldToScreanPos(getWordMousePos()));
+	
+}
+Vector2 PlaceItem::getWordMousePos()
+{
+	Vector2 cursorPos = Game->getCursorPos();
+	Vector2 destPos;
+	const int size = tileSize * 2;
+
+	destPos.x = ((int)cursorPos.x) - (int)cursorPos.x % (size);
+	if (cursorPos.x < 0)
+		destPos.x -= size;
+	destPos.y = ((int)cursorPos.y) - (int)cursorPos.y % (size);
+	if (cursorPos.y < 0)
+		destPos.y -= size;
+	return destPos;
 }

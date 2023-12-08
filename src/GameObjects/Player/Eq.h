@@ -88,6 +88,7 @@ public:
 	/// Metoda rysuj¹ca nasz przedmiot w rêce
 	/// </summary>
 	void drawItem();
+	void drawItemInterface();
 	/// <summary>
 	/// Zmienia wstan eq na przeciwny
 	/// </summary>

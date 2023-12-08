@@ -50,8 +50,6 @@ public:
 
 	virtual void onCollisionDestroyAble(DestroyAble* dest){}
 
-	virtual Rectangle getMaxRectangle() { return { 0,0,0,0 }; }
-
 	void addObjToIgnore(GameObject* ignore);
 
 	void removeObjectToIgnore(GameObject* ignore);

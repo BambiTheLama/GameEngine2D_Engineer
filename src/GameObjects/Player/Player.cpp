@@ -284,11 +284,12 @@ void Player::draw()
 	}
 	HitAble::draw({pos.x,pos.y+pos.height,pos.width,20});
 	eq->drawItem();
+
 }
 
 void Player::drawInterface()
 {
-	//miniMap->draw();
+	eq->drawItemInterface();
 	crafting->draw();
 	eq->draw();
 }

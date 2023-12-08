@@ -9,11 +9,13 @@ Vector2 textSize(const char* text, int size, int spacing=0);
 void DrawTextWithOutline(const char* text, int x, int y, int fontSize, Color textColor, Color outlineColor);
 int keyPressed();
 bool isAnyKeyPressed();
+void drawViewFinder(Rectangle pos, Color c = WHITE);
 class Properties
 {
 	static Properties* properties;
 	bool showColliders = false;
 	Font font;
+	Texture2D viewFinder;
 	Properties();
 	~Properties();
 public:
@@ -24,6 +26,8 @@ public:
 	Vector2 textSize(const char* text, int size, int spacing);
 
 	bool getShowColliders() const { return showColliders; }
+
+	void drawViewFinder(Rectangle pos, Color c = WHITE);
 
 	friend class Engine;
 };

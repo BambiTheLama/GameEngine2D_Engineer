@@ -28,6 +28,8 @@ public:
 
     virtual void drawAt(Rectangle pos);
 
+    virtual void drawInterface(){}
+
     virtual bool use(float deltaTime);
 
     virtual void updateAfterSwap() {};

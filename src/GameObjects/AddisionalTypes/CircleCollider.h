@@ -20,6 +20,6 @@ public:
 
 	bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
 
-	virtual Rectangle getMaxRectangle();
+	virtual Rectangle getCollisionPos();
 };
 

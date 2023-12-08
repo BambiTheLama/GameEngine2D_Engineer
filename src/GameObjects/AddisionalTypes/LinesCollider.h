@@ -33,7 +33,7 @@ public:
 
     virtual CollisionType getCollisionType() { return CollisionType::Lines; }
 
-    virtual Rectangle getMaxRectangle();
+    virtual Rectangle getCollisionPos();
 
     bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
 

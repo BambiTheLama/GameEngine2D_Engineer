@@ -56,7 +56,7 @@ bool Collider::isCollidingWithSomething()
 void Collider::update(float deltaTime, GameObject* obj)
 {
 	Rectangle pos = obj->getPos();
-	Rectangle getObj = getMaxRectangle();
+	Rectangle getObj = getCollisionPos();
 	getObj.x += pos.x;
 	getObj.y += pos.y;
 	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);

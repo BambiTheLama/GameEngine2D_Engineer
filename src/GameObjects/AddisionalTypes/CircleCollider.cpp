@@ -57,7 +57,7 @@ bool CircleCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 o
 	}
 	return false;
 }
-Rectangle CircleCollider::getMaxRectangle()
+Rectangle CircleCollider::getCollisionPos()
 {
 	Vector2 circle = getCirlcePoint();
 	float r = getRadius();

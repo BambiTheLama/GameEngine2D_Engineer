@@ -60,3 +60,10 @@ void Structure::readFromJson(nlohmann::json& j)
 {
 	GameObject::readFromJson(j);
 }
+
+void Structure::drawPlaceInterface(Vector2 pos)
+{
+	Rectangle col = getCollisionPos();
+	Rectangle drawPos = { pos.x,pos.y,col.width,col.height };
+	drawViewFinder(drawPos);
+}

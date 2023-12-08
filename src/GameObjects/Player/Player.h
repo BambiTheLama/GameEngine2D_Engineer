@@ -50,7 +50,7 @@ public:
     /// <summary>
     /// Metoda rysuj¹ca gracza
     /// </summary>
-    void draw();;
+    void draw();
     /// <summary>
     /// Metoda zwracaj¹ca TypObiektu
     /// </summary>

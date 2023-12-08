@@ -31,5 +31,7 @@ public:
     virtual bool destoryAfterRenderClear() { return false; }
 
     virtual void generateTexturePos(){}
+
+    virtual void drawPlaceInterface(Vector2 pos);
 };
 

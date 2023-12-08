@@ -134,7 +134,7 @@ void LinesCollider::updateRotation(float rotation, Vector2 origin,Vector2 moveBy
 
 }
 
-Rectangle LinesCollider::getMaxRectangle()
+Rectangle LinesCollider::getCollisionPos()
 {
 	float minx = points[0].x;
 	float maxx = points[0].x;

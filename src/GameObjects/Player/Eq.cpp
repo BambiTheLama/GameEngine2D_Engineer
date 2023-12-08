@@ -336,6 +336,14 @@ void Eq::drawItem()
 		items[usingItemY][usingItemX]->draw();
 }
 
+void Eq::drawItemInterface()
+{
+	if (itemInHand)
+		itemInHand->drawInterface();
+	else if (items[usingItemY][usingItemX])
+		items[usingItemY][usingItemX]->drawInterface();
+}
+
 std::vector<Item*> Eq::getItems()
 {
 	std::vector<Item*> itemsToRet;

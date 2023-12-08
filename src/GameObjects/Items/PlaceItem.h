@@ -16,5 +16,9 @@ public:
     virtual bool use(float deltaTime);
 
     virtual StackItem* clone() { return new PlaceItem(*this); }
+
+    virtual void drawInterface();
+
+    Vector2 getWordMousePos();
 };
 

@@ -8,7 +8,7 @@ class StructuresFactory :
     public Factory
 {
     static StructuresFactory* structuresFactory;
-    std::vector<GameObject*> objects;
+    std::vector<Structure*> objects;
     StructuresFactory();
     ~StructuresFactory();
 public:
@@ -18,5 +18,8 @@ public:
     void clearFactory();
 
     GameObject* getObject(int ID);
+    
+    void drawInterface(int ID,Vector2 pos);
+
 };
 

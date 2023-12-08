@@ -38,14 +38,20 @@ bool isAnyKeyPressed()
 		return true;
 	return false;
 }
+void drawViewFinder(Rectangle pos, Color c)
+{
+	Properties::getProperties()->drawViewFinder(pos,c);
+}
 
 Properties::Properties()
 {
 	font = LoadFont("Resource/RobotoSlab-Regular.ttf");
+	viewFinder = LoadTexture("Resource/ViewFinder.png");
 }
 Properties::~Properties()
 {
 	UnloadFont(font);
+	UnloadTexture(viewFinder);
 	properties = NULL;
 }
 void Properties::drawText(const char* text, int x, int y, int size, Color color)
@@ -56,4 +62,9 @@ void Properties::drawText(const char* text, int x, int y, int size, Color color)
 Vector2 Properties::textSize(const char* text, int size, int spacing)
 {
 	return MeasureTextEx(font, text, size, spacing);
+}
+
+void Properties::drawViewFinder(Rectangle pos, Color c)
+{
+	DrawTexturePro(viewFinder, { 0,0,(float)viewFinder.width,(float)viewFinder.height }, pos, { 0,0 }, 0, c);
 }

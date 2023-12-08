@@ -144,5 +144,7 @@ public:
     std::string chunkName(int x, int y);
     void mapLoaderFun();
 
+    Vector2 worldToScreanPos(Vector2 pos) { return GetWorldToScreen2D(pos, camera); }
+
 };
 

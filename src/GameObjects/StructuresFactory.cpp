@@ -47,3 +47,12 @@ GameObject* StructuresFactory::getObject(int ID)
 		return NULL;
 	return objects[ID]->clone();
 }
+
+
+void StructuresFactory::drawInterface(int ID,Vector2 pos)
+{
+	if (ID < 0 || ID >= objects.size())
+		return;
+	if(objects[ID])
+		objects[ID]->drawPlaceInterface(pos);
+}
