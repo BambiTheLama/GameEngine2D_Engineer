@@ -43,9 +43,17 @@ bool PlaceItem::use(float deltaTime)
 	bool hasFloor = false;
 	for (auto o : objects)
 	{
-		if (o->getType() == ObjectType::Block && o->getID() > 0)
+		if (o->getType() == ObjectType::Block)
 		{
-			hasFloor = true;
+			if (!CheckCollisionRecs(objectPos, o->getPos()))
+				continue;
+			if(o->getID() > 0)
+				hasFloor = true;
+			else
+			{
+				hasFloor = false;
+				break;
+			}
 
 		}
 		else

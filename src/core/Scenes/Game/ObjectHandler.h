@@ -132,14 +132,6 @@ public:
 
     void reloadBlock();
 
-    void reloadBlockUp();
-
-    void reloadBlockDown();
-
-    void reloadBlockLeft();
-
-    void reloadBlockRight();
-
     bool isObjAtThisChunk(GameObject* obj);
 
     bool hasObjectAtList(GameObject* obj);

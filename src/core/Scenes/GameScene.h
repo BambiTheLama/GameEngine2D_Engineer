@@ -145,6 +145,7 @@ public:
     void mapLoaderFun();
 
     Vector2 worldToScreanPos(Vector2 pos) { return GetWorldToScreen2D(pos, camera); }
+    float getZoom() { return camera.zoom; }
 
 };
 

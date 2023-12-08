@@ -547,34 +547,17 @@ void ObjectHandler::reloadBlock()
 		for (int j = 0; j < w; j++)
 			if (blocks[i][j])
 				blocks[i][j]->generateTexturePos();
+	for(auto o:objects)
+	{
+		if (o->getType() != ObjectType::Structure)
+			continue;
+		Structure* s = dynamic_cast<Structure*>(o);
+		
+		if (s)
+			s->generateTexturePos();
+	}
 }
 
-void ObjectHandler::reloadBlockUp()
-{
-	for (int j = 0; j < w; j++)
-		if (blocks[0][j])
-			blocks[0][j]->generateTexturePos();
-}
-void ObjectHandler::reloadBlockDown()
-{
-	int y = h - 1;
-	for (int j = 0; j < w; j++)
-		if (blocks[y][j])
-			blocks[y][j]->generateTexturePos();
-}
-void ObjectHandler::reloadBlockLeft()
-{
-	for (int i = 0; i < h; i++)
-		if (blocks[i][0])
-			blocks[i][0]->generateTexturePos();
-}
-void ObjectHandler::reloadBlockRight()
-{
-	int x = w - 1;
-	for (int i = 0; i < h; i++)
-		if (blocks[i][x])
-			blocks[i][x]->generateTexturePos();
-}
 void ObjectHandler::saveGame(nlohmann::json &j)
 {
 	nlohmann::json toSave;
