@@ -7,7 +7,7 @@ class Structure :
 protected:
     Structure(Structure& obj);
     SpriteController* sprite=NULL;
-    float damageTime=0;
+    float damageTime=0.0f;
     const float damageTimeMax = 0.5f;
 public:
     Structure(Rectangle pos, std::string name, ToolType tool = ToolType::All, int hp = 1, int power = 0);
@@ -38,9 +38,10 @@ public:
 
     Rectangle animationPos(){
         Rectangle pos = getPos();
-        if (damageTime > 0)
+        if (damageTime > 0.0f)
         {
             float p = damageTime / damageTimeMax * pos.height / 8.0f;
+            printf("%lf\n", p);
             pos.x += p;
             pos.width -= p * 2;
             pos.y -= p;

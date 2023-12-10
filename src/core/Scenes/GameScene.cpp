@@ -44,19 +44,6 @@ GameScene::GameScene(std::string worldName)
 
 	this->worldName = worldName;
 
-	{
-
-		for (int y = -3; y < 3; y++)
-		{
-			for (int x = -3; x < 3; x++)
-			{
-				generateChunk(x, y);
-			}
-		}
-
-
-	}
-
 	if (cameraTarget)
 	{
 		loadChunksCloseToTarget();

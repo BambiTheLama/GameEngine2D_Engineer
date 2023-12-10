@@ -482,7 +482,8 @@ bool ObjectHandler::addBlock(Block* block)
 			{
 				if (i + y < 0 || i + y >= h || x + j<0 || x + j>w)
 					continue;
-				blocks[y + i][x + j]->generateTexturePos();
+				if(blocks[y + i][x + j])
+					blocks[y + i][x + j]->generateTexturePos();
 			}
 
 		return true;
@@ -505,7 +506,10 @@ void ObjectHandler::deleteBlock(int x, int y)
 		int h = pos.height / tileSize;
 		for (int i = 0; i < w; i++)
 			for (int j = 0; j < h; j++)
+			{
 				blocks[y + j][x + i] = NULL;
+			}
+
 		objectsToDelete.push_back(blocks[y][x]);
 
 		for (int i = -1; i < 2; i++)
@@ -513,7 +517,8 @@ void ObjectHandler::deleteBlock(int x, int y)
 			{
 				if (i + y < 0 || i + y >= h || x + j<0 || x + j>w)
 					continue;
-				blocks[y + i][x + j]->generateTexturePos();
+				if (blocks[y + i][x + j])
+					blocks[y + i][x + j]->generateTexturePos();
 			}
 	}
 }
@@ -601,6 +606,7 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 		{
 			if (blocks[y][x])
 			{
+				
 				if (blocks[y][x]->getID() != ID)
 				{
 					if (times > 0)
@@ -621,9 +627,10 @@ void ObjectHandler::saveGame(nlohmann::json &j)
 		}
 
 	}
+
+
 	toSave["BLockArray"][k]["ID"] = ID;
 	toSave["BLockArray"][k]["t"] = times;
-
 	int i = 0;
 	for (auto o : objects)
 	{
