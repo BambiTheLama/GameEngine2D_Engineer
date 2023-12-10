@@ -266,26 +266,18 @@ void GameScene::draw()
 	DrawFPS(0, 0);
 }
 
-void GameScene::removeBlocks(Rectangle pos)
+void GameScene::removeBlock(Rectangle pos)
 {
-	int w, h;
-	w = pos.width / tileSize;
-	h = pos.height / tileSize;
-	for (int i = 0; i < w; i++)
-		for (int j = 0; j < h; j++)
-			for (auto h : handler)
-				h->removeBlock(pos.x, pos.y);
+	for (auto h : handler)
+		if (h->isObjAtThisChunk(pos))
+			h->removeBlock(pos.x, pos.y);
 }
 
-void GameScene::deleteBlocks(Rectangle pos)
+void GameScene::deleteBlock(Rectangle pos)
 {
-	int w, h;
-	w = pos.width / tileSize;
-	h = pos.height / tileSize;
-	for (int i = 0; i < w; i++)
-		for (int j = 0; j < h; j++)
-			for (auto h : handler)
-				h->deleteBlock(pos.x, pos.y);
+	for (auto h : handler)
+		if(h->isObjAtThisChunk(pos))
+			h->deleteBlock(pos.x, pos.y);
 }
 
 bool GameScene::addBlock(Block* block)

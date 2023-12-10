@@ -37,12 +37,12 @@ void Wall::onDestory()
 
 void Wall::update(float deltaTime)
 {
-
+	Structure::update(deltaTime);
 }
 
 void Wall::draw()
 {
-	Rectangle pos = getPos();
+	Rectangle pos = animationPos();
 	Texture2D texture = sprite->getTexture();
 	DrawTexturePro(texture, texturePosDown, pos, { 0,0 }, 0, WHITE);
 	DrawTexturePro(texture, texturePosUp, { pos.x,pos.y - pos.height / 2,pos.width,pos.height / 2 }, { 0,0 }, 0, WHITE);

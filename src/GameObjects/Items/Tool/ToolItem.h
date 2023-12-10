@@ -19,6 +19,7 @@ class ToolItem :
     ToolType destroyType;
     SpriteController* sprite;
     static std::string description;
+    Rectangle hittingObjectPos;
     ToolItem(ToolItem& item);
 public:
     ToolItem(nlohmann::json j);
@@ -34,6 +35,7 @@ public:
     virtual void onCollisionHitable(HitAble* hit);
     virtual void onCollisionDestroyAble(DestroyAble* dest);
     void setInHand(bool inHand) { this->inHand = inHand; }
+    virtual void drawInterface();
     friend class ItemFactory;
 };
 

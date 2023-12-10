@@ -2,8 +2,21 @@
 #include "Blocks/Block.h"
 #include <vector>
 #include "Factory.h"
-
 #define Blocks BlockFactory::getFactory()
+
+enum class BlockID
+{
+	Water=0,
+	Sand,
+	Grass,
+	Dirt,
+	Stone,
+	Snow,
+	Ice,
+	Hole,
+
+};
+
 class BlockFactory
 	:public Factory
 {
@@ -16,7 +29,9 @@ public:
 
 	void clearFactory();
 
-	Block* getObject(int i);
+	Block* getObject(int ID);
+
+	Block* getObject(BlockID ID);
 
 	int getSize() { return objects.size(); }
 };

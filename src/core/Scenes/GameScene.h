@@ -90,12 +90,12 @@ public:
     /// Usuwa obiekty z struktury bez zwalniania z pamieci
     /// </summary>
     /// <param name="pos">pozycja z której usuwamy obiekty</param>
-    void removeBlocks(Rectangle pos);
+    void removeBlock(Rectangle pos);
     /// <summary>
     /// Usuwa z pamieci bloki w podanej pozycji
     /// </summary>
     /// <param name="pos">Pozycja bloków do usuniecia z pamieci</param>
-    void deleteBlocks(Rectangle pos);
+    void deleteBlock(Rectangle pos);
     /// <summary>
     /// Dodaje obiekt
     /// </summary>

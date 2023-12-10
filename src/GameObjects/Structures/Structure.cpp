@@ -28,17 +28,24 @@ Structure::~Structure()
 
 void Structure::update(float deltaTime)
 {
-
+	if(damageTime>0)
+		damageTime -= deltaTime;
 }
 
 void Structure::draw()
 {
-	sprite->draw(getPos());
+
+	sprite->draw(animationPos());
 }
 
 void Structure::damageObject(int power, ToolType type)
 {
+	int h = hp;
 	DestroyAble::damageObject(power, type);
+	if (h != hp)
+	{
+		damageTime = damageTimeMax;
+	}
 	if (hp > 0)
 		return;
 	Rectangle pos = getPos();

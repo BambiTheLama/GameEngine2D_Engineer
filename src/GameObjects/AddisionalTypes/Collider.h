@@ -55,6 +55,8 @@ public:
 	void removeObjectToIgnore(GameObject* ignore);
 
 	void clearListToIgnore();
+
+	void setOnlyHitable() { type = CollisionsCheckType::HitAbleOnly; }
 };
 
 bool checkCollision(GameObject* obj);

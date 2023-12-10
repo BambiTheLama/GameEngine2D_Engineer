@@ -39,5 +39,6 @@ public:
 
     virtual bool isToolGoBack() { return false; }
 
+    int getHp() { return hp; }
 };
 

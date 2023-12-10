@@ -22,12 +22,12 @@ void Rock::start()
 
 void Rock::update(float deltaTime)
 {
-
+	Structure::update(deltaTime);
 }
 
 void Rock::draw()
 {
-	sprite->draw(GameObject::getPos());
+	sprite->draw(animationPos());
 	if (collidersToDraw)
 	{
 		RectangleCollider::draw(this);
@@ -52,6 +52,7 @@ void Rock::damageObject(int power, ToolType type)
 	collider.y += pos.y;
 	if (h != hp)
 	{
+		damageTime = damageTimeMax;
 		float velosity = 1.69;
 		Particle* particle = new Particle({ 0,0,5,5 }, 1, { 2,4 }, { 20,20,20,255 }, { 69,69,69,0 });
 		ParticleSystem* particleSystem = new ParticleSystem(collider, "", particle, 10);
@@ -70,6 +71,7 @@ void Rock::damageObject(int power, ToolType type)
 	addItemToDrop(rockID, 100, 2, 3);
 	spawnItem({ collider.x + collider.width / 2,collider.y + collider.width / 2 });
 	Game->deleteObject(this);
+
 }
 void Rock::spawnItem(Vector2 pos)
 {

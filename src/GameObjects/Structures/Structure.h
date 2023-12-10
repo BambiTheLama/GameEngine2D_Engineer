@@ -7,6 +7,8 @@ class Structure :
 protected:
     Structure(Structure& obj);
     SpriteController* sprite=NULL;
+    float damageTime=0;
+    const float damageTimeMax = 0.5f;
 public:
     Structure(Rectangle pos, std::string name, ToolType tool = ToolType::All, int hp = 1, int power = 0);
 
@@ -33,5 +35,18 @@ public:
     virtual void generateTexturePos(){}
 
     virtual void drawPlaceInterface(Vector2 pos);
+
+    Rectangle animationPos(){
+        Rectangle pos = getPos();
+        if (damageTime > 0)
+        {
+            float p = damageTime / damageTimeMax * pos.height / 8.0f;
+            pos.x += p;
+            pos.width -= p * 2;
+            pos.y -= p;
+            pos.height += p;
+        }
+        return pos;
+    }
 };
 

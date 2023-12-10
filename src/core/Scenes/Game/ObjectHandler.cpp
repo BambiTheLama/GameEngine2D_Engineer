@@ -34,8 +34,16 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 				if (times <= 0)
 				{
 					k++;
-					ID = toReadBlock[k]["ID"];
-					times = toReadBlock[k]["t"];
+					if (k < toReadBlock.size())
+					{
+						ID = toReadBlock[k]["ID"];
+						times = toReadBlock[k]["t"];
+					}
+					else
+					{
+						ID = 0;
+						times = 999;
+					}
 				}
 
 				blocks[y][x] = factory->getObject(ID);
@@ -460,15 +468,23 @@ void ObjectHandler::update(float deltaTime)
 bool ObjectHandler::addBlock(Block* block)
 {
 	Rectangle pos=block->getPos();
-	int x = pos.x - this->x;
-	if (x >= w * tileSize)
+	int x = (pos.x - this->x)/ tileSize;
+	if (x >= w || x < 0)
 		return false;
-	int y = pos.y - this->y;
-	if (y >= h * tileSize)
+	int y = (pos.y - this->y) / tileSize;
+	if (y >= h || y < 0)
 		return false;
-	if (blocks[y][x] == NULL)
+	if (!blocks[y][x])
 	{
 		blocks[y][x] = block;
+		for (int i = -1; i < 2; i++)
+			for (int j = -1; j < 2; j++)
+			{
+				if (i + y < 0 || i + y >= h || x + j<0 || x + j>w)
+					continue;
+				blocks[y + i][x + j]->generateTexturePos();
+			}
+
 		return true;
 	}
 	return false;
@@ -476,21 +492,36 @@ bool ObjectHandler::addBlock(Block* block)
 
 void ObjectHandler::deleteBlock(int x, int y)
 {
+	y -= this->y;
+	x -= this->x;
+	x /= tileSize;
+	y /= tileSize;
+	if (y < 0 || x < 0 || x >= w || y >= h)
+		return;
 	if (blocks[y][x])
 	{
-		objectsToDelete.push_back(blocks[y][x]);
 		Rectangle pos = blocks[y][x]->getPos();
 		int w = pos.width / tileSize;
 		int h = pos.height / tileSize;
 		for (int i = 0; i < w; i++)
 			for (int j = 0; j < h; j++)
 				blocks[y + j][x + i] = NULL;
-		
+		objectsToDelete.push_back(blocks[y][x]);
+
+		for (int i = -1; i < 2; i++)
+			for (int j = -1; j < 2; j++)
+			{
+				if (i + y < 0 || i + y >= h || x + j<0 || x + j>w)
+					continue;
+				blocks[y + i][x + j]->generateTexturePos();
+			}
 	}
 }
 
 void ObjectHandler::removeBlock(int x, int y)
 {
+	y -= this->y;
+	x -= this->x;
 	if (blocks[y][x])
 	{
 		blocks[y][x] = NULL;

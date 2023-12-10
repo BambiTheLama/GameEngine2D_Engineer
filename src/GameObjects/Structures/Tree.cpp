@@ -45,6 +45,7 @@ void Tree::incrementAge()
 
 void Tree::update(float deltaTime)
 {
+	Structure::update(deltaTime);
 	if (timer > 0 && age<maxAge)
 	{
 		timer-=deltaTime;
@@ -86,7 +87,7 @@ void Tree::updateDropFromAge()
 
 void Tree::draw()
 {
-	sprite->draw(GameObject::getPos(), age);
+	sprite->draw(animationPos(), age);
 	if (collidersToDraw)
 	{
 		RectangleCollider::draw(this);
@@ -110,6 +111,7 @@ void Tree::damageObject(int power, ToolType type)
 	collider.y += pos.y;
 	if (h != hp)
 	{
+		damageTime = damageTimeMax;
 		float velosity = 1.69;
 		Particle* particle=new Particle({0,0,5,5},1,{2,4},{77,26,1,255},{255,170,30,0});
 		ParticleSystem* particleSystem = new ParticleSystem(collider, "", particle, 10);
@@ -128,6 +130,7 @@ void Tree::damageObject(int power, ToolType type)
 		Game->addObject(i);
 	}
 	Game->deleteObject(this);
+
 }
 
 void Tree::saveToJson(nlohmann::json& j)

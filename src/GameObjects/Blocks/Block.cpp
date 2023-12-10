@@ -1,5 +1,6 @@
 #include "Block.h"
 #include "../../core/Scenes/GameScene.h"
+#include "../BlockFactory.h"
 
 Block::Block(Block& obj):GameObject(obj),DestroyAble(obj),ItemsDrop(obj)
 {
@@ -62,7 +63,8 @@ void Block::damageObject(int power, ToolType tool)
 		hp = 0;
 	if (hp <= 0)
 	{
-		Game->deleteBlocks(getPos());
+		Rectangle pos = getPos();
+		Game->deleteBlock(getPos());
 	}
 	
 }

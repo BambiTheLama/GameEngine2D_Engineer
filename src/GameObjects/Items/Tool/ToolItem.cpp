@@ -1,4 +1,7 @@
 #include "ToolItem.h"
+#include "../../AddisionalTypes/AllTypes.h"
+#include "../../BlockFactory.h"
+#include "../../Blocks/Block.h"
 std::string ToolItem::description = "";
 
 ToolItem::ToolItem(ToolItem& item) :Item(item),LinesCollider(item)
@@ -35,9 +38,7 @@ ToolItem::ToolItem(nlohmann::json j):Item(j),LinesCollider(j)
 	if (j.contains("DestoryType"))
 		destroyType = (ToolType)j["DestoryType"];
 	else
-		destroyType = ToolType::NON;
-
-	
+		destroyType = ToolType::NON;	
 }
 
 ToolItem::~ToolItem()
@@ -92,6 +93,56 @@ bool ToolItem::use(float deltaTime)
 	else
 		rotation -= 220;
 	
+	Vector2 cursor = Game->getCursorPos();
+	Rectangle cursorPos = { cursor.x,cursor.y,1,1 };
+	std::list<GameObject*> objs = Game->getObjects(cursorPos, ObjectToGet::getNoBlocks);
+	for (auto o : objs)
+	{
+		if (o->getType() != ObjectType::Structure)
+			continue;
+		Collider* c = dynamic_cast<Collider*>(o);
+		if (!c)
+			continue;
+		Rectangle pos = o->getPos();
+		Rectangle colPos = c->getCollisionPos();
+		colPos.x += pos.x;
+		colPos.y += pos.y;
+		if (!CheckCollisionRecs(cursorPos, colPos))
+			continue;
+		DestroyAble* d = dynamic_cast<DestroyAble*>(o);
+		if (!d)
+			continue;
+		hittingObjectPos = c->getCollisionPos();
+
+		hittingObjectPos.x += pos.x;
+		hittingObjectPos.y += pos.y;
+		d->damageObject(power, destroyType);
+		return true;
+	}
+	objs = Game->getObjects(cursorPos, ObjectToGet::getBlocks);
+	for (auto o : objs)
+	{
+		if (!CheckCollisionRecs(cursorPos, o->getPos()))
+			continue;
+		DestroyAble* d = dynamic_cast<DestroyAble*>(o);
+		if (!d)
+			continue;
+		hittingObjectPos = o->getPos();
+		d->damageObject(power, destroyType);
+		if (d->getHp() <= 0)
+		{
+			Block* b = Blocks->getObject((int)BlockID::Hole);
+			if (b)
+			{
+				b->setMovePos({ hittingObjectPos.x,hittingObjectPos.y });
+				if (!Game->addBlock(b))
+					delete b;
+			}
+
+		
+		}
+		return true;
+	}
 	return true;
 }
 void ToolItem::draw()
@@ -121,6 +172,17 @@ void ToolItem::draw()
 
 }
 
+void ToolItem::drawInterface()
+{
+	Rectangle pos = hittingObjectPos;
+	Vector2 toScrean = Game->worldToScreanPos({ pos.x,pos.y });
+	pos.x = toScrean.x;
+	pos.y = toScrean.y;
+	pos.width *= Game->getZoom();
+	pos.height *= Game->getZoom();
+	drawViewFinder(pos);
+}
+
 void ToolItem::drawAt(Rectangle pos)
 {
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, { 0,0 }, 0, WHITE);
@@ -138,7 +200,4 @@ void ToolItem::onCollisionHitable(HitAble* hit)
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)
 {
 
-	dest->damageObject(power, destroyType);
-	if (dest->isToolGoBack())
-		isUsing = false;
 }
