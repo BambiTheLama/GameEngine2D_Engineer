@@ -22,6 +22,10 @@ public:
 
     virtual Enemy* clone() { return new Enemy(*this); }
 
-    virtual bool destoryAfterRenderClear() { return true; }
+    virtual bool destoryAfterRenderClear() { return false; }
+
+    virtual void saveToJson(nlohmann::json& j);
+
+    virtual void readFromJson(nlohmann::json& j);
 };
 

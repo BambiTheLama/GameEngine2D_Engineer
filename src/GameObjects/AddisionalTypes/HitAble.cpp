@@ -40,3 +40,16 @@ bool HitAble::dealDamage(float damage, float invisibleFrame)
 	}
 	return true;
 }
+
+void HitAble::saveToJson(nlohmann::json& j)
+{
+	j["HP"][0] = hp;
+	j["HP"][1] = maxHp;
+
+}
+
+void HitAble::readFromJson(nlohmann::json& j)
+{
+	hp = j["HP"][0];
+	maxHp = j["HP"][1];
+}

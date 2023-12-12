@@ -42,5 +42,9 @@ public:
     virtual bool isToolGoBack() { return false; }
 
     int getHp() { return hp; }
+
+    void saveToJson(nlohmann::json& j);
+
+    void readFromJson(nlohmann::json& j);
 };
 

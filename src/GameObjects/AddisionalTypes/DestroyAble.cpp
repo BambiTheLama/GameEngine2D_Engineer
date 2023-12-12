@@ -105,3 +105,14 @@ bool DestroyAble::isDestoryAbleBy(ToolType type)
 {
 	return isThisToolType(type, itemToolRequest);
 }
+
+void DestroyAble::saveToJson(nlohmann::json& j)
+{
+	j["HP"][0] = hp;
+
+}
+
+void DestroyAble::readFromJson(nlohmann::json& j)
+{
+	hp = j["HP"][0];
+}

@@ -43,3 +43,16 @@ bool Enemy::dealDamage(float damage, float invisibileFrame)
 		Game->deleteObject(this);
 	return true;
 }
+void Enemy::saveToJson(nlohmann::json& j)
+{
+	GameObject::saveToJson(j);
+	HitAble::saveToJson(j);
+
+}
+
+void Enemy::readFromJson(nlohmann::json& j)
+{
+	GameObject::readFromJson(j);
+	HitAble::readFromJson(j);
+	
+}

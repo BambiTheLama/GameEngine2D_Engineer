@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "json.hpp"
 /// <summary>
 /// Interfejs od zadawania obra¿eñ Obiekt¹
 /// </summary>
@@ -22,6 +23,11 @@ public:
 	virtual void draw(Rectangle pos);
 
 	bool isObjectDead() { return hp <= 0; }
+	
+	void saveToJson(nlohmann::json& j);
+
+	void readFromJson(nlohmann::json& j);
+
 
 };
 
