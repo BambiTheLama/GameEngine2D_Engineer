@@ -57,7 +57,13 @@ void ToolItem::update(float deltaTime)
 			isUsing = false;
 	}
 	if (!isUsing)
+	{
+		GameObject* o = getHittingObject();
+		if (!o)
+			hittingObjectPos = { 0,0,-10,-10 };
 		return;
+	}
+
 
 	Rectangle pos = getPos();
 
@@ -92,57 +98,8 @@ bool ToolItem::use(float deltaTime)
 		rotation += 220;
 	else
 		rotation -= 220;
-	
-	Vector2 cursor = Game->getCursorPos();
-	Rectangle cursorPos = { cursor.x,cursor.y,1,1 };
-	std::list<GameObject*> objs = Game->getObjects(cursorPos, ObjectToGet::getNoBlocks);
-	for (auto o : objs)
-	{
-		if (o->getType() != ObjectType::Structure)
-			continue;
-		Collider* c = dynamic_cast<Collider*>(o);
-		if (!c)
-			continue;
-		Rectangle pos = o->getPos();
-		Rectangle colPos = c->getCollisionPos();
-		colPos.x += pos.x;
-		colPos.y += pos.y;
-		if (!CheckCollisionRecs(cursorPos, colPos))
-			continue;
-		DestroyAble* d = dynamic_cast<DestroyAble*>(o);
-		if (!d)
-			continue;
-		hittingObjectPos = c->getCollisionPos();
+	GameObject* o = getHittingObject(true);
 
-		hittingObjectPos.x += pos.x;
-		hittingObjectPos.y += pos.y;
-		d->damageObject(power, destroyType);
-		return true;
-	}
-	objs = Game->getObjects(cursorPos, ObjectToGet::getBlocks);
-	for (auto o : objs)
-	{
-		if (!CheckCollisionRecs(cursorPos, o->getPos()))
-			continue;
-		DestroyAble* d = dynamic_cast<DestroyAble*>(o);
-		if (!d)
-			continue;
-		hittingObjectPos = o->getPos();
-		d->damageObject(power, destroyType);
-		if (d->getHp() <= 0)
-		{
-			Block* b = Blocks->getObject((int)BlockID::Hole);
-			if (b)
-			{
-				b->setMovePos({ hittingObjectPos.x,hittingObjectPos.y });
-				if (!Game->addBlock(b))
-					delete b;
-			}
-
-		
-		}
-		return true;
-	}
 	return true;
 }
 void ToolItem::draw()
@@ -181,6 +138,73 @@ void ToolItem::drawInterface()
 	pos.width *= Game->getZoom();
 	pos.height *= Game->getZoom();
 	drawViewFinder(pos);
+}
+GameObject* ToolItem::getHittingObject(bool isDestory)
+{
+	Vector2 cursor = Game->getCursorPos();
+	Rectangle cursorPos = { cursor.x,cursor.y,1,1 };
+	std::list<GameObject*> objs = Game->getObjects(cursorPos, ObjectToGet::getNoBlocks);
+	for (auto o : objs)
+	{
+		if (o->getType() != ObjectType::Structure)
+			continue;
+		Collider* c = dynamic_cast<Collider*>(o);
+		if (!c)
+			continue;
+		Rectangle pos = o->getPos();
+		Rectangle colPos = c->getCollisionPos();
+		colPos.x += pos.x;
+		colPos.y += pos.y;
+		if (!CheckCollisionRecs(cursorPos, colPos))
+			continue;
+		DestroyAble* d = dynamic_cast<DestroyAble*>(o);
+		if (!d)
+			continue;
+		if (!d->isDestoryAbleBy(destroyType))
+			continue;
+		hittingObjectPos = c->getCollisionPos();
+
+		hittingObjectPos.x += pos.x;
+		hittingObjectPos.y += pos.y;
+		if(isDestory)
+			d->damageObject(power, destroyType);
+		return o;
+	}
+	objs = Game->getObjects(cursorPos, ObjectToGet::getBlocks);
+	for (auto o : objs)
+	{
+		if (!CheckCollisionRecs(cursorPos, o->getPos()))
+			continue;
+		DestroyAble* d = dynamic_cast<DestroyAble*>(o);
+		if (!d)
+			continue;
+
+		if (d->isDestoryAbleBy(destroyType))
+		{
+			hittingObjectPos = o->getPos();
+			if (isDestory)
+			{
+				d->damageObject(power, destroyType);
+				if (d->getHp() <= 0)
+				{
+
+					Block* b = Blocks->getObject((int)BlockID::Hole);
+					if (b)
+					{
+						b->setMovePos({ hittingObjectPos.x,hittingObjectPos.y });
+						if (!Game->addBlock(b))
+							delete b;
+					}
+
+
+				}
+			}
+			return o;
+		}
+
+
+	}
+	return NULL;
 }
 
 void ToolItem::drawAt(Rectangle pos)

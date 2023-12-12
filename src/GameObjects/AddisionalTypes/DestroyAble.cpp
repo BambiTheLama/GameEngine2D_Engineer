@@ -100,3 +100,8 @@ void DestroyAble::damageObject(int power, ToolType type)
 	else
 		hp = 0;
 }
+
+bool DestroyAble::isDestoryAbleBy(ToolType type)
+{
+	return isThisToolType(type, itemToolRequest);
+}

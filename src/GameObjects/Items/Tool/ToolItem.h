@@ -2,6 +2,8 @@
 #include "../Item.h"
 #include "../../Blocks/Block.h"
 #include "../../../core/Scenes/GameScene.h"
+#include "../../AddisionalTypes/AllTypes.h"
+
 class ToolItem :
     public Item , public LinesCollider
 {
@@ -36,6 +38,7 @@ public:
     virtual void onCollisionDestroyAble(DestroyAble* dest);
     void setInHand(bool inHand) { this->inHand = inHand; }
     virtual void drawInterface();
+    GameObject* getHittingObject(bool isDestory=false);
     friend class ItemFactory;
 };
 

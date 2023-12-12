@@ -37,6 +37,8 @@ public:
 
     virtual void damageObject(int power, ToolType type);
 
+    bool isDestoryAbleBy(ToolType type);
+
     virtual bool isToolGoBack() { return false; }
 
     int getHp() { return hp; }
