@@ -108,9 +108,6 @@
     <ClCompile Include="src\core\Scenes\Game\FourTree.cpp">
       <Filter>src\core\Scenes\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Scenes\Game\PerlinNoice.cpp">
-      <Filter>src\core\Scenes\Game</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjects\Blocks\Block.cpp">
       <Filter>src\GameObjects\Blocks</Filter>
     </ClCompile>
@@ -255,9 +252,6 @@
     <ClCompile Include="src\GameObjects\NPCs\Enemy_1.cpp">
       <Filter>src\GameObjects\NPCs</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Scenes\TestScene.cpp">
-      <Filter>src\core\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjects\Structures\Structure.cpp">
       <Filter>src\GameObjects\Structures</Filter>
     </ClCompile>
@@ -272,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="src\GameObjects\Items\PlaceItem.cpp">
       <Filter>src\GameObjects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\NPCFactory.cpp">
+      <Filter>src\GameObjects\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +306,6 @@
       <Filter>src\core\Scenes\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Scenes\Game\FourTree.h">
-      <Filter>src\core\Scenes\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\Scenes\Game\PerlinNoice.h">
       <Filter>src\core\Scenes\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\Blocks\Block.h">
@@ -455,14 +449,8 @@
     <ClInclude Include="src\core\Scenes\Menu.h">
       <Filter>src\core\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Scenes\ItemEdytor.h">
-      <Filter>src\core\Scenes\Game</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjects\NPCs\Enemy_1.h">
       <Filter>src\GameObjects\NPCs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\Scenes\TestScene.h">
-      <Filter>src\core\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\Structures\Structure.h">
       <Filter>src\GameObjects\Structures</Filter>
@@ -478,6 +466,12 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\Items\PlaceItem.h">
       <Filter>src\GameObjects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\NPCFactory.h">
+      <Filter>src\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\ItemEdytor.h">
+      <Filter>src\core\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

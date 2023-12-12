@@ -1,6 +1,5 @@
 #include "ObjectHandler.h"
 #include "../../../GameObjects/BlockFactory.h"
-#include "PerlinNoice.h"
 #include "../../../GameObjects/StructuresFactory.h"
 #include <fstream>
 #include "../GameScene.h"
@@ -182,39 +181,6 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 			}
 		}
 }
-ObjectHandler::ObjectHandler(int chunkX, int chunkY)
-{
-	this->x = chunkX * tileSize * (w - 1);
-	this->y = chunkY * tileSize * (h - 1);
-	this->chunkX = chunkX;
-	this->chunkY = chunkY;
-	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
-
-	PerlinNoice* perlin = new PerlinNoice(w, h);
-	perlin->generateNoise2D(10, 1.69, 692137);
-	float** noice = perlin->getNoice();
-	BlockFactory* factory = Blocks;
-
-	for (int i = 0; i < h; i++)
-	{
-		for (int j = 0; j < w; j++)
-		{
-
-			int blockID = noice[i][j] >= 0 ? 1 : 1;
-			Vector2 pos = { x + (float)j * tileSize,y + (float)i * tileSize };
-
-
-			blocks[i][j] = factory->getObject(blockID);
-
-			if (blocks[i][j])
-				blocks[i][j]->setMovePos(pos);
-		}
-
-	}
-	delete perlin;
-}
-
-
 
 ObjectHandler::~ObjectHandler()
 {

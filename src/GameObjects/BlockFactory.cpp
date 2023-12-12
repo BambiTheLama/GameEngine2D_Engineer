@@ -41,7 +41,10 @@ BlockFactory* BlockFactory::getFactory()
 void BlockFactory::clearFactory()
 {
 	if (factory)
+	{
 		delete factory;
+		factory = NULL;
+	}
 }
 
 Block* BlockFactory::getObject(int i)

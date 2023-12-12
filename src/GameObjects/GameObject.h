@@ -52,19 +52,34 @@ protected:
 	Rectangle pos;
 	std::string name;
 	int chunkX, chunkY;
+	/// <summary>
+	/// Kostruktor pomagajacy kopiowac dane z obiektu podanego w parametrze konstruktor glownie uzywany przy kolonowaniu obiektow
+	/// </summary>
+	/// <param name="obj"></param>
 	GameObject(GameObject& obj);
 public:
+	/// <summary>
+	/// Konstruktor sluzacy glownie do tworzenia obiektow w fabrykach obiektow
+	/// </summary>
+	/// <param name="pos">Pozycja obiektu</param>
+	/// <param name="name">Nazwa obiektu</param>
 	GameObject(Rectangle pos,std::string name);
+	/// <summary>
+	/// Konstruktor wczytujace dane z pliku json uzywane przy wczytywaniu przedmiotow z pliku json
+	/// </summary>
+	/// <param name="j"></param>
 	GameObject(nlohmann::json& j);
 	/// <summary>
 	/// Wiztualny destruktor by by³ wywo³any odpowiedni z klas dziedzicz¹cych
 	/// </summary>
 	virtual ~GameObject();
 	/// <summary>
-	/// Metoda aktywowana przy starcie sceny gdy wszystkie obiekty siê wygeneruj¹ lub po dodaniu obieku do sceny
+	/// Metoda aktywowana przy ustawieniu obiektu na mapie
 	/// </summary>
 	virtual void start(){}
-
+	/// <summary>
+	/// Funkcja wykonywana przy usuwaniu obiektu
+	/// </summary>
 	virtual void onDestory(){}
 	/// <summary>
 	/// Metoda aktualizuj¹ca obiekt
@@ -119,22 +134,45 @@ public:
 	/// </summary>
 	/// <returns>Nazwa obiektu</returns>
 	virtual std::string getName() { return name; }
-
+	/// <summary>
+	/// Okresla czy  obiekt ma zostac zniszczony po usunieciu chanku
+	/// </summary>
+	/// <returns></returns>
 	virtual bool destoryAfterRenderClear() { return false; }
-
+	/// <summary>
+	/// Zapisywanie obiektu do pliku json
+	/// </summary>
+	/// <param name="j"></param>
 	virtual void saveToJson(nlohmann::json &j);
-
+	/// <summary>
+	/// Wczytanie danych z pliku json
+	/// </summary>
+	/// <param name="j"></param>
 	virtual void readFromJson(nlohmann::json& j);
-
+	/// <summary>
+	/// Zwraca informacje na ktoryk kawalku mapy jestesmy w osi X
+	/// </summary>
+	/// <returns></returns>
 	int getChunkX()const { return chunkX; }
-
+	/// <summary>
+	/// Zwraca informacje na ktoryk kawalku mapy jestesmy w osi Y
+	/// </summary>
+	/// <returns></returns>
 	int getChunkY()const { return chunkY; }
-
+	/// <summary>
+	/// Generuje informacjê na ktorych kawalkach mapy jestesmy
+	/// </summary>
 	void generateChunk();
 	friend class Factory;
 	friend class BlockFactory;
 	friend class ItemFactory;
 	friend class StructuresFactory;
+	friend class NPCFactory;
 };
-
+/// <summary>
+/// Zwraca obiekt z odpowiedniej fabryki o podanym ID
+/// </summary>
+/// <param name="type">Typ obiektu okreslajacy fabryke</param>
+/// <param name="ID">Identyfikator obiektu</param>
+/// <returns></returns>
 GameObject* getObjFromFactory(ObjectType type, int ID);

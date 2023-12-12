@@ -2,7 +2,6 @@
 #include "raylib.h"
 #include "Controllers/SpriteController.h"
 #include "Scenes/GameScene.h"
-#include "Scenes/Game/PerlinNoice.h"
 #include "../GameObjects/ItemFactory.h"
 #include "../GameObjects/BlockFactory.h"
 #include "Properties.h"

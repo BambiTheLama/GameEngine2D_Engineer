@@ -156,13 +156,11 @@
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
     <ClCompile Include="src\core\Scenes\Game\FourTree.cpp" />
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp" />
-    <ClCompile Include="src\core\Scenes\Game\PerlinNoice.cpp" />
     <ClCompile Include="src\core\Scenes\ItemEdytor.cpp" />
     <ClCompile Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.cpp" />
     <ClCompile Include="src\core\Scenes\Menu.cpp" />
     <ClCompile Include="src\core\Scenes\RecipesEdytor.cpp" />
     <ClCompile Include="src\core\Scenes\Scene.cpp" />
-    <ClCompile Include="src\core\Scenes\TestScene.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\CircleCollider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp" />
@@ -177,6 +175,7 @@
     <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp" />
     <ClCompile Include="src\GameObjects\Crafting\CraftingStation.cpp" />
     <ClCompile Include="src\GameObjects\Crafting\Recipes.cpp" />
+    <ClCompile Include="src\GameObjects\NPCFactory.cpp" />
     <ClCompile Include="src\GameObjects\Factory.cpp" />
     <ClCompile Include="src\GameObjects\GameObject.cpp" />
     <ClCompile Include="src\GameObjects\Items\PlaceItem.cpp" />
@@ -226,13 +225,11 @@
     <ClInclude Include="src\core\Scenes\GameScene.h" />
     <ClInclude Include="src\core\Scenes\Game\FourTree.h" />
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />
-    <ClInclude Include="src\core\Scenes\Game\PerlinNoice.h" />
     <ClInclude Include="src\core\Scenes\ItemEdytor.h" />
     <ClInclude Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.h" />
     <ClInclude Include="src\core\Scenes\Menu.h" />
     <ClInclude Include="src\core\Scenes\RecipesEdytor.h" />
     <ClInclude Include="src\core\Scenes\Scene.h" />
-    <ClInclude Include="src\core\Scenes\TestScene.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\CircleCollider.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h" />
@@ -248,6 +245,7 @@
     <ClInclude Include="src\GameObjects\Blocks\CollidingBlock.h" />
     <ClInclude Include="src\GameObjects\Crafting\CraftingStation.h" />
     <ClInclude Include="src\GameObjects\Crafting\Recipes.h" />
+    <ClInclude Include="src\GameObjects\NPCFactory.h" />
     <ClInclude Include="src\GameObjects\Factory.h" />
     <ClInclude Include="src\GameObjects\GameObject.h" />
     <ClInclude Include="src\GameObjects\Items\PlaceItem.h" />
