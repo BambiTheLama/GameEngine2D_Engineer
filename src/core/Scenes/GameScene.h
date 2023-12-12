@@ -128,22 +128,62 @@ public:
     /// </summary>
     /// <param name="ui">Interfejs do usuniêcia</param>
     void removeUserUI(UserUI* ui) { userUI.remove(ui); }
-
+    /// <summary>
+    /// Usuwa wszystkie fragmety mapy ktore sa dalej od celu kamery
+    /// </summary>
     void deleteChunksNotCloseToTarget();
-
+    /// <summary>
+    /// Wczytuje fragmety mapy bliskie obiektu na ktorym jest skupiona kamera
+    /// </summary>
     void loadChunksCloseToTarget();
-
+    /// <summary>
+    /// Zwraca obiekty posortowane gotowe do rysowania
+    /// </summary>
+    /// <returns></returns>
     std::list<GameObject*> getObjToDraw();
-
-    void printfChunk(GameObject* obj);
+    /// <summary>
+    /// Wczytuje odpowiedni fragmet mapy 
+    /// </summary>
+    /// <param name="x">Pozycja na osi OX kawalka mapy</param>
+    /// <param name="y">Pozycja na osi OY kawalka mapy</param>
     void loadChunk(int x, int y);
+    /// <summary>
+    /// Generuje odpowiedni fragment
+    /// </summary>
+    /// <param name="x">Pozycja na osi OX kawalka mapy</param>
+    /// <param name="y">Pozycja na osi OY kawalka mapy</param>
     void generateChunk(int x, int y);
+    /// <summary>
+    /// Dodaje do listy fragmentow mapy do usuniecia
+    /// </summary>
+    /// <param name="h">Obiekt odpowiedni za fragment mapy</param>
     void deleteChunk(ObjectHandler* h);
+    /// <summary>
+    /// Zapisuje fragment mapy
+    /// </summary>
+    /// <param name="h">Obiekt odpowiedni za fragment mapy</param>
     void saveChunk(ObjectHandler* h);
+    /// <summary>
+    /// Zwraca nazwe ktora odpowieda za dany fragment mapy
+    /// </summary>
+    /// <param name="x">Pozycja na osi OX kawalka mapy</param>
+    /// <param name="y">Pozycja na osi OY kawalka mapy</param>
+    /// <returns></returns>
     std::string chunkName(int x, int y);
+    /// <summary>
+    /// Funkcja odpowiedzialna za prace osobnego watku
+    /// </summary>
     void mapLoaderFun();
-
+    /// <summary>
+    /// Konwertuje punk z pozycji w swiecie na pozycje na ekranie
+    /// </summary>
+    /// <param name="pos">Punkt do konwersji</param>
+    /// <returns>Punkt po konwersji</returns>
     Vector2 worldToScreanPos(Vector2 pos) { return GetWorldToScreen2D(pos, camera); }
+    /// <summary>
+    /// Zwraca z jakim mnoznikiem odalenia aktualnie pracuje kamera
+    /// </summary>
+    /// <returns></returns>
     float getZoom() { return camera.zoom; }
 
 };

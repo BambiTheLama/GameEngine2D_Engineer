@@ -4,10 +4,10 @@ std::string itemClassDescription()
 {
 	std::string s="";
 	s += std::to_string((int)ItemClass::StackItem) + " - StackItem";
-	s += "\n" + std::to_string((int)ItemClass::ToolItem) + " - ToolItem";
-	s += "\n" + std::to_string((int)ItemClass::Bow) + " - Bow";
-	s += "\n" + std::to_string((int)ItemClass::Ammo) + " - Ammo";
-	s += "\n" + std::to_string((int)ItemClass::PlaceItems) + " - PlaceItems";
+	s += "\n\n" + std::to_string((int)ItemClass::ToolItem) + " - ToolItem";
+	s += "\n\n" + std::to_string((int)ItemClass::Bow) + " - Bow";
+	s += "\n\n" + std::to_string((int)ItemClass::Ammo) + " - Ammo";
+	s += "\n\n" + std::to_string((int)ItemClass::PlaceItems) + " - PlaceItems";
 	return s;
 }
 

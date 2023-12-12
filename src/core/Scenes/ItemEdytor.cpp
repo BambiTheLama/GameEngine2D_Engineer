@@ -181,7 +181,6 @@ void ItemEdytor::saveData()
 	writer.close();
 }
 
-
 void ItemEdytor::start()
 {
 	for (auto* e : elements)
@@ -217,7 +216,7 @@ void ItemEdytor::update(float deltaTime)
 	
 }
 
-void ItemEdytor::newItem()
+void ItemEdytor::addItem()
 {
 	ItemProperty *i = new ItemProperty();
 	i->clearData();
@@ -257,11 +256,6 @@ void ItemEdytor::popBackItem()
 	delete items[items.size() - 1];
 	items.pop_back();
 }
-void ItemEdytor::addItem()
-{
-	items.push_back(new ItemProperty());
-	items[items.size() - 1]->ID = items.size() - 1;
-}
 
 void ItemEdytor::draw()
 {
@@ -287,6 +281,7 @@ void ItemEdytor::draw()
 	} while (*it != *elements.begin());
 
 }
+
 Rectangle ItemEdytor::itemPos(int i)
 {
 	int size = (itemsBoxSize + itemsBoxSpacing);
@@ -294,6 +289,7 @@ Rectangle ItemEdytor::itemPos(int i)
 	int y = i / howManyElementsInRow;
 	return { itemsSelect.x + x * size,itemsSelect.y + y * size,(float)itemsBoxSize,(float)itemsBoxSize };
 }
+
 Rectangle ItemEdytor::getScrollMovingPos()
 {
 	Rectangle itemScrollMovingPos = itemScroll;
@@ -318,6 +314,7 @@ void ItemEdytor::lastElementPressed()
 	}
 
 }
+
 void ItemEdytor::checkPress()
 {
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -379,6 +376,7 @@ bool ItemEdytor::itemsSelectPointClick()
 		}
 	return true;
 }
+
 bool ItemEdytor::itemDrawPointsClick()
 {
 	if (!CheckCollisionPointRec(GetMousePosition(), itemDraw))
@@ -400,6 +398,7 @@ bool ItemEdytor::itemDrawPointsClick()
 	}
 	return true;
 }
+
 void ItemEdytor::itemDrawPointsHold()
 {
 	if (CheckCollisionPointRec(GetMousePosition(), itemDraw))
@@ -418,6 +417,7 @@ void ItemEdytor::itemDrawPointsHold()
 			holdPoint = -1;
 	}
 }
+
 void ItemEdytor::itemDrawShow()
 {
 	if (!item->sprite)

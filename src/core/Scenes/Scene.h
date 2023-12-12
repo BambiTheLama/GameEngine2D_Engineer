@@ -10,12 +10,13 @@ public:
 	/// </summary>
 	virtual ~Scene() {}
 	/// <summary>
-	/// Metoda Startuj¹ce metody start dla obiektów
+	/// Metoda startujaca po stworzeniu sceny
 	/// </summary>
 	virtual void start() = 0;
 	/// <summary>
-	/// Metoda aktualizujaca
+	/// Metoda aktualizujaca sie cyklicznie do dany odstep czasu
 	/// </summary>
+	/// <param name="deltaTime">Odstep czasu od ostatniej aktualizacjai</param>
 	virtual void update(float deltaTime) = 0;
 	/// <summary>
 	/// Metoda rysuj¹ca

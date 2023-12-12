@@ -11,7 +11,9 @@
 #include "../Elements/CheckBoxOpenElements.h"
 #include "../Elements/AddItem.h"
 #include "../Elements/RemoveItem.h"
-
+/// <summary>
+/// Klasa odpowiedzialna za scene z edytora przedmiotow
+/// </summary>
 class ItemEdytor :
     public Scene, public AdderEdytor, public RemoverEdytor
 {
@@ -31,44 +33,71 @@ class ItemEdytor :
 	const int itemsBoxSpacing = 10;
 
 public:
+    /// <summary>
+    /// Konstruktor domyslny sceny
+    /// </summary>
     ItemEdytor();
-
+	/// <summary>
+	/// Destruktor domyslny sceny
+	/// </summary>
 	~ItemEdytor();
-
+	/// <summary>
+	/// Wczytuje dane z pliku
+	/// </summary>
 	void loadDataFromFile();
-
+	/// <summary>
+	/// Zapisuje dane do pliku
+	/// </summary>
 	void saveData();
 
 	void start();
 
 	void update(float deltaTime);
-
-	void newItem();
-
-	void removeItem();
-
+	/// <summary>
+	/// Doaje nowy przedmiot 
+	/// </summary>
 	void addItem();
+	/// <summary>
+	/// Usuwa przedmiot
+	/// </summary>
+	void removeItem();
 
 	void popBackItem();
 
 	virtual void draw();
-
+	/// <summary>
+	/// Zwraca pozycje obiektu na liscie wszystkich obiektow w bocznym menu
+	/// </summary>
+	/// <param name="i">index obiektu</param>
+	/// <returns></returns>
 	Rectangle itemPos(int i);
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
 	Rectangle getScrollMovingPos();
-
+	/// <summary>
+	/// Metoda sluzaca za usuniecia ostatniego elementu z danego miejsca w obiekcie
+	/// </summary>
 	void lastElementPressed();
-
+	/// <summary>
+	/// Sprawdza plikniecie 
+	/// </summary>
 	void checkPress();
 
 	bool itemDrawPointsClick();
 
 	bool itemsSelectPointClick();
-
+	/// <summary>
+	/// Rysuje trzymany punk ktory sluzy za interkacje obiektu
+	/// </summary>
 	void itemDrawPointsHold();
 
 	void itemDrawShow();
-
+	/// <summary>
+	/// Wczytuje nowy przedmiot od podanym id
+	/// </summary>
+	/// <param name="i"></param>
 	void loadNewItem(int i);
 };
 

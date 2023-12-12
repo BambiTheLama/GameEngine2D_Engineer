@@ -370,15 +370,6 @@ std::list<GameObject*> GameScene::getObjToDraw()
 	return objects;
 }
 
-void GameScene::printfChunk(GameObject* obj)
-{
-	for(auto h:handler)
-		if (h->isObjAtThisChunk(obj))
-		{
-			printf("Chunk %d %d\n", h->getChunkY(), h->getChunkX());
-		}
-}
-
 void GameScene::generateChunk(int x, int y)
 {
 
