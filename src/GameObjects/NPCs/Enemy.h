@@ -1,9 +1,13 @@
 #pragma once
 #include "../GameObject.h"
 #include "../AddisionalTypes/AllTypes.h"
+#include "PathFinding.h"
 class Enemy :
-    public GameObject, public RectangleCollider, public HitAble
+    public GameObject, public RectangleCollider, public HitAble,public UserUI
 {
+    PathFinding* path;
+    float range = 1000;
+    float speed = 30;
     Enemy(Enemy& e);
 public:
     Enemy();
@@ -14,7 +18,17 @@ public:
 
     virtual void update(float deltaTime);
 
+    void findPath();
+
+    Vector2 getMoveVector();
+
+    virtual void start();
+
+    virtual void onDestory();
+
     virtual void draw();
+
+    virtual void drawInterface();
 
     virtual bool dealDamage(float damage, float invisibleFrame);
 

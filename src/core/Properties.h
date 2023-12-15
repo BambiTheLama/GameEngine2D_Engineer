@@ -3,6 +3,7 @@
 #define textStandardSize 26
 #define textStandardSize2 30
 #define collidersToDraw Properties::getProperties()->getShowColliders()
+#define PathFindingShow Properties::getProperties()->getShowPathFinding()
 /// <summary>
 /// Rysuje text z domyslna czciaka uzytkownika
 /// </summary>
@@ -50,6 +51,7 @@ class Properties
 {
 	static Properties* properties;
 	bool showColliders = false;
+	bool showPathFinding = false;
 	Font font;
 	Texture2D viewFinder;
 	Properties();
@@ -78,6 +80,11 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	bool getShowColliders() const { return showColliders; }
+	/// <summary>
+	/// Zwaca czy maja byc rysowane sciezki z pathfindingu
+	/// </summary>
+	/// <returns></returns>
+	bool getShowPathFinding()const { return showPathFinding; }
 	/// <summary>
 	/// Rysuje celownik uzywany do niszczenia i stawianai obiektow
 	/// </summary>

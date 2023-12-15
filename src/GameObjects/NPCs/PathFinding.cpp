@@ -43,6 +43,8 @@ void PathFindingNode::clear()
 
 PathFinding::PathFinding(int x, int y, int w, int h, int objW, int objH, int posX, int posY)
 {
+	w /= objW;
+	h /= objH;
 	this->posX = posX - w / 2 * objW;
 	this->posY = posY - h / 2 * objH;
 	this->objH = objH;
@@ -84,6 +86,11 @@ void PathFinding::setNewEnd(Vector2 pos)
 	fx = (pos.x - posX) / objW;
 	fy = (pos.y - posY) / objH;
 }
+void PathFinding::setNewEnd(Rectangle pos)
+{
+	fx = (pos.x - posX) / objW;
+	fy = (pos.y - posY) / objH;
+}
 
 void PathFinding::setNewStart(Vector2 pos)
 {
@@ -106,10 +113,10 @@ void PathFinding::setWall(Rectangle pos)
 	int y = (pos.y - posY) / objH;
 	if (x < 0 || x >= w || y < 0 || y >= h)
 		return;
-	int ph = pos.height / objH;
-	int pw = pos.width / objW;
+	int pw = (pos.width + pos.x - posX) / objW + ((int)(pos.width + pos.x - posX) % objW > 0 ? 1 : 0);
+	int ph = (pos.height + pos.y - posY) / objH + ((int)(pos.height + pos.y - posY) % objH > 0 ? 1 : 0);
 	for (int i = x; i < pw && i < w; i++)
-		for (int j = x; j < ph && j < h; j++)
+		for (int j = y; j < ph && j < h; j++)
 		{
 			nodes[j][i]->canPassByIt = false;
 		}
@@ -290,4 +297,46 @@ void PathFinding::draw()
 		nodes[fy][fx]->drawPath();
 
 
+}
+void PathFinding::draw(Vector2 pos, float zoom)
+{
+	PathFindingNode::w = objW*zoom;
+	PathFindingNode::h = objH*zoom;
+	PathFindingNode::startX = pos.x;
+	PathFindingNode::startY = pos.y;
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = 0; j < w; j++)
+		{
+			nodes[i][j]->draw();
+		}
+	}
+	if (hasPath)
+		nodes[fy][fx]->drawPath();
+
+
+}
+
+Vector2 PathFinding::getMoveVector()
+{
+	if (!hasPath)
+		return { 0,0 };
+	PathFindingNode* n=getEndNode();
+	PathFindingNode* n2 = n;
+	while (n->fromNode)
+	{
+		n2 = n;
+		n = n->fromNode;
+	}
+	n = n2;
+	PathFindingNode* sn = getStartNode();
+	if (n->x == sn->x)
+	{
+		if (n->y > sn->y)
+			return{ 0,1 };
+		return{ 0,-1 };
+	}
+	if (n->x > sn->x)
+		return{ 1,0 };
+	return{ -1,0 };
 }

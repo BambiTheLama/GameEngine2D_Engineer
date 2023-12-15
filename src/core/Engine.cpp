@@ -63,8 +63,14 @@ void Engine::start()
 void Engine::update(float deltaTime)
 {
 	scene->update(deltaTime);
-	if (IsKeyPressed(KEY_F1) && IsKeyDown(KEY_LEFT_SHIFT))
-		Properties::getProperties()->showColliders = !collidersToDraw;
+	if (IsKeyDown(KEY_LEFT_SHIFT))
+	{
+		if(IsKeyPressed(KEY_F1))
+			Properties::getProperties()->showColliders = !collidersToDraw;
+		if (IsKeyPressed(KEY_F2))
+			Properties::getProperties()->showPathFinding = !PathFindingShow;
+	}
+
 }
 void Engine::draw()
 {

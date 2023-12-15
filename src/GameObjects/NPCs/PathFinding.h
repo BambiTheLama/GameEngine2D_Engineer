@@ -28,11 +28,14 @@ class PathFinding
 	int objW, objH;
 	bool hasPath = false;
 	PathFindingNode*** nodes;
+	PathFindingNode* getEndNode() { return nodes[fy][fy]; }
+	PathFindingNode* getStartNode() { return nodes[sy][sy]; }
 public:
 	PathFinding(int x, int y, int w, int h, int objW = 1, int objH = 1, int posX = 0, int posY = 0);
 
 	~PathFinding();
 	void setNewEnd(Vector2 pos);
+	void setNewEnd(Rectangle pos);
 	void setNewStart(Vector2 pos);
 	void setWall(Vector2 pos);
 	void setWall(Rectangle pos);
@@ -44,8 +47,12 @@ public:
 	void addNodesToVector(std::vector<PathFindingNode*>& nodesToCheck, int x, int y);
 	void findPath();
 	void setNewPos(int posX, int posY);
+	Vector2 getPos() { return { (float)posX,(float)posY }; }
 	void clearData();
 	void draw();
+	void draw(Vector2 pos, float zoom);
+	bool isFindthPath() { return hasPath; }
+	Vector2 getMoveVector();
 
 
 };
