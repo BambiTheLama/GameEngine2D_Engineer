@@ -270,6 +270,9 @@
     <ClCompile Include="src\GameObjects\NPCFactory.cpp">
       <Filter>src\GameObjects\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\NPCs\PathFinding.cpp">
+      <Filter>src\GameObjects\NPCs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -473,9 +476,11 @@
     <ClInclude Include="src\core\Scenes\ItemEdytor.h">
       <Filter>src\core\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameObjects\NPCs\PathFinding.h">
+      <Filter>src\GameObjects\NPCs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
 </Project>

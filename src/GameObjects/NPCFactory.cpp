@@ -5,6 +5,7 @@ NPCFactory* NPCFactory::factory = NULL;
 NPCFactory::NPCFactory()
 {
 	int i = 0;
+	objects.push_back(new Enemy());
 	for (auto o : objects)
 		o->ID = i++;
 }
