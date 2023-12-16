@@ -31,11 +31,15 @@ void Enemy::onDestory()
 
 void Enemy::update(float deltaTime)
 {
+	if (deltaTime > 0.03)
+		deltaTime = 0.03;
 	HitAble::update(deltaTime);
 	findPath();
 	Rectangle pos = getPos();
 	Vector2 moveVector = getMoveVector();
+
 	Vector2 newPos = { pos.x + moveVector.x * deltaTime * speed,pos.y + moveVector.y * deltaTime * speed };
+
 
 	setMovePos(newPos);
 	if (isCollidingWithSomething())

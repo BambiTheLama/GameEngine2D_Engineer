@@ -312,7 +312,7 @@ void PathFinding::draw(Vector2 pos, float zoom)
 		}
 	}
 	if (hasPath)
-		nodes[fy][fx]->drawPath();
+		getEndNode()->drawPath();
 
 
 }
@@ -322,14 +322,14 @@ Vector2 PathFinding::getMoveVector()
 	if (!hasPath)
 		return { 0,0 };
 	PathFindingNode* n=getEndNode();
-	PathFindingNode* n2 = n;
-	while (n->fromNode)
+	PathFindingNode* sn = getStartNode();
+	while (n->fromNode && n->fromNode != sn)
 	{
-		n2 = n;
 		n = n->fromNode;
 	}
-	n = n2;
-	PathFindingNode* sn = getStartNode();
+	if (!n->fromNode)
+		return { 0,0 };
+	printf("start = %d %d     end = %d %d\n", sn->x, sn->y, n->x, n->y);
 	if (n->x == sn->x)
 	{
 		if (n->y > sn->y)

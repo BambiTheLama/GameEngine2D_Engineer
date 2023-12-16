@@ -28,8 +28,8 @@ class PathFinding
 	int objW, objH;
 	bool hasPath = false;
 	PathFindingNode*** nodes;
-	PathFindingNode* getEndNode() { return nodes[fy][fy]; }
-	PathFindingNode* getStartNode() { return nodes[sy][sy]; }
+	PathFindingNode* getEndNode() { return nodes[fy][fx]; }
+	PathFindingNode* getStartNode() { return nodes[sy][sx]; }
 public:
 	PathFinding(int x, int y, int w, int h, int objW = 1, int objH = 1, int posX = 0, int posY = 0);
 
