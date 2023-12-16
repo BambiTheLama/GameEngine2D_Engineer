@@ -88,8 +88,8 @@ void PathFinding::setNewEnd(Vector2 pos)
 }
 void PathFinding::setNewEnd(Rectangle pos)
 {
-	fx = (pos.x - posX) / objW;
-	fy = (pos.y - posY) / objH;
+	fx = (pos.x + pos.width / 2 - posX) / objW;
+	fy = (pos.y + pos.height / 2 - posY) / objH;
 }
 
 void PathFinding::setNewStart(Vector2 pos)

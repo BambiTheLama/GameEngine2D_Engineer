@@ -42,6 +42,7 @@ void Enemy::update(float deltaTime)
 
 
 	setMovePos(newPos);
+	Game->updatePos(this);
 	if (isCollidingWithSomething())
 		setMovePos({ pos.x,pos.y });
 
