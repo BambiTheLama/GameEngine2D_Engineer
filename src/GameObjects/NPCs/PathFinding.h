@@ -21,7 +21,7 @@ struct PathFindingNode
 };
 class PathFinding
 {
-	int posX, posY;
+	float posX, posY;
 	int fx, fy;
 	int sx, sy;
 	int w, h;
@@ -46,7 +46,7 @@ public:
 	void calculateNextTo(int x, int y);
 	void addNodesToVector(std::vector<PathFindingNode*>& nodesToCheck, int x, int y);
 	void findPath();
-	void setNewPos(int posX, int posY);
+	void setNewPos(float posX, float posY);
 	Vector2 getPos() { return { (float)posX,(float)posY }; }
 	void clearData();
 	void draw();

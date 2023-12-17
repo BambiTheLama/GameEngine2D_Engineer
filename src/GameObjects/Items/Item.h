@@ -11,10 +11,13 @@ class Eq;
 class Item :
     public GameObject
 {
+
 protected:
     Item(Item& obj);
     std::string itemName;
+    GameObject* holdingObj;
     virtual void setStackSize(int s){}
+
 public:
     Item(Rectangle pos, std::string name);
 
@@ -24,19 +27,23 @@ public:
 
     virtual void update(float deltaTime);
 
+    virtual void update(float deltaTime,Vector2 curosrPos){}
+
     virtual void draw();
 
     virtual void drawAt(Rectangle pos);
 
     virtual void drawInterface(){}
 
-    virtual bool use(float deltaTime);
+    virtual bool use(float deltaTime, Vector2 curosrPos);
 
     virtual void updateAfterSwap() {};
 
     virtual void endUsing(){}
 
     virtual bool addToStack(Item* i) { return false; }
+
+    virtual void addItemToHand(GameObject* holdingObj) { this->holdingObj = holdingObj; }
 
     virtual int addToStack(int i) { return i; }
 

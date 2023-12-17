@@ -46,7 +46,41 @@ ToolItem::~ToolItem()
 	delete sprite;
 }
 
+void ToolItem::update(float deltaTime, Vector2 cursorPos)
+{
+	this->cursorPos = cursorPos;
+	if (useTime > 0)
+	{
+		useTime -= deltaTime;
+		if (useTime <= 0)
+			isUsing = false;
+	}
+	if (!isUsing)
+	{
+		GameObject* o = getHittingObject(cursorPos);
+		if (!o)
+			hittingObjectPos = { 0,0,-10,-10 };
+		return;
+	}
 
+
+	Rectangle pos = getPos();
+
+	if (leftSide)
+	{
+		origin.x = pos.width;
+		rotation -= deltaTime / useTimeMax * rotationAngle;
+	}
+	else
+	{
+		origin.x = 0;
+		rotation += deltaTime / useTimeMax * rotationAngle;
+	}
+
+	LinesCollider::updateRotation(rotation, { 0,  0 }, { 0,-pos.height }, !leftSide);
+
+	LinesCollider::update(deltaTime, holdingObj);
+}
 
 void ToolItem::update(float deltaTime)
 {
@@ -58,7 +92,7 @@ void ToolItem::update(float deltaTime)
 	}
 	if (!isUsing)
 	{
-		GameObject* o = getHittingObject();
+		GameObject* o = getHittingObject(cursorPos);
 		if (!o)
 			hittingObjectPos = { 0,0,-10,-10 };
 		return;
@@ -80,25 +114,25 @@ void ToolItem::update(float deltaTime)
 
 	LinesCollider::updateRotation(rotation , { 0,  0 },{0,-pos.height}, !leftSide);
 	
-	LinesCollider::update(deltaTime, this);
+	LinesCollider::update(deltaTime, holdingObj);
 
 }
 
 
 
-bool ToolItem::use(float deltaTime)
+bool ToolItem::use(float deltaTime,Vector2 cursorPos)
 {
 	if (useTime>0)
 		return false;
 	isUsing = true;
 	useTime = useTimeMax;
 	leftSide = !leftSide;
-	rotation = cursorTarget({ pos.x,pos.y });
+	rotation = cursorTarget({ pos.x,pos.y }, cursorPos);
 	if (leftSide)
 		rotation += 220;
 	else
 		rotation -= 220;
-	GameObject* o = getHittingObject(true);
+	GameObject* o = getHittingObject(cursorPos,true);
 
 	return true;
 }
@@ -113,7 +147,7 @@ void ToolItem::draw()
 	Rectangle pos = getPos();
 	if (useTime <= 0)
 	{
-		rotation = cursorTarget({ pos.x,pos.y });
+		rotation = cursorTarget({ pos.x,pos.y }, cursorPos);
 		if (leftSide)
 			rotation -= 40;
 		else
@@ -139,9 +173,8 @@ void ToolItem::drawInterface()
 	pos.height *= Game->getZoom();
 	drawViewFinder(pos);
 }
-GameObject* ToolItem::getHittingObject(bool isDestory)
+GameObject* ToolItem::getHittingObject(Vector2 cursor,bool isDestory)
 {
-	Vector2 cursor = Game->getCursorPos();
 	Rectangle cursorPos = { cursor.x,cursor.y,1,1 };
 	std::list<GameObject*> objs = Game->getObjects(cursorPos, ObjectToGet::getNoBlocks);
 	for (auto o : objs)
@@ -207,6 +240,13 @@ GameObject* ToolItem::getHittingObject(bool isDestory)
 	return NULL;
 }
 
+void ToolItem::addItemToHand(GameObject* holdingObj)
+{
+	Item::addItemToHand(holdingObj);
+	addObjToIgnore(holdingObj);
+	setInHand(true);
+}
+
 void ToolItem::drawAt(Rectangle pos)
 {
 	DrawTexturePro(sprite->getTexture(), sprite->getTextureSize(), pos, { 0,0 }, 0, WHITE);
@@ -219,6 +259,12 @@ std::string ToolItem::getDesctription()
 
 void ToolItem::onCollisionHitable(HitAble* hit)
 {
+	GameObject* o = dynamic_cast<GameObject*>(hit);
+	if (o == holdingObj)
+		return;
+	std::cout << o << std::endl;
+	std::cout << holdingObj << std::endl;
+	std::cout << "PRZERWA\n";
 	hit->dealDamage(damage, invisibleFrame);
 }
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)

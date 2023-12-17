@@ -33,7 +33,7 @@ void Item::drawAt(Rectangle pos)
 
 }
 
-bool Item::use(float deltaTime)
+bool Item::use(float deltaTime,Vector2 mousePos)
 {
 	return false;
 }

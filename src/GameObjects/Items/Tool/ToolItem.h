@@ -22,13 +22,16 @@ class ToolItem :
     SpriteController* sprite;
     static std::string description;
     Rectangle hittingObjectPos;
+    Vector2 cursorPos;
     ToolItem(ToolItem& item);
+
 public:
     ToolItem(nlohmann::json j);
     virtual ~ToolItem();
     virtual ToolItem* clone() { return new ToolItem(*this); }
-    void update(float deltaTime);
-    bool use(float deltaTime);
+    virtual void update(float deltaTime);
+    virtual void update(float deltaTime, Vector2 cursorPos);
+    virtual bool use(float deltaTime,Vector2 cursorPos);
     void draw();
     void drawAt(Rectangle pos);
     virtual std::string getDesctription();
@@ -38,7 +41,8 @@ public:
     virtual void onCollisionDestroyAble(DestroyAble* dest);
     void setInHand(bool inHand) { this->inHand = inHand; }
     virtual void drawInterface();
-    GameObject* getHittingObject(bool isDestory=false);
+    GameObject* getHittingObject(Vector2 cursor, bool isDestory = false);
+    virtual void addItemToHand(GameObject* holdingObj);
     friend class ItemFactory;
 };
 

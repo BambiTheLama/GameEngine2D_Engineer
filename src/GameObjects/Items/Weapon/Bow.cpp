@@ -68,11 +68,16 @@ Bow::~Bow()
 {
 	delete sprite;
 }
-
 void Bow::update(float deltaTime)
 {
 	Rectangle pos = getPos();
 	rotation = cursorTarget({ pos.x ,pos.y }) - 45;
+}
+
+void Bow::update(float deltaTime, Vector2 curosrPos)
+{
+	Rectangle pos = getPos();
+	rotation = cursorTarget({ pos.x ,pos.y }, curosrPos) - 45;
 }
 
 void Bow::draw()
@@ -109,11 +114,11 @@ void Bow::drawAt(Rectangle pos)
 	sprite->draw(pos, 0);
 }
 
-bool Bow::use(float deltaTime)
+bool Bow::use(float deltaTime, Vector2 curosrPos)
 {
 	if (chargeTime == 0)
 	{
-		if(ammo==NULL)
+		if(!ammo)
 			lookForAmmo();
 		if (ammo)
 		{
@@ -178,42 +183,41 @@ void Bow::setProjectalUsing()
 
 void Bow::spawnArrow()
 {
-	if (ammo)
+	if (!ammo)
+		lookForAmmo();
+	if (!ammo)
+		return;
+	
+	Rectangle pos = getPos();
+	Rectangle pos2 = ammo->getPos();
+	pos.width = pos2.width;
+	pos.height = pos2.height;
+	Vector2* col = ammo->getCollsions();
+	int n = ammo->getNCollisions();
+	pos.x -= numberOfProjectal / 2;
+	pos.y -= numberOfProjectal / 2;
+	for (int i = 0; i < numberOfProjectal; i++)
 	{
-		Rectangle pos = getPos();
-		Rectangle pos2 = ammo->getPos();
-		pos.width = pos2.width;
-		pos.height = pos2.height;
-		Vector2* col = ammo->getCollsions();
-		int n = ammo->getNCollisions();
-		pos.x -= numberOfProjectal / 2;
-		pos.y -= numberOfProjectal / 2;
-		for (int i = 0; i < numberOfProjectal; i++)
-		{
-			float procent = (float)chargeTime / (float)chargeTimeMax;
-			float speed = ammo->getSpeed() * speedMultiplier * procent;
-			float range = ammo->getRange() * rangeMultiplier * procent;
-			
-			Projectal* pro = new Projectal(pos, speed, rotation, range, ammo->getSprite(),
-				col,n, CollisionsCheckType::All);
+		float procent = (float)chargeTime / (float)chargeTimeMax;
+		float speed = ammo->getSpeed() * speedMultiplier * procent;
+		float range = ammo->getRange() * rangeMultiplier * procent;
 
-			Game->addObject(pro);
-			pos.x++;
-			pos.y++;
-		}
-		ammo->removeFromStack(numberOfProjectal);
-		if (ammo->getStackSize() <= 0)
-		{
-			eq->removeItem(ammo);
-			delete ammo;
-			ammo = NULL;
-			lookForAmmo();
-		}
+		Projectal* pro = new Projectal(pos, speed, rotation, range, ammo->getSprite(),
+			col, n, CollisionsCheckType::All);
+
+		Game->addObject(pro);
+		pos.x++;
+		pos.y++;
 	}
-	else
+	ammo->removeFromStack(numberOfProjectal);
+	if (ammo->getStackSize() <= 0)
 	{
+		eq->removeItem(ammo);
+		delete ammo;
+		ammo = NULL;
 		lookForAmmo();
 	}
+
 }
 
 std::string Bow::getDesctription()

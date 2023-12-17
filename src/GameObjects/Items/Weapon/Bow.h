@@ -27,11 +27,13 @@ public:
 
     virtual void update(float deltaTime);
 
+    virtual void update(float deltaTime, Vector2 curosrPos);
+
     virtual void draw();
 
     virtual void drawAt(Rectangle pos);
 
-    virtual bool use(float deltaTime);
+    virtual bool use(float deltaTime,Vector2 curosrPos);
 
     virtual void updateAfterSwap();
 

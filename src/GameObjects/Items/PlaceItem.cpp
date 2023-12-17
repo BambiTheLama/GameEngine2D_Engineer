@@ -22,9 +22,11 @@ PlaceItem::~PlaceItem()
 
 }
 
-bool PlaceItem::use(float deltaTime)
+bool PlaceItem::use(float deltaTime, Vector2 curosrPos)
 {
-	Vector2 destPos = getWordMousePos();
+	this->x = curosrPos.x;
+	this->y = curosrPos.y;
+	Vector2 destPos = getWordMousePos(curosrPos.x, curosrPos.y);
 	GameObject* o = Structures->getObject(structID);
 	if (!o)
 		return false;
@@ -88,22 +90,33 @@ bool PlaceItem::use(float deltaTime)
 	return true;
 
 }
+
+void PlaceItem::update(float deltaTime, Vector2 curosrPos)
+{
+	this->x = curosrPos.x;
+	this->y = curosrPos.y;
+}
+
+void PlaceItem::update(float deltaTime)
+{
+
+}
+
 void PlaceItem::drawInterface()
 {
-	Structures->drawInterface(structID, Game->worldToScreanPos(getWordMousePos()));
+	Structures->drawInterface(structID, Game->worldToScreanPos(getWordMousePos(x,y)));
 	
 }
-Vector2 PlaceItem::getWordMousePos()
+Vector2 PlaceItem::getWordMousePos(int x, int y)
 {
-	Vector2 cursorPos = Game->getCursorPos();
 	Vector2 destPos;
 	const int size = tileSize * 2;
 
-	destPos.x = ((int)cursorPos.x) - (int)cursorPos.x % (size);
-	if (cursorPos.x < 0)
+	destPos.x = x - (x % size);
+	if (x < 0)
 		destPos.x -= size;
-	destPos.y = ((int)cursorPos.y) - (int)cursorPos.y % (size);
-	if (cursorPos.y < 0)
+	destPos.y = y - (y % size);
+	if (y < 0)
 		destPos.y -= size;
 	return destPos;
 }

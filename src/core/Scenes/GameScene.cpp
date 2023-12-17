@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "../../GameObjects/Player/Player.h"
 #include "../../GameObjects/NPCs/Enemy.h"
+#include "../../GameObjects/NPCFactory.h"
 #include "../Engine.h"
 #include "Menu.h"
 #include <iostream>
@@ -89,7 +90,6 @@ void GameScene::start()
 {
 	for (auto h : handler)
 		h->start();
-	addObject(new Enemy());
 }
 void GameScene::update(float deltaTime)
 {
@@ -97,6 +97,17 @@ void GameScene::update(float deltaTime)
 	{
 		Engine::setScene(new Menu());
 		return;
+	}
+	if (IsKeyDown(KEY_LEFT_SHIFT))
+	{
+		if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+		{
+			GameObject* o = NPCFactory::getFactory()->getObject(0);
+			
+			o->setMovePos(cursorPos);
+			addObject(o);
+		}
+
 	}
 	Rectangle pos = cameraTarget->getPos();
 	camera.target = { pos.x + pos.width/2, pos.y + pos.height/2 };

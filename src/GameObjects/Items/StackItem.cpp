@@ -33,7 +33,7 @@ StackItem::~StackItem()
 	delete sprite;
 }
 
-bool StackItem::use(float deltaTime)
+bool StackItem::use(float deltaTime, Vector2 curosrPos)
 {
 	return false;
 }

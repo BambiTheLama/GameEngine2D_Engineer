@@ -109,11 +109,7 @@ bool Eq::addItem(Item* item)
 			if (items[i][j] == NULL)
 			{
 				items[i][j] = item->clone();
-				items[i][j]->setEq(this);
-				items[i][j]->setInHand(true);
-				Collider* c=dynamic_cast<Collider*>(items[i][j]);
-				if (c)
-					c->addObjToIgnore(player);
+				items[i][j]->addItemToHand(player);;
 				player->updateRecepies();
 				return true;
 			}
@@ -126,11 +122,11 @@ bool Eq::useItem(float deltaTime)
 {
 	if (itemInHand)
 	{
-		return itemInHand->use(deltaTime);
+		return itemInHand->use(deltaTime, Game->getCursorPos());
 	}
 	if (items[usingItemY][usingItemX])
 	{
-		return items[usingItemY][usingItemX]->use(deltaTime);
+		return items[usingItemY][usingItemX]->use(deltaTime, Game->getCursorPos());
 	}
 	return false;
 }
@@ -147,7 +143,7 @@ void Eq::update(float deltaTime)
 {
 	if (itemInHand)
 	{
-		itemInHand->update(deltaTime);
+		itemInHand->update(deltaTime, Game->getCursorPos());
 	}
 	else
 	{
@@ -155,7 +151,7 @@ void Eq::update(float deltaTime)
 		usingItemY = usingItem / EqWight;
 		if (items[usingItemY][usingItemX])
 		{
-			items[usingItemY][usingItemX]->update(deltaTime);
+			items[usingItemY][usingItemX]->update(deltaTime, Game->getCursorPos());
 		}
 	}
 	if (fullEq)

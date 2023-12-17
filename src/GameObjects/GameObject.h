@@ -12,6 +12,13 @@
 /// <returns>Kat padania</returns>
 float cursorTarget(Vector2 objPos);
 /// <summary>
+/// Zwraca kat od obiektu do pozycji kursora
+/// </summary>
+/// <param name="objPos">Pozycja obiketu</param>
+/// <param name="cursor">Pozycja cursora</param>
+/// <returns>Kat padania</returns>
+float cursorTarget(Vector2 objPos, Vector2 cursor);
+/// <summary>
 /// Konwertuje stopnie na radiany
 /// </summary>
 /// <param name="degree"></param>

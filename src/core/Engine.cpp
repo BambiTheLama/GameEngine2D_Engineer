@@ -47,6 +47,8 @@ void Engine::start()
 		time = time2;
 		time2 = GetTime();
 		deltaTime = time2 - time;
+		if (deltaTime > 0.05)
+			deltaTime = 0.05;
 
 		update(deltaTime);
 		BeginDrawing();

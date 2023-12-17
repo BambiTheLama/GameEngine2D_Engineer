@@ -17,7 +17,7 @@ public:
 
     virtual ~StackItem();
 
-    virtual bool use(float deltaTime);
+    virtual bool use(float deltaTime, Vector2 curosrPos);
 
     virtual void draw();
 

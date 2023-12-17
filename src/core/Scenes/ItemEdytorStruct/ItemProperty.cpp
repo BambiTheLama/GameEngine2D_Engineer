@@ -22,7 +22,6 @@ ItemProperty::ItemProperty(nlohmann::json& j,int ID)
 	clearData();
 	if (!j.contains("Name"))
 	{
-		printf("NIE MA DANYCH DLA ITEMU O ID %d\n", ID);
 		return;
 	}
 	this->ID = ID;

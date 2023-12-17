@@ -3,12 +3,14 @@
 #include "ItemFactory.h"
 #include "StructuresFactory.h"
 #include "BlockFactory.h"
+#include "NPCFactory.h"
 
 GameObject* getObjFromFactory(ObjectType type, int ID)
 {
 	switch (type)
 	{
 	case ObjectType::NPC:
+		return NPCFactory::getFactory()->getObject(ID);
 		break;
 	case ObjectType::Item:
 		return Items->getObject(ID);
@@ -35,6 +37,17 @@ float cursorTarget(Vector2 objPos)
 	Vector2 mouse = Game->getCursorPos();
 	float x = mouse.x - objPos.x;
 	float y = mouse.y - objPos.y;
+	float degree = atan(y / x);
+	degree *= 180.0f / PI;
+	degree -= 90;
+	if (x >= 0)
+		degree += 180;
+	return degree;
+}
+float cursorTarget(Vector2 objPos,Vector2 cursor)
+{
+	float x = cursor.x - objPos.x;
+	float y = cursor.y - objPos.y;
 	float degree = atan(y / x);
 	degree *= 180.0f / PI;
 	degree -= 90;

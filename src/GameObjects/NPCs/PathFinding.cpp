@@ -94,8 +94,9 @@ void PathFinding::setNewEnd(Rectangle pos)
 
 void PathFinding::setNewStart(Vector2 pos)
 {
-	sx = (pos.x - posX) / objW;
-	sy = (pos.y - posY) / objH;
+	float sx = (pos.x - posX) / objW;
+	float sy = (pos.y - posY) / objH;
+
 }
 
 void PathFinding::setWall(Vector2 pos)
@@ -262,10 +263,11 @@ void PathFinding::findPath()
 	}
 }
 
-void PathFinding::setNewPos(int posX, int posY)
+void PathFinding::setNewPos(float posX, float posY)
 {
 	this->posX = posX - w / 2 * objW;
 	this->posY = posY - h / 2 * objH;
+
 }
 
 void PathFinding::clearData()
@@ -329,7 +331,6 @@ Vector2 PathFinding::getMoveVector()
 	}
 	if (!n->fromNode)
 		return { 0,0 };
-	printf("start = %d %d     end = %d %d\n", sn->x, sn->y, n->x, n->y);
 	if (n->x == sn->x)
 	{
 		if (n->y > sn->y)

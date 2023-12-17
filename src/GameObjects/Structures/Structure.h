@@ -41,7 +41,6 @@ public:
         if (damageTime > 0.0f)
         {
             float p = damageTime / damageTimeMax * pos.height / 8.0f;
-            printf("%lf\n", p);
             pos.x += p;
             pos.width -= p * 2;
             pos.y -= p;

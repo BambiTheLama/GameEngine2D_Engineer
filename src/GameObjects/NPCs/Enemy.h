@@ -5,7 +5,9 @@
 class Enemy :
     public GameObject, public RectangleCollider, public HitAble,public UserUI
 {
-    PathFinding* path;
+    GameObject* target = NULL;
+    PathFinding* path = NULL;
+    Item* item;
     float range = 1000;
     float speed = 30;
     Enemy(Enemy& e);
@@ -41,5 +43,7 @@ public:
     virtual void saveToJson(nlohmann::json& j);
 
     virtual void readFromJson(nlohmann::json& j);
+
+    float getDistanceToTarget();
 };
 

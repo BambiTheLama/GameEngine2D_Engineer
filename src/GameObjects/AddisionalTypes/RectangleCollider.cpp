@@ -56,7 +56,6 @@ bool RectangleCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector
 			points2[i] = { points[i].x + otherPos.x,points[i].y + otherPos.y };
 		bool res = checkCollision(points2, n, pos);
 		delete points2;
-		printf("%d\n", (int)res);
 		return res;
 	}
 	else if (type == CollisionType::Circle)
