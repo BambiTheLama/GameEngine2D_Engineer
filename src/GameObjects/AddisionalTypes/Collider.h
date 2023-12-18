@@ -49,7 +49,7 @@ public:
 	/// <param name="thisPos">przesuniecie tego obiektu</param>
 	/// <param name="otherPos">przesuniecie obiektu z ktorym sprawdzamy kolizje</param>
 	/// <returns></returns>
-	virtual bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
+	virtual bool checkCollisionToObj(GameObject* thisObj, Collider* otherCollider,GameObject* otherObject);
 	/// <summary>
 	/// Sprawdza czy obiekt koliduje z czyms
 	/// </summary>
@@ -95,7 +95,7 @@ public:
 	/// </summary>
 	/// <param name="deltaTime"></param>
 	/// <param name="obj"></param>
-	virtual void update(float deltaTime, GameObject* obj);
+	virtual void update(float deltaTime, GameObject* obj, Vector2 moveBy={0,0});
 	/// <summary>
 	/// Metoda odpoweidzialna na interkacje z obiektem mozliwym do udrzenia
 	/// </summary>

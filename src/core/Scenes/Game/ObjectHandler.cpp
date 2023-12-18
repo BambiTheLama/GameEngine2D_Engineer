@@ -309,75 +309,15 @@ void ObjectHandler::updatePos(GameObject* obj)
 
 	
 }
-
-std::list<GameObject*> ObjectHandler::getObjectsToDraw(Rectangle pos)
+void ObjectHandler::drawBlocks()
 {
-	std::list<GameObject*> objs = tree->getObjectsAt(pos);
-	std::list<GameObject*> particles;
-	for (auto o : objs)
-	{
-		if (o->getType() == ObjectType::Particle)
+	for (int i = 0; i < h; i++)
+		for (int j = 0; j < w; j++)
 		{
-			particles.push_back(o);
+			if(blocks[i][j])			
+				blocks[i][j]->draw();
 		}
-	}
-	for (auto o : particles)
-		objs.remove(o);
 
-	GameObject** tmpObj = new GameObject * [objs.size()];
-
-	int n = 0;
-
-	while (objs.size() > 0)
-	{
-		int min = INT_MAX;
-		GameObject* minObj = NULL;
-		for (auto o : objs)
-		{
-			Rectangle pos = o->getPos();
-			if (min>pos.y+pos.height)
-			{
-				min = pos.y + pos.height;
-				minObj = o;
-			}
-		}
-		tmpObj[n] = minObj;
-		n++;
-		objs.remove(minObj);
-
-	}
-	for (int i = 0; i < n; i++)
-	{
-		objs.push_back(tmpObj[i]);
-	}
-	for (auto o : particles)
-		objs.push_back(o);
-	delete tmpObj;
-
-
-
-	int startX = (pos.x - this->x) / tileSize - 1;
-	int startY = (pos.y - this->y) / tileSize - 1;
-	if (startX < 0)
-		startX = 0;
-	if (startY < 0)
-		startY = 0;
-	int w = pos.width / tileSize + startX + 3;
-	int h = pos.height / tileSize + startY + 3;
-	if (w >= this->w)
-		w = this->w - 1;
-	if (h >= this->h)
-		h = this->h - 1;
-	for (int y = startY; y < h; y++)
-	{
-		for (int x = startX; x < w; x++)
-			if (blocks[y][x])
-				objs.push_front(blocks[y][x]);
-		
-	}
-
-
-	return objs;
 }
 
 void ObjectHandler::addObject(GameObject* obj) 

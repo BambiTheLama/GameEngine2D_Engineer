@@ -204,12 +204,12 @@ void Bow::spawnArrow()
 
 		Projectal* pro = new Projectal(pos, speed, rotation, range, ammo->getSprite(),
 			col, n, CollisionsCheckType::All);
-
+		pro->addObjToIgnore(holdingObj);
 		Game->addObject(pro);
 		pos.x++;
 		pos.y++;
 	}
-	ammo->removeFromStack(numberOfProjectal);
+	ammo->removeFromStack(0);
 	if (ammo->getStackSize() <= 0)
 	{
 		eq->removeItem(ammo);

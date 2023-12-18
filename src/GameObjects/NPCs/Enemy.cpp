@@ -105,12 +105,13 @@ void Enemy::draw()
 {
 	Rectangle pos = getPos();
 	DrawRectangleRec(pos, BLUE);
-	RectangleCollider::draw(this);
 	pos.y += pos.height + 10;
 	pos.height = 10;
 	HitAble::draw(pos);
 
 	item->draw();
+	if (collidersToDraw)
+		RectangleCollider::draw(this);
 }
 
 void Enemy::drawInterface()

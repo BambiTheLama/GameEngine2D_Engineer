@@ -67,24 +67,13 @@ Ammo::Ammo(nlohmann::json j) :StackItem(j)
 				collisions[i].x = j["Points"][i][0];
 				collisions[i].y = j["Points"][i][1];
 			}
-		}
-
-
-		for (int i = 0; i < nCollisions; i++)
-		{
-			if (j.contains(("Point" + std::to_string(i))))
-			{
-				Vector2 p;
-				p.x = j[("Point" + std::to_string(i))][0];
-				p.y = j[("Point" + std::to_string(i))][1];
-				collisions[i] = p;
-			}
-			else
-			{
+			for(int i=j["Points"].size();i<nCollisions;i++)
 				collisions[i] = { 0,0 };
-			}
-
 		}
+		else
+			for (int i = 0; i < nCollisions; i++)
+				collisions[i] = { 0,0 };
+
 	}
 
 

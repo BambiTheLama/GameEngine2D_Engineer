@@ -79,43 +79,12 @@ void ToolItem::update(float deltaTime, Vector2 cursorPos)
 
 	LinesCollider::updateRotation(rotation, { 0,  0 }, { 0,-pos.height }, !leftSide);
 
-	LinesCollider::update(deltaTime, holdingObj);
+	LinesCollider::update(deltaTime, holdingObj, { pos.width ,pos.height  });
 }
 
 void ToolItem::update(float deltaTime)
 {
-	if (useTime > 0)
-	{
-		useTime-=deltaTime;
-		if (useTime <= 0)
-			isUsing = false;
-	}
-	if (!isUsing)
-	{
-		GameObject* o = getHittingObject(cursorPos);
-		if (!o)
-			hittingObjectPos = { 0,0,-10,-10 };
-		return;
-	}
-
-
-	Rectangle pos = getPos();
-
-	if (leftSide)
-	{
-		origin.x = pos.width;
-		rotation -= deltaTime / useTimeMax * rotationAngle;
-	}
-	else
-	{
-		origin.x = 0;
-		rotation += deltaTime / useTimeMax * rotationAngle;
-	}
-
-	LinesCollider::updateRotation(rotation , { 0,  0 },{0,-pos.height}, !leftSide);
-	
-	LinesCollider::update(deltaTime, holdingObj);
-
+	update(deltaTime, Game->getCursorPos());
 }
 
 
@@ -126,7 +95,7 @@ bool ToolItem::use(float deltaTime,Vector2 cursorPos)
 		return false;
 	isUsing = true;
 	useTime = useTimeMax;
-	leftSide = !leftSide;
+	leftSide = true;
 	rotation = cursorTarget({ pos.x,pos.y }, cursorPos);
 	if (leftSide)
 		rotation += 220;

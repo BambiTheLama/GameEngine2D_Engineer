@@ -35,7 +35,7 @@ public:
 
     virtual Rectangle getCollisionPos();
 
-    bool checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos);
+    bool checkCollisionToObj(GameObject* thisObj, Collider* otherCollider, GameObject* otherObject);
 
 };
 

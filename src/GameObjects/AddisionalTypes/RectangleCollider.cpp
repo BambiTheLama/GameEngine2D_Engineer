@@ -32,23 +32,25 @@ void RectangleCollider::draw(GameObject* obj)
 	Rectangle pos = obj->getPos();
 	DrawRectangle(pos.x + collision.x, pos.y + collision.y, collision.width, collision.height, RED);
 }
-bool RectangleCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos)
+bool RectangleCollider::checkCollisionToObj(GameObject* thisObj, Collider* otherCollider, GameObject* otherObject)
 {
-	CollisionType type = c->getCollisionType();
+	CollisionType type = otherCollider->getCollisionType();
+	Rectangle thisPos = thisObj->getPos();
+	Rectangle otherPos = otherObject->getPos();
 	Rectangle pos = { collision.x + thisPos.x,collision.y + thisPos.y,collision.width,collision.height };
 	if (type == CollisionType::Rec)
 	{
-		Rectangle pos2 = c->getCollisionPos();
+		Rectangle pos2 = otherCollider->getCollisionPos();
 		pos2.x += otherPos.x;
 		pos2.y += otherPos.y;
 		return CheckCollisionRecs(pos, pos2);
 	}
 	else if (type == CollisionType::Lines)
 	{
-		Vector2* points=c->getLines();
+		Vector2* points= otherCollider->getLines();
 		if (!points)
 			return false;
-		int n=c->getHomManyLines();
+		int n= otherCollider->getHomManyLines();
 		if (n <= 0)
 			return false;
 		Vector2* points2 = new Vector2[n];
@@ -60,8 +62,8 @@ bool RectangleCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector
 	}
 	else if (type == CollisionType::Circle)
 	{
-		Vector2 circle=c->getCirlcePoint();
-		float r = c->getRadius();
+		Vector2 circle= otherCollider->getCirlcePoint();
+		float r = otherCollider->getRadius();
 		circle.x += otherPos.x;
 		circle.y += otherPos.y;
 		return CheckCollisionCircleRec(circle, r, pos);

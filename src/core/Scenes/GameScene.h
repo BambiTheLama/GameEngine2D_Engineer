@@ -137,11 +137,6 @@ public:
     /// </summary>
     void loadChunksCloseToTarget();
     /// <summary>
-    /// Zwraca obiekty posortowane gotowe do rysowania
-    /// </summary>
-    /// <returns></returns>
-    std::list<GameObject*> getObjToDraw();
-    /// <summary>
     /// Wczytuje odpowiedni fragmet mapy 
     /// </summary>
     /// <param name="x">Pozycja na osi OX kawalka mapy</param>

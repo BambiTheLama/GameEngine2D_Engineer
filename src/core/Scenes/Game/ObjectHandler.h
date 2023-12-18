@@ -76,12 +76,6 @@ public:
     /// <returns>Lista z obiektami</returns>
     std::list<GameObject*> getObjects(Rectangle pos, ObjectToGet type = ObjectToGet::getAll);
     /// <summary>
-    /// Obiekty ju¿ gotowe do rysowanie posortowane w kolejnoœci od najwy¿szego miejssca na mapie do najni¿szego
-    /// </summary>
-    /// <param name="pos">Pozycja obiektów do rysowania</param>
-    /// <returns>lista obiektów gotowych do rysowania</returns>
-    std::list<GameObject*> getObjectsToDraw(Rectangle pos);
-    /// <summary>
     /// Usuwa i dodaje nowe obiekty do kolekcji
     /// </summary>
     void update(float deltaTime);
@@ -104,6 +98,10 @@ public:
     /// Rusje drzewo drzewo
     /// </summary>
     void draw() { tree->draw(); }
+    /// <summary>
+    /// Metoda rysujaca wszyskie bloki po ktorych poruszaja sie obiekty na scenie
+    /// </summary>
+    void drawBlocks();
     /// <summary>
     /// Dodaje blok do struktury w podanej pozycji 
     /// </summary>

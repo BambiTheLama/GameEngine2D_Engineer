@@ -250,13 +250,17 @@ void GameScene::updatePos(GameObject* obj)
 
 void GameScene::draw()
 {
-	std::list<GameObject*> objects = getObjToDraw();
+	std::list<GameObject*> objects = getObjects(cameraPos, ObjectToGet::getNoBlocks);
 	BeginMode2D(camera);
 	for (GameObject* obj : objects)
 		obj->draw();
+	for(auto h:handler)
+		h->drawBlocks();
 	if (collidersToDraw)
-		for(auto h:handler)
+		for (auto h : handler)
 			h->draw();
+	for (auto o : objects)
+		o->draw();
 	EndMode2D();
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 	for (UserUI* i : userUI)
@@ -356,29 +360,6 @@ void GameScene::loadChunksCloseToTarget()
 		{
 			loadChunk(x, y);
 		}
-}
-
-
-std::list<GameObject*> GameScene::getObjToDraw()
-{
-	std::list<GameObject*> objects;
-	for (auto h : handler)
-		if (h->isObjAtThisChunk(cameraPos))
-		{
-			if (objects.size() <= 0)
-			{
-				objects = h->getObjectsToDraw(cameraPos);
-				continue;
-			}
-			std::list<GameObject*> objs=h->getObjectsToDraw(cameraPos);
-
-			for (auto o : objs)
-				objects.push_back(o);
-
-
-		}
-
-	return objects;
 }
 
 void GameScene::generateChunk(int x, int y)

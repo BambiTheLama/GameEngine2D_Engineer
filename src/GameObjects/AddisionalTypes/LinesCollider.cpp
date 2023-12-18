@@ -30,6 +30,7 @@ LinesCollider::LinesCollider(Vector2* collision, int n, CollisionsCheckType coll
 	{
 		startPoints[i] = collision[i];
 		this->points[i] = collision[i];
+		printf("%lf %lf\n", collision[i].x, collision[i].y);;
 	}
 
 }
@@ -84,29 +85,32 @@ LinesCollider::~LinesCollider()
 	if (points)
 		delete this->points;
 }
-Vector2 origin;
 void LinesCollider::draw(GameObject* obj)
 {
 	if (!points)
 		return;
 	Rectangle pos = obj->getPos();
+
 	for (int i = 0; i < nPoints; i++)
 	{
 		Vector2 p1 = { points[i].x + pos.x,points[i].y + pos.y };
 		Vector2 p2 = { points[(i + 1) % nPoints].x + pos.x,points[(i + 1) % nPoints].y + pos.y };
-		DrawLineV(p1, p2, BLACK);
+		DrawLineEx(p1, p2,2, BLACK);
 	}
 
 	for (int i = 0; i < nPoints; i++)
 	{
 		Vector2 p1 = { points[i].x + pos.x,points[i].y + pos.y };
-		DrawCircleV(p1, 1, BLUE);
+		DrawCircleV(p1, 3, BLACK);
+		DrawCircleV(p1, 2, BLUE);
 	}
-	DrawCircleV({pos.x+ origin.x,pos.y+ origin.y }, 2, RED);
+
+	DrawCircleV({ pos.x + origin.x,pos.y + origin.y }, 2.5f, BLACK);
+	DrawCircleV({ pos.x + origin.x,pos.y + origin.y }, 2, RED);
 	Rectangle col = getCollisionPos();
 	col.x += pos.x;
 	col.y += pos.y;
-	DrawRectangleRec(col, BLACK);
+	DrawRectangleRec(col, { 0,0,0,100 });
 }
 void LinesCollider::updateRotation(float rotation, Vector2 origin,Vector2 moveBy, bool leftSide)
 {
@@ -158,8 +162,10 @@ Rectangle LinesCollider::getCollisionPos()
 	return { minx,miny,maxx - minx,maxy - miny };
 }
 
-bool LinesCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 otherPos)
+bool LinesCollider::checkCollisionToObj(GameObject* thisObj, Collider* otherCollider, GameObject* otherObject)
 {
+	Rectangle thisPos = thisObj->getPos();
+	Rectangle otherPos = otherObject->getPos();
 	Vector2* points = getLines();
 	if (!points)
 		return false;
@@ -170,20 +176,19 @@ bool LinesCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 ot
 	for (int i = 0; i < n; i++)
 		points2[i] = { points[i].x + thisPos.x,points[i].y + thisPos.y };
 	bool res = false;
-	CollisionType type = c->getCollisionType();
+	CollisionType type = otherCollider->getCollisionType();
 
 	if (type == CollisionType::Rec)
 	{
-		Rectangle pos = c->getCollisionPos();
+		Rectangle pos = otherCollider->getCollisionPos();
 		pos.x += otherPos.x;
 		pos.y += otherPos.y;
 		res = checkCollision(points2, n, pos);
-
 	}
 	else if (type == CollisionType::Lines)
 	{
-		Vector2* points3 = c->getLines();
-		int n2 = c->getHomManyLines();
+		Vector2* points3 = otherCollider->getLines();
+		int n2 = otherCollider->getHomManyLines();
 		if (points3 && n2 > 0)
 		{
 			Vector2* points4 = new Vector2[n2];
@@ -197,8 +202,8 @@ bool LinesCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 ot
 	}
 	else if (type == CollisionType::Circle)
 	{
-		Vector2 circle = c->getCirlcePoint();
-		float r = c->getRadius();
+		Vector2 circle = otherCollider->getCirlcePoint();
+		float r = otherCollider->getRadius();
 		circle.x += otherPos.x;
 		circle.y += otherPos.y;
 		res = collideLinesCircle(circle, r, points2, n);

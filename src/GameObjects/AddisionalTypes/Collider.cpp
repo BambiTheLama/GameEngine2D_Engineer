@@ -24,7 +24,7 @@ Collider::Collider(nlohmann::json j)
 	}
 }
 
-bool Collider::checkCollisionToObj(Collider *c,Vector2 thisPos,Vector2 otherPos)
+bool Collider::checkCollisionToObj(GameObject* thisObj, Collider* otherCollider, GameObject* otherObject)
 {
 	return false;
 }
@@ -47,18 +47,21 @@ bool Collider::isCollidingWithSomething()
 			continue;
 		Rectangle pos1 = obj->getPos();
 		Rectangle pos2 = o->getPos();
-		if (checkCollisionToObj(collider, { pos1.x,pos1.y }, { pos2.x,pos2.y }))
+		if (checkCollisionToObj(obj, collider, o))
 			return true;
 	}
 	return false;
 }
 
-void Collider::update(float deltaTime, GameObject* obj)
+void Collider::update(float deltaTime, GameObject* obj,Vector2 moveBy)
 {
 	Rectangle pos = obj->getPos();
 	Rectangle getObj = getCollisionPos();
+	pos.x += moveBy.x;
+	pos.y += moveBy.y;
 	getObj.x += pos.x;
 	getObj.y += pos.y;
+
 	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);
 	objs.remove(obj);
 	for (auto i : objectsToIgnore)
@@ -68,29 +71,24 @@ void Collider::update(float deltaTime, GameObject* obj)
 	{
 		for (auto* o : objs)
 		{
-			HitAble* hit = dynamic_cast<HitAble*>(o);
 			Collider* col = dynamic_cast<Collider*>(o);
+			if (!col)
+				continue;
+			HitAble* hit = dynamic_cast<HitAble*>(o);
 			if (hit)
 			{
-				if (col)
-				{
-					Rectangle pos = obj->getPos();
-					Rectangle pos2 = o->getPos();
-					if (checkCollisionToObj(col, {pos.x,pos.y},{pos2.x,pos2.y}))
-						onCollisionHitable(hit);
-
-				}
+				Rectangle pos2 = o->getPos();
+				if (checkCollisionToObj(obj, col, o))
+					onCollisionHitable(hit);	
 			}
 			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
 			if (toDestory)
 			{
-				if (col)
-				{
-					Rectangle pos = obj->getPos();
-					Rectangle pos2 = o->getPos();
-					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
-						onCollisionDestroyAble(toDestory);
-				}
+
+				Rectangle pos2 = o->getPos();
+				if (checkCollisionToObj(obj, col, o))
+					onCollisionDestroyAble(toDestory);
+				
 			}
 		}
 	}
@@ -100,18 +98,18 @@ void Collider::update(float deltaTime, GameObject* obj)
 		{
 			HitAble* hit = dynamic_cast<HitAble*>(o);
 
-			if (hit)
-			{
-				Collider* col = dynamic_cast<Collider*>(o);
-				if (col)
-				{
-					Rectangle pos = obj->getPos();
-					Rectangle pos2 = o->getPos();
-					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
-						onCollisionHitable(hit);
+			if (!hit)
+				continue;
+			Collider* col = dynamic_cast<Collider*>(o);
+			if (!col)
+				continue;
+			Rectangle pos = obj->getPos();
+			Rectangle pos2 = o->getPos();
+			if (checkCollisionToObj(obj, col, o))
+				onCollisionHitable(hit);
 
-				}
-			}
+				
+			
 		}
 	}
 	else if (type == CollisionsCheckType::DestoryAbleOnly)
@@ -120,17 +118,18 @@ void Collider::update(float deltaTime, GameObject* obj)
 		{
 			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
 
-			if (toDestory)
-			{
-				Collider* col = dynamic_cast<Collider*>(o);
-				if (col)
-				{
-					Rectangle pos = obj->getPos();
-					Rectangle pos2 = o->getPos();
-					if (checkCollisionToObj(col, { pos.x,pos.y }, { pos2.x,pos2.y }))
-						onCollisionDestroyAble(toDestory);
-				}
-			}
+			if (!toDestory)
+				continue;
+			Collider* col = dynamic_cast<Collider*>(o);
+			if (!col)
+				continue;
+			
+			Rectangle pos = obj->getPos();
+			Rectangle pos2 = o->getPos();
+			if (checkCollisionToObj(obj, col, o))
+				onCollisionDestroyAble(toDestory);
+			
+
 		}
 	}
 }
@@ -174,7 +173,6 @@ bool isOnLine(float p1, float p2, float x)
 		return x >= p1 && x <= p2;
 	}
 }
-
 bool checkCollision(Vector2* points, int n, Rectangle pos)
 {
 	for (int i = 0; i < n; i++)
