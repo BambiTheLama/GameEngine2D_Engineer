@@ -133,18 +133,17 @@ void PathFinding::removeWall(Vector2 pos)
 	nodes[y][x]->canPassByIt = true;
 }
 
-void PathFinding::calculateNodesNextTo(PathFindingNode* from, PathFindingNode* to)
+void PathFinding::calculateNodesNextTo(PathFindingNode* from, PathFindingNode* to,int v)
 {
-	if (to->used && from->from + 1 >= to->from)
-	{
+	if (to->used && from->from + v >= to->from)
 		return;
-	}
+	
 	if (to->wasUsedToCalculet)
 		return;
 	if (!to->used)
 	{
-		int dx = abs(to->x - fx);
-		int dy = abs(to->y - fy);
+		int dx = abs(to->x - fx) * 10;
+		int dy = abs(to->y - fy) * 10;
 		to->to = dx + dy;
 		to->used = true;
 		if (to->to == 0)
@@ -153,7 +152,7 @@ void PathFinding::calculateNodesNextTo(PathFindingNode* from, PathFindingNode* t
 		}
 
 	}
-	to->from = from->from + 1;
+	to->from = from->from + v;
 	to->cost = to->from + to->to;
 	to->fromNode = from;
 }
@@ -210,36 +209,65 @@ void PathFinding::calculateNextTo(int x, int y)
 {
 	nodes[y][x]->wasUsedToCalculet = true;
 	if (y + 1 < h)
-		calculateNodesNextTo(nodes[y][x], nodes[y + 1][x]);
+	{
+		calculateNodesNextTo(nodes[y][x], nodes[y + 1][x], 10);
+		if (x - 1 >= 0)
+			calculateNodesNextTo(nodes[y][x], nodes[y + 1][x - 1], 14);
+		if (x + 1 < w)
+			calculateNodesNextTo(nodes[y][x], nodes[y + 1][x + 1], 14);
+	}
 	if (y - 1 >= 0)
-		calculateNodesNextTo(nodes[y][x], nodes[y - 1][x]);
+	{
+		calculateNodesNextTo(nodes[y][x], nodes[y - 1][x], 10);
+		if (x - 1 >= 0)
+			calculateNodesNextTo(nodes[y][x], nodes[y - 1][x - 1], 14);
+		if (x + 1 < w)
+			calculateNodesNextTo(nodes[y][x], nodes[y - 1][x + 1], 14);
+	}
 	if (x - 1 >= 0)
-		calculateNodesNextTo(nodes[y][x], nodes[y][x - 1]);
+	{
+		calculateNodesNextTo(nodes[y][x], nodes[y][x - 1], 10);
+	}
 	if (x + 1 < w)
-		calculateNodesNextTo(nodes[y][x], nodes[y][x + 1]);
+	{
+		calculateNodesNextTo(nodes[y][x], nodes[y][x + 1], 10);
+	}
+
 
 }
-
+bool PathFinding::canPassTo(int x, int y)
+{
+	return y < h && y >= 0 && x >= 0 && x < w && !nodes[y][x]->wasUsedToCalculet && nodes[y][x]->canPassByIt;
+}
 void PathFinding::addNodesToVector(std::vector<PathFindingNode*>& nodesToCheck, int x, int y)
 {
 
-	if (y + 1 < h && !nodes[y + 1][x]->wasUsedToCalculet && nodes[y + 1][x]->canPassByIt)
+	if (canPassTo(x, y + 1))
 	{
 		addNode(nodesToCheck, nodes[y + 1][x]);
+		if (canPassTo(x + 1, y) && canPassTo(x + 1, y + 1))
+			addNode(nodesToCheck, nodes[y + 1][x + 1]);
+		if (canPassTo(x - 1, y) && canPassTo(x - 1, y + 1))
+			addNode(nodesToCheck, nodes[y + 1][x - 1]);
+
 	}
-	if (y - 1 >= 0 && !nodes[y - 1][x]->wasUsedToCalculet && nodes[y - 1][x]->canPassByIt)
+	if (canPassTo(x, y - 1))
 	{
 		addNode(nodesToCheck, nodes[y - 1][x]);
+		if (canPassTo(x + 1, y) && canPassTo(x + 1, y - 1))
+			addNode(nodesToCheck, nodes[y - 1][x + 1]);
+		if (canPassTo(x - 1, y) && canPassTo(x - 1, y - 1))
+			addNode(nodesToCheck, nodes[y - 1][x - 1]);
+
 	}
-	if (x + 1 < w && !nodes[y][x + 1]->wasUsedToCalculet && nodes[y][x + 1]->canPassByIt)
+	if (canPassTo(x + 1, y))
 	{
 		addNode(nodesToCheck, nodes[y][x + 1]);
 	}
-	if (x - 1 >= 0 && !nodes[y][x - 1]->wasUsedToCalculet && nodes[y][x - 1]->canPassByIt)
+	if (canPassTo(x - 1, y))
 	{
 		addNode(nodesToCheck, nodes[y][x - 1]);
 	}
-
 }
 
 void PathFinding::findPath()
@@ -295,6 +323,8 @@ void PathFinding::draw()
 			nodes[i][j]->draw();
 		}
 	}
+	getStartNode()->draw();
+	getEndNode()->draw();
 	if (hasPath)
 		nodes[fy][fx]->drawPath();
 
@@ -331,13 +361,17 @@ Vector2 PathFinding::getMoveVector()
 	}
 	if (!n->fromNode)
 		return { 0,0 };
-	if (n->x == sn->x)
-	{
-		if (n->y > sn->y)
-			return{ 0,1 };
-		return{ 0,-1 };
-	}
+	Vector2 moveVectr = { 0,0 };
+
+	if (n->y > sn->y)
+		moveVectr.y = 1;
+	else if(n->y < sn->y)
+		moveVectr.y = -1;
+	
 	if (n->x > sn->x)
-		return{ 1,0 };
-	return{ -1,0 };
+		moveVectr.x = 1;
+	else if (n->x < sn->x)
+		moveVectr.x = -1;
+
+	return moveVectr;
 }

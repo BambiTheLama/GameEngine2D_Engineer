@@ -81,7 +81,7 @@ public:
 
     virtual void setCanMoveObject(bool canMove) { this->canMove = canMove; }
 
-    bool isColliding() { return true; }
+    bool isColliding() { return false; }
 
 };
 

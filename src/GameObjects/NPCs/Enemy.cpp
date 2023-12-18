@@ -4,7 +4,7 @@ Enemy::Enemy(Enemy& e):GameObject(e), RectangleCollider(e),HitAble(e)
 {
 
 }
-Enemy::Enemy():Enemy({1000,1000,32,32},{0,16,32,32},"DUMY")
+Enemy::Enemy():Enemy({1000,1000,32,32},{0,0,32,32},"DUMY")
 {
 	Rectangle pos = getPos();
 
@@ -58,7 +58,7 @@ void Enemy::update(float deltaTime)
 	Vector2 targerPoint = { targetPos.x + targetPos.width / 2,targetPos.y + targetPos.height };
 	item->update(deltaTime, targerPoint);
 	float dis = getDistanceToTarget();
-	if (dis >= 0 && dis < 500)
+	if (dis >= 0 && dis < 0)
 		item->use(deltaTime, targerPoint);
 
 }
@@ -79,7 +79,7 @@ void Enemy::findPath()
 			path->setNewEnd(o->getPos());
 			target = o;
 		}
-		if (o->getType() != ObjectType::Structure)
+		if (!o->isColliding())
 			continue;
 		Collider* c = dynamic_cast<Collider*>(o);
 		if (!c)
@@ -111,7 +111,6 @@ void Enemy::draw()
 	HitAble::draw(pos);
 
 	item->draw();
-	//path->draw();
 }
 
 void Enemy::drawInterface()
@@ -141,11 +140,6 @@ void Enemy::readFromJson(nlohmann::json& j)
 {
 	GameObject::readFromJson(j);
 	HitAble::readFromJson(j);
-	Rectangle pos = getPos();
-	if (path)
-		delete path;
-	path = new PathFinding(0, 0, range, range, pos.width, pos.height, 0, 0);
-
 }
 
 

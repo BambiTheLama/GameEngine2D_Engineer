@@ -110,6 +110,7 @@ bool Eq::addItem(Item* item)
 			{
 				items[i][j] = item->clone();
 				items[i][j]->addItemToHand(player);;
+				items[i][j]->setEq(this);
 				player->updateRecepies();
 				return true;
 			}

@@ -244,7 +244,6 @@ void ToolItem::addItemToHand(GameObject* holdingObj)
 {
 	Item::addItemToHand(holdingObj);
 	addObjToIgnore(holdingObj);
-	setInHand(true);
 }
 
 void ToolItem::drawAt(Rectangle pos)
@@ -259,12 +258,6 @@ std::string ToolItem::getDesctription()
 
 void ToolItem::onCollisionHitable(HitAble* hit)
 {
-	GameObject* o = dynamic_cast<GameObject*>(hit);
-	if (o == holdingObj)
-		return;
-	std::cout << o << std::endl;
-	std::cout << holdingObj << std::endl;
-	std::cout << "PRZERWA\n";
 	hit->dealDamage(damage, invisibleFrame);
 }
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)

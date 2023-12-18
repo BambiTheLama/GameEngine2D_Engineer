@@ -49,6 +49,8 @@ void Engine::start()
 		deltaTime = time2 - time;
 		if (deltaTime > 0.05)
 			deltaTime = 0.05;
+		if (IsKeyDown(KEY_LEFT_CONTROL))
+			deltaTime *= 0.01;
 
 		update(deltaTime);
 		BeginDrawing();

@@ -43,7 +43,7 @@ public:
 
     virtual bool addToStack(Item* i) { return false; }
 
-    virtual void addItemToHand(GameObject* holdingObj) { this->holdingObj = holdingObj; }
+    virtual void addItemToHand(GameObject* holdingObj) { this->holdingObj = holdingObj; setInHand(true); }
 
     virtual int addToStack(int i) { return i; }
 

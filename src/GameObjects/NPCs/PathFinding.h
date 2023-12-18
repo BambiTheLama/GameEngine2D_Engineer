@@ -40,7 +40,7 @@ public:
 	void setWall(Vector2 pos);
 	void setWall(Rectangle pos);
 	void removeWall(Vector2 pos);
-	void calculateNodesNextTo(PathFindingNode* from, PathFindingNode* to);
+	void calculateNodesNextTo(PathFindingNode* from, PathFindingNode* to, int v);
 	void sortVector(std::vector<PathFindingNode*>& nodesToCheck);
 	void addNode(std::vector<PathFindingNode*>& nodesToCheck, PathFindingNode* node);
 	void calculateNextTo(int x, int y);
@@ -53,6 +53,7 @@ public:
 	void draw(Vector2 pos, float zoom);
 	bool isFindthPath() { return hasPath; }
 	Vector2 getMoveVector();
+	bool canPassTo(int x, int y);
 
 
 };

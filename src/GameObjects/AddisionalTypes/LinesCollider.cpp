@@ -103,6 +103,10 @@ void LinesCollider::draw(GameObject* obj)
 		DrawCircleV(p1, 1, BLUE);
 	}
 	DrawCircleV({pos.x+ origin.x,pos.y+ origin.y }, 2, RED);
+	Rectangle col = getCollisionPos();
+	col.x += pos.x;
+	col.y += pos.y;
+	DrawRectangleRec(col, BLACK);
 }
 void LinesCollider::updateRotation(float rotation, Vector2 origin,Vector2 moveBy, bool leftSide)
 {
@@ -174,6 +178,7 @@ bool LinesCollider::checkCollisionToObj(Collider* c, Vector2 thisPos, Vector2 ot
 		pos.x += otherPos.x;
 		pos.y += otherPos.y;
 		res = checkCollision(points2, n, pos);
+
 	}
 	else if (type == CollisionType::Lines)
 	{

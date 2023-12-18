@@ -179,28 +179,30 @@ bool checkCollision(Vector2* points, int n, Rectangle pos)
 {
 	for (int i = 0; i < n; i++)
 	{
-
 		Vector2 p1 = points[i];
 		Vector2 p2 = points[(i + 1) % n];
-		float a = (p1.y - p2.y) / (p1.x - p2.x);
-		float b = p1.y - a * p1.x;
-		float x = (pos.y - b) / a;
-		if (x >= pos.x && x <= pos.x + pos.width && isOnLine(p1.x, p2.x, x))
+
+		if (CheckCollisionLines(p1, p2, { pos.x,pos.y }, { pos.x,pos.y + pos.height }, NULL))
 		{
 			return true;
 		}
-		x = (pos.y + pos.height - b) / a;
-		if (x >= pos.x && x <= pos.x + pos.width && isOnLine(p1.x, p2.x, x))
+		if (CheckCollisionLines(p1, p2, { pos.x + pos.width,pos.y }, { pos.x + pos.width,pos.y + pos.height }, NULL))
 		{
 			return true;
 		}
-		int y = pos.x * a + b;
-		if (y >= pos.y && y <= pos.y + pos.height && isOnLine(p1.x, p2.x, pos.x))
+		if (CheckCollisionLines(p1, p2, { pos.x ,pos.y }, { pos.x + pos.width,pos.y }, NULL))
 		{
 			return true;
 		}
-		y = (pos.x + pos.width) * a + b;
-		if (y >= pos.y && y <= pos.y + pos.height && isOnLine(p1.x, p2.x, pos.x + pos.width))
+		if (CheckCollisionLines(p1, p2, { pos.x,pos.y+pos.height }, { pos.x + pos.width,pos.y + pos.height }, NULL))
+		{
+			return true;
+		}
+		if (CheckCollisionLines(p1, p2, { pos.x ,pos.y }, { pos.x + pos.width,pos.y + pos.height }, NULL));
+		{
+			return true;
+		}
+		if (CheckCollisionLines(p1, p2, { pos.x,pos.y + pos.height }, { pos.x + pos.width,pos.y }, NULL));
 		{
 			return true;
 		}
