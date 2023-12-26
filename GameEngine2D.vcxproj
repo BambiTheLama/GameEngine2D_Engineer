@@ -161,6 +161,7 @@
     <ClCompile Include="src\core\Scenes\Menu.cpp" />
     <ClCompile Include="src\core\Scenes\RecipesEdytor.cpp" />
     <ClCompile Include="src\core\Scenes\Scene.cpp" />
+    <ClCompile Include="src\core\Scenes\TestScene.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\CircleCollider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\Collider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="src\core\Scenes\Menu.h" />
     <ClInclude Include="src\core\Scenes\RecipesEdytor.h" />
     <ClInclude Include="src\core\Scenes\Scene.h" />
+    <ClInclude Include="src\core\Scenes\TestScene.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\AllTypes.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\CircleCollider.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\Collider.h" />
