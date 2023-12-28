@@ -36,6 +36,9 @@ class CharacterBody
 	float sizeW, sizeH;
 	float rotateBy = 0;
 	float moveBy = 0;
+	float rotationRateHead = 0;
+	float rotationRateLegs = 0;
+	float rotationRateBody = 0;
 public:
 	CharacterBody(std::string path,float sizeW,float sizeH);
 
@@ -47,14 +50,20 @@ public:
 
 	void updateCharacterSide(CharacterSide side) { this->side = side; }
 
-	void updateCharacterState(CharacterState state) { this->state = state; frame = 0; }
+	void updateCharacterState(CharacterState state);
 
 	void draw(Rectangle at);
 
-	void drawHead(Rectangle at);
+	void drawHead(Rectangle pos, float rotate);
 
-	void drawBody(Rectangle at);
+	void drawBody(Rectangle pos, float rotate);
 
-	void drawLegs(Rectangle at);
+	void drawLegs(Rectangle pos, float rotate);
+
+	void drawDie(Rectangle at);
+
+	void diffElementsPos();
+
+	float getEndH() { return sizeH; }
 };
 

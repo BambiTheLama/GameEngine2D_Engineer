@@ -184,36 +184,51 @@ void Player::updateEq(float deltaTime)
 
 void Player::update(float deltaTime)
 {
+	if (IsKeyPressed(KEY_F4))
+		alive = !alive;
+	if (alive)
+	{
+
+		move(deltaTime);
+		Game->updatePos(this);
+		updateEq(deltaTime);
+		pickUpItemsClose(deltaTime);
+		updateCrafting();
+		HitAble::update(deltaTime);
+	}
+	else
+	{
+		body->updateCharacterState(CharacterState::Die);
+	}
 	body->updateDeltaTime(deltaTime);
-	move(deltaTime);
-	Game->updatePos(this);
-	updateEq(deltaTime);
-	pickUpItemsClose(deltaTime);
-	updateCrafting();
-	HitAble::update(deltaTime);
+
 }
 
 void Player::move(float deltaTime)
 {
-	
+	bool moving = false;
 	Vector2 posTmp = { 0,0 };
 	if (canMove)
 	{
 		if (IsKeyDown(KEY_A))
 		{
 			posTmp.x -= 1;
+			moving = true;
 		}
 		if (IsKeyDown(KEY_D))
 		{
 			posTmp.x += 1;
+			moving = true;
 		}
 		if (IsKeyDown(KEY_W))
 		{
 			posTmp.y -= 1;
+			moving = true;
 		}
 		if (IsKeyDown(KEY_S))
 		{
 			posTmp.y += 1;
+			moving = true;
 		}
 		if (eq->canChangeItem())
 		{
@@ -254,6 +269,10 @@ void Player::move(float deltaTime)
 	{
 		setMovePos({ pos.x, pos.y });
 	}
+	if(moving)
+		body->updateCharacterState(CharacterState::Run);
+	else
+		body->updateCharacterState(CharacterState::Ide);
 }
 
 void Player::draw()

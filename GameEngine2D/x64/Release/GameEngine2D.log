@@ -1,7 +1,7 @@
 ﻿  CharacterBody.cpp
   Trwa generowanie kodu
-  1 of 3659 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 3663 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    7 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   GameEngine2D.vcxproj -> C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\x64\Release\GameEngine2D.exe

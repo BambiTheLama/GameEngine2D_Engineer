@@ -18,7 +18,7 @@ class Player :
     MiniMap* miniMap;
     CraftingStation* crafting;
     CharacterBody* body=NULL;
-
+    bool alive = true;
 protected:
     Player(Player& obj);
 public:
