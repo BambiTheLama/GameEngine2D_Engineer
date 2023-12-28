@@ -4,9 +4,6 @@
 #include "Eq.h"
 #include "MiniMap.h"
 #include "../Crafting/CraftingStation.h"
-enum class playerAnimationState {
-    IDE = 0, MoveUp, MoveDown, MoveLeft, MoveRight = -3, Doge = 4, Die = 5
-};
 /// <summary>
 /// Obiekt gracza nad któr¹ ma kontrolê u¿ytkownik
 /// </summary>
@@ -20,8 +17,7 @@ class Player :
     Eq* eq;
     MiniMap* miniMap;
     CraftingStation* crafting;
-    AnimationController* animations;
-    playerAnimationState state = playerAnimationState::IDE;
+    CharacterBody* body=NULL;
 
 protected:
     Player(Player& obj);

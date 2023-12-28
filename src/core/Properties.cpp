@@ -46,12 +46,14 @@ void drawViewFinder(Rectangle pos, Color c)
 Properties::Properties()
 {
 	font = LoadFont("Resource/RobotoSlab-Regular.ttf");
+	font.baseSize = 32;
 	viewFinder = LoadTexture("Resource/ViewFinder.png");
 }
 Properties::~Properties()
 {
 	UnloadFont(font);
-	UnloadTexture(viewFinder);
+	if(viewFinder.id>=0)
+		UnloadTexture(viewFinder);
 	properties = NULL;
 }
 void Properties::drawText(const char* text, int x, int y, int size, Color color)

@@ -8,27 +8,17 @@
 
 Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj),HitAble(obj)
 {
-	animations = new AnimationController(*obj.animations);
 	miniMap = new MiniMap(this);
 	eq = new Eq(this);
 	crafting = new CraftingStation(CraftingStationEnum::NON);
-
+	body = new CharacterBody(*obj.body);
 }
 
-Player::Player() :GameObject({ 100,100,64,64 }, "Player")
+Player::Player() :GameObject({ 100,100,32,32 }, "Player")
 , RectangleCollider({ pos.width / 3,pos.height * (1.5f / 4.0f),pos.width / 3,pos.width / 2 })
 , HitAble(69)
 {
 	speed = 8;
-	int n = 6;
-	std::string names[6] = { "IDE","MoveUp","MoveDown","MoveLeft","Doge","Die" };
-	std::vector<SpriteController*> sprites;
-	for (int i = 0; i < n; i++)
-	{
-		std::string path = "Resource/Player/" + names[i] + ".png";
-		sprites.push_back(new SpriteController(path.c_str()));
-	}
-	animations = new AnimationController(sprites);
 	miniMap = new MiniMap(this);
 	eq = new Eq(this);
 	crafting = new CraftingStation(CraftingStationEnum::NON);
@@ -39,7 +29,8 @@ Player::Player() :GameObject({ 100,100,64,64 }, "Player")
 		eq->addItem(item);
 		delete item;
 	}
-		
+	Rectangle pos = getPos();
+	body = new CharacterBody("Resource/Character/Character_1/",pos.width,pos.height);
 
 }
 
@@ -48,7 +39,7 @@ Player::~Player()
 {
 	if(Game)
 		Game->removeUserUI(this);
-	delete animations;
+	delete body;
 	delete miniMap;
 	delete crafting;
 	delete eq;
@@ -193,6 +184,7 @@ void Player::updateEq(float deltaTime)
 
 void Player::update(float deltaTime)
 {
+	body->updateDeltaTime(deltaTime);
 	move(deltaTime);
 	Game->updatePos(this);
 	updateEq(deltaTime);
@@ -230,11 +222,11 @@ void Player::move(float deltaTime)
 
 				if (posTmp.x > 0)
 				{
-					state = playerAnimationState::MoveRight;
+					body->updateCharacterSide(CharacterSide::Right);
 				}
 				else
 				{
-					state = playerAnimationState::MoveLeft;
+					body->updateCharacterSide(CharacterSide::Left);
 				}
 
 			}
@@ -243,20 +235,16 @@ void Player::move(float deltaTime)
 
 				if (posTmp.y > 0)
 				{
-					state = playerAnimationState::MoveDown;
+					body->updateCharacterSide(CharacterSide::Down);
 				}
 				else
 				{
-					state = playerAnimationState::MoveUp;
+					body->updateCharacterSide(CharacterSide::Up);
 				}
 
 			}
 		}
 
-		if (IsKeyDown(KEY_SPACE))
-		{
-			state = playerAnimationState::Doge;
-		}
 	}
 	posTmp.x *= speed * 64.0f * deltaTime;
 	posTmp.y *= speed * 64.0f * deltaTime;
@@ -271,8 +259,7 @@ void Player::move(float deltaTime)
 void Player::draw()
 {
 	Rectangle pos = getPos();
-
-	animations->draw(pos, frame, abs((int)state), (int)state < 0 ? true : false);
+	body->draw(pos);
 	if (collidersToDraw)
 	{
 		Rectangle posPickUpRange = getPos();
@@ -284,7 +271,7 @@ void Player::draw()
 		RectangleCollider::draw(this);
 		DrawTextWithOutline(TextFormat("(%d:%d)", getChunkX(), getChunkY()), pos.x, pos.y, textStandardSize, WHITE, BLACK);
 	}
-	HitAble::draw({pos.x,pos.y+pos.height,pos.width,20});
+	//HitAble::draw({pos.x,pos.y+pos.height,pos.width,20});
 	eq->drawItem();
 
 }

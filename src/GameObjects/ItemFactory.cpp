@@ -138,7 +138,6 @@ void ItemFactory::loadLanguage(std::string language)
 		return;
 	reader >> j;
 	reader.close();
-	std::cout << j.dump(2) << std::endl;
 	if(j.contains("ToolItem"))
 		ToolItem::description = j["ToolItem"];
 	if (j.contains("StackItem"))

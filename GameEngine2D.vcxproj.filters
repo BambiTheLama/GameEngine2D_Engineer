@@ -273,6 +273,10 @@
     <ClCompile Include="src\GameObjects\NPCs\PathFinding.cpp">
       <Filter>src\GameObjects\NPCs</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Scenes\TestScene.cpp" />
+    <ClCompile Include="src\GameObjects\AddisionalTypes\CharacterBody.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -478,6 +482,10 @@
     </ClInclude>
     <ClInclude Include="src\GameObjects\NPCs\PathFinding.h">
       <Filter>src\GameObjects\NPCs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scenes\TestScene.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\CharacterBody.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

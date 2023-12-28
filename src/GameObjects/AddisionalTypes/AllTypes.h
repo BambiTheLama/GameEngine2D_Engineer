@@ -7,3 +7,4 @@
 #include "UserUI.h"
 #include "CircleCollider.h"
 #include "RectangleCollider.h"
+#include "CharacterBody.h"
