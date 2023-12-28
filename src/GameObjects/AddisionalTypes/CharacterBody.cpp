@@ -36,6 +36,10 @@ CharacterBody::~CharacterBody()
 	delete this->eyes;
 	delete this->head;
 }
+void CharacterBody::update(float deltaTime) 
+{ 
+	frame += deltaTime * frameRate; 
+}
 
 void CharacterBody::updateCharacterState(CharacterState state)
 { 

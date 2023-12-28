@@ -39,6 +39,7 @@ class CharacterBody
 	float rotationRateHead = 0;
 	float rotationRateLegs = 0;
 	float rotationRateBody = 0;
+	Vector2 handPos = { 0,0 };
 public:
 	CharacterBody(std::string path,float sizeW,float sizeH);
 
@@ -46,7 +47,7 @@ public:
 
 	~CharacterBody();
 
-	void updateDeltaTime(float deltaTime) { frame += deltaTime * frameRate; }
+	void update(float deltaTime);
 
 	void updateCharacterSide(CharacterSide side) { this->side = side; }
 
@@ -64,6 +65,8 @@ public:
 
 	void diffElementsPos();
 
-	float getEndH() { return sizeH; }
+	float getEndH() { return legsPos.y; }
+
+	Vector2 getHandPos() { return handPos; }
 };
 
