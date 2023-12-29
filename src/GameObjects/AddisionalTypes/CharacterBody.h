@@ -39,7 +39,7 @@ class CharacterBody
 	float rotationRateHead = 0;
 	float rotationRateLegs = 0;
 	float rotationRateBody = 0;
-	Vector2 handPos = { 0,0 };
+	Rectangle handPos = { 0,0 ,32,32};
 public:
 	CharacterBody(std::string path,float sizeW,float sizeH);
 
@@ -61,12 +61,14 @@ public:
 
 	void drawLegs(Rectangle pos, float rotate);
 
+	void drawHand(Rectangle pos, float rotation);
+
 	void drawDie(Rectangle at);
 
 	void diffElementsPos();
 
 	float getEndH() { return legsPos.y; }
 
-	Vector2 getHandPos() { return handPos; }
+	Vector2 getHandPos() { return { handPos.x+handPos.width/2,handPos.y+handPos.height/2 }; }
 };
 

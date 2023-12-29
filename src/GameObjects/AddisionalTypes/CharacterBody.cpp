@@ -80,10 +80,22 @@ void CharacterBody::draw(Rectangle at)
 		drawLegs({ legsPos.x + at.x,legsPos.y + at.y,legsPos.width,legsPos.height }, 0);
 		drawBody({ bodyPos.x + at.x,bodyPos.y + at.y - moveBy * headPos.height / 64,bodyPos.width,bodyPos.height }, rotateBy);
 		drawHead({ headPos.x + at.x,headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }, rotateBy * 3);
+		
+		drawHand({ handPos.x + at.x,handPos.y + at.y,handPos.width , handPos.height }, 0);
 	}
 	else
 		drawDie(at);
 
+}
+
+void CharacterBody::drawHand(Rectangle pos,float rotation)
+{
+	pos.x += pos.width / 2;
+	pos.y += pos.height / 2;
+	pos.height /= 2;
+	Texture2D texture = legs->getTexture();
+	Rectangle texturePos = { texture.width * 3 / 4.0f,0,texture.width / 4.0f,(float)texture.height / 2 };
+	DrawTexturePro(texture, texturePos, pos, {pos.width / 2,pos.height / 2}, rotation, headColor);
 }
 
 void CharacterBody::drawHead(Rectangle pos,float rotate)
@@ -160,7 +172,7 @@ void CharacterBody::drawLegs(Rectangle pos, float rotate)
 	Rectangle pos2 = { pos.x + pos.width / 2,pos.y,pos.width,pos.height };
 	pos.height /= 2;
 	pos.y -= pos.height / 7;
-	DrawTexturePro(texture, { texturePos.width * 3 ,0,texturePos.width ,texturePos.height / 2 }, pos, { 0,0 }, 0, legsColor);
+	//DrawTexturePro(texture, { texturePos.width * 3 ,0,texturePos.width ,texturePos.height / 2 }, pos, { 0,0 }, 0, legsColor);
 	DrawTexturePro(texture, texturePos, pos2, { pos.width / 2,0 }, rotation, legsColor);
 	DrawTexturePro(texture, texturePos, pos2, { pos.width / 2,0 }, -rotation, legsColor);
 
@@ -182,10 +194,14 @@ void CharacterBody::drawDie(Rectangle at)
 	if (frame <= f)
 		f = frame;
 	drawHead({ at.width / 4 *f*rotationRateHead+headPos.x + at.x,f*speed+headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }, rotationRateHead * f * 60);
+	f = (endH - handPos.y) / speed;
+	if (frame <= f)
+		f = frame;
+	drawHand({ handPos.x + at.x,handPos.y + at.y,handPos.width , handPos.height }, rotationRateHead * f * 60);
 }
 
 void CharacterBody::diffElementsPos() {
 	headPos = { 0,-sizeH,sizeW,sizeW };
 	bodyPos = { 0,-sizeH * 7 / 16,sizeW,sizeW };
-	legsPos = { 0,sizeH * 4 / 16,sizeW,sizeW };
+	legsPos = { 0,sizeH * 3 / 16,sizeW,sizeW };
 }

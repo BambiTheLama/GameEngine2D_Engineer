@@ -7,8 +7,8 @@
 #include "FourTree.h"
 #include "json.hpp"
 #include "FastNoiseLite.h"
-#define chunkXPerFile 2
-#define chunkYPerFile 2
+#define chunkXPerFile 1
+#define chunkYPerFile 1
 #define tileSize 32
 /// <summary>
 /// Typ obiektow jakie chcemy dostac

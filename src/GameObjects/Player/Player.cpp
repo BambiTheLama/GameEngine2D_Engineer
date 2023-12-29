@@ -200,7 +200,7 @@ void Player::update(float deltaTime)
 	{
 		body->updateCharacterState(CharacterState::Die);
 	}
-	body->updateDeltaTime(deltaTime);
+	body->update(deltaTime);
 
 }
 
