@@ -43,8 +43,26 @@ void PathFindingNode::clear()
 
 PathFinding::PathFinding(int x, int y, int w, int h, int objW, int objH, int posX, int posY)
 {
+	const int divBy = 4;
+	if (objH > divBy)
+	{
+		int tmp = (objH / divBy) + (objH % divBy == 0 ? 0 : 1);
+		sizeObjH = objH / tmp + (objH % divBy == 0 ? 0 : 1);
+		objH = tmp;
+	}
+
+	if (objW > 4)
+	{
+		int tmp = (objW / divBy) + (objW % divBy == 0 ? 0 : 1);
+		sizeObjW = objW / tmp + (objW % divBy == 0 ? 0 : 1);
+		objW = tmp;
+	}
+
 	w /= objW;
 	h /= objH;
+	
+
+
 	this->posX = posX - w / 2 * objW;
 	this->posY = posY - h / 2 * objH;
 	this->objH = objH;
@@ -237,7 +255,22 @@ void PathFinding::calculateNextTo(int x, int y)
 }
 bool PathFinding::canPassTo(int x, int y)
 {
-	return y < h && y >= 0 && x >= 0 && x < w && !nodes[y][x]->wasUsedToCalculet && nodes[y][x]->canPassByIt;
+	if (y >= h || y < 0 || x < 0 || x >= w)
+		return false;
+	if (y + sizeObjH >= h || x + sizeObjW >= w)
+		return false;
+	if (nodes[y][x]->wasUsedToCalculet)
+		return false;
+	for (int i = 0; i < sizeObjH; i++)
+	{
+		for (int j = 0; j < sizeObjW; j++)
+		{
+			if (!nodes[y + i][x + j]->canPassByIt)
+				return false;
+		}
+	}
+
+	return nodes[y][x]->canPassByIt;
 }
 void PathFinding::addNodesToVector(std::vector<PathFindingNode*>& nodesToCheck, int x, int y)
 {

@@ -26,6 +26,7 @@ class PathFinding
 	int sx, sy;
 	int w, h;
 	int objW, objH;
+	int sizeObjW, sizeObjH;
 	bool hasPath = false;
 	PathFindingNode*** nodes;
 	PathFindingNode* getEndNode() { return nodes[fy][fx]; }
