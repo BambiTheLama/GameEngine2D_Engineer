@@ -14,7 +14,7 @@ Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj),HitAble(obj
 	body = new CharacterBody(*obj.body);
 }
 
-Player::Player() :GameObject({ 100,100,32,64 }, "Player")
+Player::Player() :GameObject({ 100,100,48,80 }, "Player")
 , RectangleCollider({ 10,20,12,34 })
 , HitAble(69)
 {
@@ -147,7 +147,9 @@ void Player::updateCrafting()
 void Player::updateEq(float deltaTime)
 {
 	eq->update(deltaTime);
-	eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
+	
+	eq->updateItemPos(body->getHandPos());
+	//eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
 		if (!eq->isPressedOnEq() &&!crafting->isPressedInCraftingUI())

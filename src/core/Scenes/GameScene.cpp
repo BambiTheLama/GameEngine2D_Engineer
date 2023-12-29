@@ -212,6 +212,7 @@ void GameScene::removeObject(GameObject* obj)
 	for (auto h : handler)
 		h->removeObject(obj);
 }
+
 std::list<GameObject*> GameScene::getObjects(Rectangle pos, ObjectToGet type)
 {
 	std::list<GameObject*> objs;
@@ -239,6 +240,7 @@ std::list<GameObject*> GameScene::getObjects(Rectangle pos, ObjectToGet type)
 
 		}
 
+
 	return objs;
 }
 
@@ -247,10 +249,26 @@ void GameScene::updatePos(GameObject* obj)
 	for (auto h : handler)
 		h->updatePos(obj);
 }
+bool comparePos(GameObject* first, GameObject* second)
+{
+	if (first->getType() == ObjectType::Particle)
+	{
 
+		return false;
+	}
+
+
+	Rectangle pos1 = first->getPos();
+	Rectangle pos2 = second->getPos();
+
+
+	return (pos1.y + pos1.height) < (pos2.y + pos2.height);
+}
 void GameScene::draw()
 {
 	std::list<GameObject*> objects = getObjects(cameraPos, ObjectToGet::getNoBlocks);
+	if (objects.size() >= 2)
+		objects.sort(comparePos);
 	BeginMode2D(camera);
 	for (GameObject* obj : objects)
 		obj->draw();

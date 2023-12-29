@@ -10,6 +10,7 @@ class Enemy :
     Item* item;
     float range = 1000;
     float speed = 30;
+    CharacterBody* body;
     Enemy(Enemy& e);
 public:
     Enemy();
@@ -19,6 +20,9 @@ public:
     virtual ~Enemy();
 
     virtual void update(float deltaTime);
+    virtual void move(float deltaTime);
+    virtual void itemUpdate(float deltaTime);
+    virtual void bodyUpdate(float deltaTime);
 
     void findPath();
 

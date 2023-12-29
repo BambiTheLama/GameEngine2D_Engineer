@@ -21,11 +21,11 @@ class CharacterBody
 	SpriteController* head;
 	SpriteController* eyes;
 	SpriteController* hair;
-	Color bodyColor = RED;
+	Color bodyColor = WHITE;
 	Color legsColor = WHITE;
-	Color headColor = YELLOW;
-	Color eyesColor = WHITE;
-	Color hairColor = BROWN;
+	Color headColor = WHITE;
+	Color eyesColor = BLUE;
+	Color hairColor = WHITE;
 	int hairStyle = 1;
 	int eyeStyle = 2;
 	int headStyle = 0;
@@ -69,6 +69,16 @@ public:
 
 	float getEndY() { return legsPos.y; }
 
-	Vector2 getHandPos() { return { handPos.x+handPos.width/2,handPos.y+handPos.height/2 }; }
+	Vector2 getHandPos() { return { handPos.x,handPos.y }; }
+
+	void setBodyColor(Color c) { bodyColor = c; }
+
+	void setLegsColor(Color c) { legsColor = c; }
+
+	void setHairColor(Color c) { hairColor = c; }
+
+	void setEyesColor(Color c) { eyesColor = c; }
+
+	void setHeadColor(Color c) { headColor = c; }
 };
 

@@ -39,13 +39,19 @@ CharacterBody::~CharacterBody()
 }
 void CharacterBody::update(float deltaTime, Vector2 cursor,Rectangle pos)
 { 
-	frame += deltaTime * frameRate; 
+	frame += deltaTime * frameRate;
+	bool leftHand = (pos.x + pos.width / 2) > cursor.x;
 	Vector2 start = { pos.x + pos.width / 2,pos.y + pos.height / 2 };
+	if (leftHand)
+		start.x -= pos.width / 4;
+	else
+		start.x += pos.width / 4;
 	float rotation = cursorTarget(start, cursor);
-	handPos = { sin(degreeToRadius(rotation)) * handPos.width/2 + start.x
-		,-cos(degreeToRadius(rotation)) * handPos.height/2 + start.y
+	handPos = { sin(degreeToRadius(rotation)) * handPos.width/4 + start.x
+		,-cos(degreeToRadius(rotation)) * handPos.height/4 + start.y
 		,handPos.width
 		,handPos.height };
+
 }
 
 void CharacterBody::updateCharacterState(CharacterState state)
@@ -211,4 +217,5 @@ void CharacterBody::diffElementsPos() {
 	headPos = { 0,0,sizeH,sizeH };
 	bodyPos = { 0,sizeH * 7 / 16,sizeH,sizeH };
 	legsPos = { 0,sizeH * 17 / 16,sizeH,sizeH };
+	handPos = { 0,0 ,sizeH,sizeH };
 }

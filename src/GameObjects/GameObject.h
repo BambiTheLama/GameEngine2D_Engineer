@@ -115,7 +115,7 @@ public:
 	/// Metoda zwraca pozycje obiektu
 	/// </summary>
 	/// <returns>Pozycja obiektu</returns>
-	virtual Rectangle getPos() { return pos; }
+	virtual Rectangle getPos() const { return pos; }
 	/// <summary>
 	/// Metoda do klonowania obiektu
 	/// </summary>

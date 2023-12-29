@@ -95,12 +95,12 @@ bool ToolItem::use(float deltaTime,Vector2 cursorPos)
 		return false;
 	isUsing = true;
 	useTime = useTimeMax;
-	leftSide = true;
+	//leftSide = false;
 	rotation = cursorTarget({ pos.x,pos.y }, cursorPos);
 	if (leftSide)
-		rotation += 220;
+		rotation += 180;
 	else
-		rotation -= 220;
+		rotation -= 180;
 	GameObject* o = getHittingObject(cursorPos,true);
 
 	return true;
@@ -112,16 +112,14 @@ void ToolItem::draw()
 		sprite->draw(getPos(), 0);
 		return;
 	}
-	Rectangle textureSize = sprite->getTextureSize();
-	Rectangle pos = getPos();
 	if (useTime <= 0)
 	{
-		rotation = cursorTarget({ pos.x,pos.y }, cursorPos);
-		if (leftSide)
-			rotation -= 40;
-		else
-			rotation += 40;
+		return;
 	}
+	Rectangle textureSize = sprite->getTextureSize();
+	Rectangle pos = getPos();
+
+
 	if (leftSide)
 		textureSize.width = -textureSize.width;
 
