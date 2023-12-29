@@ -15,7 +15,7 @@ Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj),HitAble(obj
 }
 
 Player::Player() :GameObject({ 100,100,48,80 }, "Player")
-, RectangleCollider({ 10,20,12,34 })
+, RectangleCollider({ 12,22,24,58 })
 , HitAble(69)
 {
 	speed = 8;

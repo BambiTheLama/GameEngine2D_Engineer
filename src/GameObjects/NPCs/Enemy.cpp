@@ -4,7 +4,7 @@ Enemy::Enemy(Enemy& e):GameObject(e), RectangleCollider(e),HitAble(e)
 {
 	body = new CharacterBody(*e.body);
 }
-Enemy::Enemy():Enemy({1000,1000,48,80},{0,0,32,32},"DUMY")
+Enemy::Enemy():Enemy({1000,1000,48,80},{12,22,24,58},"DUMY")
 {
 	Rectangle pos = getPos();
 
@@ -12,6 +12,12 @@ Enemy::Enemy():Enemy({1000,1000,48,80},{0,0,32,32},"DUMY")
 Enemy::Enemy(Rectangle pos, Rectangle colliderBox,std::string name):GameObject(pos,name),RectangleCollider(colliderBox),HitAble(69)
 {
 	body = new CharacterBody("Resource/Character/Character_1/", pos.width, pos.width);
+	body->setBodyColor({ 100,20,20,255 });
+	body->setEyesColor(BLACK);
+	body->setEyeStyle(3);
+	body->setHairStyle(0);
+	body->setHeadColor({ 20,100,20,255 });
+	body->setLegsColor({ 20,20,100,255 });
 }
 
 Enemy::~Enemy()
@@ -39,16 +45,25 @@ void Enemy::onDestory()
 void Enemy::update(float deltaTime)
 {
 
+	if (alive)
+	{
+		HitAble::update(deltaTime);
+		findPath();
 
-	HitAble::update(deltaTime);
-	findPath();
 
+		Rectangle pos = getPos();
 
-	Rectangle pos = getPos();
-
-	move(deltaTime);
-	bodyUpdate(deltaTime);
-	itemUpdate(deltaTime);
+		move(deltaTime);
+		bodyUpdate(deltaTime);
+		itemUpdate(deltaTime);
+	}
+	else
+	{
+		deadTimer -= deltaTime;
+		bodyUpdate(deltaTime);
+		if(deadTimer<=0)
+			Game->deleteObject(this);
+	}
 
 }
 void Enemy::move(float deltaTime)
@@ -84,25 +99,34 @@ void Enemy::bodyUpdate(float deltaTime)
 	Rectangle pos = getPos();
 	Vector2 moveVector = getMoveVector();
 	Rectangle targetPos = {};
-	if (moveVector.y != 0 || moveVector.x != 0)
+	Vector2 targerPoint = {};
+	if (alive)
 	{
-		if (moveVector.y > 0)
-			body->updateCharacterSide(CharacterSide::Down);
-		else if (moveVector.y < 0)
-			body->updateCharacterSide(CharacterSide::Up);
-		else if (moveVector.x > 0)
-			body->updateCharacterSide(CharacterSide::Right);
-		else if (moveVector.x < 0)
-			body->updateCharacterSide(CharacterSide::Left);
-		body->updateCharacterState(CharacterState::Run);
+		if (moveVector.y != 0 || moveVector.x != 0)
+		{
+			if (moveVector.y > 0)
+				body->updateCharacterSide(CharacterSide::Down);
+			else if (moveVector.y < 0)
+				body->updateCharacterSide(CharacterSide::Up);
+			else if (moveVector.x > 0)
+				body->updateCharacterSide(CharacterSide::Right);
+			else if (moveVector.x < 0)
+				body->updateCharacterSide(CharacterSide::Left);
+			body->updateCharacterState(CharacterState::Run);
+		}
+		else
+			body->updateCharacterState(CharacterState::Ide);
+
+
+		if (target)
+			targetPos = target->getPos();
+		targerPoint = { targetPos.x + targetPos.width / 2,targetPos.y + targetPos.height };
 	}
 	else
-		body->updateCharacterState(CharacterState::Ide);
+	{
+		body->updateCharacterState(CharacterState::Die);
+	}
 
-
-	if (target)
-		targetPos = target->getPos();
-	Vector2 targerPoint = { targetPos.x + targetPos.width / 2,targetPos.y + targetPos.height };
 	body->update(deltaTime, targerPoint, pos);
 }
 
@@ -147,11 +171,11 @@ Vector2 Enemy::getMoveVector()
 void Enemy::draw()
 {
 	Rectangle pos = getPos();
-
-	DrawRectangleRec(pos, BLUE);
 	body->draw(pos);
-	pos.y += pos.height + 10;
-	pos.height = 10;
+	if (!alive)
+		return;
+	pos.y -= 20;
+	pos.height = 5;
 	HitAble::draw(pos);
 
 	item->draw();
@@ -173,7 +197,12 @@ bool Enemy::dealDamage(float damage, float invisibileFrame)
 		return false;
 	}
 	if (isObjectDead())
-		Game->deleteObject(this);
+	{
+		alive = false;
+		if (body)
+			body->updateCharacterState(CharacterState::Die);
+	}
+
 	return true;
 }
 void Enemy::saveToJson(nlohmann::json& j)

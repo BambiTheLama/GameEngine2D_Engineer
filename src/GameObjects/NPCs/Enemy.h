@@ -10,6 +10,8 @@ class Enemy :
     Item* item;
     float range = 1000;
     float speed = 30;
+    bool alive = true;
+    float deadTimer = 2;
     CharacterBody* body;
     Enemy(Enemy& e);
 public:
@@ -42,7 +44,7 @@ public:
 
     virtual Enemy* clone() { return new Enemy(*this); }
 
-    virtual bool destoryAfterRenderClear() { return false; }
+    virtual bool destoryAfterRenderClear() { return !alive; }
 
     virtual void saveToJson(nlohmann::json& j);
 

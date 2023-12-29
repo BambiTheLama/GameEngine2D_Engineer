@@ -26,6 +26,14 @@ CharacterBody::CharacterBody(CharacterBody& body)
 	this->headPos = body.headPos;
 	this->sizeH = body.sizeH;
 	this->sizeW = body.sizeW;
+	this->bodyColor = body.bodyColor;
+	this->legsColor = body.legsColor;
+	this->headColor = body.headColor;
+	this->eyesColor = body.eyesColor;
+	this->hairColor = body.hairColor;
+	this->hairStyle = body.hairStyle;
+	this->eyeStyle = body.eyeStyle;
+	this->headStyle = body.headStyle;
 	diffElementsPos();
 }
 
@@ -39,7 +47,10 @@ CharacterBody::~CharacterBody()
 }
 void CharacterBody::update(float deltaTime, Vector2 cursor,Rectangle pos)
 { 
+
 	frame += deltaTime * frameRate;
+	if (this->state == CharacterState::Die)
+		return;
 	bool leftHand = (pos.x + pos.width / 2) > cursor.x;
 	Vector2 start = { pos.x + pos.width / 2,pos.y + pos.height / 2 };
 	if (leftHand)
@@ -93,7 +104,6 @@ void CharacterBody::draw(Rectangle at)
 		drawLegs({ legsPos.x + at.x,legsPos.y + at.y,legsPos.width,legsPos.height }, 0);
 		drawBody({ bodyPos.x + at.x,bodyPos.y + at.y - moveBy * headPos.height / 64,bodyPos.width,bodyPos.height }, rotateBy);
 		drawHead({ headPos.x + at.x,headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }, rotateBy * 3);
-		
 		drawHand(handPos, 0);
 	}
 	else
@@ -205,11 +215,6 @@ void CharacterBody::drawDie(Rectangle at)
 	if (frame <= f)
 		f = frame;
 	drawHead({ at.width / 4 * f * rotationRateHead + headPos.x + at.x,f * speed + headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }
-	, rotationRateHead * f * 60);
-	f = (endH - handPos.y) / speed;
-	if (frame <= f)
-		f = frame;
-	drawHand({ at.width / 4 * f * rotationRateHead + handPos.x + at.x,f * speed + handPos.y + at.y,handPos.width , handPos.height }
 	, rotationRateHead * f * 60);
 }
 

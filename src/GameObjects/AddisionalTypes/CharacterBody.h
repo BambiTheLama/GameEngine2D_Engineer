@@ -80,5 +80,9 @@ public:
 	void setEyesColor(Color c) { eyesColor = c; }
 
 	void setHeadColor(Color c) { headColor = c; }
+
+	void setHairStyle(int hairStyle) { this->hairStyle = hairStyle; }
+
+	void setEyeStyle(int eyeStyle) { this->eyeStyle = eyeStyle; }
 };
 
