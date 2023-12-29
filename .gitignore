@@ -32,10 +32,10 @@
 *.out
 *.app
 
-x64/Debug/
-x64/Debug/GameEngine2D.tlog/
-x64/Relise/
-x64/Relise/GameEngine2D.tlog/
+x64/Debug/*
+x64/Debug/GameEngine2D.tlog/*
+x64/Relise/*
+x64/Relise/GameEngine2D.tlog/*
 Debug/*
 Relise/*
 .vs/GameEngine2D/

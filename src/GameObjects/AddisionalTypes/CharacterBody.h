@@ -47,7 +47,7 @@ public:
 
 	~CharacterBody();
 
-	void update(float deltaTime);
+	void update(float deltaTime,Vector2 cursor,Rectangle pos);
 
 	void updateCharacterSide(CharacterSide side) { this->side = side; }
 
@@ -67,7 +67,7 @@ public:
 
 	void diffElementsPos();
 
-	float getEndH() { return legsPos.y; }
+	float getEndY() { return legsPos.y; }
 
 	Vector2 getHandPos() { return { handPos.x+handPos.width/2,handPos.y+handPos.height/2 }; }
 };

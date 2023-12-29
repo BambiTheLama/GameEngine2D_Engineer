@@ -14,8 +14,8 @@ Player::Player(Player& obj) :GameObject(obj), RectangleCollider(obj),HitAble(obj
 	body = new CharacterBody(*obj.body);
 }
 
-Player::Player() :GameObject({ 100,100,32,32 }, "Player")
-, RectangleCollider({ pos.width / 3,pos.height * (1.5f / 4.0f),pos.width / 3,pos.width / 2 })
+Player::Player() :GameObject({ 100,100,32,64 }, "Player")
+, RectangleCollider({ 10,20,12,34 })
 , HitAble(69)
 {
 	speed = 8;
@@ -30,7 +30,7 @@ Player::Player() :GameObject({ 100,100,32,32 }, "Player")
 		delete item;
 	}
 	Rectangle pos = getPos();
-	body = new CharacterBody("Resource/Character/Character_1/",pos.width,pos.height);
+	body = new CharacterBody("Resource/Character/Character_1/",pos.width,pos.width);
 
 }
 
@@ -200,7 +200,7 @@ void Player::update(float deltaTime)
 	{
 		body->updateCharacterState(CharacterState::Die);
 	}
-	body->update(deltaTime);
+	body->update(deltaTime, Game->getCursorPos(),getPos());
 
 }
 
@@ -278,7 +278,9 @@ void Player::move(float deltaTime)
 void Player::draw()
 {
 	Rectangle pos = getPos();
+	DrawRectangleRec(pos, { 0,0,255,122 });
 	body->draw(pos);
+	
 	if (collidersToDraw)
 	{
 		Rectangle posPickUpRange = getPos();

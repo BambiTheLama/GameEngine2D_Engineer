@@ -30,7 +30,7 @@ RectangleCollider::RectangleCollider(ObjectType type, int ID)
 void RectangleCollider::draw(GameObject* obj)
 {
 	Rectangle pos = obj->getPos();
-	DrawRectangle(pos.x + collision.x, pos.y + collision.y, collision.width, collision.height, RED);
+	DrawRectangle(pos.x + collision.x, pos.y + collision.y, collision.width, collision.height, {128,0,0,128});
 }
 bool RectangleCollider::checkCollisionToObj(GameObject* thisObj, Collider* otherCollider, GameObject* otherObject)
 {

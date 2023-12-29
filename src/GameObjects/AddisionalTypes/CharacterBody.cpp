@@ -1,4 +1,5 @@
 #include "CharacterBody.h"
+#include "../GameObject.h"
 
 CharacterBody::CharacterBody(std::string path,float sizeW,float sizeH)
 {
@@ -36,9 +37,15 @@ CharacterBody::~CharacterBody()
 	delete this->eyes;
 	delete this->head;
 }
-void CharacterBody::update(float deltaTime) 
+void CharacterBody::update(float deltaTime, Vector2 cursor,Rectangle pos)
 { 
 	frame += deltaTime * frameRate; 
+	Vector2 start = { pos.x + pos.width / 2,pos.y + pos.height / 2 };
+	float rotation = cursorTarget(start, cursor);
+	handPos = { sin(degreeToRadius(rotation)) * handPos.width/2 + start.x
+		,-cos(degreeToRadius(rotation)) * handPos.height/2 + start.y
+		,handPos.width
+		,handPos.height };
 }
 
 void CharacterBody::updateCharacterState(CharacterState state)
@@ -81,7 +88,7 @@ void CharacterBody::draw(Rectangle at)
 		drawBody({ bodyPos.x + at.x,bodyPos.y + at.y - moveBy * headPos.height / 64,bodyPos.width,bodyPos.height }, rotateBy);
 		drawHead({ headPos.x + at.x,headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }, rotateBy * 3);
 		
-		drawHand({ handPos.x + at.x,handPos.y + at.y,handPos.width , handPos.height }, 0);
+		drawHand(handPos, 0);
 	}
 	else
 		drawDie(at);
@@ -90,8 +97,6 @@ void CharacterBody::draw(Rectangle at)
 
 void CharacterBody::drawHand(Rectangle pos,float rotation)
 {
-	pos.x += pos.width / 2;
-	pos.y += pos.height / 2;
 	pos.height /= 2;
 	Texture2D texture = legs->getTexture();
 	Rectangle texturePos = { texture.width * 3 / 4.0f,0,texture.width / 4.0f,(float)texture.height / 2 };
@@ -134,11 +139,9 @@ void CharacterBody::drawHead(Rectangle pos,float rotate)
 
 void CharacterBody::drawBody(Rectangle pos, float rotate)
 {
-	pos.x += pos.width / 2;
-	pos.y += pos.height / 2;
 	Texture2D texture = body->getTexture();
 	Rectangle texturePos = { texture.width / 4.0f * (int)side,0.0f,texture.width / 4.0f,(float)texture.height };
-	DrawTexturePro(texture, texturePos, pos, { pos.width / 2,pos.height / 2 }, rotate, bodyColor);
+	DrawTexturePro(texture, texturePos, pos, { 0,0 }, 0, bodyColor);
 
 }
 
@@ -180,28 +183,32 @@ void CharacterBody::drawLegs(Rectangle pos, float rotate)
 
 void CharacterBody::drawDie(Rectangle at)
 {
-	float endH = getEndH();
+	float endH = getEndY();
 	float speed = at.height*4;
 	float f = (endH - legsPos.y) / speed;
 	if (frame <= f)
 		f = frame;
-	drawLegs({ at.width/4*f*rotationRateLegs+legsPos.x + at.x,f*speed+legsPos.y + at.y,legsPos.width,legsPos.height }, rotationRateLegs * f*60);
+	drawLegs({ at.width / 4 * f * rotationRateLegs + legsPos.x + at.x,f * speed + legsPos.y + at.y,legsPos.width,legsPos.height }
+	, rotationRateLegs * f * 60);
 	f = (endH - bodyPos.y) / speed;
 	if (frame <= f)
 		f = frame;
-	drawBody({ at.width / 4 *f*rotationRateBody+bodyPos.x + at.x,f*speed+bodyPos.y + at.y - moveBy * headPos.height / 64,bodyPos.width,bodyPos.height }, rotationRateBody * f * 60);
+	drawBody({ at.width / 4 * f * rotationRateBody + bodyPos.x + at.x,f * speed + bodyPos.y + at.y - moveBy * headPos.height / 64,bodyPos.width,bodyPos.height }
+	, rotationRateBody * f * 60);
 	f = (endH - headPos.y) / speed;
 	if (frame <= f)
 		f = frame;
-	drawHead({ at.width / 4 *f*rotationRateHead+headPos.x + at.x,f*speed+headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }, rotationRateHead * f * 60);
+	drawHead({ at.width / 4 * f * rotationRateHead + headPos.x + at.x,f * speed + headPos.y + at.y - moveBy * headPos.height / 32,headPos.width,headPos.height }
+	, rotationRateHead * f * 60);
 	f = (endH - handPos.y) / speed;
 	if (frame <= f)
 		f = frame;
-	drawHand({ handPos.x + at.x,handPos.y + at.y,handPos.width , handPos.height }, rotationRateHead * f * 60);
+	drawHand({ at.width / 4 * f * rotationRateHead + handPos.x + at.x,f * speed + handPos.y + at.y,handPos.width , handPos.height }
+	, rotationRateHead * f * 60);
 }
 
 void CharacterBody::diffElementsPos() {
-	headPos = { 0,-sizeH,sizeW,sizeW };
-	bodyPos = { 0,-sizeH * 7 / 16,sizeW,sizeW };
-	legsPos = { 0,sizeH * 3 / 16,sizeW,sizeW };
+	headPos = { 0,0,sizeH,sizeH };
+	bodyPos = { 0,sizeH * 7 / 16,sizeH,sizeH };
+	legsPos = { 0,sizeH * 17 / 16,sizeH,sizeH };
 }

@@ -1,2 +1,10 @@
-﻿  CharacterBody.cpp
+﻿  Player.cpp
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/GameObjects/Player/Player.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/GameObjects/Player/Player.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\Player\Player.cpp(293,82): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\Player\Player.cpp(293,75): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
   GameEngine2D.vcxproj -> C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\x64\Debug\GameEngine2D.exe
