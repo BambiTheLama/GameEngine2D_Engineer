@@ -13,12 +13,12 @@ class Player :
     bool canMove = true;
     int pickUpRange = 100;
     float speed;
-    float frame = 0;
+    bool alive = true;
     Eq* eq;
     MiniMap* miniMap;
     CraftingStation* crafting;
     CharacterBody* body=NULL;
-    bool alive = true;
+
 protected:
     Player(Player& obj);
 public:
@@ -78,6 +78,10 @@ public:
     virtual void setCanMoveObject(bool canMove) { this->canMove = canMove; }
 
     bool isColliding() { return false; }
+
+    void saveToJson(nlohmann::json& writer);
+
+    void readFromJson(nlohmann::json& reader);
 
 };
 

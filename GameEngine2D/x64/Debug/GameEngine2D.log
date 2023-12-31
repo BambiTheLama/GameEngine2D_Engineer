@@ -1,23 +1,53 @@
-﻿  PathFinding.cpp
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(66,20): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(67,20): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(104,22): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(105,22): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(109,38): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(110,39): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(122,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(123,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(131,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(132,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(135,9): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(136,9): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(147,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(148,8): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(219,13): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(350,28): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(351,28): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(368,27): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(369,27): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(370,31): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCs\PathFinding.cpp(371,31): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+﻿  Collider.cpp
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/GameObjects/AddisionalTypes/Collider.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/GameObjects/AddisionalTypes/Collider.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Collider.cpp(199,101): warning C4390: ";": znaleziono kontrolowaną pustą instrukcję; czy to było zamierzone?
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Collider.cpp(203,100): warning C4390: ";": znaleziono kontrolowaną pustą instrukcję; czy to było zamierzone?
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Collider.cpp(216,7): warning C4305: "=": obcięcie z "int" do "float"
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Collider.cpp(275,13): warning C4244: "return": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Collider.cpp(282,12): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+  LinesCollider.cpp
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/GameObjects/AddisionalTypes/LinesCollider.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/GameObjects/AddisionalTypes/LinesCollider.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\LinesCollider.cpp(206,11): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+  GameScene.cpp
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
+  
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCFactory.h(18,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
+  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.39.33321\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(132,15): warning C4305: "+=": obcięcie z "double" do "float"
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(134,15): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(141,104): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(141,104): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(141,159): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(141,159): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(307,29): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(307,22): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(314,29): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(314,22): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(329,33): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(329,26): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(340,55): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(340,44): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(340,37): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(340,30): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(343,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(343,57): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(343,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(343,43): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+  Generowanie kodu...
   GameEngine2D.vcxproj -> C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\x64\Debug\GameEngine2D.exe

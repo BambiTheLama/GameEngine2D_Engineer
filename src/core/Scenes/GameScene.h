@@ -26,6 +26,7 @@ class GameScene :
     static GameScene* game;
     const int renderDystance = 2;
     std::string worldName;
+    std::string worldFile;
     std::string chunksFile;
     std::thread mapLoader;
     bool endMapLoaderWork = false;
@@ -180,6 +181,7 @@ public:
     /// </summary>
     /// <returns></returns>
     float getZoom() { return camera.zoom; }
-
+    std::string getWorldName() { return worldName; }
+    
 };
 

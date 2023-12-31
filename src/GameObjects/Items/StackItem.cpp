@@ -85,3 +85,17 @@ std::string StackItem::getDesctription()
 	
 	return std::string(TextFormat(description.c_str(), getName().c_str(), stackSize));
 }
+
+void StackItem::saveToJson(nlohmann::json& j)
+{
+	Item::saveToJson(j);
+	j["StackSize"][0]= stackSize;
+	j["StackSize"][1]= stackMaxSize;
+}
+
+void StackItem::readFromJson(nlohmann::json& j)
+{
+	Item::readFromJson(j);
+	stackSize = j["StackSize"][0];
+	stackMaxSize = j["StackSize"][1];
+}

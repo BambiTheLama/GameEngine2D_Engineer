@@ -37,9 +37,9 @@ bool Item::use(float deltaTime,Vector2 mousePos)
 {
 	return false;
 }
-void Item::saveToJson(nlohmann::json j)
+void Item::saveToJson(nlohmann::json &j)
 {
-	j[getID()]["ItemType"] = getItemType();
+	GameObject::saveToJson(j);
 }
 
 void Item::drawDescription(int x, int y)

@@ -3,24 +3,16 @@
 
 CharacterBody::CharacterBody(std::string path,float sizeW,float sizeH)
 {
-	this->body = new SpriteController(std::string(path+"Body.png").c_str());
-	this->legs = new SpriteController(std::string(path+"Legs.png").c_str());
-	this->hair = new SpriteController(std::string(path+"Hair.png").c_str());
-	this->eyes = new SpriteController(std::string(path+"Eyes.png").c_str());
-	this->head = new SpriteController(std::string(path+"Head.png").c_str());
 	this->sizeH = sizeH;
 	this->sizeW = sizeW;
+	this->path = path;
 	diffElementsPos();
-
+	loadTextures();
 }
 
 CharacterBody::CharacterBody(CharacterBody& body)
 {
-	this->body = new SpriteController(*body.body);
-	this->legs = new SpriteController(*body.legs);
-	this->hair = new SpriteController(*body.hair);
-	this->eyes = new SpriteController(*body.eyes);
-	this->head = new SpriteController(*body.head);
+	this->path = body.path;
 	this->bodyPos = body.bodyPos;
 	this->legsPos = body.legsPos;
 	this->headPos = body.headPos;
@@ -35,6 +27,7 @@ CharacterBody::CharacterBody(CharacterBody& body)
 	this->eyeStyle = body.eyeStyle;
 	this->headStyle = body.headStyle;
 	diffElementsPos();
+	loadTextures();
 }
 
 CharacterBody::~CharacterBody()
@@ -223,4 +216,65 @@ void CharacterBody::diffElementsPos() {
 	bodyPos = { 0,sizeH * 7 / 16,sizeH,sizeH };
 	legsPos = { 0,sizeH * 17 / 16,sizeH,sizeH };
 	handPos = { 0,0 ,sizeH,sizeH };
+}
+
+void CharacterBody::loadTextures()
+{
+	if (body)
+		delete body;
+	body = new SpriteController(std::string(path + "Body.png").c_str());
+	if (legs)
+		delete legs;
+	legs = new SpriteController(std::string(path + "Legs.png").c_str());
+	if (hair)
+		delete hair;
+	hair = new SpriteController(std::string(path + "Hair.png").c_str());
+	if (eyes)
+		delete eyes;
+	eyes = new SpriteController(std::string(path + "Eyes.png").c_str());
+	if (head)
+		delete head;
+	head = new SpriteController(std::string(path + "Head.png").c_str());
+}
+void saveColorToJson(nlohmann::json& writer, Color c)
+{
+	writer[0] = c.r;
+	writer[1] = c.g;
+	writer[2] = c.b;
+}
+void CharacterBody::saveData(nlohmann::json& writer)
+{
+	writer["Body"]["Path"] = path;
+	saveColorToJson(writer["Body"]["Colors"][0], bodyColor);
+	saveColorToJson(writer["Body"]["Colors"][1], legsColor);
+	saveColorToJson(writer["Body"]["Colors"][2], headColor);
+	saveColorToJson(writer["Body"]["Colors"][3], eyesColor);
+	saveColorToJson(writer["Body"]["Colors"][4], hairColor);
+	writer["Body"]["Style"][0] = hairStyle;
+	writer["Body"]["Style"][1] = eyeStyle;
+	writer["Body"]["Style"][2] = headStyle;
+	writer["Body"]["Size"][0] = sizeW;
+	writer["Body"]["Size"][0] = sizeH;
+}
+Color readColorToJson(nlohmann::json& reader)
+{
+	return { reader[0] ,reader[1] ,reader[2] ,255 };
+}
+void CharacterBody::readData(nlohmann::json& reader)
+{
+	if (!reader.contains("Body"))
+		return;
+	reader["Body"]["Path"] = path;
+	bodyColor = readColorToJson(reader["Body"]["Colors"][0]);
+	legsColor = readColorToJson(reader["Body"]["Colors"][1]);
+	headColor = readColorToJson(reader["Body"]["Colors"][2]);
+	eyesColor = readColorToJson(reader["Body"]["Colors"][3]);
+	hairColor = readColorToJson(reader["Body"]["Colors"][4]);
+	hairStyle = reader["Body"]["Style"][0];
+	eyeStyle = reader["Body"]["Style"][1];
+	headStyle = reader["Body"]["Style"][2];
+	sizeW = reader["Body"]["Size"][0];
+	sizeH = reader["Body"]["Size"][0];
+	diffElementsPos();
+	loadTextures();
 }

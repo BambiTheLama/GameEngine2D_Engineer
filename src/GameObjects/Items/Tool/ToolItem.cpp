@@ -79,7 +79,7 @@ void ToolItem::update(float deltaTime, Vector2 cursorPos)
 
 	LinesCollider::updateRotation(rotation, { 0,  0 }, { 0,-pos.height }, !leftSide);
 
-	LinesCollider::update(deltaTime, holdingObj, { pos.width ,pos.height  });
+	LinesCollider::update(deltaTime, this, { 0 ,0  });
 }
 
 void ToolItem::update(float deltaTime)
@@ -229,5 +229,17 @@ void ToolItem::onCollisionHitable(HitAble* hit)
 }
 void ToolItem::onCollisionDestroyAble(DestroyAble* dest)
 {
+
+}
+void ToolItem::saveToJson(nlohmann::json& j)
+{
+	Item::saveToJson(j);
+	j["InHand"] = inHand;
+}
+void ToolItem::readFromJson(nlohmann::json& j)
+{
+	Item::readFromJson(j);
+	if (j.contains("InHand"))
+		inHand = j["InHand"];
 
 }

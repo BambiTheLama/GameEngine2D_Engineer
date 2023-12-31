@@ -41,6 +41,10 @@ public:
 
     virtual std::string getDesctription();
 
+    virtual void saveToJson(nlohmann::json& j);
+
+    virtual void readFromJson(nlohmann::json& j);
+
     friend class ItemFactory;
 };
 

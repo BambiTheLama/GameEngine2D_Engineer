@@ -120,3 +120,16 @@ Vector2 PlaceItem::getWordMousePos(int x, int y)
 		destPos.y -= size;
 	return destPos;
 }
+
+void PlaceItem::saveToJson(nlohmann::json& j)
+{
+	StackItem::saveToJson(j);
+	j["StructID"] = structID;
+}
+
+void PlaceItem::readFromJson(nlohmann::json& j)
+{
+	StackItem::readFromJson(j);
+	if(j.contains("StructID"))
+		structID = j["StructID"];
+}

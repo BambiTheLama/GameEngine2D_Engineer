@@ -224,3 +224,15 @@ std::string Bow::getDesctription()
 {
 	return std::string(TextFormat(description.c_str(), getName().c_str(), chargeTimeMax, speedMultiplier, rangeMultiplier, numberOfProjectalMax));
 }
+void Bow::saveToJson(nlohmann::json& j)
+{
+	Item::saveToJson(j);
+	j["InHand"] = inHand;
+}
+
+void Bow::readFromJson(nlohmann::json& j)
+{
+	Item::readFromJson(j);
+	if (j.contains("InHand"))
+		inHand = j["InHand"];
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "../../core/Controllers/SpriteController.h"
+#include "json.hpp"
 
 enum class CharacterSide
 {
@@ -16,11 +17,11 @@ class CharacterBody
 	Rectangle bodyPos;
 	Rectangle legsPos;
 	Rectangle headPos;
-	SpriteController* body;
-	SpriteController* legs;
-	SpriteController* head;
-	SpriteController* eyes;
-	SpriteController* hair;
+	SpriteController* body = NULL;
+	SpriteController* legs = NULL;
+	SpriteController* head = NULL;
+	SpriteController* eyes = NULL;
+	SpriteController* hair = NULL;
 	Color bodyColor = WHITE;
 	Color legsColor = WHITE;
 	Color headColor = WHITE;
@@ -40,6 +41,7 @@ class CharacterBody
 	float rotationRateLegs = 0;
 	float rotationRateBody = 0;
 	Rectangle handPos = { 0,0 ,32,32};
+	std::string path;
 public:
 	CharacterBody(std::string path,float sizeW,float sizeH);
 
@@ -84,5 +86,11 @@ public:
 	void setHairStyle(int hairStyle) { this->hairStyle = hairStyle; }
 
 	void setEyeStyle(int eyeStyle) { this->eyeStyle = eyeStyle; }
+
+	void loadTextures();
+
+	void saveData(nlohmann::json& writer);
+
+	void readData(nlohmann::json& reader);
 };
 

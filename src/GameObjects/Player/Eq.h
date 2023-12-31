@@ -142,5 +142,9 @@ public:
 	void removeItem(Item *item);
 
 	void changeItem();
+
+	void saveData(nlohmann::json& writer);
+
+	void readData(nlohmann::json& reader);
 };
 

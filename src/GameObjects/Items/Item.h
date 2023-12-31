@@ -71,7 +71,7 @@ public:
 
     virtual void setInHand(bool inHand) { }
 
-    virtual void saveToJson(nlohmann::json j);
+    virtual void saveToJson(nlohmann::json &j);
 
     virtual void drawDescription(int x, int y);
 

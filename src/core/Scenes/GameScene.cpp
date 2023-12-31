@@ -17,7 +17,7 @@ GameScene::GameScene(std::string worldName)
 	struct stat sb;
 
 	const char* savePath = "Saves";
-	std::string worldFile = savePath + (std::string)"/" + worldName;
+	worldFile = savePath + (std::string)"/" + worldName;
 	chunksFile = savePath + (std::string)"/" + worldName + (std::string)"/chunks";
 	if (stat(savePath, &sb) != 0)
 		_mkdir(savePath);
@@ -33,7 +33,15 @@ GameScene::GameScene(std::string worldName)
 	//handler.push_back(new ObjectHandler(0, 0));
 
 	GameObject *p = new Player();
-
+	std::ifstream reader;
+	reader.open(worldFile + "/Player.json");
+	if (reader.is_open())
+	{
+		nlohmann::json j;
+		reader >> j;
+		p->readFromJson(j);
+	}
+	reader.close();
 	cameraTarget = p;
 	game = this;
 	Rectangle pos = cameraTarget->getPos();
@@ -66,6 +74,15 @@ GameScene::GameScene(std::string worldName)
 
 GameScene::~GameScene()
 {
+	nlohmann::json j;
+	cameraTarget->saveToJson(j);
+	std::ofstream writer;
+	writer.open(worldFile + "/Player.json");
+	if (writer.is_open())
+	{
+		writer << j;
+	}
+	writer.close();
 	game = NULL;
 	if (mapLoader.joinable())
 		mapLoader.join();
@@ -163,9 +180,6 @@ void GameScene::update(float deltaTime)
 		handlersToAdd.clear();
 
 	}
-
-	
-
 
 	if (!loadingMap)
 	{

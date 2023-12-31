@@ -25,5 +25,11 @@ public:
     virtual void drawInterface();
 
     Vector2 getWordMousePos(int x,int y);
+
+    virtual void saveToJson(nlohmann::json& j);
+
+    virtual void readFromJson(nlohmann::json& j);
+
+
 };
 

@@ -479,3 +479,70 @@ void Eq::changeItem()
 		itemInHand->updateAfterSwap();
 
 }
+
+void Eq::saveData(nlohmann::json& writer)
+{
+	writer["Eq"]["UsingItem"][0] = usingItem;
+	writer["Eq"]["UsingItem"][1] = usingItemX;
+	writer["Eq"]["UsingItem"][2] = usingItemY;
+	if (itemInHand)
+		itemInHand->saveToJson(writer["Eq"]["HandItem"]);
+	for (int i = 0; i < EqHeight; i++)
+		for (int j = 0; j < EqWight; j++)
+		{
+			if (items[i][j])
+				items[i][j]->saveToJson(writer["Eq"]["Items"][i * EqWight + j]);
+			else
+				writer["Eq"]["Items"][i * EqWight + j] = NULL;
+			
+		}
+
+}
+
+void Eq::readData(nlohmann::json& reader)
+{
+
+
+	if (!reader.contains("Eq"))
+		return;
+	usingItem  = reader["Eq"]["UsingItem"][0];
+	usingItemX = reader["Eq"]["UsingItem"][1];
+	usingItemY = reader["Eq"]["UsingItem"][2];
+	if (reader["Eq"].contains("HandItem"))
+	{
+		int ID = reader["Eq"]["HandItem"]["ID"];
+		Item* obj = Items->getObject(ID);
+		if (obj)
+		{
+			obj->readFromJson(reader["Eq"]["HandItem"]);
+			itemInHand = obj;
+		}
+	}
+	for (int i = 0; i < EqHeight; i++)
+		for (int j = 0; j < EqWight; j++)
+		{
+			if (items[i][j])
+			{
+				delete items[i][j];
+				items[i][j] = NULL;
+			}
+
+			if (reader["Eq"]["Items"].size() <= (i * EqWight + j) || reader["Eq"]["Items"][i * EqWight + j] == NULL)
+			{
+				items[i][j] = NULL;
+				continue;
+			}
+			int ID = reader["Eq"]["Items"][i * EqWight + j]["ID"];
+			Item* obj = Items->getObject(ID);
+			if (obj)
+			{
+				obj->readFromJson(reader["Eq"]["Items"][i * EqWight + j]);
+				items[i][j] = obj;
+				items[i][j]->addItemToHand(player);
+				items[i][j]->setEq(this);
+			}
+
+		}
+	player->updateRecepies();
+
+}

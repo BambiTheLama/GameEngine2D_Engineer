@@ -146,9 +146,8 @@ void Player::updateCrafting()
 
 void Player::updateEq(float deltaTime)
 {
-	eq->update(deltaTime);
-	
 	eq->updateItemPos(body->getHandPos());
+	eq->update(deltaTime);
 	//eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
@@ -304,4 +303,32 @@ void Player::drawInterface()
 	eq->drawItemInterface();
 	crafting->draw();
 	eq->draw();
+}
+
+void Player::saveToJson(nlohmann::json& writer)
+{
+	GameObject::saveToJson(writer);
+	HitAble::saveToJson(writer);
+	eq->saveData(writer);
+	body->saveData(writer);
+	writer["PickUpRange"] = pickUpRange;
+	writer["Speed"] = speed;
+	writer["Alive"] = alive;
+}
+
+void Player::readFromJson(nlohmann::json& reader)
+{
+	GameObject::readFromJson(reader);
+	HitAble::readFromJson(reader);
+	eq->readData(reader);
+	body->readData(reader);
+	if(reader.contains("PickUpRange"))
+		pickUpRange = reader["PickUpRange"];
+	if (reader.contains("Speed"))
+		speed = reader["Speed"];
+	if (reader.contains("Alive"))
+		alive = reader["Alive"];
+
+
+
 }

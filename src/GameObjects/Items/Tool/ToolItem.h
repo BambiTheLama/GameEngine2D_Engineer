@@ -43,6 +43,8 @@ public:
     virtual void drawInterface();
     GameObject* getHittingObject(Vector2 cursor, bool isDestory = false);
     virtual void addItemToHand(GameObject* holdingObj);
+    virtual void saveToJson(nlohmann::json& j);
+    virtual void readFromJson(nlohmann::json& j);
     friend class ItemFactory;
 };
 
