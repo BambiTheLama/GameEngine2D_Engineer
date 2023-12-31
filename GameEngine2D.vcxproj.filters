@@ -277,6 +277,7 @@
     <ClCompile Include="src\GameObjects\AddisionalTypes\CharacterBody.cpp">
       <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Scenes\CharacterCreator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -487,6 +488,7 @@
     <ClInclude Include="src\GameObjects\AddisionalTypes\CharacterBody.h">
       <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Scenes\CharacterCreator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

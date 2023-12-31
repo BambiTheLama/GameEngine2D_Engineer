@@ -227,12 +227,9 @@ std::string Bow::getDesctription()
 void Bow::saveToJson(nlohmann::json& j)
 {
 	Item::saveToJson(j);
-	j["InHand"] = inHand;
 }
 
 void Bow::readFromJson(nlohmann::json& j)
 {
 	Item::readFromJson(j);
-	if (j.contains("InHand"))
-		inHand = j["InHand"];
 }

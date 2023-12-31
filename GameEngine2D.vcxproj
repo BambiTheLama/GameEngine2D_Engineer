@@ -153,6 +153,7 @@
     <ClCompile Include="src\core\Elements\VectorEnter.cpp" />
     <ClCompile Include="src\core\Engine.cpp" />
     <ClCompile Include="src\core\Properties.cpp" />
+    <ClCompile Include="src\core\Scenes\CharacterCreator.cpp" />
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
     <ClCompile Include="src\core\Scenes\Game\FourTree.cpp" />
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="src\core\Elements\VectorEnter.h" />
     <ClInclude Include="src\core\Engine.h" />
     <ClInclude Include="src\core\Properties.h" />
+    <ClInclude Include="src\core\Scenes\CharacterCreator.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
     <ClInclude Include="src\core\Scenes\Game\FourTree.h" />
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />

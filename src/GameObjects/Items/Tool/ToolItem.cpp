@@ -234,12 +234,8 @@ void ToolItem::onCollisionDestroyAble(DestroyAble* dest)
 void ToolItem::saveToJson(nlohmann::json& j)
 {
 	Item::saveToJson(j);
-	j["InHand"] = inHand;
 }
 void ToolItem::readFromJson(nlohmann::json& j)
 {
 	Item::readFromJson(j);
-	if (j.contains("InHand"))
-		inHand = j["InHand"];
-
 }
