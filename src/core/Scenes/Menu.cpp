@@ -32,8 +32,9 @@ void Menu::start()
 
 void Menu::update(float deltaTime)
 {
-	if (!IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-		return;
+	for (auto b : buttons)
+		b->update(deltaTime);
+
 	if (buttons[0]->press())
 	{
 		Scene* s = new GameScene();

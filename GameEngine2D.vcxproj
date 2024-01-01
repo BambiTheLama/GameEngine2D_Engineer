@@ -169,6 +169,7 @@
     <ClCompile Include="src\GameObjects\AddisionalTypes\DestroyAble.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\DodgeInterface.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\HitAble.cpp" />
+    <ClCompile Include="src\GameObjects\AddisionalTypes\Interactive.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\ItemsDrop.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\LinesCollider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\RectangleCollider.cpp" />
@@ -178,7 +179,9 @@
     <ClCompile Include="src\GameObjects\Blocks\CollidingBlock.cpp" />
     <ClCompile Include="src\GameObjects\Crafting\CraftingStation.cpp" />
     <ClCompile Include="src\GameObjects\Crafting\Recipes.cpp" />
-    <ClCompile Include="src\GameObjects\NPCFactory.cpp" />
+    <ClCompile Include="src\GameObjects\EnemyFactory.cpp" />
+    <ClCompile Include="src\GameObjects\Enemy\Enemy.cpp" />
+    <ClCompile Include="src\GameObjects\Enemy\PathFinding.cpp" />
     <ClCompile Include="src\GameObjects\Factory.cpp" />
     <ClCompile Include="src\GameObjects\GameObject.cpp" />
     <ClCompile Include="src\GameObjects\Items\PlaceItem.cpp" />
@@ -187,9 +190,8 @@
     <ClCompile Include="src\GameObjects\Items\Tool\ToolItem.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\Ammo.cpp" />
     <ClCompile Include="src\GameObjects\Items\Weapon\Bow.cpp" />
-    <ClCompile Include="src\GameObjects\NPCs\Enemy.cpp" />
-    <ClCompile Include="src\GameObjects\NPCs\Enemy_1.cpp" />
-    <ClCompile Include="src\GameObjects\NPCs\PathFinding.cpp" />
+    <ClCompile Include="src\GameObjects\NPCFactory.cpp" />
+    <ClCompile Include="src\GameObjects\NPCs\NPC.cpp" />
     <ClCompile Include="src\GameObjects\Particles\Particle.cpp" />
     <ClCompile Include="src\GameObjects\Particles\ParticleSystem.cpp" />
     <ClCompile Include="src\GameObjects\Particles\TextParticle.cpp" />
@@ -243,6 +245,7 @@
     <ClInclude Include="src\GameObjects\AddisionalTypes\DestroyAble.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\DodgeInterface.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\HitAble.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\Interactive.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\ItemsDrop.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\LinesCollider.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\RectangleCollider.h" />
@@ -252,7 +255,9 @@
     <ClInclude Include="src\GameObjects\Blocks\CollidingBlock.h" />
     <ClInclude Include="src\GameObjects\Crafting\CraftingStation.h" />
     <ClInclude Include="src\GameObjects\Crafting\Recipes.h" />
-    <ClInclude Include="src\GameObjects\NPCFactory.h" />
+    <ClInclude Include="src\GameObjects\EnemyFactory.h" />
+    <ClInclude Include="src\GameObjects\Enemy\Enemy.h" />
+    <ClInclude Include="src\GameObjects\Enemy\PathFinding.h" />
     <ClInclude Include="src\GameObjects\Factory.h" />
     <ClInclude Include="src\GameObjects\GameObject.h" />
     <ClInclude Include="src\GameObjects\Items\PlaceItem.h" />
@@ -261,9 +266,8 @@
     <ClInclude Include="src\GameObjects\Items\Tool\ToolItem.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\Ammo.h" />
     <ClInclude Include="src\GameObjects\Items\Weapon\Bow.h" />
-    <ClInclude Include="src\GameObjects\NPCs\Enemy.h" />
-    <ClInclude Include="src\GameObjects\NPCs\Enemy_1.h" />
-    <ClInclude Include="src\GameObjects\NPCs\PathFinding.h" />
+    <ClInclude Include="src\GameObjects\NPCFactory.h" />
+    <ClInclude Include="src\GameObjects\NPCs\NPC.h" />
     <ClInclude Include="src\GameObjects\Particles\Particle.h" />
     <ClInclude Include="src\GameObjects\Particles\ParticleSystem.h" />
     <ClInclude Include="src\GameObjects\Particles\TextParticle.h" />

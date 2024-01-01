@@ -1,7 +1,8 @@
 #include "GameScene.h"
 #include "raylib.h"
 #include "../../GameObjects/Player/Player.h"
-#include "../../GameObjects/NPCs/Enemy.h"
+#include "../../GameObjects/Enemy/Enemy.h"
+#include "../../GameObjects/EnemyFactory.h"
 #include "../../GameObjects/NPCFactory.h"
 #include "../Engine.h"
 #include "Menu.h"
@@ -33,6 +34,7 @@ GameScene::GameScene(std::string worldName)
 	//handler.push_back(new ObjectHandler(0, 0));
 
 	GameObject *p = new Player();
+
 	std::ifstream reader;
 	reader.open(worldFile + "/Player.json");
 	if (reader.is_open())
@@ -52,7 +54,7 @@ GameScene::GameScene(std::string worldName)
 
 
 	this->worldName = worldName;
-
+	cameraTarget->generateChunk();
 	if (cameraTarget)
 	{
 		loadChunksCloseToTarget();
@@ -68,6 +70,7 @@ GameScene::GameScene(std::string worldName)
 	handlersToAdd.clear();
 	start();
 	addObject(p);
+	p->start();
 }
 
 
@@ -119,12 +122,23 @@ void GameScene::update(float deltaTime)
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
 		{
-			GameObject* o = NPCFactory::getFactory()->getObject(0);
-			
-			o->setMovePos(cursorPos);
-			addObject(o);
+			GameObject* o = EnemyFactory::getFactory()->getObject(0);
+			if (o)
+			{
+				o->setMovePos(cursorPos);
+				addObject(o);
+			}
 		}
+		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+		{
+			GameObject* o = NPCFactory::getFactory()->getObject(0);
+			if (o)
+			{
+				o->setMovePos(cursorPos);
+				addObject(o);
+			}
 
+		}
 	}
 	Rectangle pos = cameraTarget->getPos();
 	camera.target = { pos.x + pos.width/2, pos.y + pos.height/2 };
@@ -193,7 +207,7 @@ void GameScene::update(float deltaTime)
 			mapLoader = std::thread(&GameScene::mapLoaderFun, this);
 		}
 	}
-
+	this->updatePos(cameraTarget);
 
 }
 

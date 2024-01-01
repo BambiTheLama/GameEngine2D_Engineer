@@ -1,11 +1,11 @@
 #pragma once
 #include "Factory.h"
-#include "NPCs/Enemy.h"
+#include "NPCs/NPC.h"
 class NPCFactory :
-    public Factory
+	public Factory
 {
-    static NPCFactory* factory;
-	std::vector<Enemy*> objects;
+	static NPCFactory* factory;
+	std::vector<NPC*> objects;
 	NPCFactory();
 	~NPCFactory();
 public:
@@ -13,8 +13,7 @@ public:
 
 	void clearFactory();
 
-	Enemy* getObject(int ID);
+	NPC* getObject(int ID);
 
 	int getSize() { return objects.size(); }
 };
-

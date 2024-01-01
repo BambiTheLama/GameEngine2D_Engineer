@@ -3,12 +3,16 @@
 #include "ItemFactory.h"
 #include "StructuresFactory.h"
 #include "BlockFactory.h"
+#include "EnemyFactory.h"
 #include "NPCFactory.h"
 
 GameObject* getObjFromFactory(ObjectType type, int ID)
 {
 	switch (type)
 	{
+	case ObjectType::Enemy:
+		return EnemyFactory::getFactory()->getObject(ID);
+		break;
 	case ObjectType::NPC:
 		return NPCFactory::getFactory()->getObject(ID);
 		break;
