@@ -54,6 +54,7 @@ public:
 	void draw(Vector2 pos, float zoom);
 	bool isFindthPath() { return hasPath; }
 	Vector2 getMoveVector();
+	float howLongToGoPath(float speed);
 	bool canPassTo(int x, int y);
 
 

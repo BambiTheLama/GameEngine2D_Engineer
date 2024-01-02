@@ -65,12 +65,14 @@ void Collider::update(float deltaTime, GameObject* obj,Vector2 moveBy)
 	std::list<GameObject*>objs = Game->getObjects(getObj, ObjectToGet::getNoBlocks);
 	objs.remove(obj);
 	for (auto i : objectsToIgnore)
-		objs.remove(i);
+		objs.remove(i);	
 
 	if (type == CollisionsCheckType::All)
 	{
 		for (auto* o : objs)
 		{
+			if (o->getType() == ignoreType)
+				continue;
 			Collider* col = dynamic_cast<Collider*>(o);
 			if (!col)
 				continue;
@@ -96,6 +98,8 @@ void Collider::update(float deltaTime, GameObject* obj,Vector2 moveBy)
 	{
 		for (auto* o : objs)
 		{
+			if (o->getType() == ignoreType)
+				continue;
 			HitAble* hit = dynamic_cast<HitAble*>(o);
 
 			if (!hit)
@@ -116,6 +120,8 @@ void Collider::update(float deltaTime, GameObject* obj,Vector2 moveBy)
 	{
 		for (auto* o : objs)
 		{
+			if (o->getType() == ignoreType)
+				continue;
 			DestroyAble* toDestory = dynamic_cast<DestroyAble*>(o);
 
 			if (!toDestory)

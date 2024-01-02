@@ -386,7 +386,7 @@ Vector2 PathFinding::getMoveVector()
 {
 	if (!hasPath)
 		return { 0,0 };
-	PathFindingNode* n=getEndNode();
+	PathFindingNode* n = getEndNode();
 	PathFindingNode* sn = getStartNode();
 	while (n->fromNode && n->fromNode != sn)
 	{

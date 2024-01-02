@@ -149,12 +149,42 @@ void Player::updateEq(float deltaTime)
 	eq->updateItemPos(body->getHandPos());
 	eq->update(deltaTime);
 	//eq->updateItemPos({ pos.x + pos.width / 2,pos.y + pos.height / 2 });
-	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	{
+		Vector2 mousePos = Game->getCursorPos();
+		if (!interactObject)
+		{
+
+			std::list <GameObject*> objs = Game->getObjects({ mousePos.x,mousePos.y,1,1 }, ObjectToGet::getNoBlocks);
+			for (auto o : objs)
+			{
+				if (o->getType() != ObjectType::NPC)
+					continue;
+				interactObject = o;
+				shop = dynamic_cast<Shop*>(o);
+				eq->setEqFullLook();		
+				crafting->setVisibility(true);
+			}
+		}
+		else
+		{
+			Item* i = shop->updateShop(Game->worldToScreanPos(mousePos), shopX, shopY, money);
+			
+			if (i && !eq->addItem(i))
+			{
+				Rectangle pos = getPos();
+				i->setMovePos({ pos.x + pos.width / 2, pos.y + pos.height / 2 });
+				Game->addObject(i);
+			}
+		}
+	}
+	else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
 		if (!eq->isPressedOnEq() &&!crafting->isPressedInCraftingUI())
 			eq->useItem(deltaTime);
 		else
 			eq->endUsingItem();
+
 	}
 	else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 	{
@@ -167,8 +197,11 @@ void Player::updateEq(float deltaTime)
 	if (IsKeyPressed(KEY_I))
 	{
 		eq->swapEqLook();
-		crafting->swapVisibility();
+		crafting->setVisibility(eq->isFullEqVisuble());
 		updateRecepies();
+		if (shop)
+			shop = NULL;
+		interactObject = NULL;
 	}
 
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -181,6 +214,20 @@ void Player::updateEq(float deltaTime)
 	if (IsKeyPressed(KEY_F4))
 		eq->sortItems(sortBy::Type);
 	eq->update(0.0);
+	if (interactObject)
+	{
+		Rectangle pos = getPos();
+		Vector2 p1 = { pos.x + pos.width / 2,pos.y + pos.height / 2 };
+		pos = interactObject->getPos();
+		Vector2 p2 = { pos.x + pos.width / 2,pos.y + pos.height / 2 };
+		float len = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)*1.6);
+		if (len > 200)
+		{
+			shop = NULL;
+			interactObject = NULL;
+		}
+	}
+
 }
 
 void Player::update(float deltaTime)
@@ -196,6 +243,7 @@ void Player::update(float deltaTime)
 		pickUpItemsClose(deltaTime);
 		updateCrafting();
 		HitAble::update(deltaTime);
+		
 	}
 	else
 	{
@@ -303,6 +351,12 @@ void Player::drawInterface()
 	eq->drawItemInterface();
 	crafting->draw();
 	eq->draw();
+	const char* text = TextFormat("%d$", money);
+	int screenW = GetScreenWidth() - textSize(text, textStandardSize).x - 10;
+
+	DrawTextWithOutline(text, screenW, 10, textStandardSize, YELLOW, BLACK);
+	if (shop)
+		shop->drawShop(shopX, shopY);
 }
 
 void Player::saveToJson(nlohmann::json& writer)
@@ -314,6 +368,7 @@ void Player::saveToJson(nlohmann::json& writer)
 	writer["PickUpRange"] = pickUpRange;
 	writer["Speed"] = speed;
 	writer["Alive"] = alive;
+	writer["Money"] = money;
 }
 
 void Player::readFromJson(nlohmann::json& reader)
@@ -328,7 +383,7 @@ void Player::readFromJson(nlohmann::json& reader)
 		speed = reader["Speed"];
 	if (reader.contains("Alive"))
 		alive = reader["Alive"];
-
-
+	if (reader.contains("Money"))
+		money = reader["Money"];
 
 }

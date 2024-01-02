@@ -28,13 +28,13 @@ ItemEdytor::ItemEdytor()
 	//Odczyt danych z pliku json
 	
 	//Dodanie wszystkich przyciskow
-	const int n = 8;
+	const int n = 9;
 	elements.push_back(new TextEnter({ 0,0,300,64 },"Name", &item->name));
 	Rectangle pos = { 5,100,200,32 };
 	std::string names[n] = { "has lines collider", "Is stacable" ,"is using item",
-		"is dealing damage","is destory able","Is range weapon","Spawn Object","IsAnimated"};
+		"is dealing damage","is destory able","Is range weapon","Spawn Object","Value","IsAnimated"};
 	bool* bPointers[n] = { &item->hasLinesCollider ,&item->isStacable, &item->isUsingItem,
-		&item->isDealingDamage, &item->isDestoryAble,&item->isRangeWeapon,&item->isSpawnObject,&item->animated };
+		&item->isDealingDamage, &item->isDestoryAble,&item->isRangeWeapon,&item->isSpawnObject,&item->isValue,&item->animated };
 	pos.y += 48;
 
 	CheckBoxOpenElements* checkBoxs[n];
@@ -93,8 +93,11 @@ ItemEdytor::ItemEdytor()
 	e = new IntEnter({ 0,0,200,h }, "Object Spawn ID: ", &item->spawnObjectID);
 	checkBoxs[6]->addElement(e);
 	//////////////////////////////////////////////////////////////////////////////////////
-	e = new IntEnter({ 0,0,200,h }, "Frame: ", &item->frame);
+	e = new IntEnter({ 0,0,200,h }, "Value: ", &item->value);
 	checkBoxs[7]->addElement(e);
+	//////////////////////////////////////////////////////////////////////////////////////
+	e = new IntEnter({ 0,0,200,h }, "Frame: ", &item->frame);
+	checkBoxs[8]->addElement(e);
 	////////////////////////////////////////////////////////////////////////////////////
 	Rectangle buttons = itemsSelect;
 	buttons.y = 85;

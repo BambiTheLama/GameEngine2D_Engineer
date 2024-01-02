@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -173,6 +173,7 @@
     <ClCompile Include="src\GameObjects\AddisionalTypes\ItemsDrop.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\LinesCollider.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\RectangleCollider.cpp" />
+    <ClCompile Include="src\GameObjects\AddisionalTypes\Shop.cpp" />
     <ClCompile Include="src\GameObjects\AddisionalTypes\UserUI.cpp" />
     <ClCompile Include="src\GameObjects\BlockFactory.cpp" />
     <ClCompile Include="src\GameObjects\Blocks\Block.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="src\GameObjects\AddisionalTypes\ItemsDrop.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\LinesCollider.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\RectangleCollider.h" />
+    <ClInclude Include="src\GameObjects\AddisionalTypes\Shop.h" />
     <ClInclude Include="src\GameObjects\AddisionalTypes\UserUI.h" />
     <ClInclude Include="src\GameObjects\BlockFactory.h" />
     <ClInclude Include="src\GameObjects\Blocks\Block.h" />

@@ -2,15 +2,19 @@
 Item::Item(Item& obj) :GameObject(obj)
 {
 	itemName = obj.itemName;
+	value = obj.value;
 }
 Item::Item(Rectangle pos, std::string name):GameObject(pos,name)
 {
 	itemName = name;
+
 }
 
 Item::Item(nlohmann::json j):GameObject(j)
 {
 	itemName = j["Name"];
+	if(j.contains("Value"))
+		value = j["Value"];
 }
 
 Item::~Item()

@@ -1,12 +1,13 @@
 #include "NPC.h"
 
-NPC::NPC(NPC& npc):GameObject(npc),RectangleCollider(npc),HitAble(npc)
+NPC::NPC(NPC& npc):GameObject(npc),RectangleCollider(npc),HitAble(npc),Shop(npc)
 {
-
+	randomShop(10);
 }
 
 NPC::NPC(Rectangle pos, Rectangle collider,int hp, std::string name) :GameObject(pos, name), RectangleCollider(collider),HitAble(hp)
 {
+
 
 }
 
@@ -21,10 +22,36 @@ void NPC::update(float deltaTime)
 	HitAble::update(deltaTime);
 }
 
+void NPC::randomShop(int n)
+{
+	const int nItems = Items->getSize();
+	for (int i = 0; i < n; i++)
+	{
+		Item* item = Items->getObject(rand() % Items->getSize());
+		if (!item)
+			continue;
+		int prise = item->getValue() * 2.5f;
+		if (prise <= 0)
+			prise = 1;
+		int itemSize = 1;
+		int itemStackSize = item->getStackMaxSize()/3;
+		if (item->isStacable() && itemStackSize>=1)
+			itemSize = (rand() % itemStackSize) + 1;
+		addItem(item, prise, itemSize);
+	}
+}
+
 void NPC::start()
 {
 	Rectangle pos = getPos();
 	body = new CharacterBody("Resource/Character/Character_1/", pos.width, pos.width);
+	body->setHairStyle(3);
+	body->setBodyColor(BLUE);
+	body->setLegsColor(BLACK);
+	body->setEyeStyle(1);
+	body->setHeadColor({ 241,194,125,255 });
+	body->setHairColor(BLACK);
+
 }
 
 void NPC::onDestory()
@@ -48,12 +75,14 @@ void NPC::saveToJson(nlohmann::json& j)
 {
 	GameObject::saveToJson(j);
 	HitAble::saveToJson(j);
+	Shop::saveToJson(j);
 }
 
 void NPC::readFromJson(nlohmann::json& j)
 {
 	GameObject::readFromJson(j);
 	HitAble::readFromJson(j);
+	Shop::readFromJson(j);
 }
 
 bool NPC::dealDamage(float damage, float invisibleFrame)

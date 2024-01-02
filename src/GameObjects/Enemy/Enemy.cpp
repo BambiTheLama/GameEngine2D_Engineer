@@ -48,7 +48,12 @@ void Enemy::update(float deltaTime)
 	if (alive)
 	{
 		HitAble::update(deltaTime);
-		findPath();
+		if (goTime <= 0)
+		{
+			findPath();
+			goTime = 0.2f;
+		}
+		goTime -= deltaTime;
 
 
 		Rectangle pos = getPos();

@@ -93,6 +93,8 @@ public:
 	/// Zmienia wstan eq na przeciwny
 	/// </summary>
 	void swapEqLook() { fullEq = !fullEq; }
+	void setEqFullLook() { fullEq = true; }
+	bool isFullEqVisuble() { return fullEq; }
 	/// <summary>
 	/// Zwraca wszystkie itemy jakie mamy w EQ
 	/// </summary>

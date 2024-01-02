@@ -96,6 +96,11 @@ ItemProperty::ItemProperty(nlohmann::json& j,int ID)
 		isSpawnObject = true;
 		spawnObjectID = j["spawnObjectID"];
 	}
+	if (j.contains("Value"))
+	{
+		isValue = true;
+		value = j["Value"];
+	}
 	update();
 	reLoadTexture();
 }
@@ -115,6 +120,7 @@ void ItemProperty::update()
 	isDestoryAble = false;
 	isRangeWeapon = false;
 	isSpawnObject = false;
+	isValue = true;
 	switch (item)
 	{
 	case ItemClass::StackItem:
@@ -321,7 +327,8 @@ void ItemProperty::saveToJson(nlohmann::json& j)
 	{
 		j["spawnObjectID"] = spawnObjectID;
 	}
-	
+	if (isValue)
+		j["Value"] = value;
 }
 
 void ItemProperty::setDataFrom(ItemProperty& item)
@@ -372,6 +379,9 @@ void ItemProperty::setDataFrom(ItemProperty& item)
 	///Czy pojawia obiekt
 	isSpawnObject = item.isSpawnObject;
 	spawnObjectID = item.spawnObjectID;
+	//Wartosc przedmiotu
+	isValue = item.isValue;
+	value = item.value;
 }
 
 void ItemProperty::reLoadTexture()

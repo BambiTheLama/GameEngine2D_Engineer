@@ -16,6 +16,7 @@ protected:
     Item(Item& obj);
     std::string itemName;
     GameObject* holdingObj;
+    int value = 0;
     virtual void setStackSize(int s){}
 
 public:
@@ -81,6 +82,9 @@ public:
 
     virtual bool destoryAfterRenderClear() { return false; }
 
+    int getValue() { return value; }
+
     friend class Recipes;
+
 };
 

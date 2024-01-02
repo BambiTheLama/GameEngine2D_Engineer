@@ -4,6 +4,7 @@
 #include "Eq.h"
 #include "MiniMap.h"
 #include "../Crafting/CraftingStation.h"
+#include "../AddisionalTypes/Shop.h"
 /// <summary>
 /// Obiekt gracza nad któr¹ ma kontrolê u¿ytkownik
 /// </summary>
@@ -18,7 +19,10 @@ class Player :
     MiniMap* miniMap;
     CraftingStation* crafting;
     CharacterBody* body=NULL;
-
+    GameObject* interactObject = NULL;
+    Shop* shop = NULL;
+    int money = 100;
+    const int shopX = 20, shopY = 400;
 protected:
     Player(Player& obj);
 public:

@@ -291,6 +291,9 @@
     <ClCompile Include="src\core\Scenes\TestScene.cpp">
       <Filter>src\core\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObjects\AddisionalTypes\Shop.cpp">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Engine.h">
@@ -511,6 +514,9 @@
     </ClInclude>
     <ClInclude Include="src\core\Scenes\TestScene.h">
       <Filter>src\core\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\AddisionalTypes\Shop.h">
+      <Filter>src\GameObjects\AddisionalTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

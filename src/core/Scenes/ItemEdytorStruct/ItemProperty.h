@@ -67,6 +67,9 @@ struct ItemProperty
 	///Czy powoduje pojawienie siê obiektów na scenie
 	bool isSpawnObject;
 	int spawnObjectID;
+	///Wartosc itemu
+	bool isValue;
+	int value;
 	/// <summary>
 	/// Konstruktor domyslny obiketu 
 	/// </summary>

@@ -150,3 +150,20 @@ void ItemFactory::loadLanguage(std::string language)
 		i->loadLangue(j);
 
 }
+
+int ItemFactory::getItemVaiue(int ID)
+{
+	if (ID < 0 || ID >= objects.size())
+		return 0;
+	if (objects[ID])
+		return objects[ID]->getValue();
+	return 0;
+}
+bool ItemFactory::isStacable(int ID)
+{
+	if (ID < 0 || ID >= objects.size())
+		return false;
+	if (objects[ID])
+		return objects[ID]->isStacable();
+	return false;
+}

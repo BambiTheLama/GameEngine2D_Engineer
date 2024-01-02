@@ -12,6 +12,7 @@ class Enemy :
     float speed = 30;
     bool alive = true;
     float deadTimer = 2;
+    float goTime = 0;
     CharacterBody* body;
     Enemy(Enemy& e);
 public:

@@ -8,7 +8,8 @@
       32.0,
       32.0
     ],
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 4
   },
   {
     "ItemClass": 0,
@@ -19,9 +20,11 @@
       32.0,
       32.0
     ],
-    "StackSize": 400
+    "StackSize": 400,
+    "Value": 4
   },
   {
+    "Animated": true,
     "ItemClass": 0,
     "Name": "Sand",
     "Pos": [
@@ -30,7 +33,8 @@
       32.0,
       32.0
     ],
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 1
   },
   {
     "ItemClass": 0,
@@ -41,7 +45,8 @@
       32.0,
       32.0
     ],
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 1
   },
   {
     "ItemClass": 0,
@@ -52,7 +57,8 @@
       32.0,
       32.0
     ],
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 1
   },
   {
     "ItemClass": 0,
@@ -63,7 +69,8 @@
       32.0,
       32.0
     ],
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 1
   },
   {
     "ItemClass": 0,
@@ -74,7 +81,8 @@
       32.0,
       32.0
     ],
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 5
   },
   {
     "AmmoType": 0,
@@ -93,7 +101,8 @@
     "Projectals": 1,
     "Range": 1.0,
     "Speed": 1.0,
-    "UseTime": 2.0
+    "UseTime": 2.0,
+    "Value": 20
   },
   {
     "AmmoType": 0,
@@ -138,7 +147,8 @@
     "Projectals": 1,
     "Range": 690.0,
     "Speed": 6.0,
-    "StackSize": 100
+    "StackSize": 100,
+    "Value": 2
   },
   {
     "CollisionsCheckType": 3,
@@ -177,7 +187,8 @@
       32.0
     ],
     "Power": 0,
-    "UseTime": 0.550000011920929
+    "UseTime": 0.550000011920929,
+    "Value": 10
   },
   {
     "CollisionsCheckType": 3,
@@ -232,7 +243,8 @@
       32.0
     ],
     "Power": 10,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 10
   },
   {
     "CollisionsCheckType": 3,
@@ -283,7 +295,8 @@
       32.0
     ],
     "Power": 10,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 10
   },
   {
     "CollisionsCheckType": 3,
@@ -295,7 +308,7 @@
     "Name": "WoodPickaxe",
     "Points": [
       [
-        3.5399999618530273,
+        3.509999990463257,
         3.5
       ],
       [
@@ -330,7 +343,8 @@
       32.0
     ],
     "Power": 10,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 10
   },
   {
     "CollisionsCheckType": 3,
@@ -369,7 +383,8 @@
       32.0
     ],
     "Power": 10,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 10
   },
   {
     "CollisionsCheckType": 3,
@@ -408,7 +423,8 @@
       32.0
     ],
     "Power": 0,
-    "UseTime": 0.550000011920929
+    "UseTime": 0.550000011920929,
+    "Value": 100
   },
   {
     "CollisionsCheckType": 3,
@@ -463,7 +479,8 @@
       32.0
     ],
     "Power": 20,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 100
   },
   {
     "CollisionsCheckType": 3,
@@ -514,7 +531,8 @@
       32.0
     ],
     "Power": 20,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 100
   },
   {
     "CollisionsCheckType": 3,
@@ -526,7 +544,7 @@
     "Name": "StonePickaxe",
     "Points": [
       [
-        3.509999990463257,
+        3.5,
         3.5
       ],
       [
@@ -561,7 +579,8 @@
       32.0
     ],
     "Power": 20,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 100
   },
   {
     "CollisionsCheckType": 3,
@@ -600,7 +619,8 @@
       32.0
     ],
     "Power": 20,
-    "UseTime": 0.6000000238418579
+    "UseTime": 0.6000000238418579,
+    "Value": 100
   },
   {
     "ItemClass": 4,
@@ -612,6 +632,7 @@
       32.0
     ],
     "StackSize": 0,
+    "Value": 4,
     "spawnObjectID": 0
   },
   {
@@ -624,6 +645,7 @@
       32.0
     ],
     "StackSize": 0,
+    "Value": 20,
     "spawnObjectID": 3
   },
   {
@@ -636,6 +658,7 @@
       32.0
     ],
     "StackSize": 0,
+    "Value": 20,
     "spawnObjectID": 4
   },
   {
@@ -648,45 +671,7 @@
       32.0
     ],
     "StackSize": 0,
+    "Value": 20,
     "spawnObjectID": 5
-  },
-  {
-    "CollisionsCheckType": 3,
-    "Damage": 0.0,
-    "DestoryType": 0,
-    "InvisibleFrame": 0.0,
-    "ItemClass": 1,
-    "LineCollsionN": 5,
-    "Name": "WoodSword",
-    "Points": [
-      [
-        13.850000381469727,
-        38.61000061035156
-      ],
-      [
-        52.15999984741211,
-        0.6200000047683716
-      ],
-      [
-        63.88999938964844,
-        0.20000000298023224
-      ],
-      [
-        63.88999938964844,
-        10.34000015258789
-      ],
-      [
-        25.059999465942383,
-        49.599998474121094
-      ]
-    ],
-    "Pos": [
-      0.0,
-      0.0,
-      64.0,
-      64.0
-    ],
-    "Power": 0,
-    "UseTime": 1.0
   }
 ]

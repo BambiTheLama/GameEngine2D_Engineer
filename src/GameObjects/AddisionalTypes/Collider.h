@@ -25,6 +25,7 @@ class Collider
 {
 	std::list<GameObject*> objectsToIgnore;
 	CollisionsCheckType type;
+	ObjectType ignoreType = ObjectType::NON;
 protected:
 	/// <summary>
 	/// Konstruktor kopiujace dane z obiektu
@@ -120,6 +121,8 @@ public:
 	/// Czysci lsite ignorowanych obiektow
 	/// </summary>
 	void clearListToIgnore();
+
+	void setIgnoreType(ObjectType type) { ignoreType = type; }
 };
 /// <summary>
 /// Srpawdza czy obiek kolizuje z innymi

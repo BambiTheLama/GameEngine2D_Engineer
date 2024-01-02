@@ -82,5 +82,9 @@ public:
 	/// </summary>
 	/// <param name="Language">Jezyk jaki chcemy wszystaæ</param>
 	void loadLanguage(std::string Language);
+
+	int getItemVaiue(int ID);
+
+	bool isStacable(int ID);
 };
 

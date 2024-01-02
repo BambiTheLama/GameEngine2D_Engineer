@@ -1,12 +1,14 @@
 #pragma once
 #include "../GameObject.h"
 #include "../AddisionalTypes/AllTypes.h"
+#include "../AddisionalTypes/Shop.h"
 class NPC :
-    public GameObject, public RectangleCollider,public HitAble
+    public GameObject, public RectangleCollider,public HitAble,public Shop
 {
     bool alive = true;
     CharacterBody* body = NULL;
     NPC(NPC& npc);
+    void randomShop(int n);
 public:
     NPC(Rectangle pos, Rectangle collider, int hp, std::string name);
 

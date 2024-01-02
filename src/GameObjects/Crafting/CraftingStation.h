@@ -55,6 +55,8 @@ public:
 	/// Swapuje czy widzimy crafting
 	/// </summary>
 	void swapVisibility() { canSee = !canSee; }
+
+	void setVisibility(bool visible) { canSee = visible; }
 	/// <summary>
 	/// Zwraca ID przedmiotu w zale¿noœci jaki crafting wybierzemy
 	/// </summary>

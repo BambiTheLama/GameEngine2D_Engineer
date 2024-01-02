@@ -209,8 +209,10 @@ GameObject* ToolItem::getHittingObject(Vector2 cursor,bool isDestory)
 
 void ToolItem::addItemToHand(GameObject* holdingObj)
 {
+	setIgnoreType(holdingObj->getType());
 	Item::addItemToHand(holdingObj);
 	addObjToIgnore(holdingObj);
+	
 }
 
 void ToolItem::drawAt(Rectangle pos)
