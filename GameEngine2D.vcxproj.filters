@@ -108,7 +108,7 @@
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp">
       <Filter>src\core\Scenes\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Scenes\Game\FourTree.cpp">
+    <ClCompile Include="src\core\Scenes\Game\QuadTree.cpp">
       <Filter>src\core\Scenes\Game</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjects\Blocks\Block.cpp">
@@ -329,7 +329,7 @@
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h">
       <Filter>src\core\Scenes\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Scenes\Game\FourTree.h">
+    <ClInclude Include="src\core\Scenes\Game\QuadTree.h">
       <Filter>src\core\Scenes\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjects\Blocks\Block.h">
@@ -521,5 +521,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="GameObjectDiagram.cd" />
   </ItemGroup>
 </Project>

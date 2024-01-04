@@ -302,12 +302,14 @@ void GameScene::draw()
 		obj->draw();
 	for(auto h:handler)
 		h->drawBlocks();
+	for (auto o : objects)
+		o->draw();
+	drawCollidingPoints();
 	if (collidersToDraw)
 		for (auto h : handler)
 			h->draw();
-	for (auto o : objects)
-		o->draw();
 	EndMode2D();
+
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 	for (UserUI* i : userUI)
 		i->drawInterface();

@@ -179,6 +179,20 @@ bool isOnLine(float p1, float p2, float x)
 		return x >= p1 && x <= p2;
 	}
 }
+std::vector<Vector2>collisionsPoints;
+void clearCollidingPoints()
+{
+	collisionsPoints.clear();	
+}
+void drawCollidingPoints()
+{
+	for (int i = 0; i < collisionsPoints.size() + 1 && i < collisionsPoints.size(); i+=2)
+	{
+		DrawLineEx(collisionsPoints[i], collisionsPoints[i + 1], 2, BLACK);
+		DrawCircleV(collisionsPoints[i], 3, RED);
+		DrawCircleV(collisionsPoints[i + 1], 3, RED);
+	}
+}
 bool checkCollision(Vector2* points, int n, Rectangle pos)
 {
 	for (int i = 0; i < n; i++)
@@ -188,28 +202,37 @@ bool checkCollision(Vector2* points, int n, Rectangle pos)
 
 		if (CheckCollisionLines(p1, p2, { pos.x,pos.y }, { pos.x,pos.y + pos.height }, NULL))
 		{
+			//collisionsPoints.push_back(p1);
+			//collisionsPoints.push_back(p2);
+			//collisionsPoints.push_back({pos.x,pos.y});
+			//collisionsPoints.push_back({ pos.x,pos.y + pos.height });
 			return true;
 		}
 		if (CheckCollisionLines(p1, p2, { pos.x + pos.width,pos.y }, { pos.x + pos.width,pos.y + pos.height }, NULL))
 		{
+			//collisionsPoints.push_back(p1);
+			//collisionsPoints.push_back(p2);
+			//collisionsPoints.push_back({ pos.x + pos.width,pos.y });
+			//collisionsPoints.push_back({ pos.x + pos.width,pos.y + pos.height });
 			return true;
 		}
 		if (CheckCollisionLines(p1, p2, { pos.x ,pos.y }, { pos.x + pos.width,pos.y }, NULL))
 		{
+			//collisionsPoints.push_back(p1);
+			//collisionsPoints.push_back(p2);
+			//collisionsPoints.push_back({ pos.x,pos.y });
+			//collisionsPoints.push_back({ pos.x + pos.width,pos.y });
 			return true;
 		}
 		if (CheckCollisionLines(p1, p2, { pos.x,pos.y+pos.height }, { pos.x + pos.width,pos.y + pos.height }, NULL))
 		{
+			//collisionsPoints.push_back(p1);
+			//collisionsPoints.push_back(p2);
+			//collisionsPoints.push_back({ pos.x,pos.y + pos.height });
+			//collisionsPoints.push_back({ pos.x + pos.width,pos.y + pos.height });
 			return true;
 		}
-		if (CheckCollisionLines(p1, p2, { pos.x ,pos.y }, { pos.x + pos.width,pos.y + pos.height }, NULL));
-		{
-			return true;
-		}
-		if (CheckCollisionLines(p1, p2, { pos.x,pos.y + pos.height }, { pos.x + pos.width,pos.y }, NULL));
-		{
-			return true;
-		}
+
 
 	}
 	return false;

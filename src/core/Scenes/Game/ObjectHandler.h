@@ -4,7 +4,7 @@
 #include "../../../GameObjects/GameObject.h"
 #include "../../../GameObjects/AddisionalTypes/UserUI.h"
 #include "../../../GameObjects/Blocks/Block.h"
-#include "FourTree.h"
+#include "QuadTree.h"
 #include "json.hpp"
 #include "FastNoiseLite.h"
 #define chunkXPerFile 1
@@ -35,7 +35,7 @@ private:
     std::list<GameObject*> objectsToAdd = std::list<GameObject*>();
     std::list<GameObject*> objectsToDelete = std::list<GameObject*>();
     std::list<GameObject*> objectsToRemove = std::list<GameObject*>();
-    FourTree* tree = NULL;
+    QuadTree* tree = NULL;
     Block* blocks[h][w];
 public:
     /// <summary>

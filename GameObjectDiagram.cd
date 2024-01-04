@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RhAAAAAIgABAgACgQAIBAIAAAQEMAAQAAAAEEAIEAAA=</HashCode>
+      <FileName>src\GameObjects\GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="10.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BkAAEgAIAAAAAACgaAYiAAAAhQAAAQQAAAAAMgAEAAA=</HashCode>
+      <FileName>src\GameObjects\Enemy\Enemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ammo" Collapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAABAMAAQAARAAIAAAAAAAAAAACQABAAAAEQCIAAA=</HashCode>
+      <FileName>src\GameObjects\Items\Weapon\Ammo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToolItem" Collapsed="true">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAEIGAQAAAAAkAAw6ALgAIAACBEACABABAAAECDMABA=</HashCode>
+      <FileName>src\GameObjects\Items\Tool\ToolItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bow" Collapsed="true">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAKIAQAAgBAAAAxYAKAAAAABhMACAAABAQAMIC0AAA=</HashCode>
+      <FileName>src\GameObjects\Items\Weapon\Bow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgABQQIBCBAECARCQZBCAAUAQAACCAABAQFEBCEAAA=</HashCode>
+      <FileName>src\GameObjects\Items\Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaceItem" Collapsed="true">
+    <Position X="6.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAEABAAgSAAAAAAAAAAAAAAABABgEAAFAAA=</HashCode>
+      <FileName>src\GameObjects\Items\PlaceItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StackItem" Collapsed="true">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgFQAAAAAAAAAwYBYACAAQABAACAAADAAAEAAAAAA=</HashCode>
+      <FileName>src\GameObjects\Items\StackItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ParticleSystem" Collapsed="true">
+    <Position X="17.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAgIAoAQAIAAQQAAAAAGAACkAAUAAA=</HashCode>
+      <FileName>src\GameObjects\Particles\ParticleSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextParticle" Collapsed="true">
+    <Position X="15.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAIAAAAAAAQAAIAAAAAAQAAAAAAAEACEAAEAAA=</HashCode>
+      <FileName>src\GameObjects\Particles\TextParticle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAEAAgAAgAECgTAIAEAAARRAAAQAAgIAAEUAFEBA=</HashCode>
+      <FileName>src\GameObjects\Player\Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projectal" Collapsed="true">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAIAAAAAIAAABKEAAAACRAAAQAAAAAAEEBEQAA=</HashCode>
+      <FileName>src\GameObjects\Projectals\Projectal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NPC" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAACIAAAAAAAgQgIAAAAAFQAAAAQAAAAAEAAEAAA=</HashCode>
+      <FileName>src\GameObjects\NPCs\NPC.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Block" Collapsed="true">
+    <Position X="13.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAEAAAAAAAAAAAgAAIAAAAQARAAAAAAECAQEAAEAAE=</HashCode>
+      <FileName>src\GameObjects\Blocks\Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollidingBlock" Collapsed="true">
+    <Position X="13.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>src\GameObjects\Blocks\CollidingBlock.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DestroyAble" Collapsed="true">
+    <Position X="15" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAgQAAAAAAQAAEAQAAEAABAAIAAJAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\DestroyAble.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemsDrop" Collapsed="true">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAiAABgAAAAAAAAAAAEAAAAAAIAAAAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\ItemsDrop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shop" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQEAAAABAAoQACAAAJAAACAAAAIAAAIAAgAAEA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\Shop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UserUI" Collapsed="true">
+    <Position X="15.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\UserUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HitAble" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAAAAAAAAAACAAgQAIAAAAAAAAAAAIAAABAACAEAAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\HitAble.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CircleCollider" Collapsed="true">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAQAAAAAAAAAAAAIAAAAgAAAAAAAICkABAAAAAAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\CircleCollider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collider" Collapsed="true">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAEQAAQAAAAACAAGIIAAgAAAABCAAYCiAAAABEAAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\Collider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LinesCollider" Collapsed="true">
+    <Position X="27" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CGAgAACCAAAAAAAAAAKAAEAAAAAAgAAIAiAAAAAAAAE=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\LinesCollider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RectangleCollider" Collapsed="true">
+    <Position X="24.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAgAAAAAAAAAAAAAIAAAAAACAAAAAIAgAAAIAAAAA=</HashCode>
+      <FileName>src\GameObjects\AddisionalTypes\RectangleCollider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -147,6 +147,8 @@ struct LineData {
 	/// <returns></returns>
 	bool checkLines(LineData l);
 };
+void clearCollidingPoints();
+void drawCollidingPoints();
 /// <summary>
 /// Sprawdza kolizje Prostokat z liniami
 /// </summary>

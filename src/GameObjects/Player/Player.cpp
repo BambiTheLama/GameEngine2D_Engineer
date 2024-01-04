@@ -327,7 +327,7 @@ void Player::move(float deltaTime)
 void Player::draw()
 {
 	Rectangle pos = getPos();
-	DrawRectangleRec(pos, { 0,0,255,122 });
+	//DrawRectangleRec(pos, { 0,0,255,122 });
 	body->draw(pos);
 	
 	if (collidersToDraw)
@@ -337,7 +337,7 @@ void Player::draw()
 		posPickUpRange.y -= pickUpRange;
 		posPickUpRange.width += pickUpRange * 2;
 		posPickUpRange.height += pickUpRange * 2;
-		DrawRectangleRec(posPickUpRange, { 0,0,255,126 });
+		//DrawRectangleRec(posPickUpRange, { 0,0,255,126 });
 		RectangleCollider::draw(this);
 		DrawTextWithOutline(TextFormat("(%d:%d)", getChunkX(), getChunkY()), pos.x, pos.y, textStandardSize, WHITE, BLACK);
 	}

@@ -12,7 +12,7 @@ ObjectHandler::ObjectHandler(int chunkX,int chunkY, nlohmann::json j)
 	this->chunkX = chunkX;
 	this->chunkY = chunkY;
 	BlockFactory* factory = Blocks;
-	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
+	tree = new QuadTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
 	nlohmann::json toRead;
 	std::string name = "CHUNK " + std::to_string(chunkX) + " " + std::to_string(chunkY);
 	if (j.contains(name))
@@ -151,7 +151,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 	this->chunkX = chunkX;
 	this->chunkY = chunkY;
 	BlockFactory* factory = Blocks;
-	tree = new FourTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
+	tree = new QuadTree({ (float)x,(float)y,(w - 1) * tileSize,(h - 1) * tileSize });
 	for (int x = 0; x < w; x++)
 		for (int y = 0; y < h; y++)
 		{

@@ -155,7 +155,7 @@
     <ClCompile Include="src\core\Properties.cpp" />
     <ClCompile Include="src\core\Scenes\CharacterCreator.cpp" />
     <ClCompile Include="src\core\Scenes\GameScene.cpp" />
-    <ClCompile Include="src\core\Scenes\Game\FourTree.cpp" />
+    <ClCompile Include="src\core\Scenes\Game\QuadTree.cpp" />
     <ClCompile Include="src\core\Scenes\Game\ObjectHandler.cpp" />
     <ClCompile Include="src\core\Scenes\ItemEdytor.cpp" />
     <ClCompile Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.cpp" />
@@ -231,7 +231,7 @@
     <ClInclude Include="src\core\Properties.h" />
     <ClInclude Include="src\core\Scenes\CharacterCreator.h" />
     <ClInclude Include="src\core\Scenes\GameScene.h" />
-    <ClInclude Include="src\core\Scenes\Game\FourTree.h" />
+    <ClInclude Include="src\core\Scenes\Game\QuadTree.h" />
     <ClInclude Include="src\core\Scenes\Game\ObjectHandler.h" />
     <ClInclude Include="src\core\Scenes\ItemEdytor.h" />
     <ClInclude Include="src\core\Scenes\ItemEdytorStruct\ItemProperty.h" />
@@ -286,6 +286,7 @@
     <ClInclude Include="src\GameObjects\Structures\Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GameObjectDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
