@@ -122,12 +122,16 @@ void GameScene::update(float deltaTime)
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
 		{
-			GameObject* o = EnemyFactory::getFactory()->getObject(0);
-			if (o)
+			for (int i = 0; i < 100; i++)
 			{
-				o->setMovePos(cursorPos);
-				addObject(o);
+				GameObject* o = EnemyFactory::getFactory()->getObject(0);
+				if (o)
+				{
+					o->setMovePos({ cursorPos.x+i%100,cursorPos.y+i/100 });
+					addObject(o);
+				}
 			}
+
 		}
 		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 		{
@@ -313,7 +317,7 @@ void GameScene::draw()
 	DrawText(TextFormat("%.2lf", camera.zoom), 0, 50, 20, BLACK);
 	for (UserUI* i : userUI)
 		i->drawInterface();
-	DrawFPS(0, 0);
+	//DrawFPS(0, 0);
 }
 
 void GameScene::removeBlock(Rectangle pos)

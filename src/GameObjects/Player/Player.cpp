@@ -194,7 +194,7 @@ void Player::updateEq(float deltaTime)
 		eq->dropItemFromHand();
 	if (GetMouseWheelMove() != 0)
 		eq->mouseWeel();
-	if (IsKeyPressed(KEY_I))
+	if (IsKeyPressed(KEY_E))
 	{
 		eq->swapEqLook();
 		crafting->setVisibility(eq->isFullEqVisuble());

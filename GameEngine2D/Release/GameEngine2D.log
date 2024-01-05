@@ -10,9 +10,9 @@ C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\G
 C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\Player\Player.cpp(346,75): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
 C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\Player\Player.cpp(359,14): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
   Trwa generowanie kodu
-  3 of 3944 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 3944 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    51 functions had inline decision re-evaluated but remain unchanged
+    9 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
 raylib.lib(raudio.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „raylib.lib(raudio.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
 raylib.lib(rcore.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „raylib.lib(rcore.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
