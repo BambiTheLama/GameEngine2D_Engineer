@@ -106,7 +106,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 {
 	FastNoiseLite terrain(seed);
 	terrain.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2S);
-	terrain.SetFrequency(0.0102f);
+	terrain.SetFrequency(0.00162f);
 	terrain.SetFractalType(FastNoiseLite::FractalType_FBm);
 	terrain.SetFractalOctaves(3);
 	terrain.SetFractalGain(1.48f);
@@ -124,10 +124,6 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 	water.SetFractalWeightedStrength(0.53f);
 
 
-
-
-
-
 	FastNoiseLite friendly;
 	friendly.SetSeed(seed + 2);
 	friendly.SetFrequency(0.0000269f);
@@ -141,7 +137,7 @@ ObjectHandler::ObjectHandler(int chunkX, int chunkY, float seed)
 	temperature.SetFractalType(FastNoiseLite::FractalType_FBm);
 	temperature.SetFractalOctaves(3);
 	temperature.SetFrequency(0.0005123f);
-	temperature.SetFractalLacunarity(0.45f);
+	temperature.SetFractalLacunarity(0.302f);
 	temperature.SetFractalGain(3.18f);
 	temperature.SetFractalWeightedStrength(4.490f);
 

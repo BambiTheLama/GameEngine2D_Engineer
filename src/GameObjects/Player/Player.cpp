@@ -322,6 +322,10 @@ void Player::move(float deltaTime)
 		body->updateCharacterState(CharacterState::Run);
 	else
 		body->updateCharacterState(CharacterState::Ide);
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && IsKeyDown(KEY_LEFT_CONTROL))
+	{
+		setMovePos(Game->getCursorPos());
+	}
 }
 
 void Player::draw()
