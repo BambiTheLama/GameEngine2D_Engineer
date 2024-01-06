@@ -26,11 +26,13 @@ Engine::~Engine()
 	if (scene)
 		delete scene;
 	scene = NULL;
-	SpriteController::closeSprites();
-	Factory::deleteAllFactory();
+
+
 	Properties* prop = Properties::getProperties();
 	if(prop)
 		delete prop;
+	SpriteController::closeSprites();
+	Factory::deleteAllFactory();
 	RecipesFactory* recipes = CraftingRecipes;
 	delete recipes;
 	CloseWindow();

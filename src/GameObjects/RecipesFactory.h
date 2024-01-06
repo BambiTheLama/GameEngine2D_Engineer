@@ -17,5 +17,6 @@ public:
 	std::vector<Recipes*> getAllRecepies(CraftingStationEnum craftingStation);
 
 	friend class Engine;
+	friend class GameScene;
 };
 

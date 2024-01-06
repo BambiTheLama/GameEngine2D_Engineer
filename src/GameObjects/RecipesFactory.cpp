@@ -25,6 +25,9 @@ RecipesFactory::RecipesFactory()
 RecipesFactory::~RecipesFactory()
 {
 	recipesFactory = NULL;
+	for (auto r : recipes)
+		delete r;
+	recipes.clear();
 }
 
 RecipesFactory* RecipesFactory::getFactory()

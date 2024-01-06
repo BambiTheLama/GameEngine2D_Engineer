@@ -5,7 +5,7 @@ std::string StackItem::description="";
 StackItem::StackItem(StackItem& item):Item(item)
 {
 	stackMaxSize = item.stackMaxSize;
-	this->stackSize = item.stackSize;
+	stackSize = item.stackSize;
 	sprite = new SpriteController(*item.sprite);
 }
 

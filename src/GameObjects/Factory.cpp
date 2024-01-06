@@ -13,6 +13,7 @@ void Factory::deleteAllFactory()
 	{
 		delete f;
 	}
+	factories.clear();
 }
 Factory::Factory()
 {

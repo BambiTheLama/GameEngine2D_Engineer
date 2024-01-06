@@ -4,6 +4,7 @@
 #include "../../GameObjects/Enemy/Enemy.h"
 #include "../../GameObjects/EnemyFactory.h"
 #include "../../GameObjects/NPCFactory.h"
+#include "../../GameObjects/RecipesFactory.h"
 #include "../Engine.h"
 #include "Menu.h"
 #include <iostream>
@@ -103,7 +104,10 @@ GameScene::~GameScene()
 		delete o;
 
 	game = NULL;
-
+	SpriteController::closeSprites();
+	Factory::deleteAllFactory();
+	RecipesFactory* recipes = CraftingRecipes;
+	delete recipes;
 
 }
 void GameScene::start()
@@ -122,15 +126,15 @@ void GameScene::update(float deltaTime)
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
 		{
-			for (int i = 0; i < 100; i++)
+
+			GameObject* o = EnemyFactory::getFactory()->getObject(0);
+			if (o)
 			{
-				GameObject* o = EnemyFactory::getFactory()->getObject(0);
-				if (o)
-				{
-					o->setMovePos({ cursorPos.x+i%100,cursorPos.y+i/100 });
-					addObject(o);
-				}
+				Rectangle pos = o->getPos();
+				o->setMovePos({ cursorPos.x + pos.width/2,cursorPos.y + pos.height/2 });
+				addObject(o);
 			}
+			
 
 		}
 		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))

@@ -11,9 +11,11 @@ EnemyFactory::EnemyFactory()
 }
 EnemyFactory::~EnemyFactory()
 {
+	factory = NULL;
 	for (auto o : objects)
 		delete o;
 	objects.clear();
+
 }
 
 EnemyFactory* EnemyFactory::getFactory()

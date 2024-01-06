@@ -13,6 +13,7 @@ NPCFactory::NPCFactory()
 }
 NPCFactory::~NPCFactory()
 {
+	factory = NULL;
 	for (auto o : objects)
 		delete o;
 	objects.clear();

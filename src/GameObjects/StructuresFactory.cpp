@@ -21,6 +21,7 @@ StructuresFactory::StructuresFactory()
 
 StructuresFactory::~StructuresFactory()
 {
+	structuresFactory = NULL;
 	for (auto* o : objects)
 		delete o;
 	objects.clear();
