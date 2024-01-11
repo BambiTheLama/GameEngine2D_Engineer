@@ -1,74 +1,7 @@
-﻿  EnemyFactory.cpp
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/EnemyFactory.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/EnemyFactory.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\EnemyFactory.h(18,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/EnemyFactory.cpp”)
-  
-  NPCFactory.cpp
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/NPCFactory.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/NPCFactory.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Shop.h(22,53): warning C4244: "inicjowanie": konwersja z "float" do "const int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/NPCFactory.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCFactory.h(18,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/NPCFactory.cpp”)
-  
-  RecipesFactory.cpp
-  StructuresFactory.cpp
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/StructuresFactory.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/GameObjects/StructuresFactory.cpp”)
-  
-  GameScene.cpp
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\ItemFactory.h(79,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\CircleCollider.h(15,35): warning C4244: "return": konwersja z "float" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\AddisionalTypes\Shop.h(22,53): warning C4244: "inicjowanie": konwersja z "float" do "const int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\EnemyFactory.h(18,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
-  
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\GameObjects\NPCFactory.h(18,37): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  (kompilowanie pliku źródłowego „src/core/Scenes/GameScene.cpp”)
-  
-C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.39.33321\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(154,15): warning C4305: "+=": obcięcie z "double" do "float"
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(156,15): warning C4305: "-=": obcięcie z "double" do "float"
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(163,104): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(163,104): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(163,159): warning C4838: konwersja z „int” do „float” wymaga konwersji zawężającej
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(163,159): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(331,29): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(331,22): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(338,29): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(338,22): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(353,33): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(353,26): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(364,55): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(364,44): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(364,37): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(364,30): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(367,68): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(367,57): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(367,50): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\src\core\Scenes\GameScene.cpp(367,43): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+﻿  StackItem.cpp
   Trwa generowanie kodu
-  13 of 3944 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  0 of 3944 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    15 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   GameEngine2D.vcxproj -> C:\Users\Szymek\Desktop\Github\GameEngine2D_Engineer\GameEngine2D_Engineer\x64\Release\GameEngine2D.exe
