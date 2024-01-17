@@ -14,7 +14,7 @@ ItemFactory::ItemFactory()
 	
 	nlohmann::json j;
 	std::ifstream reader;
-	reader.open("Items.json");
+	reader.open("Resource/Items.json");
 	if (reader.is_open())
 		reader >> j;
 	reader.close();
@@ -133,7 +133,7 @@ void ItemFactory::loadLanguage(std::string language)
 {
 	nlohmann::json j;
 	std::ifstream reader;
-	reader.open(language+".json");
+	reader.open("Resource/"+language + ".json");
 	if (!reader.is_open())
 		return;
 	reader >> j;

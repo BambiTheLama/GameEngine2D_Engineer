@@ -85,7 +85,7 @@ void RecipesEdytor::loadDataFromFile()
 
 	nlohmann::json j;
 	std::ifstream reader;
-	reader.open("Recepies.json");
+	reader.open("Resource/Recepies.json");
 	if (reader.is_open())
 	{
 		reader >> j;
@@ -113,7 +113,7 @@ void RecipesEdytor::saveData()
 	}
 	std::ofstream writer;
 	std::cout << j.dump(2) << std::endl;
-	writer.open("Recepies.json");
+	writer.open("Resource/Recepies.json");
 	writer << j.dump(2) << std::endl;
 	writer.close();
 }

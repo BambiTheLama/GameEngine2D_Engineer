@@ -9,7 +9,7 @@ RecipesFactory::RecipesFactory()
 	recipesFactory = this;
 	nlohmann::json j;
 	std::ifstream reader;
-	reader.open("Recepies.json");
+	reader.open("Resource/Recepies.json");
 	if (reader.is_open())
 	{
 		reader >> j;

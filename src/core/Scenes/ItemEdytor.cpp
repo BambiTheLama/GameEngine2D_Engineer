@@ -148,7 +148,7 @@ void ItemEdytor::loadDataFromFile()
 {
 	nlohmann::json j;
 	std::ifstream reader;
-	reader.open("Items.json");
+	reader.open("Resource/Items.json");
 	if (reader.is_open())
 	{
 		reader >> j;
@@ -179,7 +179,7 @@ void ItemEdytor::saveData()
 		ID++;
 	}
 	std::ofstream writer;
-	writer.open("Items.json");
+	writer.open("Resource/Items.json");
 	writer << j.dump(2) << std::endl;
 	writer.close();
 }
