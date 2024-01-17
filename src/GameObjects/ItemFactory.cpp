@@ -74,10 +74,10 @@ ItemFactory* ItemFactory::getFactory()
 	return factory;
 }
 
-Item* ItemFactory::getObject(int i) 
+Item* ItemFactory::getObject(int ID) 
 {
-	if (i > -1 && i < objects.size())
-		return objects[i]->clone();
+	if (ID > -1 && ID < objects.size())
+		return objects[ID]->clone();
 	return NULL;
 }
 
