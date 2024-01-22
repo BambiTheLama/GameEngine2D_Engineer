@@ -1,0 +1,41 @@
+#pragma once
+#include "../Items/Item.h"
+#include "../ItemFactory.h"
+#include <vector>
+/// <summary>
+/// Struktura która przechowuje dane odnoœnie dropu itemu jak szansa iloœæ i ID itemu
+/// </summary>
+struct DropItem
+{
+	int ID;				//ID itemu którego mo¿emy dostaæ
+	int min;			//Minimalna iloœæ itemów
+	int max;			//Maksymalna iloœæ itemów 
+	float dropChanse;	//Pomiêdzy <0;100> wyra¿ona w % dok³adkoœæ do 0.001
+	bool wasDroped() {
+		return ((float)(rand() % 100) + (float)(rand() % 1000) / 1000.f) < dropChanse;
+	}
+	int howMuch() {
+		if (min >= max)
+			return min;
+		return rand() % (max - min + 1) + min;
+	}
+
+};
+enum class ObjectType;
+
+class ItemsDrop {
+	std::vector<DropItem> items;
+	void copyDataFrom(ItemsDrop& drops);
+public:
+	ItemsDrop();
+
+	ItemsDrop(ObjectType type,int ID);
+
+	ItemsDrop(ItemsDrop& drops);
+
+	void addItemToDrop(int ID, float chanse, int min, int max);
+
+	void clearItemsDrop() { items.clear(); }
+
+	std::vector<Item*> getDrop();
+};
