@@ -308,7 +308,7 @@
     "Name": "WoodPickaxe",
     "Points": [
       [
-        3.509999990463257,
+        3.5,
         3.5
       ],
       [
@@ -673,5 +673,37 @@
     "StackSize": 900,
     "Value": 20,
     "spawnObjectID": 5
+  },
+  {
+    "CollisionsCheckType": 3,
+    "Damage": 112.0,
+    "DestoryType": 1,
+    "InvisibleFrame": 1.0,
+    "ItemClass": 1,
+    "LineCollsionN": 3,
+    "Name": "stonesword",
+    "Points": [
+      [
+        30.5,
+        1.75
+      ],
+      [
+        7.139999866485596,
+        19.889999389648438
+      ],
+      [
+        12.420000076293945,
+        24.959999084472656
+      ]
+    ],
+    "Pos": [
+      0.0,
+      0.0,
+      32.0,
+      32.0
+    ],
+    "Power": 1,
+    "UseTime": 1.0,
+    "Value": 42240
   }
 ]
