@@ -1,6 +1,6 @@
 # GameEngine2D
 
-![](Obrazy/Obraz.png)
+![](Obrazy/Menu.png)
 
 ## Opis
 Projekt zainspirowany popularnymi sulwiwalarami jak core keeper czy terraria. Praca inżynierska powstał jako projekt pokazujący umiejętonosci nabyte na pierwszym stopniu studiów.
